@@ -12,7 +12,7 @@
     },
     "settings": {
         "owoprefix": "",
-        "discordrpc": false,
+        "discordrpc": true,
         "chatfeedback": true,
         "autophrases": true,
         "checklist": {

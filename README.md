@@ -13,6 +13,7 @@ dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM=
 ### Videos
 
 -   [Windows](https://youtu.be/ceTXgTorn30) - Official
+-   [Termux](https://youtu.be/w2tvj1oRSO8?si=ueve5EIC9usVpxIT) - ZungHieu
 
 ### Text
 
