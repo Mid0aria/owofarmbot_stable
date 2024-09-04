@@ -175,11 +175,7 @@ function rpc(type) {
         .setType("PLAYING")
         .setName("OwO Farm Bot Stable")
         .setDetails("Auto Farming")
-        .setState(
-            `${client.global.paused ? "Paused" : "Running"} / Membership: ${
-                apiprojectpremiumresponse ? "Premium" : "Free"
-            }`
-        )
+        .setState(`${client.global.paused ? "Paused" : "Running"}`)
         .setStartTimestamp(Date.now())
         .setAssetsLargeImage("1253758464816054282")
         .setAssetsLargeText("OwO Farm Bot Stable")
