@@ -1,0 +1,46 @@
+{
+    "name": "owofarmbot_stable",
+    "version": "0.0.1.8",
+    "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
+    "main": "bot.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Mid0aria/owofarmbot_stable.git"
+    },
+    "keywords": [
+        "nodejs",
+        "bot",
+        "selfbot",
+        "selfbot-for-discord",
+        "owo",
+        "owo-bot",
+        "owo-self-bot",
+        "owofarm",
+        "discord-owo-selfbot",
+        "self-owo",
+        "owofarmbot",
+        "owoautofarm",
+        "owobot",
+        "owoautofarmer"
+    ],
+    "author": "Mid0aria",
+    "license": "MIT",
+    "scripts": {
+        "start": "node bot.js",
+        "run": "node bot.js",
+        "setup": "npm i"
+    },
+    "dependencies": {
+        "adm-zip": "^0.5.14",
+        "axios": "^1.7.2",
+        "chalk": "^4.1.2",
+        "discord.js-selfbot-v13": "^3.1.4",
+        "fs-extra": "^11.2.0",
+        "node-notifier": "^10.0.1",
+        "systeminformation": "^5.22.11"
+    },
+    "bugs": {
+        "url": "https://github.com/Mid0aria/owofarmbot_stable/issues"
+    },
+    "homepage": "https://github.com/Mid0aria/owofarmbot_stable#readme"
+}

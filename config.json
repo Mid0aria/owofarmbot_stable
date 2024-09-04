@@ -1,0 +1,67 @@
+{
+    "midoservices_authkey": "",
+    "prefix": "!",
+    "token": "",
+    "userid": "",
+    "commandschannelid": "",
+    "owodmchannelid": "",
+
+    "commands": {
+        "hunt": true,
+        "battle": true,
+        "pray": true,
+        "curse": true
+    },
+    "settings": {
+        "owoprefix": "",
+        "discordrpc": true,
+        "chatfeedback": true,
+        "autophrases": true,
+        "checklist": {
+            "check": true,
+            "types": {
+                "daily": true,
+                "cookie": true,
+                "vote": true
+            }
+        },
+        "inventory": {
+            "check": true,
+            "use": {
+                "lootbox": true,
+                "fabledlootbox": false,
+                "crate": true,
+                "gems": true
+            }
+        },
+        "captcha": {
+            "alerttype": {
+                "notification": true,
+                "prompt": true
+            }
+        }
+    },
+    "animals": {
+        "enable": false,
+        "type": {
+            "sell": false,
+            "sacrifice": false
+        },
+        "animaltype": {
+            "common": false,
+            "uncommon": false,
+            "rare": false,
+            "epic": false,
+            "mythical": false,
+            "patreon": false,
+            "cpatreon": false,
+            "legendary": false,
+            "gem": false,
+            "bot": false,
+            "distorted": false,
+            "fabled": false,
+            "special": false,
+            "hidden": false
+        }
+    }
+}
