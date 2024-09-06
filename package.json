@@ -24,7 +24,7 @@
         "owoautofarmer"
     ],
     "author": "Mid0aria",
-    "license": "MIT",
+    "license": "GNU",
     "scripts": {
         "start": "node bot.js",
         "run": "node bot.js",
