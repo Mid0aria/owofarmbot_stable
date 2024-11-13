@@ -14,6 +14,8 @@ module.exports = async (client, message) => {
     console.log(
         client.chalk.blue(client.chalk.bold(`Bot`)),
         client.chalk.white(`>>`),
+        client.chalk.blue(client.global.type),
+        client.chalk.white(`>>`),
         client.chalk.red(`Events`),
         client.chalk.green(`Succesfully loaded!`)
     );
