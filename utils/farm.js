@@ -82,7 +82,7 @@ module.exports = async (client, message) => {
     await client.delay(16000);
     if (client.basic.animals) {
         let type = "";
-        let animaltype = client.config.settings.animaltype;
+        let animaltype = client.config.animals.animaltype;
         switch (true) {
             case animaltype.common:
                 type += " c";
@@ -130,21 +130,21 @@ module.exports = async (client, message) => {
                 break;
         }
         if (type.length < 1) {
-            logger.err(
+            client.logger.alert(
                 "Config",
                 "Animals",
                 "Config conflict: no active animaltype found!?"
                 );
         } else {
-            if (client.config.settings.animals.sell) {
+            if (client.config.animals.type.sell) {
                 setInterval(() => {
                     sell(client, channel, "sell", type)
-                }, client.config.settings.animals.interval);
+                }, client.config.animals.interval);
             }
-            if (client.config.settings.animals.sacrifice) {
+            if (client.config.animals.type.sacrifice) {
                 setInterval(() => {
                     sell(client, channel, "sacrifice", type)
-                }, client.config.settings.animals.interval);
+                }, client.config.animals.interval);
             }
         }
     }
