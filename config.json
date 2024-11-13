@@ -57,6 +57,7 @@
         "chatfeedback": true,
         "autophrases": true,
         "newlog": false,
+        "loglength": 20,
         "checklist": {
             "types": {
                 "daily": true,
