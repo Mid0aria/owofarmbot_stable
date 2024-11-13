@@ -146,6 +146,8 @@ const checkUpdate = async () => {
     }
 };
 
+checkupdate(); //wow i forgot about this
+
 const chalk = require("chalk");
 
 //client
