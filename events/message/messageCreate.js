@@ -1,28 +1,28 @@
-const { logger } = require("../../utils/logger");
 module.exports = async (client, message) => {
     let msgcontent = message.content.toLowerCase();
 
     if (
-        message.author.id === "408785106942164992" &&
-        (message.channel.id === client.config.commandschannelid ||
-            message.channel.id === client.config.owodmchannelid)
+        !message.author.id === "408785106942164992" &&
+        (message.channel.id === client.basic.commandschannelid ||
+            message.channel.id === client.basic.owodmchannelid)
     ) {
         if (
+        (
             msgcontent.includes("please complete your captcha") ||
             msgcontent.includes("verify that you are human") ||
             msgcontent.includes("are you a real human") ||
             msgcontent.includes("please use the link below so i can check")
-        ) {
+        ) && !client.global.captchadetected) {
             client.global.paused = true;
             client.global.captchadetected = true;
             client.global.total.captcha++;
-            logger.alert("Bot", "Captcha", `Captcha Detected!!!`);
-            logger.info(
+            client.logger.alert("Bot", "Captcha", `Captcha Detected!!!`);
+            client.logger.info(
                 "Bot",
                 "Captcha",
                 `Total Captcha: ${client.global.total.captcha}`
             );
-            logger.warn(
+            client.logger.warn(
                 "Bot",
                 "Captcha",
                 `Bot Paused: ${client.global.paused}`
@@ -77,12 +77,12 @@ module.exports = async (client, message) => {
                             ]);
                         break;
                     default:
-                        logger.warn("Bot", "Captcha", "Unsupported platform!");
+                        client.logger.warn("Bot", "Captcha", "Unsupported platform!");
                         return;
                 }
 
                 if (captchabrowserexecute) {
-                    logger.info("Bot", "Captcha", "Opening Browser.");
+                    client.logger.info("Bot", "Captcha", "Opening Browser.");
                     executeCommand(
                         `${captchabrowserexecute} https://owobot.com/captcha`
                     );
@@ -91,8 +91,8 @@ module.exports = async (client, message) => {
         }
         if (msgcontent.includes("i have verified that you are human")) {
             client.global.captchadetected = false;
-            client.global.paused = false;
-            logger.warn("Bot", "Captcha", `Captcha Solved. Bot Resuming...`);
+            //client.global.paused = false;
+            client.logger.warn("Bot", "Captcha", `Captcha Solved. Bot Resuming...`);
         }
     }
 
@@ -118,7 +118,7 @@ module.exports = async (client, message) => {
         client.commands.get(client.aliases.get(command));
 
     if (cmd) {
-        if (message.author.id !== client.config.userid) return;
+        if (message.author.id !== client.basic.userid) return;
         cmd.run(client, message, args);
     }
 };
