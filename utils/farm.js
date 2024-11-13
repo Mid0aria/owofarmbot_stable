@@ -843,6 +843,7 @@ async function coinflip(client, channel) {
             }
         
         coinfliping = true;
+        currentBet = Math.round(currentBet);
         function head() {
             return commandrandomizer(["owo", client.config.settings.owoprefix]) +
                    commandrandomizer(["coinflip", "cf"]) + " " +
@@ -983,6 +984,7 @@ function slot(client, channel) {
             }
         
         sloting = true;
+        currentBet = Math.round(currentBet);
         const content = commandrandomizer(["owo", client.config.settings.owoprefix]) +
                         commandrandomizer(["slots", "s"]) + " " +
                         currentBet;
