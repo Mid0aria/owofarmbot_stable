@@ -3,7 +3,7 @@ let client, extrac;
 module.exports = (uwu) => { //plz change it when upload, u will remember it, right?
     const chalk = require("chalk");
     let logger = [];
-    let length = 20;
+    let length = uwu.config.settings.loglength;
     if (uwu.basic.enable) extrac = uwu;
     else client = uwu;
 
