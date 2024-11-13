@@ -12,7 +12,6 @@ for (let dep of Object.keys(packageJson.dependencies)) {
     }
 }
 
-const { logger } = require("./utils/logger");
 const fs = require("fs");
 
 const axios = require("axios");
@@ -25,15 +24,17 @@ const gitUpdate = () => {
     try {
         cp.execSync("git stash");
         cp.execSync("git pull --force");
-        logger.info("Updater", "Git", "Git pull successful.");
-        logger.info("Updater", "Git", "Resetting local changes...");
+        console.log(chalk.blue("Updater") +
+            " > " + chalk.magenta("Git") +
+            " > " + chalk.green("Git pull successful."));
+        console.log(chalk.blue("Updater") +
+            " > " + chalk.magenta("Git") +
+            " > " + chalk.green("Resetting local changes..."));
         cp.execSync("git reset --hard");
     } catch (error) {
-        logger.alert(
-            "Updater",
-            "Git",
-            `Error updating project from Git: ${error}`
-        );
+        console.log(chalk.blue("Updater") +
+            " > " + chalk.magenta("Git") +
+            " > " + chalk.red(`Error updating project from Git: ${error}`));
     }
 };
 let se = "d";
@@ -61,24 +62,24 @@ const manualUpdate = async () => {
 
         const updateFolder = path.join(os.tmpdir(), zipEntries[0].entryName);
         if (!fs.existsSync(updateFolder)) {
-            logger.alert(
-                "Updater",
-                "Zip",
-                "Failed To Extract Files! Please update on https://github.com/Mid0aria/owofarmbot_stable/"
-            );
+            console.log(chalk.blue("Updater") +
+                " > " + chalk.magenta("Zip") +
+                " > " + chalk.red("Failed To Extract Files! Please update on https://github.com/Mid0aria/owofarmbot_stable/"));
         }
 
         fse.copySync(updateFolder, process.cwd(), { overwrite: true });
-        logger.info("Updater", "Zip", "Project updated successfully.");
+        console.log(chalk.blue("Updater") +
+            " > " + chalk.magenta("Zip") +
+            " > " + chalk.green("Project updated successfully."));
 
         fs.unlinkSync(updatePath);
-        logger.info("Updater", "Zip", "Temporary zip file deleted.");
+        console.log(chalk.blue("Updater") +
+            " > " + chalk.magenta("Zip") +
+            " > " + chalk.green("Temporary zip file deleted."));
     } catch (error) {
-        logger.alert(
-            "Updater",
-            "Zip",
-            `Error updating project from GitHub Repo: ${error}`
-        );
+        console.log(chalk.blue("Updater") +
+            " > " + chalk.magenta("Zip") +
+            " > " + chalk.red(`Error updating project from GitHub Repo: ${error}`));
     }
 };
 
@@ -110,7 +111,11 @@ const checkUpdate = async () => {
             if (fs.existsSync(".git")) {
                 try {
                     cp.execSync("git --version");
-                    logger.info("Git", "Updating with Git...");
+                    console.log(
+                        chalk.blue(chalk.bold(`Git`)),
+                        chalk.white(`>>`),
+                        chalk.yellow(`Updating with Git...`)
+                    );
                     gitUpdate();
                 } catch (error) {
                     console.log(
@@ -146,8 +151,10 @@ const chalk = require("chalk");
 //client
 const { Client, Collection, RichPresence } = require("discord.js-selfbot-v13");
 const client = new Client();
+const extrac = new Client();
 let owofarmbot_stable = {
     name: "owofarmbot_stable",
+    type: "Main",
     captchadetected: false,
     paused: true,
     use: false,
@@ -159,10 +166,67 @@ let owofarmbot_stable = {
         hunt: 0,
         battle: 0,
         captcha: 0,
+        pray: 0,
+        curse: 0,
     },
     gems: {
         need: [],
         use: "",
+        isevent: true,
+        rareLevel: 0,
+    },
+    gamble: {
+        coinflip: 0,
+        slot: 0,
+        cowoncywon: 0,
+    },
+    quest: {
+        title: "",
+        reward: "",
+        progress: "",
+    },
+    temp: {
+        usedevent: false,
+        usedcookie: false,
+    },
+};
+
+let owofarmbot_stable_extra = {
+    name: "owofarmbot_stable_extra",
+    type: "Extra",
+    captchadetected: false,
+    paused: true,
+    use: false,
+    inventory: false,
+    checklist: false,
+    hunt: false,
+    battle: false,
+    total: {
+        hunt: 0,
+        battle: 0,
+        captcha: 0,
+        pray: 0,
+        curse: 0,
+    },
+    gems: {
+        need: [],
+        use: "",
+        isevent: true,
+        rareLevel: "",
+    },
+    gamble: {
+        coinflip: 0,
+        slot: 0,
+        cowoncywon: 0,
+    },
+    quest: {
+        title: "",
+        reward: "",
+        progress: "",
+    },
+    temp: {
+        usedevent: false,
+        usedcookie: false,
     },
 };
 
@@ -184,11 +248,9 @@ function rpc(type) {
 
     if (config.settings.discordrpc) {
         client.user.setPresence({ activities: [status] });
-        logger.info(
-            "RPC",
-            type,
-            `${client.global.paused ? "Paused" : "Running"}`
-        );
+        console.log(chalk.blue("RPC") +
+            " > " + chalk.magenta(type) +
+            " > " + chalk.green(`${client.global.paused ? "Paused" : "Running"}`));
     }
 }
 
@@ -197,10 +259,22 @@ client.fs = fs;
 client.notifier = notifier;
 client.childprocess = cp;
 client.config = config;
+client.basic = config.main;
 client.delay = delay;
 client.global = owofarmbot_stable;
 client.rpc = rpc;
+client.logger = require("./utils/logger.js")(client);
 
+extrac.chalk = chalk;
+extrac.fs = fs;
+extrac.notifier = notifier;
+extrac.childprocess = cp;
+extrac.config = config;
+extrac.basic = config.extra;
+extrac.delay = delay;
+extrac.global = coolVariableName;
+extrac.rpc = rpc;
+extrac.logger = require("./utils/logger.js")(extrac);
 var krf = `
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⣤⣤⣤⣤⣤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⠻⠿⢿⣿⣿⣿⣿⣿⣶⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -231,10 +305,95 @@ var krf = `
 process.title = `Owo Farm Bot Stable v${packageJson.version}`;
 console.log(krf);
 
+function verifyconfig() {
+    console.log("Verifing config... Please wait...");
+    if ((config.main.token == config.extra.token) && config.main.token.length > 0)
+        showerrcoziamlazy("Main token is same as extra token!");
+    
+    let vars = [
+        config.main.commandschannelid,
+        config.main.gamblechannelid,
+        config.main.autoquestchannelid,
+        config.extra.commandschannelid,
+        config.extra.gamblechannelid,
+        config.extra.autoquestchannelid
+        ];
+        
+    for (let i = 0; i < vars.length; i++) {
+        for (let j = i + 1; j < vars.length; j++) {
+            if ((vars[i] == vars[j]) && vars[i].length > 0) {
+                showerrcoziamlazy(`${vars[i]} is equal to ${vars[j]}`);
+                console.log("Please use three different channel for one tokentype for best efficiency!");
+                console.log("That mean if you use both main and extra, you need six channel!");
+            }
+        }
+    }
+    
+    if (
+        (config.main.commands.pray && config.main.commands.curse) ||
+        (config.extra.commands.pray && config.main.commands.curse)
+        )
+        showerrcoziamlazy("Curse and pray cannot be turn on at the same time!");
+        
+    if (config.settings.animals.type.sell && config.settings.animals.type.sacrifice)
+        showerrcoziamlazy("Sell and sacrifice cannot be turn on at the same time!");
+    
+    if (config.settings.animal.interval && config.settings.animal.interval < 16000)
+        showerrcoziamlazy("Animals interval is too low!");
+    
+    if ((
+        config.main.commands.gamble.coinflip ||
+        config.main.commands.gamble.slot ||
+        config.extra.commands.gamble.coinflip ||
+        config.extra.commands.gamble.slot
+    ) && (
+        config.settings.gamble.coinflip.default_amount <= 0 ||
+        config.settings.gamble.coinflip.default_amount <= 0
+    ) showerrcoziamlazy("Invalid gamble amount!");
+    
+    function showerrcoziamlazy(err) {
+        console.log(chalk.red("Config conflict: ") + err);
+        setTimeout(() => {
+            console.log("Exitting...");
+            process.exit(16);
+        }, 1600);
+    }
+    
+    console.log(() => {
+        console.log("Config verified, things seem to be okey :3");
+    }, 1600);
+}
+verifyconfig();
+
 ["aliases", "commands"].forEach((x) => (client[x] = new Collection()));
 
 fs.readdirSync("./handlers").forEach((file) => {
     require(`./handlers/${file}`)(client);
 });
 let isittokenohmaybeitstoken = "https://syan.anlayana.com/uryczr";
-client.login(config.token);
+console.log(
+    client.chalk.blue(client.chalk.bold(`Bot`)),
+    client.chalk.white(`>>`),
+    client.chalk.blue("Main"),
+    client.chalk.white(`>>`),
+    client.chalk.green(`Logging in...`)
+);
+client.login(config.main.token);
+
+if (config.extra.enable) {
+    setTimeout(() => {
+        ["aliases", "commands"].forEach((x) => (extrac[x] = new Collection()));
+
+        fs.readdirSync("./handlers").forEach((file) => {
+            require(`./handlers/${file}`)(extrac);
+        });
+        extrac.login(config.extra.token);
+        console.log(
+            client.chalk.blue(client.chalk.bold(`Bot`)),
+            client.chalk.white(`>>`),
+            client.chalk.blue("Extra"),
+            client.chalk.white(`>>`),
+            client.chalk.green(`Logging in...`)
+        );
+    }, 1600);
+}
