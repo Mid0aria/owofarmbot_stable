@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.1(BETA)</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.2(BETA)</h1>
 <p align="center">
 
 [![Total Views](https://hits.sh/github.com/Mid0aria/owofarmbot_stable.svg?view=today-total&label=Repo%20Today/Total%20Views&color=770ca1&labelColor=007ec6)](https://github.com/Mid0aria/owofarmbot_stable)
@@ -58,6 +58,14 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
     -   Battle
     -   Pray
     -   Curse
+    -   Gamble
+        - Coinflip
+        - Slot
+
+- Questing:
+
+    - Do quest that require one user to done
+    - If extratoken is enabled, both can do quest for each other
 
 -   Animals:
 
@@ -96,6 +104,10 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
 -   Discord RPC
 -   Auto Phrases Send
 -   Chat FeedBack
+-   Extra Token:
+    - All Maintoken feature
+    - Pray/curse to main 
+-   All commands now controlable
 
 -   NEW FEATURES WILL COME WITH UPDATES
 
@@ -104,24 +116,66 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
 ```
 {
     "midoservices_authkey": "", / Mido services AUTH KEY
-    "prefix": "", / SelfBot PREFIX
-    "token": "", / SelfBot Token
-    "userid": "", / SelfBot UserID
-    "commandschannelid": "", / Farm Channel ID
-    "owodmchannelid": "", / OwO DM Channel ID
-    "commands": {
-        "hunt": true, / true or false (boolean)
-        "battle": true, / true or false (boolean)
-        "pray": true, / true or false (boolean)
-        "curse": true / true or false (boolean)
+    "prefix": "!", / SelfBot PREFIX
+    "main": { / main account, required
+        "token": "", / SelfBot Token (your discord token)
+        "userid": "",  / SelfBot UserID (your account userid)
+        "commandschannelid": "", / Farm Channel ID
+        "owodmchannelid": "", / OwO DM Channel ID
+        "gamblechannelid": "", / Gamble Channel ID
+        "autoquestchannelid": "", / Quest Channel ID
+
+        "commands": {
+            "hunt": true, / true or false (boolean)
+            "battle": true, / true or false (boolean)
+            "pray": false, / true or false (boolean)
+            "curse": true, / true or false (boolean)
+            "gamble": {
+                "coinflip": true, / true or false (boolean)
+                "slot": true / true or false (boolean)
+            },
+            "animals": false, / true or false (boolean) (sell/sac animals or not)
+            "inventory": true, / true or false (boolean)
+            "checklist": true, / true or false (boolean)
+            "autoquest": true / true or false (boolean)
+        },
+        "maximum_gem_rarity": "Mythical" / "common", "uncommon", "rare", "epic", "mythical", "legendary", "fabled"
+    },
+    "extra": { / not required, same as main
+        "enable": true,
+        "music": false,
+        "token": "",
+        "userid": "",
+        "commandschannelid": "",
+        "owodmchannelid": "",
+        "gamblechannelid": "",
+        "autoquestchannelid": "",
+
+        "commands": {
+            "hunt": true,
+            "battle": true,
+            "pray": false,
+            "curse": true,
+            "tomain": true, / use curse/pray to main token or not, true or false (boolean)
+            "gamble": {
+                "coinflip": true,
+                "slot": true
+            },
+            "animals": false,
+            "inventory": true,
+            "checklist": true,
+            "autoquest": true
+        },
+        "maximum_gem_rarity": "Mythical"
     },
     "settings": {
         "owoprefix": "w", / owo bot's prefix on your server (recommended)
         "discordrpc": false, / true or false (boolean)
         "chatfeedback": true, / true or false (boolean)
         "autophrases": true, / true or false (boolean)
+        "newlog": true, / a log with a table for controlling, will remove old log
+        "loglength": 20, / how many lines of log at one moment (only affect when newlog is true)
         "checklist": {
-            "check": true, / true or false (boolean)
             "types": {
                 "daily": true, / true or false (boolean)
                 "cookie": true, / true or false (boolean)
@@ -129,7 +183,6 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
             }
         },
         "inventory": {
-            "check": true, / true or false (boolean)
             "use": {
                 "lootbox": true, / true or false (boolean)
                 "fabledlootbox": false, / true or false (boolean)
@@ -142,10 +195,22 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
                 "notification": true, / true or false (boolean)
                 "prompt": true / true or false (boolean)
             }
+        },
+        "gamble": {
+            "coinflip": {
+                "default_amount": 1000, / base bet value
+                "max_amount": 250000, / max bet value, will reset to base if current bet bigger
+                "multiplier": 1.0 / multiply when lose
+            },
+            "slot": {
+                "default_amount": 1000,
+                "max_amount": 250000,
+                "multiplier": 1.0
+            }
         }
     },
     "animals": {
-        "enable": false, / true or false (boolean)
+        "interval": 610000,
         "type": {
             "sell": false, / true or false (boolean)
             "sacrifice": false / true or false (boolean)
@@ -168,6 +233,7 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
         }
     }
 }
+
 
 
 ```
