@@ -211,7 +211,7 @@ async function questHandler(client, channel) {
 }
 
 async function questOwO(client, channel, quest) {
-    while (quest.pro1 - 10 < quest.pro2) { // minus 10 to make sure
+    while (quest.pro1 - 2 < quest.pro2) { // minus 10 to make sure - 2 should be enough
         while (client.global.captchadetected) {
             await client.delay(16000);
             if (!client.global.captchadetected) break;
