@@ -1,32 +1,70 @@
 {
     "midoservices_authkey": "",
     "prefix": "!",
-    "token": "",
-    "userid": "",
-    "commandschannelid": "",
-    "owodmchannelid": "",
+    "main": {
+        "token": "",
+        "userid": "",
+        "commandschannelid": "",
+        "owodmchannelid": "",
+        "gamblechannelid": "",
+        "autoquestchannelid": "",
 
-    "commands": {
-        "hunt": true,
-        "battle": true,
-        "pray": true,
-        "curse": true
+        "commands": {
+            "hunt": true,
+            "battle": true,
+            "pray": false,
+            "curse": true,
+            "gamble": {
+                "coinflip": true,
+                "slot": true
+            },
+            "animals": false,
+            "inventory": true,
+            "checklist": true,
+            "autoquest": true
+        },
+        "maximum_gem_rarity": "Mythical"
+    },
+    "extra": {
+        "enable": true,
+        "token": "",
+        "userid": "",
+        "commandschannelid": "",
+        "owodmchannelid": "",
+        "gamblechannelid": "",
+        "autoquestchannelid": "",
+
+        "commands": {
+            "hunt": true,
+            "battle": true,
+            "pray": false,
+            "curse": true,
+            "tomain": true,
+            "gamble": {
+                "coinflip": true,
+                "slot": true
+            },
+            "animals": false,
+            "inventory": true,
+            "checklist": true,
+            "autoquest": true
+        },
+        "maximum_gem_rarity": "Mythical"
     },
     "settings": {
-        "owoprefix": "",
-        "discordrpc": true,
+        "owoprefix": "o",
+        "discordrpc": false,
         "chatfeedback": true,
         "autophrases": true,
+        "newlog": false,
         "checklist": {
-            "check": true,
             "types": {
                 "daily": true,
-                "cookie": true,
-                "vote": true
+                "cookie": false,
+                "vote": false
             }
         },
         "inventory": {
-            "check": true,
             "use": {
                 "lootbox": true,
                 "fabledlootbox": false,
@@ -39,10 +77,22 @@
                 "notification": true,
                 "prompt": true
             }
+        },
+        "gamble": {
+            "coinflip": {
+                "default_amount": 1000,
+                "max_amount": 250000,
+                "multiplier": 1.0
+            },
+            "slot": {
+                "default_amount": 1000,
+                "max_amount": 250000,
+                "multiplier": 1.0
+            }
         }
     },
     "animals": {
-        "enable": false,
+        "interval": 610000,
         "type": {
             "sell": false,
             "sacrifice": false
