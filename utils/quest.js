@@ -157,7 +157,7 @@ async function questHandler(client, channel) {
                                     questBattle(client, channel, quest);
                                     selectedQuest = true;
                                     break;
-                                case quest.title.includes("Receive a cookie from 1 friends") &&
+                                case quest.title.includes("Receive a cookie from") &&
                                      (!mainclient.global.temp.usedcookie &&
                                       !extraclient.global.temp.usedcookie):
                                     questCookie(client, channel, quest);
@@ -204,13 +204,14 @@ async function questHandler(client, channel) {
                 client.logger.info(
                     "Farm",
                     "Quest",
-                    `No active quest found! 
+                    `No active quest found!`
+                    );
             }
         });
 }
 
 async function questOwO(client, channel, quest) {
-    while (quest.pro1 < quest.pro2) {
+    while (quest.pro1 - 10 < quest.pro2) { // minus 10 to make sure
         while (client.global.captchadetected) {
             await client.delay(16000);
             if (!client.global.captchadetected) break;
