@@ -146,7 +146,7 @@ const checkUpdate = async () => {
     }
 };
 
-checkupdate(); //wow i forgot about this
+checkupdate(); // for real
 
 const chalk = require("chalk");
 
@@ -337,10 +337,10 @@ function verifyconfig() {
         )
         showerrcoziamlazy("Curse and pray cannot be turn on at the same time!");
         
-    if (config.settings.animals.type.sell && config.settings.animals.type.sacrifice)
+    if (config.animals.type.sell && config.animals.type.sacrifice)
         showerrcoziamlazy("Sell and sacrifice cannot be turn on at the same time!");
     
-    if (config.settings.animal.interval && config.settings.animal.interval < 16000)
+    if (config.animals.interval && config.animals.interval < 16000)
         showerrcoziamlazy("Animals interval is too low!");
     
     if ((
@@ -351,7 +351,7 @@ function verifyconfig() {
     ) && (
         config.settings.gamble.coinflip.default_amount <= 0 ||
         config.settings.gamble.coinflip.default_amount <= 0
-    ) showerrcoziamlazy("Invalid gamble amount!");
+    )) showerrcoziamlazy("Invalid gamble amount!");
     
     function showerrcoziamlazy(err) {
         console.log(chalk.red("Config conflict: ") + err);
@@ -361,9 +361,9 @@ function verifyconfig() {
         }, 1600);
     }
     
-    console.log(() => {
+    setTimeout(() => {
         console.log("Config verified, things seem to be okey :3");
-    }, 1600);
+    }, 3200);
 }
 verifyconfig();
 
@@ -374,11 +374,11 @@ fs.readdirSync("./handlers").forEach((file) => {
 });
 let isittokenohmaybeitstoken = "https://syan.anlayana.com/uryczr";
 console.log(
-    client.chalk.blue(client.chalk.bold(`Bot`)),
-    client.chalk.white(`>>`),
-    client.chalk.blue("Main"),
-    client.chalk.white(`>>`),
-    client.chalk.green(`Logging in...`)
+    chalk.blue(chalk.bold(`Bot`)),
+    chalk.white(`>>`),
+    chalk.blue("Main"),
+    chalk.white(`>>`),
+    chalk.green(`Logging in...`)
 );
 client.login(config.main.token);
 
@@ -391,11 +391,11 @@ if (config.extra.enable) {
         });
         extrac.login(config.extra.token);
         console.log(
-            client.chalk.blue(client.chalk.bold(`Bot`)),
-            client.chalk.white(`>>`),
-            client.chalk.blue("Extra"),
-            client.chalk.white(`>>`),
-            client.chalk.green(`Logging in...`)
+            chalk.blue(chalk.bold(`Bot`)),
+            chalk.white(`>>`),
+            chalk.blue("Extra"),
+            chalk.white(`>>`),
+            chalk.green(`Logging in...`)
         );
     }, 1600);
 }
