@@ -204,14 +204,14 @@ async function questHandler(client, channel) {
                 client.logger.info(
                     "Farm",
                     "Quest",
-                    `No active quest found!`
+                    `No active quest found! `
                     );
             }
         });
 }
 
 async function questOwO(client, channel, quest) {
-    while (quest.pro1 - 2 < quest.pro2) { // minus 10 to make sure - 2 should be enough
+    while (quest.pro1 - 10 < quest.pro2) {
         while (client.global.captchadetected) {
             await client.delay(16000);
             if (!client.global.captchadetected) break;
