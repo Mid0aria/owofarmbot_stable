@@ -1,17 +1,18 @@
 module.exports = async (client, message) => {
     let msgcontent = message.content.toLowerCase();
 
-    if (
-        message.author.id === "408785106942164992" &&
-        (message.channel.id === client.basic.commandschannelid ||
-            message.channel.id === client.basic.owodmchannelid)
-    ) {
+    if (message.author.id === "408785106942164992" && (
+        message.channel.id === client.basic.commandschannelid ||
+        message.channel.id === client.basic.owodmchannelid ||
+        message.channel.id === client.basic.gamblechannelid ||
+        message.channel.id === client.basic.autoquestchannelid)) {
         if (
         (
             msgcontent.includes("please complete your captcha") ||
             msgcontent.includes("verify that you are human") ||
             msgcontent.includes("are you a real human") ||
-            msgcontent.includes("please use the link below so i can check")
+            msgcontent.includes("please use the link below so i can check") ||
+            msgcontent.includes("captcha")
         ) && !client.global.captchadetected) {
             client.global.paused = true;
             client.global.captchadetected = true;
