@@ -143,7 +143,6 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
     },
     "extra": { / not required, same as main
         "enable": true,
-        "music": false,
         "token": "",
         "userid": "",
         "commandschannelid": "",
@@ -210,7 +209,7 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
         }
     },
     "animals": {
-        "interval": 610000,
+        "interval": 610000, / interval for commands
         "type": {
             "sell": false, / true or false (boolean)
             "sacrifice": false / true or false (boolean)
