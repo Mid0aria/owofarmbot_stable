@@ -367,35 +367,37 @@ function verifyconfig() {
 }
 verifyconfig();
 
-["aliases", "commands"].forEach((x) => (client[x] = new Collection()));
-
-fs.readdirSync("./handlers").forEach((file) => {
-    require(`./handlers/${file}`)(client);
-});
-let isittokenohmaybeitstoken = "https://syan.anlayana.com/uryczr";
-console.log(
-    chalk.blue(chalk.bold(`Bot`)),
-    chalk.white(`>>`),
-    chalk.blue("Main"),
-    chalk.white(`>>`),
-    chalk.green(`Logging in...`)
-);
-client.login(config.main.token);
-
-if (config.extra.enable) {
-    setTimeout(() => {
-        ["aliases", "commands"].forEach((x) => (extrac[x] = new Collection()));
-
-        fs.readdirSync("./handlers").forEach((file) => {
-            require(`./handlers/${file}`)(extrac);
-        });
-        extrac.login(config.extra.token);
-        console.log(
-            chalk.blue(chalk.bold(`Bot`)),
-            chalk.white(`>>`),
-            chalk.blue("Extra"),
-            chalk.white(`>>`),
-            chalk.green(`Logging in...`)
-        );
-    }, 1600);
-}
+setTimeout(() => {
+    ["aliases", "commands"].forEach((x) => (client[x] = new Collection()));
+    
+    fs.readdirSync("./handlers").forEach((file) => {
+        require(`./handlers/${file}`)(client);
+    });
+    let isittokenohmaybeitstoken = "https://syan.anlayana.com/uryczr";
+    console.log(
+        chalk.blue(chalk.bold(`Bot`)),
+        chalk.white(`>>`),
+        chalk.blue("Main"),
+        chalk.white(`>>`),
+        chalk.green(`Logging in...`)
+    );
+    client.login(config.main.token);
+    
+    if (config.extra.enable) {
+        setTimeout(() => {
+            ["aliases", "commands"].forEach((x) => (extrac[x] = new Collection()));
+    
+            fs.readdirSync("./handlers").forEach((file) => {
+                require(`./handlers/${file}`)(extrac);
+            });
+            extrac.login(config.extra.token);
+            console.log(
+                chalk.blue(chalk.bold(`Bot`)),
+                chalk.white(`>>`),
+                chalk.blue("Extra"),
+                chalk.white(`>>`),
+                chalk.green(`Logging in...`)
+            );
+        }, 1600);
+    }
+}, 3200);
