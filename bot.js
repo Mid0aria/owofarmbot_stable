@@ -19,6 +19,7 @@ const path = require("path");
 const admZip = require("adm-zip");
 const os = require("os");
 const fse = require("fs-extra");
+const chalk = require("chalk");
 
 const gitUpdate = () => {
     try {
@@ -146,9 +147,7 @@ const checkUpdate = async () => {
     }
 };
 
-checkupdate(); // for real
-
-const chalk = require("chalk");
+checkUpdate(); // for real
 
 //client
 const { Client, Collection, RichPresence } = require("discord.js-selfbot-v13");
@@ -193,6 +192,7 @@ let owofarmbot_stable = {
     },
 };
 
+//extraclient
 let owofarmbot_stable_extra = {
     name: "owofarmbot_stable_extra",
     type: "Extra",
@@ -277,6 +277,7 @@ extrac.delay = delay;
 extrac.global = coolVariableName;
 extrac.rpc = rpc;
 extrac.logger = require("./utils/logger.js")(extrac);
+
 var krf = `
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣤⣤⣤⣤⣤⣤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠛⠻⠿⢿⣿⣿⣿⣿⣿⣶⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -305,7 +306,10 @@ var krf = `
 `;
 
 process.title = `Owo Farm Bot Stable v${packageJson.version}`;
-console.log(krf);
+setTimeout(() => {
+    verifyconfig();
+    console.log(krf);
+}, 1000);
 
 function verifyconfig() {
     console.log("Verifing config... Please wait...");
@@ -363,9 +367,8 @@ function verifyconfig() {
     
     setTimeout(() => {
         console.log("Config verified, things seem to be okey :3");
-    }, 3200);
+    }, 1600);
 }
-verifyconfig();
 
 setTimeout(() => {
     ["aliases", "commands"].forEach((x) => (client[x] = new Collection()));
