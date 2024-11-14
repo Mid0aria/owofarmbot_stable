@@ -72,10 +72,10 @@ module.exports = async (client, message) => {
         }
     }
     
-    await client.delay(16000);
+    await client.delay(8000);
     if (client.basic.commands.autoquest) require("./quest.js")(client, message);
     
-    await client.delay(16000);
+    await client.delay(32000);
     if (client.basic.commands.pray) pray(client, channel);
     else if (client.basic.commands.curse) curse(client, channel);
     
@@ -151,6 +151,7 @@ module.exports = async (client, message) => {
 };
 
 async function checklist(client, channel) {
+    if (client.global.captchadetected) return;
     let id;
     await channel
         .send({
@@ -226,6 +227,7 @@ async function checklist(client, channel) {
             }
             
             await client.delay(2000);
+            if (client.global.captchadetected) return;
             let checklistmsg = message.embeds[0].description;
             if (checklistmsg.includes("☑️ 🎉")) {
                 client.logger.info("Farm", "Checklist", "Checklist Completed");
@@ -422,6 +424,7 @@ async function inventory(client, channel) {
                 return;
             }
             
+            if (client.global.captchadetected) return;
             let invcontent = message.content;
 
             let values = [];
@@ -772,7 +775,9 @@ async function battle(client, channel) {
 }
 
 async function use(client, channel, item, count, where) {
-    if (client.global.paused && where !== "inventory") return;
+    if (client.global.captchadetected || 
+        (client.global.paused && where !== "inventory")
+        ) return;
     client.global.use = true;
     await channel.send({
         content: `${commandrandomizer([
@@ -786,6 +791,7 @@ async function use(client, channel, item, count, where) {
 }
 
 async function sell(client, channel, choose, types) {
+    if (client.global.captchadetected) return;
     await channel
         .send({
             content: `${commandrandomizer([
@@ -843,7 +849,6 @@ async function coinflip(client, channel) {
             }
         
         coinfliping = true;
-        currentBet = Math.round(currentBet);
         function head() {
             return commandrandomizer(["owo", client.config.settings.owoprefix]) +
                    commandrandomizer(["coinflip", "cf"]) + " " +
@@ -984,7 +989,6 @@ function slot(client, channel) {
             }
         
         sloting = true;
-        currentBet = Math.round(currentBet);
         const content = commandrandomizer(["owo", client.config.settings.owoprefix]) +
                         commandrandomizer(["slots", "s"]) + " " +
                         currentBet;
