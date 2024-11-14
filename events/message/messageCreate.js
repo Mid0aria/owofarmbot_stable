@@ -2,7 +2,7 @@ module.exports = async (client, message) => {
     let msgcontent = message.content.toLowerCase();
 
     if (
-        !message.author.id === "408785106942164992" &&
+        message.author.id === "408785106942164992" &&
         (message.channel.id === client.basic.commandschannelid ||
             message.channel.id === client.basic.owodmchannelid)
     ) {
