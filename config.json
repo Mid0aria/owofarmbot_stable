@@ -52,7 +52,7 @@
         "maximum_gem_rarity": "Mythical"
     },
     "settings": {
-        "owoprefix": "o",
+        "owoprefix": "",
         "discordrpc": false,
         "chatfeedback": true,
         "autophrases": true,
