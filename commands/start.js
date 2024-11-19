@@ -17,7 +17,7 @@ module.exports = {
             }
 
             setTimeout(() => {
-                require("../utils/farm.js")(client, message);
+                require("../utils/mainHandler.js")(client, message);
             }, 1000);
         } else {
             await message.delete();
