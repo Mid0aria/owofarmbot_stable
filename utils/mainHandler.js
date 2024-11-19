@@ -19,8 +19,8 @@ module.exports = async (client, message) => {
     await client.delay(2000);
     
     await client.delay(16000); //reduce bot rate
-    if (client.basic.commands.coinflip ||
-        client.basic.commands.slot) require("./function/gamble.js")(client, message);
+    if (client.basic.commands.gamble.coinflip ||
+        client.basic.commands.gamble.slot) require("./function/gamble.js")(client, message);
     
     await client.delay(8000);
     if (client.basic.commands.autoquest) require("./function/quest.js")(client, message);
@@ -95,7 +95,7 @@ async function checklist(client, channel) {
             }
             
             if (message == null) {
-                client.global.Checklist = false;
+                client.global.checklist = false;
                 client.logger.alert(
                     "Farm",
                     "Checklist",
