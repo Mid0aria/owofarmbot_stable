@@ -10,12 +10,5 @@ module.exports = async (client) => {
                 client.aliases.set(a, pull.config.name)
             );
     }
-    console.log(
-        client.chalk.blue(client.chalk.bold(`Bot`)),
-        client.chalk.white(`>>`),
-        client.chalk.blue(client.global.type),
-        client.chalk.white(`>>`),
-        client.chalk.red(`Commands`),
-        client.chalk.green(`Succesfully loaded!`)
-    );
+    client.logger.info("Bot", "Commands", "Succesfully loaded");
 };
