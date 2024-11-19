@@ -146,6 +146,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
             
             if (questcontent.includes("You finished all of your quests!")) {
                 client.logger.info("Farm", "Quest", "All quest completed!");
+                client.global.quest.title = "All quest completed!";
             } else {
                 let selectedQuest = false;
                 for (const quest of quests) {
