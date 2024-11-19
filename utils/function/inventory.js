@@ -1,8 +1,6 @@
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 module.exports = async (client, message) => {
-    if (client.global.paused || client.global.captchadetected) return;
-    
     let channel = client.channels.cache.get(client.basic.commandschannelid);
     if (client.config.settings.owoprefix.length <= 0) {
         client.config.settings.owoprefix = "owo";
@@ -67,7 +65,10 @@ async function inventory(client, channel) {
                 return;
             }
             
-            if (client.global.captchadetected || client.global.paused) return;
+            if (client.global.captchadetected || client.global.paused) {
+                client.global.inventory = false;
+                return;
+            }
             let invcontent = message.content;
 
             let values = [];
