@@ -313,7 +313,7 @@ process.title = `Owo Farm Bot Stable v${packageJson.version}`;
 setTimeout(() => {
     console.log(krf);
     verifyconfig();
-}, 1000);
+}, 800);
 
 function verifyconfig() {
     let normal = true;
@@ -491,6 +491,12 @@ function verifyconfig() {
             "Config",
             normal ? "Config verified, things seem to be okey :3"
                 : "Config verified, there are some config error but bot can still run");
+
+        client.logger.info(
+            "Bot",
+            "Help",
+            `Use \"${config.prefix}start\" to start the bot. \"${config.prefix}resume\" to resume and \"${config.prefix}pause\" to pause.`
+            );
     }, 1600);
 }
 
