@@ -205,7 +205,7 @@ async function inventory(client, channel) {
             for (let value of values) {
                 switch (value) {
                     case "050":
-                        use(
+                        if (client.config.settings.inventory.use.lootbox) use(
                             client,
                             channel,
                             `${commandrandomizer(["lb", "lootbox"])}`,
@@ -215,7 +215,7 @@ async function inventory(client, channel) {
                         await client.delay(2500);
                         break;
                     case "049":
-                        use(
+                        if (client.config.settings.inventory.use.fabledlootbox) use(
                             client,
                             channel,
                             "lootbox fabled",
@@ -225,7 +225,7 @@ async function inventory(client, channel) {
                         await client.delay(2500);
                         break;
                     case "100":
-                        use(
+                        if (client.config.settings.inventory.use.crate) use(
                             client,
                             channel,
                             `${commandrandomizer(["wc", "crate"])}`,
