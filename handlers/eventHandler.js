@@ -11,10 +11,5 @@ module.exports = async (client, message) => {
     };
 
     client.fs.readdirSync("./events/").forEach((x) => load(x));
-    console.log(
-        client.chalk.blue(client.chalk.bold(`Bot`)),
-        client.chalk.white(`>>`),
-        client.chalk.red(`Events`),
-        client.chalk.green(`Succesfully loaded!`)
-    );
+    client.logger.info("Bot", "Events", "Succesfully loaded");
 };

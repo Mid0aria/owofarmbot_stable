@@ -1,10 +1,11 @@
 module.exports = async (client) => {
-    console.log(
-        client.chalk.blue(client.chalk.bold(`Bot`)),
-        client.chalk.white(`>>`),
-        client.chalk.red(`${client.user.username}`),
-        client.chalk.green(`is ready!`)
-    );
+    client.logger.info(
+        "Bot",
+        "Startup",
+        client.chalk.red(`${client.user.username}`) + " is ready!"
+        );
+    
+    client.global.temp.isready = true;
 
     client.rpc("start");
 };
