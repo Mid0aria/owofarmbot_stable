@@ -21,7 +21,7 @@ module.exports = (uwu) => { //plz change it when upload, u will remember it, rig
     function logging(type, module, result, color) {
         const logMessage = `${client.chalk.white(`[${new Date().toLocaleTimeString()}]`)} ` +
                            `${client.chalk.blue(client.chalk.bold(type))}` +
-                           `${(type == "Bot" || type == "Updater") && module != "Startup" ? "" : //idk why i put this on
+                           `${(type == "Bot" || type == "Updater") && (module != "Startup" || module != "Captcha") ? "" : //idk why i put this on
                            `${client.chalk.white(" >> ")}${client.chalk.cyan(client.chalk.bold(uwu.global.type))}`} > ` +
                            `${client.chalk.magenta(module)} > ` +
                            `${color(result)}`;
