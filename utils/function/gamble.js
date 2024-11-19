@@ -1,8 +1,6 @@
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 module.exports = async (client, message) => {
-    if (client.global.paused || client.global.captchadetected) return;
-    
     if (client.config.settings.owoprefix.length <= 0) {
         client.config.settings.owoprefix = "owo";
     }
@@ -138,7 +136,7 @@ function slot(client, channel) {
                         commandrandomizer(["slots", "s"]) + " " + currentBet;
 
         let id;
-        await channel.send({ `${content}` }).then((message) => {
+        await channel.send({ content: `${content}` }).then((message) => {
             id = message.id;
             client.global.gamble.slot++;
             client.logger.info(
