@@ -172,6 +172,7 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
         "discordrpc": false, / true or false (boolean)
         "chatfeedback": true, / true or false (boolean)
         "autophrases": true, / true or false (boolean)
+        "autoresume": false, / auto resume bot after captcha sloved. true or false (boolean)
         "logging": {
             "newlog": true, / a log with a table for controlling, will remove old log
             "loglength": 20, / how many lines of log at one moment (only affect when newlog is true)
