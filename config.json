@@ -56,8 +56,11 @@
         "discordrpc": false,
         "chatfeedback": true,
         "autophrases": true,
-        "newlog": false,
-        "loglength": 20,
+        "logging": {
+            "newlog": true,
+            "loglength": 20,
+            "showlogbeforeexit": true
+        },
         "checklist": {
             "types": {
                 "daily": true,
@@ -93,7 +96,6 @@
         }
     },
     "animals": {
-        "interval": 610000,
         "type": {
             "sell": false,
             "sacrifice": false
@@ -113,6 +115,32 @@
             "fabled": false,
             "special": false,
             "hidden": false
+        }
+    },
+    "interval": {
+        "hunt": {
+            "max": 32000,
+            "min": 16000
+        },
+        "battle": {
+            "max": 32000,
+            "min": 16000
+        },
+        "pray": {
+            "max": 332000,
+            "min": 316000
+        },
+        "coinflip": {
+            "max": 32000,
+            "min": 16000
+        },
+        "slot": {
+            "max": 32000,
+            "min": 16000
+        },
+        "animals": {
+            "max": 661000,
+            "min": 610000
         }
     }
 }
