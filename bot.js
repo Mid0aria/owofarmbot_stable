@@ -364,7 +364,8 @@ function verifyconfig() {
         config.settings.gamble.coinflip.default_amount <= 0
     )) showerrcoziamlazy("Invalid gamble amount!");
     
-    let clients = [client, extrac];
+    let clients = [client];
+    if (config.extra.enable) clients.push(extrac);
     for (const client of clients) {
         if (client.basic.maximum_gem_rarity.length > 0) {
             switch (client.basic.maximum_gem_rarity.toLowerCase()) {
