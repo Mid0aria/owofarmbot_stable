@@ -59,7 +59,7 @@
         "logging": {
             "newlog": true,
             "loglength": 20,
-            "showlogbeforeexit": true
+            "showlogbeforeexit": false
         },
         "checklist": {
             "types": {
