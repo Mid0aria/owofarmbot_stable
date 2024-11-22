@@ -56,6 +56,7 @@
         "discordrpc": false,
         "chatfeedback": true,
         "autophrases": true,
+        "autoresume": false,
         "logging": {
             "newlog": true,
             "loglength": 20,
