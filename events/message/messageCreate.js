@@ -92,8 +92,12 @@ module.exports = async (client, message) => {
         }
         if (msgcontent.includes("i have verified that you are human")) {
             client.global.captchadetected = false;
-            //client.global.paused = false;
-            client.logger.warn("Bot", "Captcha", `Captcha Solved. Bot Resuming...`);
+            if (client.config.settings.autoresume) {
+                client.global.paused = false;
+                client.logger.warn("Bot", "Captcha", `Captcha Solved. Bot Resuming...`);
+            } else {
+                client.logger.warn("Bot", "Captcha", `Captcha Solved, please resume by type \"${client.config.prefix}resume\" to resume`);
+            }
         }
     }
 
