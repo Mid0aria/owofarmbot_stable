@@ -325,6 +325,8 @@ function verifyconfig() {
         "Verifing config... Please wait...");
     if ((config.main.token == config.extra.token) && config.main.token.length > 0)
         showerrcoziamlazy("Main token is same as extra token!");
+    if (config.extra.enable && config.extra.token.length == 0)
+        showerrcoziamlazy("Extra token enabled but no token found");
     
     let vars = [
         config.main.commandschannelid,
@@ -338,9 +340,10 @@ function verifyconfig() {
     for (let i = 0; i < vars.length; i++) {
         for (let j = i + 1; j < vars.length; j++) {
             if ((vars[i] == vars[j]) && vars[i].length > 0) {
-                showerrcoziamlazy(`${vars[i]} is equal to ${vars[j]}`);
+                showerrcoziamlazy(`There are some duplicate channel id!`);
                 console.log("Please use three different channel for one tokentype for best efficiency!");
-                console.log("That mean if you use both main and extra, you need six channel!");
+                console.log("That mean if you use both main and extra, and farm, quest and gamble, you need six channel!");
+                break;
             }
         }
     }
