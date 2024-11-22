@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.2(BETA)</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.3(BETA)</h1>
 <p align="center">
 
 [![Total Views](https://hits.sh/github.com/Mid0aria/owofarmbot_stable.svg?view=today-total&label=Repo%20Today/Total%20Views&color=770ca1&labelColor=007ec6)](https://github.com/Mid0aria/owofarmbot_stable)
@@ -48,7 +48,7 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
 
 -   Use of this farm bot may lead to actions being taken against your OwO profile and/or your Discord account. We are not responsible for them.
 -   Discord may restart as a result of discord RPC overload.
--   DO NOT USE ONE CHANNEL FOR TWO ACCOUNTS, USE IT FOR 1 ACCOUNT ONLY.
+-   FARM, QUEST AND GAMBLE NEED TO PLACE IN DIFFERENT CHANNEL. That mean if you use all of them, you need three different channel. And if you use extra token, that will be six.
 
 ## 👑・Features
 
@@ -172,8 +172,12 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
         "discordrpc": false, / true or false (boolean)
         "chatfeedback": true, / true or false (boolean)
         "autophrases": true, / true or false (boolean)
-        "newlog": true, / a log with a table for controlling, will remove old log
-        "loglength": 20, / how many lines of log at one moment (only affect when newlog is true)
+        "autoresume": false, / auto resume bot after captcha sloved. true or false (boolean)
+        "logging": {
+            "newlog": true, / a log with a table for controlling, will remove old log
+            "loglength": 20, / how many lines of log at one moment (only affect when newlog is true)
+            "showlogbeforeexit": false / show a full log when user click ctrl + c (only affect when newlog is true)
+        },
         "checklist": {
             "types": {
                 "daily": true, / true or false (boolean)
@@ -209,7 +213,6 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
         }
     },
     "animals": {
-        "interval": 610000, / interval for commands
         "type": {
             "sell": false, / true or false (boolean)
             "sacrifice": false / true or false (boolean)
@@ -229,6 +232,32 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
             "fabled": false, / true or false (boolean)
             "special": false, / true or false (boolean)
             "hidden": false / true or false (boolean)
+        }
+    },
+    "interval": { / interval for commands (milisecond)
+        "hunt": {
+            "max": 32000,
+            "min": 16000
+        },
+        "battle": {
+            "max": 32000,
+            "min": 16000
+        },
+        "pray": {
+            "max": 332000,
+            "min": 316000
+        },
+        "coinflip": {
+            "max": 32000,
+            "min": 16000
+        },
+        "slot": {
+            "max": 32000,
+            "min": 16000
+        },
+        "animals": {
+            "max": 661000,
+            "min": 610000
         }
     }
 }

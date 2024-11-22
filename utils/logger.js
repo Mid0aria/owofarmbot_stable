@@ -1,10 +1,20 @@
 let reallog = [];
+let fulllog = [];
 let client, extrac;
 module.exports = (uwu) => { //plz change it when upload, u will remember it, right?
     let logger = [];
-    let length = uwu ? uwu.config.settings.loglength : 16;
+    let length = uwu ? uwu.config.settings.logging.loglength : 16;
     if (uwu.global.type == "Main") client = uwu;
     else extrac = uwu;
+    let exitlog = uwu.config.settings.logging.showlogbeforeexit && uwu.config.settings.logging.newlog;
+    process.on('SIGINT', () => {
+        if (exitlog) {
+            for (const logs of fulllog) console.log(logs);
+            console.log("//END OF LOG//");
+        }
+        process.exit(0);
+    });
+            
     
     function info(type, module, result = "") {
         logging(type, module, result, client.chalk.green);
@@ -21,19 +31,20 @@ module.exports = (uwu) => { //plz change it when upload, u will remember it, rig
     function logging(type, module, result, color) {
         const logMessage = `${client.chalk.white(`[${new Date().toLocaleTimeString()}]`)} ` +
                            `${client.chalk.blue(client.chalk.bold(type))}` +
-                           `${(type == "Bot" || type == "Updater") && (module != "Startup" || module != "Captcha") ? "" : //idk why i put this on
+                           `${(type == "Bot" || type == "Updater") && (module != "Startup" && module != "Captcha") ? "" : //idk why i put this on
                            `${client.chalk.white(" >> ")}${client.chalk.cyan(client.chalk.bold(uwu.global.type))}`} > ` +
                            `${client.chalk.magenta(module)} > ` +
                            `${color(result)}`;
 
         reallog.push(logMessage);
+        if (exitlog) fulllog.push(logMessage);
         if (reallog.length >= length) reallog.shift();
         showlog(reallog);
     }
 
     function showlog(reallog) {
         //no client
-        if (!client.global.temp.isready || !extrac.global.temp.isready) {
+        if (!client.global.temp.isready || (extrac && !extrac.global.temp.isready)) {
             console.log(reallog[reallog.length - 1]);
             return;
         }
@@ -77,7 +88,7 @@ module.exports = (uwu) => { //plz change it when upload, u will remember it, rig
             }
         }
         
-        if (uwu.config.extra.enable && extrac && uwu.config.settings.newlog) {
+        if (uwu.config.extra.enable && extrac && uwu.config.settings.logging.newlog) {
             console.clear();
             console.log(
 `╔══════════╦═══════════════════════╦════════════════════════════════════════════════
@@ -93,7 +104,7 @@ module.exports = (uwu) => { //plz change it when upload, u will remember it, rig
 ╚══════════╩═══════════════════════╩════════════════════════════════════════════════
 >>> Log`);
             for (const logs of reallog) console.log(logs);
-        } else if (uwu.config.settings.newlog) {
+        } else if (uwu.config.settings.logging.newlog) {
             console.clear();
             console.log(
 `╔══════════════════════╦══════════╦═══════════════════════════════════════════════

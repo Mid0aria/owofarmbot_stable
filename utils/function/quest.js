@@ -1,9 +1,10 @@
 const fs = require("fs");
 let type = "single";
-let mainclient, extraclient, mainSender, extraSender;;
+let mainclient, extraclient, mainSender, extraSender;
 let mainready = false;
 let extraready = false;
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const getrand = (min, max) => Math.random() * (max - min) + min;
 
 module.exports = async (client, message) => {
     let channel;
@@ -56,6 +57,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
     
     client.logger.info("Farm", "Questing", "Getting quest...");
     let id;
+    channel.sendTyping();
     channel
         .send({
             content: `${commandrandomizer([
@@ -147,6 +149,8 @@ async function questHandler(client, channel, mainSender, extraSender) {
             if (questcontent.includes("You finished all of your quests!")) {
                 client.logger.info("Farm", "Quest", "All quest completed!");
                 client.global.quest.title = "All quest completed!";
+                client.global.quest.reward = "";
+                client.global.quest.progress = "";
             } else {
                 let selectedQuest = false;
                 for (const quest of quests) {
@@ -185,8 +189,8 @@ async function questHandler(client, channel, mainSender, extraSender) {
                                     selectedQuest = true;
                                     break;
                                 case quest.title.includes("Receive a cookie from") &&
-                                     (!mainclient.global.temp.usedcookie &&
-                                      !extraclient.global.temp.usedcookie):
+                                     (mainclient.global.temp.usedcookie == false &&
+                                      extraclient.global.temp.usedcookie == false):
                                     questCookie(client, channel, quest, mainSender, extraSender);
                                     selectedQuest = true;
                                     break;
@@ -249,14 +253,16 @@ async function questOwO(client, channel, quest) {
                client.global.paused)
             await client.delay(16000);
         
+        channel.sendTyping();
         channel.send({
             content: `${commandrandomizer(["owo", "Owo", "owO", "OwO"])}`
         }).then(async () => {
             quest.pro1++;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         });
-        await client.delay(12345);
+        await client.delay(getrand(12000, 16000));
     }
+    client.global.quest.progress = "Completed!";
     
     setTimeout(() => {
         questHandler(client, channel)
@@ -269,6 +275,7 @@ async function questGamble(client, channel, quest) {
                client.global.paused)
             await client.delay(16000);
         
+        channel.sendTyping();
         channel.send({
             content: `${commandrandomizer(["owo", "Owo", "owO", "OwO"])}` + 
                      `${commandrandomizer(["cf", "coinflip"])}` +
@@ -277,8 +284,9 @@ async function questGamble(client, channel, quest) {
             quest.pro1++;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         });
-        await client.delay(12345);
+        await client.delay(getrand(12000, 16000));
     }
+    client.global.quest.progress = "Completed!";
     
     setTimeout(() => {
         questHandler(client, channel)
@@ -291,14 +299,16 @@ async function questActionOther(client, channel, quest) {
                client.global.paused)
             await client.delay(16000);
         
+        channel.sendTyping();
         channel.send({
             content: `${commandrandomizer(["owo", "Owo", "owO", "OwO"])} hug <@408785106942164992>`
         }).then(async () => {
             quest.pro1++;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         });
-        await client.delay(12345);
+        await client.delay(getrand(12000, 16000));
     }
+    client.global.quest.progress = "Completed!";
     
     setTimeout(() => {
         questHandler(client, channel)
@@ -322,6 +332,7 @@ async function questCurse(client, channel, quest, mainSender, extraSender) {
                    client.global.paused)
                 await client.delay(16000);
             
+            mainSender.sendTyping();
             mainSender.send({ //so it will need extra to curse to main
                 content: `${commandrandomizer(["owo", client.config.settings.owoprefix])} curse <@${mainclient.basic.userid}>`
             }).then(async () => {
@@ -341,6 +352,7 @@ async function questCurse(client, channel, quest, mainSender, extraSender) {
                    client.global.paused)
                 await client.delay(16000);
             
+            extraSender.sendTyping();
             extraSender.send({
                 content: `${commandrandomizer(["owo", client.config.settings.owoprefix])} curse <@${extraclient.basic.userid}>`
             }).then(async () => {
@@ -351,9 +363,10 @@ async function questCurse(client, channel, quest, mainSender, extraSender) {
         }
         if (resetProp) client.config.main.commands.curse = true;
     }
+    client.global.quest.progress = "Completed!";
     
     setTimeout(() => {
-        questHandler(client, channel)
+        questHandler(client, channel, mainSender, extraSender)
     }, 16000);
 }
 
@@ -369,6 +382,7 @@ async function questPray(client, channel, quest, mainSender, extraSender) {
                    client.global.paused)
                 await client.delay(16000);
             
+            mainSender.sendTyping();
             mainSender.send({
                 content: `${commandrandomizer(["owo", client.config.settings.owoprefix])} pray <@${mainclient.basic.userid}>`
             }).then(async () => {
@@ -388,6 +402,7 @@ async function questPray(client, channel, quest, mainSender, extraSender) {
                    client.global.paused)
                 await client.delay(16000);
             
+            extraSender.sendTyping();
             extraSender.send({
                 content: `${commandrandomizer(["owo", client.config.settings.owoprefix])} pray <@${extraclient.basic.userid}>`
             }).then(async () => {
@@ -398,13 +413,15 @@ async function questPray(client, channel, quest, mainSender, extraSender) {
         }
         if (resetProp) client.config.main.commands.pray = true;
     }
+    client.global.quest.progress = "Completed!";
     
     setTimeout(() => {
-        questHandler(client, channel)
+        questHandler(client, channel, mainSender, extraSender)
     }, 16000);
 }
 
 async function questBattle(client, channel, quest, mainSender, extraSender) {
+    await client.delay(16000);
     let resetProp = false;
     if (client.global.type == "Main") {
         if (client.basic.commands.battle) {
@@ -416,10 +433,12 @@ async function questBattle(client, channel, quest, mainSender, extraSender) {
                    client.global.paused)
                 await client.delay(16000);
             
+            channel.sendTyping();
             channel.send({
                 content: `${commandrandomizer(["owo", client.config.settings.owoprefix])} ${commandrandomizer(["battle", "b"])} <@${extraclient.basic.userid}>`
             }).then(async () => {
                 await client.delay(4000);
+                mainSender.sendTyping();
                 mainSender.send({
                     content: `${commandrandomizer(["owo", client.config.settings.owoprefix])}ab`
                 });
@@ -439,10 +458,12 @@ async function questBattle(client, channel, quest, mainSender, extraSender) {
                    client.global.paused)
                 await client.delay(16000);
             
+            channel.sendTyping();
             channel.send({
                 content: `${commandrandomizer(["owo", client.config.settings.owoprefix])} battle <@${mainclient.basic.userid}>`
             }).then(async () => {
                 await client.delay(4000);
+                channel.sendTyping();
                 extraSender.send({
                     content: `${commandrandomizer(["owo", client.config.settings.owoprefix])}ab`
                 });
@@ -453,9 +474,10 @@ async function questBattle(client, channel, quest, mainSender, extraSender) {
         }
         if (resetProp) client.basic.commands.battle = true;
     }
+    client.global.quest.progress = "Completed!";
     
     setTimeout(() => {
-        questHandler(client, channel)
+        questHandler(client, channel, mainSender, extraSender)
     }, 16000);
 }
 
@@ -485,9 +507,10 @@ async function questCookie(client, channel, quest, mainSender, extraSender) {
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         });
     }
+    client.global.quest.progress = "Completed!";
     
     setTimeout(() => {
-        questHandler(client, channel)
+        questHandler(client, channel, mainSender, extraSender)
     }, 16000);
 }
 
@@ -498,6 +521,7 @@ async function questActionMe(client, channel, quest, mainSender, extraSender) {
                    client.global.paused)
                 await client.delay(16000);
             
+            mainSender.sendTyping();
             mainSender.send({
                 content: `${commandrandomizer(["owo", client.config.settings.owoprefix])} ${commandrandomizer(["hug", "kiss"])} <@${mainclient.basic.userid}>`
             }).then(async () => {
@@ -512,6 +536,7 @@ async function questActionMe(client, channel, quest, mainSender, extraSender) {
                    client.global.paused)
                 await client.delay(16000);
             
+            extraSender.sendTyping();
             extraSender.send({
                 content: `${commandrandomizer(["owo", client.config.settings.owoprefix])} ${commandrandomizer(["hug", "kiss"])} <@${extraclient.basic.userid}>`
             }).then(async () => {
@@ -521,8 +546,9 @@ async function questActionMe(client, channel, quest, mainSender, extraSender) {
             await client.delay(16000);
         }
     }
+    client.global.quest.progress = "Completed!";
     
     setTimeout(() => {
-        questHandler(client, channel)
+        questHandler(client, channel, mainSender, extraSender)
     }, 16000);
 }

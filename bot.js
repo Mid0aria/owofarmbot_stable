@@ -61,7 +61,8 @@ let owofarmbot_stable = {
         usedevent: false,
         usedcookie: false,
         animaltype: "",
-        isready: false
+        isready: false,
+        started: false
     },
 };
 
@@ -102,7 +103,8 @@ let coolVariableName = {
         usedevent: false,
         usedcookie: false,
         animaltype: "",
-        isready: false
+        isready: false,
+        started: false
     },
 };
 
@@ -323,6 +325,8 @@ function verifyconfig() {
         "Verifing config... Please wait...");
     if ((config.main.token == config.extra.token) && config.main.token.length > 0)
         showerrcoziamlazy("Main token is same as extra token!");
+    if (config.extra.enable && config.extra.token.length == 0)
+        showerrcoziamlazy("Extra token enabled but no token found");
     
     let vars = [
         config.main.commandschannelid,
@@ -336,9 +340,10 @@ function verifyconfig() {
     for (let i = 0; i < vars.length; i++) {
         for (let j = i + 1; j < vars.length; j++) {
             if ((vars[i] == vars[j]) && vars[i].length > 0) {
-                showerrcoziamlazy(`${vars[i]} is equal to ${vars[j]}`);
+                showerrcoziamlazy(`There are some duplicate channel id!`);
                 console.log("Please use three different channel for one tokentype for best efficiency!");
-                console.log("That mean if you use both main and extra, you need six channel!");
+                console.log("That mean if you use both main and extra, and farm, quest and gamble, you need six channel!");
+                break;
             }
         }
     }
@@ -348,9 +353,6 @@ function verifyconfig() {
         (config.extra.commands.pray && config.main.commands.curse)
         )
         showerrcoziamlazy("Curse and pray cannot be turn on at the same time!");
-    
-    if (config.animals.interval && config.animals.interval < 16000)
-        showerrcoziamlazy("Animals interval is too low!");
     
     if ((
         config.main.commands.gamble.coinflip ||
@@ -362,7 +364,8 @@ function verifyconfig() {
         config.settings.gamble.coinflip.default_amount <= 0
     )) showerrcoziamlazy("Invalid gamble amount!");
     
-    let clients = [client, extrac];
+    let clients = [client];
+    if (config.extra.enable) clients.push(extrac);
     for (const client of clients) {
         if (client.basic.maximum_gem_rarity.length > 0) {
             switch (client.basic.maximum_gem_rarity.toLowerCase()) {
@@ -464,13 +467,38 @@ function verifyconfig() {
     }
     
     if (client.basic.commands.animals ||
-        extrac.basic.commands.animals) {
+        (config.extra.enable && extrac.basic.commands.animals)) {
         if (config.animals.type.sell &&
             config.animals.type.sacrifice) {
                 showerrcoziamlazy("Sell and sacrifice cannot be turn on at the same time!");
             }
         }
-    
+        
+    const verifyInterval = (type, minValue, minDefault, maxValue, maxDefault) => {
+        if (minValue < minDefault) {
+            client.logger.warn("Bot", "Config", `${type} min interval is too low, resetting to default!`);
+            config.interval[type].min = minDefault;
+        }
+        if (maxValue < minDefault || maxValue < minValue) {
+            client.logger.warn("Bot", "Config", `${type} max interval is too low or less than min, resetting to default!`);
+            config.interval[type].max = maxDefault;
+        }
+    };
+
+    const intervals = ["hunt", "battle", "pray", "coinflip", "slot", "animals"];
+    let missingValue = intervals.some(type => !config.interval[type].min || !config.interval[type].max);
+
+    if (missingValue) {
+        showerrcoziamlazy("Interval cannot be null!");
+    } else {
+        verifyInterval("hunt", config.interval.hunt.min, 12000, config.interval.hunt.max, 16000);
+        verifyInterval("battle", config.interval.battle.min, 12000, config.interval.battle.max, 16000);
+        verifyInterval("pray", config.interval.pray.min, 316000, config.interval.pray.max, 332000);
+        verifyInterval("coinflip", config.interval.coinflip.min, 12000, config.interval.coinflip.max, 16000);
+        verifyInterval("slot", config.interval.slot.min, 12000, config.interval.slot.max, 16000);
+        verifyInterval("animals", config.interval.animals.min, 610000, config.interval.animals.max, 661000);
+    }
+    //does it change? idk!
     function showerrcoziamlazy(err) {
         client.logger.alert(
             "Bot",

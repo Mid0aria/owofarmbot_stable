@@ -1,5 +1,6 @@
 const fs = require("fs");
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const getrand = (min, max) => Math.random() * (max - min) + min;
 
 module.exports = async (client, message) => {
     if (client.global.paused || client.global.captchadetected) return;
@@ -27,10 +28,13 @@ module.exports = async (client, message) => {
     else client.global.quest.title = "Quest not enabled";
     
     await client.delay(16000);
-    if (client.basic.commands.animals) sell(client,
-        channel,
-        client.config.animals.type.sell ? "sell" : "sacrifice",
-        client.global.temp.animaltype);
+    if (client.basic.commands.animals) 
+        sell(
+            client,
+            channel,
+            client.config.animals.type.sell ? "sell" : "sacrifice",
+            client.global.temp.animaltype
+        );
     
     await client.delay(32000);
     require("./function/luck.js")(client, message);
@@ -39,6 +43,7 @@ module.exports = async (client, message) => {
 async function checklist(client, channel) {
     if (client.global.captchadetected || client.global.paused) return;
     let id;
+    channel.sendTyping();
     await channel
         .send({
             content: `${commandrandomizer([
@@ -241,7 +246,13 @@ async function checklist(client, channel) {
 }
 
 async function sell(client, channel, choose, types) {
-    if (client.global.captchadetected || client.global.paused) return;
+    if (client.global.captchadetected || client.global.paused) {
+        setTimeout(() => {
+            sell(client, channel, choose, types);
+        }, 16000);
+        return;
+    }
+    channel.sendTyping();
     await channel
         .send({
             content: `${commandrandomizer([
@@ -249,4 +260,7 @@ async function sell(client, channel, choose, types) {
                 client.config.settings.owoprefix,
             ])} ${choose} ${types}`,
         });
+    setTimeout(() => {
+        sell(client, channel, choose, types);
+    }, getrand(client.config.interval.animals.min, client.config.interval.animals.max));
 }

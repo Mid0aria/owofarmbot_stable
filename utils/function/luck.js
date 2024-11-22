@@ -1,4 +1,5 @@
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const getrand = (min, max) => Math.random() * (max - min) + min;
 
 module.exports = async (client, message) => {
     let channel = client.channels.cache.get(client.basic.commandschannelid);
@@ -18,7 +19,11 @@ async function pray(client, channel) {
           ) {
         await client.delay(16000);
     }
+    channel.sendTyping();
     let content;
+    let interval = getrand(
+        client.config.interval.pray.min,
+        client.config.interval.pray.max);
     if (client.basic.commands.tomain) {
         content = commandrandomizer(["owo", client.config.settings.owoprefix]) +
                     "pray <@" + client.config.main.userid + ">";
@@ -39,7 +44,7 @@ async function pray(client, channel) {
     
     setTimeout(() => {
         pray(client, channel);
-    }, 336000);
+    }, interval);
 }
 
 async function curse(client, channel) {
@@ -50,7 +55,11 @@ async function curse(client, channel) {
           ) {
         await client.delay(16000);
     }
+    channel.sendTyping();
     let content;
+    let interval = getrand(
+        client.config.interval.pray.min,
+        client.config.interval.pray.max);
     if (client.basic.commands.tomain) {
         content = commandrandomizer(["owo", client.config.settings.owoprefix]) +
                     "curse  <@" + client.config.main.userid + ">";
@@ -71,5 +80,5 @@ async function curse(client, channel) {
     
     setTimeout(() => {
         curse(client, channel);
-    }, 336000);
+    }, interval);
 }
