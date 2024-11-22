@@ -487,11 +487,11 @@ function verifyconfig() {
     if (missingValue) {
         showerrcoziamlazy("Interval cannot be null!");
     } else {
-        verifyInterval("hunt", config.interval.hunt.min, 16000, config.interval.hunt.max, 32000);
-        verifyInterval("battle", config.interval.battle.min, 16000, config.interval.battle.max, 32000);
+        verifyInterval("hunt", config.interval.hunt.min, 12000, config.interval.hunt.max, 16000);
+        verifyInterval("battle", config.interval.battle.min, 12000, config.interval.battle.max, 16000);
         verifyInterval("pray", config.interval.pray.min, 316000, config.interval.pray.max, 332000);
-        verifyInterval("coinflip", config.interval.coinflip.min, 16000, config.interval.coinflip.max, 32000);
-        verifyInterval("slot", config.interval.slot.min, 16000, config.interval.slot.max, 32000);
+        verifyInterval("coinflip", config.interval.coinflip.min, 12000, config.interval.coinflip.max, 16000);
+        verifyInterval("slot", config.interval.slot.min, 12000, config.interval.slot.max, 16000);
         verifyInterval("animals", config.interval.animals.min, 610000, config.interval.animals.max, 661000);
     }
     //does it change? idk!
