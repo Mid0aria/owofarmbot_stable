@@ -61,7 +61,8 @@ let owofarmbot_stable = {
         usedevent: false,
         usedcookie: false,
         animaltype: "",
-        isready: false
+        isready: false,
+        started: false
     },
 };
 
@@ -102,7 +103,8 @@ let coolVariableName = {
         usedevent: false,
         usedcookie: false,
         animaltype: "",
-        isready: false
+        isready: false,
+        started: false
     },
 };
 
@@ -349,9 +351,6 @@ function verifyconfig() {
         )
         showerrcoziamlazy("Curse and pray cannot be turn on at the same time!");
     
-    if (config.animals.interval && config.animals.interval < 16000)
-        showerrcoziamlazy("Animals interval is too low!");
-    
     if ((
         config.main.commands.gamble.coinflip ||
         config.main.commands.gamble.slot ||
@@ -470,7 +469,32 @@ function verifyconfig() {
                 showerrcoziamlazy("Sell and sacrifice cannot be turn on at the same time!");
             }
         }
-    
+        
+    const verifyInterval = (type, minValue, minDefault, maxValue, maxDefault) => {
+        if (minValue < minDefault) {
+            client.logger.warn("Bot", "Config", `${type} min interval is too low, resetting to default!`);
+            config.interval[type].min = minDefault;
+        }
+        if (maxValue < minDefault || maxValue < minValue) {
+            client.logger.warn("Bot", "Config", `${type} max interval is too low or less than min, resetting to default!`);
+            config.interval[type].max = maxDefault;
+        }
+    };
+
+    const intervals = ["hunt", "battle", "pray", "coinflip", "slot", "animals"];
+    let missingValue = intervals.some(type => !config.interval[type].min || !config.interval[type].max);
+
+    if (missingValue) {
+        showerrcoziamlazy("Interval cannot be null!");
+    } else {
+        verifyInterval("hunt", config.interval.hunt.min, 16000, config.interval.hunt.max, 32000);
+        verifyInterval("battle", config.interval.battle.min, 16000, config.interval.battle.max, 32000);
+        verifyInterval("pray", config.interval.pray.min, 316000, config.interval.pray.max, 332000);
+        verifyInterval("coinflip", config.interval.coinflip.min, 16000, config.interval.coinflip.max, 32000);
+        verifyInterval("slot", config.interval.slot.min, 16000, config.interval.slot.max, 32000);
+        verifyInterval("animals", config.interval.animals.min, 610000, config.interval.animals.max, 661000);
+    }
+    //does it change? idk!
     function showerrcoziamlazy(err) {
         client.logger.alert(
             "Bot",
