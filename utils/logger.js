@@ -44,7 +44,7 @@ module.exports = (uwu) => { //plz change it when upload, u will remember it, rig
 
     function showlog(reallog) {
         //no client
-        if (!client.global.temp.isready || !extrac.global.temp.isready) {
+        if (!client.global.temp.isready || (extrac && !extrac.global.temp.isready)) {
             console.log(reallog[reallog.length - 1]);
             return;
         }
