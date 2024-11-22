@@ -1,4 +1,5 @@
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const getrand = (min, max) => Math.random() * (max - min) + min;
 
 module.exports = async (client, message) => {
     if (client.config.settings.owoprefix.length <= 0) {
@@ -21,22 +22,22 @@ async function coinflip(client, channel) {
     let currentBet = defaultBet;
     let maxBet = client.config.settings.gamble.coinflip.max_amount;
     let multiplier = client.config.settings.gamble.coinflip.multiplier;
-    let coinfliping = false;
 
     smol();
     async function smol() {
-        if (
+        while (
             client.global.captchadetected ||
-            coinfliping ||
             client.global.paused ||
             client.global.inventory ||
             client.global.checklist
         ) {
-            setTimeout(smol, 16000);
-            return;
+            await client.delay(16000);
         }
 
-        coinfliping = true;
+        channel.sendTyping();
+        let interval = getrand(
+            client.config.interval.coinflip.min,
+            client.config.interval.coinflip.max);
         const content = commandrandomizer(["owo", client.config.settings.owoprefix]) +
                            commandrandomizer(["coinflip", "cf"]) + " " +
                            commandrandomizer(["heads", "tails", "h", "t"]) + " " + currentBet;
@@ -49,65 +50,72 @@ async function coinflip(client, channel) {
                 "Farm",
                 "Coinflip",
                 `Betting: ${currentBet}. Total time: ${client.global.gamble.coinflip}`);
-        });
 
-        const updateCFListener = (oldMsg, newMsg) => {
-            if (newMsg.channel.id !== channel.id ||
-                newMsg.author.id !== "408785106942164992" ||
-                newMsg.id.localeCompare(id) < 0) return;
-            const isWin = newMsg.content.includes("and you won");
-            const isLoss = newMsg.content.includes("and you lost");
+            const updateCFListener = (oldMsg, newMsg) => {
+                if (newMsg.channel.id !== channel.id ||
+                    newMsg.author.id !== "408785106942164992" ||
+                    newMsg.id.localeCompare(id) < 0) return;
+                const isWin = newMsg.content.includes("and you won");
+                const isLoss = newMsg.content.includes("and you lost");
 
-            if ((isWin || isLoss) &&
-                (
-                !oldMsg.content.includes("and you won") &&
-                !oldMsg.content.includes("and you lost")
-                )) {
-                client.global.gamble.cowoncywon += isWin ? currentBet : -currentBet;
-                client.logger.info("Farm", "Coinflip", `${isWin ? "Won" : "Lost"} ${currentBet}!`);
-                currentBet = isWin ? defaultBet : Math.min(Math.round(currentBet * multiplier), maxBet);
-
-                client.off('messageUpdate', updateCFListener);
-                coinfliping = false;
-                setTimeout(smol, 16000);
-            }
-        };
-
-        const startCollector = () => {
-            const filter = msg =>
-                msg.author.id === "408785106942164992" &&
-                msg.id.localeCompare(id) > 0 &&
-                msg.content.includes("and chose");
-            const collector = channel.createMessageCollector({ filter, time: 10000 });
-
-            collector.on("collect", (msg) => {
-                const isWin = msg.content.includes("and you won");
-                const isLoss = msg.content.includes("and you lost");
-
-                if (isWin || isLoss) {
+                if ((isWin || isLoss) &&
+                    (
+                    !oldMsg.content.includes("and you won") &&
+                    !oldMsg.content.includes("and you lost")
+                    )) {
                     client.global.gamble.cowoncywon += isWin ? currentBet : -currentBet;
                     client.logger.info("Farm", "Coinflip", `${isWin ? "Won" : "Lost"} ${currentBet}!`);
                     currentBet = isWin ? defaultBet : Math.min(Math.round(currentBet * multiplier), maxBet);
-                    coinfliping = false;
-                } else {
-                    client.global.gamble.coinflip--;
-                    client.logger.info("Farm", "Coinflip", "Failed to gamble!");
+
+                    client.off('messageUpdate', updateCFListener);
+                    clearTimeout(doublecheck);
+
+                    setTimeout(() => {
+                        smol();
+                    }, interval);
                 }
+            };
 
-                collector.stop();
-            });
+            const startCollector = () => {
+                const filter = (msg) =>
+                    msg.author.id === "408785106942164992" &&
+                    msg.id.localeCompare(id) > 0 &&
+                    msg.content.includes("and chose");
+                const collector = channel.createMessageCollector({ filter, time: 10000 });
 
-            collector.on("end", () => setTimeout(smol, 16000));
-        };
+                collector.on("collect", (msg) => {
+                    const isWin = msg.content.includes("and you won");
+                    const isLoss = msg.content.includes("and you lost");
 
-        setTimeout(() => {
-            if (coinfliping) {
+                    if (isWin || isLoss) {
+                        client.global.gamble.cowoncywon += isWin ? currentBet : -currentBet;
+                        client.logger.info("Farm", "Coinflip", `${isWin ? "Won" : "Lost"} ${currentBet}!`);
+                        currentBet = isWin ? defaultBet : Math.min(Math.round(currentBet * multiplier), maxBet);
+                    }
+
+                    setTimeout(() => {
+                        smol();
+                    }, interval);
+                });
+                
+                collector.on("end", (collected) => {
+                    if (collected.size == 0) {
+                        client.global.gamble.coinflip--;
+                        client.logger.info("Farm", "Coinflip", "Failed to gamble!");
+                        setTimeout(() => {
+                            smol();
+                        }, interval);
+                    }
+                });
+            };
+
+            const doublecheck = setTimeout(() => {
                 client.off('messageUpdate', updateCFListener);
                 startCollector();
-            }
-        }, 10000);
+            }, 10000);
 
-        client.on('messageUpdate', updateCFListener);
+            client.on('messageUpdate', updateCFListener);
+        });
     }
 }
 
@@ -116,22 +124,22 @@ function slot(client, channel) {
     let currentBet = defaultBet;
     let maxBet = client.config.settings.gamble.slot.max_amount;
     let multiplier = client.config.settings.gamble.slot.multiplier;
-    let sloting = false;
 
     smol();
     async function smol() {
-        if (
+        while (
             client.global.captchadetected ||
-            sloting ||
             client.global.paused ||
             client.global.inventory ||
             client.global.checklist
         ) {
-            setTimeout(smol, 16000);
-            return;
+            await client.delay(16000);
         }
 
-        sloting = true;
+        channel.sendTyping();
+        let interval = getrand(
+            client.config.interval.slot.min,
+            client.config.interval.slot.max);
         const content = commandrandomizer(["owo", client.config.settings.owoprefix]) +
                         commandrandomizer(["slots", "s"]) + " " + currentBet;
 
@@ -143,76 +151,74 @@ function slot(client, channel) {
                 "Farm",
                 "Slot",
                 `Betting: ${currentBet}. Total time: ${client.global.gamble.slot}`);
-        });
 
-        const updateSlotListener = (oldMsg, newMsg) => {
-            if (newMsg.channel.id !== channel.id ||
-                newMsg.author.id !== "408785106942164992" ||
-                newMsg.id.localeCompare(id) < 0) return;
-            
-            const isWin = newMsg.content.includes("and won") && !newMsg.content.includes("nothing...");
-            const isLoss = newMsg.content.includes("and won nothing...");
-            
-            if (isWin || isLoss) {
-                if (isWin) {
-                    const match = newMsg.content.match(/and won <:\w+:\d+> (\d[\d,]*)/);
-                    let won = Number(match[1].replace(/,/g, '')) - currentBet;
-                    client.global.gamble.cowoncywon += won;
-                    client.logger.info("Farm", "Slot", `Won ${won}!`);
-                    currentBet = defaultBet;
-                } else if (isLoss) {
-                    client.global.gamble.cowoncywon -= currentBet;
-                    client.logger.info("Farm", "Slot", `Lost ${currentBet}!`);
-                    currentBet = Math.min(Math.round(currentBet * multiplier), maxBet);
-                }
+            const updateSlotListener = (oldMsg, newMsg) => {
+                if (newMsg.channel.id !== channel.id ||
+                    newMsg.author.id !== "408785106942164992" ||
+                    newMsg.id.localeCompare(id) < 0) return;
                 
-                client.off('messageUpdate', updateSlotListener);
-                sloting = false;
-                setTimeout(smol, 18000);
-            }
-        };
-
-        const startCollector = () => {
-            const filter = msg => msg.author.id === "408785106942164992" && msg.id > id && msg.content.includes("SLOTS");
-            const collector = channel.createMessageCollector({ filter, time: 10000 });
-
-            collector.on("collect", (msg) => {
-                const isWin = msg.content.includes("and won") && !msg.content.includes("nothing...");
-                const isLoss = msg.content.includes("and won nothing...");
-
+                const isWin = newMsg.content.includes("and won") && !newMsg.content.includes("nothing...");
+                const isLoss = newMsg.content.includes("and won nothing...");
+                
                 if (isWin || isLoss) {
                     if (isWin) {
-                        const match = msg.content.match(/and won <:\w+:\d+> (\d[\d,]*)/);
+                        const match = newMsg.content.match(/and won <:\w+:\d+> (\d[\d,]*)/);
                         let won = Number(match[1].replace(/,/g, '')) - currentBet;
                         client.global.gamble.cowoncywon += won;
                         client.logger.info("Farm", "Slot", `Won ${won}!`);
                         currentBet = defaultBet;
-                    } else {
+                    } else if (isLoss) {
                         client.global.gamble.cowoncywon -= currentBet;
                         client.logger.info("Farm", "Slot", `Lost ${currentBet}!`);
                         currentBet = Math.min(Math.round(currentBet * multiplier), maxBet);
                     }
                     
-                    sloting = false;
-                } else {
-                    client.global.gamble.slot--;
-                    client.logger.info("Farm", "Slot", "Failed to gamble!");
-                    sloting = false;
+                    client.off('messageUpdate', updateSlotListener);
+                    clearTimeout(doublecheck);
+                    setTimeout(() => {
+                        smol();
+                    }, interval);
                 }
+            };
 
-                collector.stop();
-            });
+            const startCollector = () => {
+                const filter = (msg) => msg.author.id === "408785106942164992" && msg.id.localeCompare(id) > 0 && msg.content.includes("SLOTS");
+                const collector = channel.createMessageCollector({ filter, time: 10000 });
 
-            collector.on("end", () => setTimeout(smol, 16000));
-        };
+                collector.on("collect", (msg) => {
+                    if (msg.content.includes("and won") && !msg.content.includes("nothing...")) {
+                        const match = msg.content.match(/and won <:\w+:\d+> (\d[\d,]*)/);
+                        let won = Number(match[1].replace(/,/g, '')) - currentBet;
+                        client.global.gamble.cowoncywon += won;
+                        client.logger.info("Farm", "Slot", `Won ${won}!`);
+                        currentBet = defaultBet;
+                    } else if (msg.content.includes("and won nothing...")) {
+                        client.global.gamble.cowoncywon -= currentBet;
+                        client.logger.info("Farm", "Slot", `Lost ${currentBet}!`);
+                        currentBet = Math.min(Math.round(currentBet * multiplier), maxBet);
+                    }
+                    setTimeout(() => {
+                        smol();
+                    }, interval);
+                });
+                
+                collector.on("end", (collected) => {
+                    if (collected.size == 0) {
+                        client.global.gamble.slot--;
+                        client.logger.info("Farm", "Slot", "Failed to gamble!");
+                        setTimeout(() => {
+                            smol();
+                        }, interval);
+                    }
+                });
+            };
 
-        setTimeout(() => {
-            if (sloting) {
+            const doublecheck = setTimeout(() => {
                 client.off('messageUpdate', updateSlotListener);
                 startCollector();
-            }
-        }, 10000);
+            }, 10000);
 
-        client.on('messageUpdate', updateSlotListener);
+            client.on('messageUpdate', updateSlotListener);
+        });
     }
 }
