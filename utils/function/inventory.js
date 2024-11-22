@@ -14,6 +14,7 @@ async function inventory(client, channel) {
     if (client.global.captchadetected ||
         client.global.paused ||
         client.global.inventory) return;
+    channel.sendTyping();
     client.global.inventory = true;
     client.logger.info("Farm", "Inventory", `Paused: ${client.global.inventory}! Getting Inventory ...`);
     let id;
