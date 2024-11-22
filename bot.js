@@ -467,7 +467,7 @@ function verifyconfig() {
     }
     
     if (client.basic.commands.animals ||
-        extrac.basic.commands.animals) {
+        (config.extra.enable && extrac.basic.commands.animals)) {
         if (config.animals.type.sell &&
             config.animals.type.sacrifice) {
                 showerrcoziamlazy("Sell and sacrifice cannot be turn on at the same time!");
