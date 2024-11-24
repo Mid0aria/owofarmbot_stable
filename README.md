@@ -1,4 +1,4 @@
-[Version 1.0.7.9(no longer support)](https://github.com/mid0aria/owofarmbot)<br>
+[Version 1.0.8.8(no longer support)](https://github.com/mid0aria/owofarmbot)<br>
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
@@ -28,14 +28,27 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
 # Contents
 
 [⭐・Star History](#star-history)<br>
-[❗・Important](#important)<br>
+
+[❗・Important](#important-anyone-using-the-bot-is-deemed-to-have-read-and-accepted-these)<br>
+
 [👑・Features](#features)<br>
+
 [⚙・Config.json example](#configjson-example)<br>
+
 [💎・Get Token](#get-token)<br>
+
 [📚・Discord RPC](#discord-rpc)<br>
+
 [⚠️・Captcha Alert](#captcha-alert)<br>
+
 [🔗・Required Links](#required-links)<br>
-[🎈・Installation](#Installation)<br>
+
+[🎈・Installation](#installation)<br>
+
+[🥰・Contributors](#contributors)<br>
+
+[🤓・For the curious](#for-the-curious)<br>
+
 
 ## ⭐・Star History
 
@@ -303,9 +316,9 @@ m)
 6. Click on the bookmark named Token Finder.
 7. A new page will open, the text in the page will be your Discord account token.
 
-<!-- ## 📚・Discord RPC
+## 📚・Discord RPC
 
-![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/images/rpc.jpg) -->
+![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/images/rpc.jpg) 
 
 ## ❗・Captcha Alert
 
@@ -388,6 +401,11 @@ In config.json, type [prefix]stop (example: e!stop) with the prefix you set in c
 # Resume Bot:
 In config.json, type [prefix]resume (example: e!resume) with the prefix you set in config.json to the channel whose ID you entered in channelid
 ```
+
+## 🥰・Contributors
+
+-   Random-629671 [(GitHub)](https://github.com/Random-629671)
+-   Hiếu LoneLy [(YouTube)](https://www.youtube.com/watch?v=w2tvj1oRSO8)
 
 ## 🤓・For the curious
 
