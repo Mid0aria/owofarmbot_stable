@@ -8,10 +8,12 @@ const argv = yargs.option("token", {
     demandOption: true,
 }).argv;
 
-const userToken = argv.token;
+const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 (async () => {
     const authUrl =
         "https://discord.com/api/v9/oauth2/authorize?client_id=408785106942164992&response_type=code&redirect_uri=https%3A%2F%2Fowobot.com%2Fapi%2Fauth%2Fdiscord%2Fredirect&scope=identify%20guilds%20email%20guilds.members.read";
+    const userToken = argv.token;
 
     const browser = await puppeteer.launch({ headless: false });
     const page = await browser.newPage();
@@ -20,6 +22,8 @@ const userToken = argv.token;
         width: 1200,
         height: 1080,
     });
+
+    // Kullanıcı token'ını localStorage'a set et
     await page.evaluateOnNewDocument((token) => {
         window.localStorage.setItem("token", `"${token}"`);
     }, userToken);
@@ -46,27 +50,32 @@ const userToken = argv.token;
 
         await page.goto(captchaUrl, { waitUntil: "load" });
         console.log("Waiting for the captcha to be solved...");
+        /* try {
+            await page.waitForSelector('iframe[src*="hcaptcha.com"]', {
+                visible: true,
+                timeout: 3000,
+            });
+        } catch (error) {
+            console.log("iframe not found");
+        }*/
 
-        // await page.waitForNavigation({ waitUntil: "load", timeout });
+        while (true) {
+            const isCaptchaOk = await page.evaluate(() => {
+                return document.body.innerText.includes(
+                    "You're free to go! c:"
+                );
+            });
 
-        await page.waitForSelector("input[type='text']", {
-            visible: true,
-            timeout: 160000,
-        });
+            if (isCaptchaOk) {
+                console.log("User successfully solved captcha.");
+                break;
+            } else {
+                console.log("User did not solve the captcha.");
+                await delay(2500);
+            }
+        }
     } else {
-        console.log("Authorization failed");
-    }
-
-    const iscaptchaok = await page.evaluate(() => {
-        return document.body.innerText.includes(
-            "It seems like you're not a bot"
-        );
-    });
-    console.log(iscaptchaok);
-    if (iscaptchaok) {
-        console.log("User successfully solved captcha ");
-    } else {
-        console.log("User did not solve Captcha");
+        console.log("Authorization failed.");
     }
 
     await browser.close();
