@@ -1,7 +1,15 @@
-const DEVELOPER_MODE = false;
-
+const os = require("os");
 const cp = require("child_process");
-let config;
+
+let config, DEVELOPER_MODE;
+
+if (
+    os.userInfo().username === "Mido" ||
+    os.userInfo().username === "enter ur pc username here"
+) {
+    DEVELOPER_MODE = true;
+}
+
 if (DEVELOPER_MODE) {
     config = require("./config-developer.json");
 } else {

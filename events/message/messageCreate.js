@@ -91,7 +91,7 @@ module.exports = async (client, message) => {
                             "Opening Browser."
                         );
                         client.childprocess.spawn("node", [
-                            "./utils/captchapage.js",
+                            "./utils/captcha.js",
                             `--token=${client.basic.token}`,
                         ]);
                         return;

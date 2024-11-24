@@ -1,11 +1,30 @@
 const puppeteer = require("puppeteer");
 const yargs = require("yargs");
-
-const argv = yargs.option("token", {
-    alias: "t",
-    describe: "usertoken",
-    type: "string",
-    demandOption: true,
+const argv = yargs.options({
+    token: {
+        alias: "t",
+        describe: "User token",
+        type: "string",
+        demandOption: true,
+    },
+    solve: {
+        alias: "s",
+        describe: "Solve captcha with 3th party services",
+        type: "boolean",
+        demandOption: false,
+    },
+    service: {
+        alias: "serv",
+        describe: "Solve captcha with 3th party services",
+        type: "string",
+        demandOption: false,
+    },
+    servicetoken: {
+        alias: "st",
+        describe: "Solve captcha with 3th party services",
+        type: "string",
+        demandOption: false,
+    },
 }).argv;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -57,6 +76,29 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         } catch (error) {
             console.log("iframe not found");
         }*/
+
+        //TODO: add 3th party captcha solve services
+        if (argv.solve) {
+            const hcaptchaKey = await page.evaluate(() => {
+                const hcaptchaElement =
+                    document.querySelector("[data-sitekey]");
+                return hcaptchaElement
+                    ? hcaptchaElement.getAttribute("data-sitekey")
+                    : null;
+            }); // not sure if it works, need to test it
+
+            const servicekey = argv.servicetoken; // service api token
+            switch (argv.service) {
+                case "x":
+                    //code that will make captcha solve
+                    break;
+                case "y":
+                    //code that will make captcha solve
+                    break;
+                default:
+                    break;
+            }
+        }
 
         while (true) {
             const isCaptchaOk = await page.evaluate(() => {
