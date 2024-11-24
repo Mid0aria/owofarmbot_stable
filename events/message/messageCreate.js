@@ -59,7 +59,7 @@ module.exports = async (client, message) => {
                 const webhookClient = new WebhookClient({
                     url: client.config.settings.captcha.alerttype.webhookurl,
                 });
-                let message = `**Captcha detected!** Solve the captcha`;
+                let message = `#Token Type: ${client.global.type}\n**🚨Captcha detected!🚨 Solve the captcha**`;
 
                 if (!client.config.settings.autoresume) {
                     message += `and type ${client.config.prefix}resume in farm channel`;

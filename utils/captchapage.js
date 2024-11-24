@@ -32,7 +32,7 @@ const userToken = argv.token;
     await page.waitForNavigation({ waitUntil: "load" });
 
     const redirectedUrl = page.url();
-    console.log(`Yönlendirilen URL: ${redirectedUrl}`);
+    console.log(`Redirected URL: ${redirectedUrl}`);
 
     const isLoggedIn = await page.evaluate(() => {
         return !document.body.innerText.includes("Unauthorized");
