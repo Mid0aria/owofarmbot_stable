@@ -1,10 +1,11 @@
 const DEVELOPER_MODE = true;
 
 const cp = require("child_process");
+let config;
 if (DEVELOPER_MODE) {
-    const config = require("./config-developer.json");
+    config = require("./config-developer.json");
 } else {
-    const config = require("./config.json");
+    config = require("./config.json");
 }
 
 // auto install dependencies

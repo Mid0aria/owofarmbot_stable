@@ -4,38 +4,42 @@ const getrand = (min, max) => Math.random() * (max - min) + min;
 
 module.exports = async (client, message) => {
     if (client.global.paused || client.global.captchadetected) return;
-    
+
     let channel = client.channels.cache.get(client.basic.commandschannelid);
     if (client.config.settings.owoprefix.length <= 0) {
         client.config.settings.owoprefix = "owo";
     }
-    
+
     if (client.basic.commands.checklist) {
         checklist(client, channel);
     } else {
         await client.delay(2000);
         require("./function/farm.js")(client, message);
     }
-    
+
     await client.delay(2000);
-    
+
     await client.delay(16000); //reduce bot rate
-    if (client.basic.commands.gamble.coinflip ||
-        client.basic.commands.gamble.slot) require("./function/gamble.js")(client, message);
-    
+    if (
+        client.basic.commands.gamble.coinflip ||
+        client.basic.commands.gamble.slot
+    )
+        require("./function/gamble.js")(client, message);
+
     await client.delay(8000);
-    if (client.basic.commands.autoquest) require("./function/quest.js")(client, message);
+    if (client.basic.commands.autoquest)
+        require("./function/quest.js")(client, message);
     else client.global.quest.title = "Quest not enabled";
-    
+
     await client.delay(16000);
-    if (client.basic.commands.animals) 
+    if (client.basic.commands.animals)
         sell(
             client,
             channel,
             client.config.animals.type.sell ? "sell" : "sacrifice",
             client.global.temp.animaltype
         );
-    
+
     await client.delay(32000);
     require("./function/luck.js")(client, message);
 };
@@ -69,7 +73,7 @@ async function checklist(client, channel) {
                         msg.author.id === "408785106942164992" &&
                         msg.channel.id === channel.id &&
                         msg.id.localeCompare(id) > 0;
-                        
+
                     const listener = (msg) => {
                         if (filter(msg)) {
                             clearTimeout(timer);
@@ -77,15 +81,18 @@ async function checklist(client, channel) {
                             resolve(msg);
                         }
                     };
-                    
+
                     const timer = setTimeout(() => {
                         client.logger.warn(
                             "Farm",
                             "Checklist",
                             "Rechecking checklist..."
-                            );
+                        );
                         client.off("messageCreate", listener);
-                        const collector = channel.createMessageCollector({ filter, time: 11600});
+                        const collector = channel.createMessageCollector({
+                            filter,
+                            time: 11600,
+                        });
                         collector.on("collect", (msg) => {
                             if (filter(msg)) {
                                 collector.stop();
@@ -98,20 +105,21 @@ async function checklist(client, channel) {
                     client.on("messageCreate", listener);
                 });
             }
-            
+
             if (message == null) {
                 client.global.checklist = false;
                 client.logger.alert(
                     "Farm",
                     "Checklist",
-                    "Cannot get checklist");
+                    "Cannot get checklist"
+                );
                 require("./function/farm.js")(client, message);
                 return;
             }
-            
+
             await client.delay(2000);
             if (client.global.captchadetected || client.global.paused) return;
-            let checklistmsg = message.embeds[0].description;
+            let checklistmsg = message.embeds[0].description.toLowerCase();
             if (checklistmsg.includes("☑️ 🎉")) {
                 client.logger.info("Farm", "Checklist", "Checklist Completed");
             } else {
@@ -211,17 +219,25 @@ async function checklist(client, channel) {
                                 });
                             await client.delay(3000);
                             break;
-                            
+
                         case line.startsWith("️☑️ 🍪"):
                             client.global.temp.usedcookie = true;
                             break;
 
                         case line.startsWith("☑️ 💎"):
-                            client.logger.info("Farm", "Checklist", "Completed daily lootbox");
+                            client.logger.info(
+                                "Farm",
+                                "Checklist",
+                                "Completed daily lootbox"
+                            );
                             break;
 
                         case line.startsWith("☑️ ⚔"):
-                            client.logger.info("Farm", "Checklist", "Completed daily crate");
+                            client.logger.info(
+                                "Farm",
+                                "Checklist",
+                                "Completed daily crate"
+                            );
                             break;
                     }
                 });
@@ -235,7 +251,7 @@ async function checklist(client, channel) {
                 }
                 await client.delay(1000);
             }
-            
+
             client.logger.info(
                 "Farm",
                 "Checklist",
@@ -253,13 +269,12 @@ async function sell(client, channel, choose, types) {
         return;
     }
     channel.sendTyping();
-    await channel
-        .send({
-            content: `${commandrandomizer([
-                "owo",
-                client.config.settings.owoprefix,
-            ])} ${choose} ${types}`,
-        });
+    await channel.send({
+        content: `${commandrandomizer([
+            "owo",
+            client.config.settings.owoprefix,
+        ])} ${choose} ${types}`,
+    });
     setTimeout(() => {
         sell(client, channel, choose, types);
     }, getrand(client.config.interval.animals.min, client.config.interval.animals.max));
