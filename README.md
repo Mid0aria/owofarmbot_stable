@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.3(BETA)</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.4(BETA)</h1>
 <p align="center">
 
 [![Total Views](https://hits.sh/github.com/Mid0aria/owofarmbot_stable.svg?view=today-total&label=Repo%20Today/Total%20Views&color=770ca1&labelColor=007ec6)](https://github.com/Mid0aria/owofarmbot_stable)
@@ -121,6 +121,7 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
     - All Maintoken feature
     - Pray/curse to main 
 -   All commands now controlable
+-   Autopause to reduce bot rate
 
 -   NEW FEATURES WILL COME WITH UPDATES
 
@@ -185,7 +186,12 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
         "discordrpc": false, / true or false (boolean)
         "chatfeedback": true, / true or false (boolean)
         "autophrases": true, / true or false (boolean)
-        "autoresume": false, / auto resume bot after captcha sloved. true or false (boolean)
+        "safety": {
+            "autoresume": false, / auto resume bot after captcha sloved. true or false (boolean)
+            "autopause": false, / auto pause to reduce OwO bot rate or not. true or false (boolean)
+            "afterminute": 30, / how long before pause, minute
+            "forminute": 5 / how long for a pause, minute
+        },
         "logging": {
             "newlog": true, / a log with a table for controlling, will remove old log
             "loglength": 20, / how many lines of log at one moment (only affect when newlog is true)
@@ -318,7 +324,7 @@ m)
 
 ## 📚・Discord RPC
 
-![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/images/rpc.jpg) 
+![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/assets/rpc.jpg) 
 
 ## ❗・Captcha Alert
 
