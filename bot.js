@@ -338,13 +338,16 @@ function verifyconfig() {
         ];
         
     for (let i = 0; i < vars.length; i++) {
+        let c = false;
         for (let j = i + 1; j < vars.length; j++) {
             if ((vars[i] == vars[j]) && vars[i].length > 0) {
+                c = true;
                 showerrcoziamlazy(`There are some duplicate channel id!`);
                 console.log("Please use three different channel for one tokentype for best efficiency!");
                 console.log("That mean if you use both main and extra, and farm, quest and gamble, you need six channel!");
                 break;
             }
+            if (c) break;
         }
     }
     
@@ -499,6 +502,14 @@ function verifyconfig() {
         verifyInterval("animals", config.interval.animals.min, 610000, config.interval.animals.max, 661000);
     }
     //does it change? idk!
+    
+    if (config.settings.safety.autopause) {
+        if (config.settings.safety.afterminute <= 0 ||
+            config.settings.safety.forminute <= 0) {
+                showerrcoziamlazy("Invalid safety pause time!");
+            } else if (config.settings.safety.afterminute < 5) client.logger.warn("Bot", "Safety", "Safety pause timer is quite low, are you sure?");
+    }
+    
     function showerrcoziamlazy(err) {
         client.logger.alert(
             "Bot",
@@ -520,11 +531,13 @@ function verifyconfig() {
             normal ? "Config verified, things seem to be okey :3"
                 : "Config verified, there are some config error but bot can still run");
 
-        client.logger.info(
-            "Bot",
-            "Help",
-            `Use \"${config.prefix}start\" to start the bot. \"${config.prefix}resume\" to resume and \"${config.prefix}pause\" to pause.`
-            );
+        console.log(`════════════════════════════════════════════════════════════════════════════════════
+    Commands list: []: optional
+        ${config.prefix}start [all | main | extra]: start the current/selected thread
+        ${config.prefix}resume [all | main | extra]: resume the current/selected thread
+        ${config.prefix}stop [all | main | extra]: pause the current/selected thread
+        ${config.prefix}exit: exit the bot
+════════════════════════════════════════════════════════════════════════════════════`);
     }, 1600);
 }
 
