@@ -92,7 +92,7 @@ module.exports = async (client, message) => {
         }
         if (msgcontent.includes("i have verified that you are human")) {
             client.global.captchadetected = false;
-            if (client.config.settings.autoresume) {
+            if (client.config.settings.safety.autoresume) {
                 client.global.paused = false;
                 client.logger.warn("Bot", "Captcha", `Captcha Solved. Bot Resuming...`);
             } else {
@@ -124,6 +124,6 @@ module.exports = async (client, message) => {
 
     if (cmd) {
         if (message.author.id !== client.basic.userid) return;
-        cmd.run(client, message, args);
+        require ("../../handlers/commandHandler.js")(client, message, command, args);
     }
 };
