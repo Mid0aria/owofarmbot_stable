@@ -38,6 +38,8 @@ module.exports = async (client, message) => {
     
     await client.delay(32000);
     require("./function/luck.js")(client, message);
+
+    if (client.config.settings.safety.autopause) require("./function/safety.js")(client, message);
 };
 
 async function checklist(client, channel) {
