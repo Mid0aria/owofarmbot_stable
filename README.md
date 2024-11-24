@@ -369,14 +369,25 @@ start ./start.bat
 or
 node bot.js
 
-# Start Bot:
-In config.json, type [prefix]start (example: e!start) with the prefix you set in config.json to the channel whose ID you entered in channelid
+# Prefix: is the things you set in config.json (eg: "!")
 
-# Stop Bot:
-In config.json, type [prefix]stop (example: e!stop) with the prefix you set in config.json to the channel whose ID you entered in channelid
+# Start Bot:
+<prefix>start [all | main | extra]
+Example: !start, !start all, !start extra
+
+# Pause Bot:
+<prefix><pause | stop> [all | main | extra]
+Example: !pause, !pause main, !stop extra
 
 # Resume Bot:
-In config.json, type [prefix]resume (example: e!resume) with the prefix you set in config.json to the channel whose ID you entered in channelid
+<prefix>resume [all | main | extra]
+Example: !resume, !resume all
+
+# Exit Bot:
+<prefix>exit
+Example: !exit
+
+<>: required, []: optional
 ```
 
 ### 📱・Android / iOS (Termux)
