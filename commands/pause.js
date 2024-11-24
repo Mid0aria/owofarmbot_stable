@@ -1,25 +1,20 @@
 module.exports = {
     config: {
         name: "pause",
-        aliases: ["stop"],
     },
-    run: async (client, message, args) => {
+    run: async (client, channel, args) => {
         if (client.global.paused) {
-            await message.delete();
             if (client.config.settings.chatfeedback) {
-                await message.channel.send({
-                    content: "Bot is already paused!!!",
+                await channel.send({
+                    content: `${client.global.type} thread is already paused!!!`,
                 });
             }
         } else {
             client.global.paused = true;
             client.rpc("update");
-            await message.delete();
             if (client.config.settings.chatfeedback) {
-                await message.channel.send({ content: "Paused :)" });
+                await channel.send({ content: `Paused ${client.global.type} thread :)` });
             }
-
-            // process.exit(0);
         }
     },
 };
