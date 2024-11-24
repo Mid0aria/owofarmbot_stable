@@ -126,9 +126,13 @@ async function questHandler(client, channel, mainSender, extraSender) {
             questLines.forEach(line => {
                 const title = line.match(/\*\*\d+\.\s(.+?)\*\*/)[1];
 
-                const rewardGroup = line.match(/Reward:\`\s*(?<reward>\d*)\s*<:(?<rewardtype>[\w]+):\d+>/);
-                const reward = rewardGroup && rewardGroup.groups ? rewardGroup.groups.reward : "";
-                const type = rewardGroup && rewardGroup.groups ? rewardGroup.groups.rewardtype : "";
+                const rewardGroup = line.match(/Reward:\`\s*(?<reward>[^<]*)<:(?<rewardtype>[\w]+):/);
+                let reward, type;
+
+                if (rewardGroup && rewardGroup.groups) {
+                    reward = rewardGroup.groups.reward ? parseInt(rewardGroup.groups.reward.replace(/,/g, ''), 10) : "";
+                    type = rewardGroup.groups.rewardtype;
+                }
                 
                 const progressGroup = line.match(/Progress:\s*\[(\d+)\/(\d+)\]/);
                 const [progress1, progress2] = progressGroup ? [parseInt(progressGroup[1]), parseInt(progressGroup[2])] : [0, 0];
