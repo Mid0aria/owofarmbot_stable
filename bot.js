@@ -1,5 +1,12 @@
+const DEVELOPER_MODE = true;
+
 const cp = require("child_process");
-const config = require("./config.json");
+if (DEVELOPER_MODE) {
+    const config = require("./config-developer.json");
+} else {
+    const config = require("./config.json");
+}
+
 // auto install dependencies
 const packageJson = require("./package.json");
 for (let dep of Object.keys(packageJson.dependencies)) {
