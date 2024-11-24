@@ -9,6 +9,7 @@ module.exports = (uwu) => { //plz change it when upload, u will remember it, rig
     let exitlog = uwu.config.settings.logging.showlogbeforeexit && uwu.config.settings.logging.newlog;
     process.on('SIGINT', () => {
         if (exitlog) {
+            console.log("//START OF LOG//");
             for (const logs of fulllog) console.log(logs);
             console.log("//END OF LOG//");
         }
@@ -31,7 +32,7 @@ module.exports = (uwu) => { //plz change it when upload, u will remember it, rig
     function logging(type, module, result, color) {
         const logMessage = `${client.chalk.white(`[${new Date().toLocaleTimeString()}]`)} ` +
                            `${client.chalk.blue(client.chalk.bold(type))}` +
-                           `${(type == "Bot" || type == "Updater") && (module != "Startup" && module != "Captcha") ? "" : //idk why i put this on
+                           `${(type == "Bot" || type == "Updater") && ((module != "Startup" && module != "Captcha") || module == "Basic") ? "" :
                            `${client.chalk.white(" >> ")}${client.chalk.cyan(client.chalk.bold(uwu.global.type))}`} > ` +
                            `${client.chalk.magenta(module)} > ` +
                            `${color(result)}`;
@@ -126,5 +127,6 @@ module.exports = (uwu) => { //plz change it when upload, u will remember it, rig
         info,
         warn,
         alert,
+        getLog: () => fulllog
     };
 };
