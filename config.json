@@ -80,7 +80,9 @@
         "captcha": {
             "alerttype": {
                 "notification": true,
-                "prompt": true
+                "prompt": true,
+                "webhook": true,
+                "webhookurl": "xxx"
             }
         },
         "gamble": {

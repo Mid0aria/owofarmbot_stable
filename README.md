@@ -49,7 +49,6 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
 
 [🤓・For the curious](#for-the-curious)<br>
 
-
 ## ⭐・Star History
 
 <h2 align="center">Goal: <a href="https://github.com/Mid0aria/owofarmbot_stable/stargazers"><img src="https://img.shields.io/github/stars/Mid0aria/owofarmbot_stable" /></a> / 512</h2>
@@ -72,13 +71,13 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
     -   Pray
     -   Curse
     -   Gamble
-        - Coinflip
-        - Slot
+        -   Coinflip
+        -   Slot
 
-- Questing:
+-   Questing:
 
-    - Do quest that require one user to done
-    - If extratoken is enabled, both can do quest for each other
+    -   Do quest that require one user to done
+    -   If extratoken is enabled, both can do quest for each other
 
 -   Animals:
 
@@ -118,8 +117,8 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
 -   Auto Phrases Send
 -   Chat FeedBack
 -   Extra Token:
-    - All Maintoken feature
-    - Pray/curse to main 
+    -   All Maintoken feature
+    -   Pray/curse to main
 -   All commands now controlable
 
 -   NEW FEATURES WILL COME WITH UPDATES
@@ -210,6 +209,8 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
             "alerttype": {
                 "notification": true, / true or false (boolean)
                 "prompt": true / true or false (boolean)
+                "webhook": true, / true or false (boolean)
+                "webhookurl": "xxx"  / If you set webhook to true, enter your webhook url here
             }
         },
         "gamble": {
@@ -318,7 +319,7 @@ m)
 
 ## 📚・Discord RPC
 
-![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/images/rpc.jpg) 
+![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/images/rpc.jpg)
 
 ## ❗・Captcha Alert
 
