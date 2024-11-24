@@ -1,19 +1,22 @@
 module.exports = async (client, message) => {
     let msgcontent = message.content.toLowerCase();
-
-    if (message.author.id === "408785106942164992" && (
-        message.channel.id === client.basic.commandschannelid ||
-        message.channel.id === client.basic.owodmchannelid ||
-        message.channel.id === client.basic.gamblechannelid ||
-        message.channel.id === client.basic.autoquestchannelid)) {
+    if (
+        message.author.id === "408785106942164992" &&
+        (message.channel.id === client.basic.commandschannelid ||
+            message.channel.id === client.basic.owodmchannelid ||
+            message.channel.id === client.basic.gamblechannelid ||
+            message.channel.id === client.basic.autoquestchannelid)
+    ) {
         if (
-        (
-            msgcontent.includes("please complete your captcha") ||
-            msgcontent.includes("verify that you are human") ||
-            msgcontent.includes("are you a real human") ||
-            msgcontent.includes("please use the link below so i can check") ||
-            msgcontent.includes("captcha")
-        ) && !client.global.captchadetected) {
+            (msgcontent.includes("please complete your captcha") ||
+                msgcontent.includes("verify that you are human") ||
+                msgcontent.includes("are you a real human") ||
+                msgcontent.includes(
+                    "please use the link below so i can check"
+                ) ||
+                msgcontent.includes("captcha")) &&
+            !client.global.captchadetected
+        ) {
             client.global.paused = true;
             client.global.captchadetected = true;
             client.global.total.captcha++;
@@ -51,42 +54,45 @@ module.exports = async (client, message) => {
                     `powershell.exe -ExecutionPolicy Bypass -Command "${psScript}"`
                 );
             }
+            if (client.config.settings.captcha.alerttype.webhook) {
+                const { WebhookClient } = require("discord.js");
+                const webhookClient = new WebhookClient({
+                    url: client.config.settings.captcha.alerttype.webhookurl,
+                });
+                let message = `**Captcha detected!** Solve the captcha`;
+
+                if (!client.config.settings.autoresume) {
+                    message += `and type ${client.config.prefix}resume in farm channel`;
+                }
+
+                await webhookClient.send({
+                    content: `${message}\n||@everyone||`,
+                    username: "OwO Farm Bot Stable",
+                });
+            }
 
             if (msgcontent.includes("owobot.com/captcha")) {
                 let captchabrowserexecute, executeCommand;
 
                 switch (process.platform) {
-                    case "win32":
-                        captchabrowserexecute = "start";
-                        executeCommand = (command) =>
-                            client.childprocess.exec(command);
-                        break;
-                    case "darwin":
-                        captchabrowserexecute = "open";
-                        executeCommand = (command) =>
-                            client.childprocess.spawn(command, [
-                                "https://owobot.com/captcha",
-                            ]);
-                        break;
                     case "android":
+                        client.logger.warn(
+                            "Bot",
+                            "Captcha",
+                            "Unsupported platform!"
+                        );
                         return;
-                    case "linux":
-                        captchabrowserexecute = "xdg-open";
-                        executeCommand = (command) =>
-                            client.childprocess.spawn(command, [
-                                "https://owobot.com/captcha",
-                            ]);
-                        break;
                     default:
-                        client.logger.warn("Bot", "Captcha", "Unsupported platform!");
+                        client.logger.info(
+                            "Bot",
+                            "Captcha",
+                            "Opening Browser."
+                        );
+                        client.childprocess.spawn("node", [
+                            "./utils/captchapage.js",
+                            `--token=${client.basic.token}`,
+                        ]);
                         return;
-                }
-
-                if (captchabrowserexecute) {
-                    client.logger.info("Bot", "Captcha", "Opening Browser.");
-                    executeCommand(
-                        `${captchabrowserexecute} https://owobot.com/captcha`
-                    );
                 }
             }
         }
@@ -94,9 +100,17 @@ module.exports = async (client, message) => {
             client.global.captchadetected = false;
             if (client.config.settings.autoresume) {
                 client.global.paused = false;
-                client.logger.warn("Bot", "Captcha", `Captcha Solved. Bot Resuming...`);
+                client.logger.warn(
+                    "Bot",
+                    "Captcha",
+                    `Captcha Solved. Bot Resuming...`
+                );
             } else {
-                client.logger.warn("Bot", "Captcha", `Captcha Solved, please resume by type \"${client.config.prefix}resume\" to resume`);
+                client.logger.warn(
+                    "Bot",
+                    "Captcha",
+                    `Captcha Solved, please resume by type \"${client.config.prefix}resume\" to resume`
+                );
             }
         }
     }

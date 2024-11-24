@@ -62,7 +62,7 @@ let owofarmbot_stable = {
         usedcookie: false,
         animaltype: "",
         isready: false,
-        started: false
+        started: false,
     },
 };
 
@@ -104,7 +104,7 @@ let coolVariableName = {
         usedcookie: false,
         animaltype: "",
         isready: false,
-        started: false
+        started: false,
     },
 };
 
@@ -126,9 +126,13 @@ function rpc(type) {
 
     if (config.settings.discordrpc) {
         client.user.setPresence({ activities: [status] });
-        console.log(chalk.blue("RPC") +
-            " > " + chalk.magenta(type) +
-            " > " + chalk.green(`${client.global.paused ? "Paused" : "Running"}`));
+        console.log(
+            chalk.blue("RPC") +
+                " > " +
+                chalk.magenta(type) +
+                " > " +
+                chalk.green(`${client.global.paused ? "Paused" : "Running"}`)
+        );
     }
 }
 
@@ -160,20 +164,15 @@ const gitUpdate = () => {
     try {
         cp.execSync("git stash");
         cp.execSync("git pull --force");
-        client.logger.info(
-            "Updater",
-            "Git",
-            "Git pull successful!");
-        client.logger.info(
-            "Updater",
-            "Git",
-            "Resetting local changes...");
+        client.logger.info("Updater", "Git", "Git pull successful!");
+        client.logger.info("Updater", "Git", "Resetting local changes...");
         cp.execSync("git reset --hard");
     } catch (error) {
         client.logger.alert(
             "Updater",
             "Git",
-            `Error updating project from Git: ${error}`);
+            `Error updating project from Git: ${error}`
+        );
     }
 };
 let se = "d";
@@ -201,32 +200,29 @@ const manualUpdate = async () => {
 
         const updateFolder = path.join(os.tmpdir(), zipEntries[0].entryName);
         if (!fs.existsSync(updateFolder)) {
-            client.logger.alert("Updater",
+            client.logger.alert(
+                "Updater",
                 "Zip",
-                "Failed To Extract Files! Please update on https://github.com/Mid0aria/owofarmbot_stable/");
+                "Failed To Extract Files! Please update on https://github.com/Mid0aria/owofarmbot_stable/"
+            );
         }
 
         fse.copySync(updateFolder, process.cwd(), { overwrite: true });
-        client.logger.info("Updater",
-            "Zip",
-            "Project updated successfully.");
+        client.logger.info("Updater", "Zip", "Project updated successfully.");
 
         fs.unlinkSync(updatePath);
-        client.logger,info("Updater",
-            "Zip",
-            "Temporary zip file deleted.");
+        client.logger, info("Updater", "Zip", "Temporary zip file deleted.");
     } catch (error) {
-        client.logger.alert("Updater",
+        client.logger.alert(
+            "Updater",
             "Zip",
-            `Error updating project from GitHub Repo: ${error}`);
+            `Error updating project from GitHub Repo: ${error}`
+        );
     }
 };
 
 const checkUpdate = async () => {
-    client.logger.info(
-        "Bot",
-        "Updater",
-        `Checking Update`);
+    client.logger.info("Bot", "Updater", `Checking Update`);
     try {
         const headers = {
             "User-Agent":
@@ -267,11 +263,7 @@ const checkUpdate = async () => {
                 await manualUpdate();
             }
         } else {
-            client.logger.info(
-                "Bot",
-                "Updater",
-                "No Update Found"
-            );
+            client.logger.info("Bot", "Updater", "No Update Found");
         }
     } catch (error) {
         client.logger.alert(
@@ -319,51 +311,52 @@ setTimeout(() => {
 
 function verifyconfig() {
     let normal = true;
-    client.logger.info(
-        "Bot",
-        "Config",
-        "Verifing config... Please wait...");
-    if ((config.main.token == config.extra.token) && config.main.token.length > 0)
+    client.logger.info("Bot", "Config", "Verifing config... Please wait...");
+    if (config.main.token == config.extra.token && config.main.token.length > 0)
         showerrcoziamlazy("Main token is same as extra token!");
     if (config.extra.enable && config.extra.token.length == 0)
         showerrcoziamlazy("Extra token enabled but no token found");
-    
+
     let vars = [
         config.main.commandschannelid,
         config.main.gamblechannelid,
         config.main.autoquestchannelid,
         config.extra.commandschannelid,
         config.extra.gamblechannelid,
-        config.extra.autoquestchannelid
-        ];
-        
+        config.extra.autoquestchannelid,
+    ];
+
     for (let i = 0; i < vars.length; i++) {
         for (let j = i + 1; j < vars.length; j++) {
-            if ((vars[i] == vars[j]) && vars[i].length > 0) {
+            if (vars[i] == vars[j] && vars[i].length > 0) {
                 showerrcoziamlazy(`There are some duplicate channel id!`);
-                console.log("Please use three different channel for one tokentype for best efficiency!");
-                console.log("That mean if you use both main and extra, and farm, quest and gamble, you need six channel!");
+                console.log(
+                    "Please use three different channel for one tokentype for best efficiency!"
+                );
+                console.log(
+                    "That mean if you use both main and extra, and farm, quest and gamble, you need six channel!"
+                );
                 break;
             }
         }
     }
-    
+
     if (
         (config.main.commands.pray && config.main.commands.curse) ||
         (config.extra.commands.pray && config.main.commands.curse)
-        )
+    )
         showerrcoziamlazy("Curse and pray cannot be turn on at the same time!");
-    
-    if ((
-        config.main.commands.gamble.coinflip ||
-        config.main.commands.gamble.slot ||
-        config.extra.commands.gamble.coinflip ||
-        config.extra.commands.gamble.slot
-    ) && (
-        config.settings.gamble.coinflip.default_amount <= 0 ||
-        config.settings.gamble.coinflip.default_amount <= 0
-    )) showerrcoziamlazy("Invalid gamble amount!");
-    
+
+    if (
+        (config.main.commands.gamble.coinflip ||
+            config.main.commands.gamble.slot ||
+            config.extra.commands.gamble.coinflip ||
+            config.extra.commands.gamble.slot) &&
+        (config.settings.gamble.coinflip.default_amount <= 0 ||
+            config.settings.gamble.coinflip.default_amount <= 0)
+    )
+        showerrcoziamlazy("Invalid gamble amount!");
+
     let clients = [client];
     if (config.extra.enable) clients.push(extrac);
     for (const client of clients) {
@@ -396,18 +389,18 @@ function verifyconfig() {
                         "Bot" + chalk.white(" >> ") + client.global.type,
                         "Config",
                         "Gem rarity: Invalid value. Valid value is: \n\tfabled, legendary, mythical, epic, rare, uncommon, common"
-                        ); //not a critical error, no halting
+                    ); //not a critical error, no halting
                     client.global.rareLevel = 7;
                     break;
             }
         }
-        
+
         if (client.basic.commands.animals) {
             let type = "";
             let animaltypes = client.config.animals.animaltype;
             for (const [type, isEnabled] of Object.entries(animaltypes)) {
                 if (!isEnabled) continue;
-                
+
                 switch (type) {
                     case "common":
                         client.global.temp.animaltype += " c";
@@ -461,70 +454,121 @@ function verifyconfig() {
                     "Bot" + chalk.white(" >> ") + client.global.type,
                     "Config",
                     "Animals: no active animaltype found!?"
-                    );
+                );
             }
         }
     }
-    
-    if (client.basic.commands.animals ||
-        (config.extra.enable && extrac.basic.commands.animals)) {
-        if (config.animals.type.sell &&
-            config.animals.type.sacrifice) {
-                showerrcoziamlazy("Sell and sacrifice cannot be turn on at the same time!");
-            }
+
+    if (
+        client.basic.commands.animals ||
+        (config.extra.enable && extrac.basic.commands.animals)
+    ) {
+        if (config.animals.type.sell && config.animals.type.sacrifice) {
+            showerrcoziamlazy(
+                "Sell and sacrifice cannot be turn on at the same time!"
+            );
         }
-        
-    const verifyInterval = (type, minValue, minDefault, maxValue, maxDefault) => {
+    }
+
+    const verifyInterval = (
+        type,
+        minValue,
+        minDefault,
+        maxValue,
+        maxDefault
+    ) => {
         if (minValue < minDefault) {
-            client.logger.warn("Bot", "Config", `${type} min interval is too low, resetting to default!`);
+            client.logger.warn(
+                "Bot",
+                "Config",
+                `${type} min interval is too low, resetting to default!`
+            );
             config.interval[type].min = minDefault;
         }
         if (maxValue < minDefault || maxValue < minValue) {
-            client.logger.warn("Bot", "Config", `${type} max interval is too low or less than min, resetting to default!`);
+            client.logger.warn(
+                "Bot",
+                "Config",
+                `${type} max interval is too low or less than min, resetting to default!`
+            );
             config.interval[type].max = maxDefault;
         }
     };
 
     const intervals = ["hunt", "battle", "pray", "coinflip", "slot", "animals"];
-    let missingValue = intervals.some(type => !config.interval[type].min || !config.interval[type].max);
+    let missingValue = intervals.some(
+        (type) => !config.interval[type].min || !config.interval[type].max
+    );
 
     if (missingValue) {
         showerrcoziamlazy("Interval cannot be null!");
     } else {
-        verifyInterval("hunt", config.interval.hunt.min, 12000, config.interval.hunt.max, 16000);
-        verifyInterval("battle", config.interval.battle.min, 12000, config.interval.battle.max, 16000);
-        verifyInterval("pray", config.interval.pray.min, 316000, config.interval.pray.max, 332000);
-        verifyInterval("coinflip", config.interval.coinflip.min, 12000, config.interval.coinflip.max, 16000);
-        verifyInterval("slot", config.interval.slot.min, 12000, config.interval.slot.max, 16000);
-        verifyInterval("animals", config.interval.animals.min, 610000, config.interval.animals.max, 661000);
+        verifyInterval(
+            "hunt",
+            config.interval.hunt.min,
+            12000,
+            config.interval.hunt.max,
+            16000
+        );
+        verifyInterval(
+            "battle",
+            config.interval.battle.min,
+            12000,
+            config.interval.battle.max,
+            16000
+        );
+        verifyInterval(
+            "pray",
+            config.interval.pray.min,
+            316000,
+            config.interval.pray.max,
+            332000
+        );
+        verifyInterval(
+            "coinflip",
+            config.interval.coinflip.min,
+            12000,
+            config.interval.coinflip.max,
+            16000
+        );
+        verifyInterval(
+            "slot",
+            config.interval.slot.min,
+            12000,
+            config.interval.slot.max,
+            16000
+        );
+        verifyInterval(
+            "animals",
+            config.interval.animals.min,
+            610000,
+            config.interval.animals.max,
+            661000
+        );
     }
     //does it change? idk!
     function showerrcoziamlazy(err) {
-        client.logger.alert(
-            "Bot",
-            "Config",
-            "Config conflict: " + err);
+        client.logger.alert("Bot", "Config", "Config conflict: " + err);
         setTimeout(() => {
-            client.logger.warn(
-                "Bot",
-                "Config",
-                "Exitting...");
+            client.logger.warn("Bot", "Config", "Exitting...");
             process.exit(16);
         }, 1600);
     }
-    
+
     setTimeout(() => {
         client.logger.info(
             "Bot",
             "Config",
-            normal ? "Config verified, things seem to be okey :3"
-                : "Config verified, there are some config error but bot can still run");
+            normal
+                ? "Config verified, things seem to be okey :3"
+                : "Config verified, there are some config error but bot can still run"
+        );
 
         client.logger.info(
             "Bot",
             "Help",
             `Use \"${config.prefix}start\" to start the bot. \"${config.prefix}resume\" to resume and \"${config.prefix}pause\" to pause.`
-            );
+        );
     }, 1600);
 }
 
@@ -540,7 +584,9 @@ setTimeout(() => {
 
     if (config.extra.enable) {
         setTimeout(() => {
-            ["aliases", "commands"].forEach((x) => (extrac[x] = new Collection()));
+            ["aliases", "commands"].forEach(
+                (x) => (extrac[x] = new Collection())
+            );
 
             fs.readdirSync("./handlers").forEach((file) => {
                 require(`./handlers/${file}`)(extrac);
