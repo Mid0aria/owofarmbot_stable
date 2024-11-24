@@ -23,10 +23,5 @@ module.exports = (client) => {
             client.chalk.red(err, origin)
         );
     });
-    console.log(
-        client.chalk.blue(client.chalk.bold(`Bot`)),
-        client.chalk.white(`>>`),
-        client.chalk.red(`AntiCrash`),
-        client.chalk.green(`ready!`)
-    );
+    client.logger.info("Bot", "AntiCrash", "Ready");
 };

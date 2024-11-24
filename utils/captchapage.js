@@ -23,7 +23,6 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         height: 1080,
     });
 
-    // Kullanıcı token'ını localStorage'a set et
     await page.evaluateOnNewDocument((token) => {
         window.localStorage.setItem("token", `"${token}"`);
     }, userToken);
