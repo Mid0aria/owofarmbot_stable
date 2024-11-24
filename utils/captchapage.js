@@ -61,7 +61,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         while (true) {
             const isCaptchaOk = await page.evaluate(() => {
                 return document.body.innerText.includes(
-                    "You're free to go! c:"
+                    "I have verified that you're a human"
                 );
             });
 

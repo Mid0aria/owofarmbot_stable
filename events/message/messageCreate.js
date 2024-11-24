@@ -54,8 +54,11 @@ module.exports = async (client, message) => {
                     `powershell.exe -ExecutionPolicy Bypass -Command "${psScript}"`
                 );
             }
-            if (client.config.settings.captcha.alerttype.webhook) {
-                const { WebhookClient } = require("discord.js");
+            if (
+                client.config.settings.captcha.alerttype.webhook &&
+                client.config.settings.captcha.alerttype.webhookurl.length > 10
+            ) {
+                const { WebhookClient } = require("discord.js-selfbot-v13");
                 const webhookClient = new WebhookClient({
                     url: client.config.settings.captcha.alerttype.webhookurl,
                 });
@@ -70,10 +73,9 @@ module.exports = async (client, message) => {
                     username: "OwO Farm Bot Stable",
                 });
             }
-
+            console.log(msgcontent);
+            console.log(msgcontent.includes("owobot.com/captcha"));
             if (msgcontent.includes("owobot.com/captcha")) {
-                let captchabrowserexecute, executeCommand;
-
                 switch (process.platform) {
                     case "android":
                         client.logger.warn(

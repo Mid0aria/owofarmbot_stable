@@ -1,4 +1,4 @@
-const DEVELOPER_MODE = true;
+const DEVELOPER_MODE = false;
 
 const cp = require("child_process");
 let config;
