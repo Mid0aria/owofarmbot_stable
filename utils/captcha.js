@@ -1,3 +1,14 @@
+/*
+ * OwO Farm Bot Stable
+ * Copyright (C) 2024 Mido
+ * This software is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+ * For more information, see README.md and LICENSE
+ */
+
+/*
+ * using puppeteer it goes to the auth connection and opens the captcha page for you, you just need to solve the captcha
+ */
+
 const puppeteer = require("puppeteer");
 const yargs = require("yargs");
 const argv = yargs.options({
@@ -102,9 +113,14 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
         while (true) {
             const isCaptchaOk = await page.evaluate(() => {
-                return document.body.innerText.includes(
-                    "I have verified that you're a human"
-                );
+                if (
+                    document.body.innerText.includes(
+                        "I have verified that you're a human"
+                    ) ||
+                    document.body.innerText.includes("You're free to go! c:")
+                ) {
+                    return true;
+                } else return false;
             });
 
             if (isCaptchaOk) {
