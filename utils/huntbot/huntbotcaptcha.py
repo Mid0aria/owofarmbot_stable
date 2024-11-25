@@ -46,7 +46,10 @@ sio.attach(app)
 class HuntBotCaptchaSolver:
     async def solve_huntbot_captcha(self, captcha_url):
         checks = []
-        check_images = glob.glob("huntbot/**/*.png")
+        check_images = glob.glob(
+            os.path.join(script_dir, "letters/**/*.png"), recursive=True
+        )
+
         for check_image in sorted(check_images):
             img = Image.open(check_image)
             checks.append((img, img.size, check_image.split(".")[0].split(os.sep)[-1]))
@@ -76,14 +79,14 @@ class HuntBotCaptchaSolver:
 
 @sio.event
 async def captcha(sid, captcha_url):
-    print(f"CAPTCHA URL alındı: {captcha_url}")
+    print(f"CAPTCHA URL recieved: {captcha_url}")
     solver = HuntBotCaptchaSolver()
     try:
         result = await solver.solve_huntbot_captcha(captcha_url)
-        print(f"Çözülen CAPTCHA: {result}")
+        print(f"Solved CAPTCHA: {result}")
         await sio.emit("captcha_solution", result, to=sid)
     except Exception as e:
-        print(f"CAPTCHA çözüm hatası: {e}")
+        print(f"CAPTCHA solve error: {e}")
         await sio.emit("captcha_solution", f"ERROR: {e}", to=sid)
 
 
