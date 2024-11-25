@@ -276,6 +276,9 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
             "min": 610000
         }
     }
+    "socket": { / If another program is using port 65432 on your computer (I think it shouldn't be), you can avoid the conflict by changing the port here.
+        "port": 65432
+    }
 }
 
 
@@ -339,6 +342,7 @@ Promt mode:
 ## 🔗・Required Links
 
 [NodeJS](https://nodejs.org/en/)<br>
+[Python(version ≥ 3.10)](https://www.python.org/downloads/)<br>
 [Terminal](https://apps.microsoft.com/detail/9n0dx20hk701)<br>
 [Farm Bot ZIP File](https://github.com/Mid0aria/owofarmbot_stable/archive/refs/heads/main.zip)
 
@@ -349,6 +353,9 @@ Promt mode:
 ```bash
 # Check Node.js version:
 node -v
+
+# Check Python version:
+py --version
 
 # Clone the files with git:
 git clone https://github.com/Mid0aria/owofarmbot_stable

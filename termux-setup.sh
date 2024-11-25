@@ -30,7 +30,7 @@ apt update -y && apt upgrade -y
 echo "${GREEN} [+] ${BLUE} Successfully updated termux ${RESTORE}"
 echo "${GREEN} [+] ${BLUE} Installing necessary packages ${RESTORE}"
 sleep 3
-pkg install git nodejs 
+pkg install git python nodejs 
 sleep 1
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 # sleep 1
@@ -40,7 +40,7 @@ sleep 1
 # sleep 1
 # unset PREFIX && nvm use node
 echo "${GREEN} [+] ${BLUE} Installed Packages ${RESTORE}"
-echo "${GREEN} [+] ${BLUE} Installing OwO Farm Botv2 ${RESTORE}"
+echo "${GREEN} [+] ${BLUE} Installing OwO Farm Bot Stable ${RESTORE}"
 git clone https://github.com/Mid0aria/owofarmbot_stable
 cd owofarmbot_stable
 echo "${GREEN} [+] ${BLUE} Installing nodejs packages${RESTORE}"
