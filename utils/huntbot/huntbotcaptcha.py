@@ -28,7 +28,7 @@ install_packages(required_modules)
 import socketio, aiohttp, glob, numpy
 from PIL import Image
 
-with open("config.json", "r") as f:
+with open("../../config.json", "r") as f:
     config = json.load(f)
 
 
