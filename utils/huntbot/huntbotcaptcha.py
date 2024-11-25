@@ -1,5 +1,5 @@
 # This project is inspired by PhanDat's project https://github.com/realphandat/phandat-selfbot. Some of the original code has been taken and added to it. We thank him for this work.
-# LICENSE: https://web.archive.org/web/20241125191604/https://github.com/realphandat/phandat-selfbot/blob/1c751d8bba0990278e4ca9527b07dc240e271f79/LICENSE
+# LICENSE: https://web.archive.org/web/20241125182749/https://github.com/realphandat/phandat-selfbot/blob/main/LICENSE
 
 
 import os, io, sys, json, subprocess
