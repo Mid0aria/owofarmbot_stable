@@ -7,15 +7,18 @@
  */
 
 const io = require("socket.io-client");
+const cp = require("child_process");
 const config = require("./config.json");
 const socket = io(`http://localhost:${config.socket.port}`); // connect to the Python server
+
+cp.spawn("py", ["./utils/huntbot/huntbotcaptcha.py"]); // spawn huntbotcaptcha.py in headless mode
 
 socket.on("connect", () => {
     console.log("I connected to the Hunt Bot Captcha server");
 
     // Send the CAPTCHA URL to the Python server
     const captchaUrl =
-        "https://cdn.discordapp.com/attachments/1309535845925261323/1310672570651250738/captcha.png?ex=67461273&is=6744c0f3&hm=1478ec27f1d44e1c0cfbb769722f72a4a54c61414a8d12dfc9294d742be2117c&"; // Buraya gerçek CAPTCHA URL'nizi koyun
+        "https://cdn.discordapp.com/attachments/1267791683865673738/1311700675956179015/captcha.png?ex=6749cff3&is=67487e73&hm=87546f6269e04a7d0078327f86ece562b01e3e98cbfd5d2d4b755059e4b5fcc0&"; // Buraya gerçek CAPTCHA URL'nizi koyun
     socket.emit("captcha", captchaUrl);
 });
 
