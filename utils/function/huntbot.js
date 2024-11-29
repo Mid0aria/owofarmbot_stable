@@ -82,7 +82,7 @@ async function huntbotHandler(client, channel) {
             }
 
             if (!message.embeds[0]) {
-                client.global.temp.hadess = true;
+                client.global.temp.huntbotessence = true;
                 setTimeout(() => {
                     triggerHB(client, channel);
                 }, 6100);
@@ -91,9 +91,45 @@ async function huntbotHandler(client, channel) {
 
                 for (const field of message.embeds[0].fields) {
                     if (field.name.includes("is currently hunting")) {
+                        const regex = /(\d+)([SMHD])/;
+                        const match = field.value.match(regex);
+
+                        if (match) {
+                            const time = parseInt(match[1]);
+                            const unit = match[2];
+
+                            console.log(time + unit);
+                            let milliseconds = 0;
+
+                            if (unit === "S") {
+                                milliseconds = time * 1000;
+                            } else if (unit === "M") {
+                                milliseconds = time * 60 * 1000;
+                            } else if (unit === "H") {
+                                milliseconds = time * 60 * 60 * 1000;
+                            } else if (unit === "D") {
+                                milliseconds = time * 24 * 60 * 60 * 1000;
+                            }
+                            //TODO use for interval ^^
+                            console.log(milliseconds);
+                        } else {
+                            console.log("No valid duration format found.");
+                        }
+
                         isHunting = true;
                     }
+                    if (field.name.includes("Duration")) {
+                        const regex = /(\d+(\.\d+)?)H/;
+                        const match = field.name.match(regex);
 
+                        if (match) {
+                            const duration = match[1];
+                            client.global.temp.huntbotmaxtime = duration;
+                        } else {
+                            client.global.temp.huntbotmaxtime =
+                                client.basic.commands.huntbot.maxtime;
+                        }
+                    }
                     if (field.name.includes("Animal Essence")) {
                         const match = field.name.match(
                             /Animal Essence - `(\d[\d,]*)`/
@@ -104,7 +140,7 @@ async function huntbotHandler(client, channel) {
                                 10
                             );
                             if (essence > 0) {
-                                client.global.temp.hadess = true;
+                                client.global.temp.huntbotessence = true;
                             }
                         }
                     }
@@ -112,7 +148,6 @@ async function huntbotHandler(client, channel) {
 
                 if (isHunting) {
                     client.logger.warn("Farm", "Huntbot", "Currently hunting");
-                    return;
                 } else {
                     setTimeout(() => {
                         triggerHB(client, channel);
@@ -120,7 +155,7 @@ async function huntbotHandler(client, channel) {
                 }
             }
 
-            if (client.global.temp.hadess) {
+            if (client.global.temp.huntbotessence) {
                 await client.delay(6100);
                 upgradeHuntbot(client, channel);
             }
@@ -134,7 +169,7 @@ async function triggerHB(client, channel) {
                 "owo",
                 client.config.settings.owoprefix,
             ])} ${commandrandomizer(["autohunt", "huntbot", "hb", "ah"])} ${
-                client.basic.commands.huntbot.maxtime
+                client.global.temp.huntbotmaxtime
             }h`,
         })
         .then(async (msg) => {
@@ -212,7 +247,7 @@ async function triggerHB(client, channel) {
                         "huntbot",
                         "hb",
                         "ah",
-                    ])} ${client.basic.commands.huntbot.maxtime}h ${solution}`,
+                    ])} ${client.global.temp.huntbotmaxtime}h ${solution}`,
                 });
 
                 client.logger.info("Farm", "Huntbot", "Huntbot is hunting :3");
@@ -228,13 +263,13 @@ async function upgradeHuntbot(client, channel) {
             "owo",
             client.config.settings.owoprefix,
         ])} ${commandrandomizer(["upg", "upgrade"])} ${
-            client.global.temp.huntbottype
+            client.basic.commands.huntbot.upgradetype
         } all`,
     });
 
     client.logger.info(
         "Farm",
         "Huntbot",
-        "Upgraded trailts: " + client.global.temp.huntbottype
+        "Upgraded trait: " + client.basic.commands.huntbot.upgradetype
     );
 }

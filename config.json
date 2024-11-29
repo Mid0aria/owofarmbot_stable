@@ -17,8 +17,9 @@
             "curse": true,
             "huntbot": {
                 "enable": true,
+                "maxtime": 10,
                 "upgrade": false,
-                "maxtime": 10
+                "upgradetype": "duration"
             },
             "gamble": {
                 "coinflip": true,
@@ -48,8 +49,9 @@
             "curse": true,
             "huntbot": {
                 "enable": true,
+                "maxtime": 10,
                 "upgrade": false,
-                "maxtime": 10
+                "upgradetype": "duration"
             },
             "tomain": true,
             "gamble": {

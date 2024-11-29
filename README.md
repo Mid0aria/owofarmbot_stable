@@ -72,7 +72,8 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
     -   Battle
     -   Pray
     -   Curse
-    -   Huntbot (with captcha solver)
+    -   HuntBot (with captcha solver)
+    -   Upgrade HuntBot
     -   Gamble
         -   Coinflip
         -   Slot
@@ -150,8 +151,9 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
             "curse": true, / true or false (boolean)
             "huntbot": {
                 "enable": true, / true or false (boolean)
+                "maxtime": 10 / If no valid duration is found for huntbot, the value here is used in hours
                 "upgrade": false, / true or false (boolean)
-                "maxtime": 10 / time input of huntbot command
+                "upgradetype": "duration" / efficiency, duration, cost, gain, exp or radar
             },
             "gamble": {
                 "coinflip": true, / true or false (boolean)
@@ -181,8 +183,9 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
             "curse": true,
             "huntbot": {
                 "enable": true, / true or false (boolean)
+                "maxtime": 10 / If no valid duration is found for huntbot, the value here is used in hours
                 "upgrade": false, / true or false (boolean)
-                "maxtime": 10 / time input of huntbot command
+                "upgradetype": "duration" / efficiency, duration, cost, gain, exp or radar
             },
             "tomain": true, / use curse/pray to main token or not, true or false (boolean)
             "gamble": {
