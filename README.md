@@ -21,7 +21,9 @@ dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM=
     -   [Windows / Linux](#windows--linux) - Official
     -   [Android / iOS (Termux)](#android--ios-termux) - Official
 
-To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), go to [`#🤖・bot-commands`](https://discord.com/channels/1202294695091507230/1203705738770256032), and send `s!key`. The official bot will directly message you with the key.
+If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt6C)
+
+<!-- To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), go to [`#🤖・bot-commands`](https://discord.com/channels/1202294695091507230/1203705738770256032), and send `s!key`. The official bot will directly message you with the key. -->
 
 </p>
 
