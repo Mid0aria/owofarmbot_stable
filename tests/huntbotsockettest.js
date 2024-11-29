@@ -9,7 +9,7 @@
 const io = require("socket.io-client");
 const cp = require("child_process");
 const net = require("net");
-const config = require("./config.json");
+const config = require("../config.json");
 
 const port = config.socket.port;
 
@@ -38,7 +38,7 @@ isPortInUse(port).then((inUse) => {
     if (inUse) {
         return 0;
     } else {
-        cp.spawn("py", ["./utils/huntbot/huntbotcaptcha.py"]);
+        cp.spawn("py", ["../utils/huntbot_captcha/huntbotcaptcha.py"]);
     }
 });
 
