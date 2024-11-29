@@ -54,6 +54,7 @@ module.exports = async (client, message) => {
     }
     if (client.basic.commands.huntbot.enable) {
         let huntbotcaptchaprocess;
+
         client.globalutil
             .isPortInUse(client.config.socket.port, "localhost")
             .then((inUse) => {

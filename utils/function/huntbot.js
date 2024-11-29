@@ -83,6 +83,8 @@ async function huntbotHandler(client, channel) {
 
             if (!message.embeds[0]) {
                 client.global.temp.huntbotessence = true;
+                client.global.temp.huntbotmaxtime =
+                    client.basic.commands.huntbot.maxtime;
                 setTimeout(() => {
                     triggerHB(client, channel);
                 }, 6100);

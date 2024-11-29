@@ -1,3 +1,8 @@
+/**
+ * TODO backup the config file before updates and integrate it into the new config
+ *
+ */
+
 const axios = require("axios");
 const path = require("path");
 const admZip = require("adm-zip");
@@ -440,24 +445,24 @@ exports.verifyconfig = async (client, extrac, config) => {
  *
  *
  */
-exports.isPortInUse = (port, host) => {
-    return new Promise((resolve) => {
-        const server = net.createServer();
+exports.isPortInUse = (port, host = "localhost") => {
+    return new Promise((resolve, reject) => {
+        const socket = new net.Socket();
 
-        server.once("error", (err) => {
-            if (err.code === "EADDRINUSE") {
-                resolve(true);
-            } else {
+        socket.once("error", (err) => {
+            if (err.code === "ECONNREFUSED") {
                 resolve(false);
+            } else {
+                reject(err);
             }
         });
 
-        server.once("listening", () => {
-            server.close();
-            resolve(false);
+        socket.once("connect", () => {
+            resolve(true);
+            socket.end();
         });
 
-        server.listen(port, host);
+        socket.connect(port, host);
     });
 };
 
