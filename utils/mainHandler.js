@@ -1,4 +1,4 @@
-const fs = require("fs");
+const path = require("path");
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getrand = (min, max) => Math.random() * (max - min) + min;
 
@@ -10,6 +10,13 @@ module.exports = async (client, message) => {
         client.config.settings.owoprefix = "owo";
     }
 
+    if (
+        client.config.settings.autojoingiveaways &&
+        client.global.owosupportserver
+    ) {
+        require("./function/joingiveaways.js")(client);
+    }
+
     if (client.basic.commands.checklist) {
         checklist(client, channel);
     } else {
@@ -19,20 +26,22 @@ module.exports = async (client, message) => {
 
     await client.delay(2000);
 
-    await client.delay(16000); //reduce bot rate
+    // await client.delay(16000); //reduce bot rate
     if (
         client.basic.commands.gamble.coinflip ||
         client.basic.commands.gamble.slot
-    )
+    ) {
         require("./function/gamble.js")(client, message);
-
-    await client.delay(8000);
-    if (client.basic.commands.autoquest)
+        await client.delay(8000);
+    }
+    if (client.basic.commands.autoquest) {
         require("./function/quest.js")(client, message);
-    else client.global.quest.title = "Quest not enabled";
+    } else {
+        client.global.quest.title = "Quest not enabled";
+    }
 
-    await client.delay(16000);
-    if (client.basic.commands.animals)
+    // await client.delay(16000);
+    if (client.basic.commands.animals) {
         sell(
             client,
             channel,
@@ -40,8 +49,56 @@ module.exports = async (client, message) => {
             client.global.temp.animaltype
         );
 
-    await client.delay(32000);
-    require("./function/luck.js")(client, message);
+        await client.delay(32000);
+        require("./function/luck.js")(client, message);
+    }
+    if (client.basic.commands.huntbot.enable) {
+        let huntbotcaptchaprocess;
+        client.globalutil
+            .isPortInUse(client.config.socket.port, "localhost")
+            .then((inUse) => {
+                if (inUse) {
+                    client.logger.warn(
+                        "Bot",
+                        "Huntbot",
+                        "HuntBot captcha solver already started..."
+                    );
+                    require("./function/huntbot.js")(client);
+                    return 0;
+                } else {
+                    client.logger.warn(
+                        "Bot",
+                        "Huntbot",
+                        "HuntBot captcha solver starting..."
+                    );
+                    huntbotcaptchaprocess = client.childprocess.spawn("py", [
+                        path.join(
+                            __dirname,
+                            "./huntbot_captcha/huntbotcaptcha.py"
+                        ),
+                    ]);
+
+                    require("./function/huntbot.js")(client);
+                }
+            });
+
+        process.on("exit", () => {
+            client.logger.warn(
+                "Bot",
+                "Huntbot",
+                "Killing huntBot captcha solver..."
+            );
+            huntbotcaptchaprocess.kill("SIGINT");
+        });
+        process.on("SIGINT", () => {
+            client.logger.warn(
+                "Bot",
+                "Huntbot",
+                "Killing huntBot captcha solver..."
+            );
+            huntbotcaptchaprocess.kill("SIGINT");
+        });
+    }
 };
 
 async function checklist(client, channel) {

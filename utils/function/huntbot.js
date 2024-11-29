@@ -8,7 +8,7 @@
 const io = require("socket.io-client");
 
 module.exports = async (client) => {
-    let channel = client.channels.cache.get(client.basic.commandschannelid);
+    let channel = client.channels.cache.get(client.basic.huntbotchannelid);
     if (client.config.settings.owoprefix.length <= 0) {
         client.config.settings.owoprefix = "owo";
     }
@@ -31,6 +31,7 @@ async function huntbotHandler(client, channel) {
         .then(async (msg) => {
             let id = msg.id;
             let message = await getMessage();
+
             async function getMessage() {
                 return new Promise((resolve) => {
                     const filter = (msg) =>
@@ -89,8 +90,9 @@ async function huntbotHandler(client, channel) {
                 let isHunting = false;
 
                 for (const field of message.embeds[0].fields) {
-                    if (field.name.includes("is currently hunting"))
+                    if (field.name.includes("is currently hunting")) {
                         isHunting = true;
+                    }
 
                     if (field.name.includes("Animal Essence")) {
                         const match = field.name.match(
@@ -101,7 +103,9 @@ async function huntbotHandler(client, channel) {
                                 match[1].replace(/,/g, ""),
                                 10
                             );
-                            if (essence > 0) client.global.temp.hadess = true;
+                            if (essence > 0) {
+                                client.global.temp.hadess = true;
+                            }
                         }
                     }
                 }
@@ -124,14 +128,13 @@ async function huntbotHandler(client, channel) {
 }
 
 async function triggerHB(client, channel) {
-    if (!client.basic.commands.huntbot.enable) return;
     await channel
         .send({
             content: `${commandrandomizer([
                 "owo",
                 client.config.settings.owoprefix,
-            ])} ${commandrandomizer(["hb", "huntbot"])} ${
-                client.config.settings.huntbot.maxtime
+            ])} ${commandrandomizer(["autohunt", "huntbot", "hb", "ah"])} ${
+                client.basic.commands.huntbot.maxtime
             }h`,
         })
         .then(async (msg) => {
@@ -204,9 +207,12 @@ async function triggerHB(client, channel) {
                     content: `${commandrandomizer([
                         "owo",
                         client.config.settings.owoprefix,
-                    ])} ${commandrandomizer(["hb", "huntbot"])} ${
-                        client.config.settings.huntbot.maxtime
-                    }h ${solution}`,
+                    ])} ${commandrandomizer([
+                        "autohunt",
+                        "huntbot",
+                        "hb",
+                        "ah",
+                    ])} ${client.basic.commands.huntbot.maxtime}h ${solution}`,
                 });
 
                 client.logger.info("Farm", "Huntbot", "Huntbot is hunting :3");

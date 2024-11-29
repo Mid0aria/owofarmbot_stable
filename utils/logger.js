@@ -34,13 +34,14 @@ module.exports = (client) => {
             `${client.chalk.white(`[${new Date().toLocaleTimeString()}]`)} ` +
             `${client.chalk.blue(client.chalk.bold(type))}` +
             `${
-                (type == "Bot" || type == "Updater") &&
-                module != "Startup" &&
-                module != "Captcha"
-                    ? "" //idk why i put this on
-                    : `${client.chalk.white(" >> ")}${client.chalk.cyan(
-                          client.chalk.bold(client.global.type)
-                      )}`
+                // (type == "Bot" || type == "Updater") &&
+                // module != "Startup" &&
+                // module != "Captcha"
+                //     ? "" //idk why i put this on
+                //     :
+                `${client.chalk.white(" >> ")}${client.chalk.cyan(
+                    client.chalk.bold(client.global.type)
+                )}`
             } > ` +
             `${client.chalk.magenta(module)} > ` +
             `${color(result)}`;

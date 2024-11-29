@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.3(BETA)</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.4(BETA)</h1>
 <p align="center">
 
 [![Total Views](https://hits.sh/github.com/Mid0aria/owofarmbot_stable.svg?view=today-total&label=Repo%20Today/Total%20Views&color=770ca1&labelColor=007ec6)](https://github.com/Mid0aria/owofarmbot_stable)
@@ -72,6 +72,7 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
     -   Battle
     -   Pray
     -   Curse
+    -   Huntbot (with captcha solver)
     -   Gamble
         -   Coinflip
         -   Slot
@@ -112,9 +113,11 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
     -   Features:
         -   Command Randomizer
         -   Suspends all farm operations when captcha is detected
+        -   Auto open captcha solve page (only works on desktop)
         -   When the captcha is solved, farm operations continue automatically
         -   NEW CAPTCHA FEATURES WILL COME WITH UPDATES
 
+-   Auto Join OwO Support Server Giveaways
 -   Discord RPC
 -   Auto Phrases Send
 -   Chat FeedBack
@@ -135,6 +138,7 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
         "token": "", / SelfBot Token (your discord token)
         "userid": "",  / SelfBot UserID (your account userid)
         "commandschannelid": "", / Farm Channel ID
+        "huntbotchannelid": "", / HuntBot Channel ID
         "owodmchannelid": "", / OwO DM Channel ID
         "gamblechannelid": "", / Gamble Channel ID
         "autoquestchannelid": "", / Quest Channel ID
@@ -144,6 +148,11 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
             "battle": true, / true or false (boolean)
             "pray": false, / true or false (boolean)
             "curse": true, / true or false (boolean)
+            "huntbot": {
+                "enable": true, / true or false (boolean)
+                "upgrade": false, / true or false (boolean)
+                "maxtime": 10 / time input of huntbot command
+            },
             "gamble": {
                 "coinflip": true, / true or false (boolean)
                 "slot": true / true or false (boolean)
@@ -160,6 +169,7 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
         "token": "",
         "userid": "",
         "commandschannelid": "",
+        "huntbotchannelid": "",
         "owodmchannelid": "",
         "gamblechannelid": "",
         "autoquestchannelid": "",
@@ -169,6 +179,11 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
             "battle": true,
             "pray": false,
             "curse": true,
+            "huntbot": {
+                "enable": true, / true or false (boolean)
+                "upgrade": false, / true or false (boolean)
+                "maxtime": 10 / time input of huntbot command
+            },
             "tomain": true, / use curse/pray to main token or not, true or false (boolean)
             "gamble": {
                 "coinflip": true,
@@ -187,6 +202,7 @@ To get auth key, join the Discord server [here](https://discord.gg/WzYXVbXt6C), 
         "chatfeedback": true, / true or false (boolean)
         "autophrases": true, / true or false (boolean)
         "autoresume": false, / auto resume bot after captcha sloved. true or false (boolean)
+        "autojoingiveaways": true, /you are automatically entered into giveaways on the owo support server [you must be present on the server] (boolean)
         "logging": {
             "newlog": true, / a log with a table for controlling, will remove old log
             "loglength": 20, / how many lines of log at one moment (only affect when newlog is true)

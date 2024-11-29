@@ -3,6 +3,7 @@ const path = require("path");
 const admZip = require("adm-zip");
 const os = require("os");
 const fse = require("fs-extra");
+const net = require("net");
 
 /**
  *
@@ -163,7 +164,7 @@ const manualUpdate = async (client) => {
 
 exports.verifyconfig = async (client, extrac, config) => {
     let normal = true;
-    client.logger.info("Bot", "Config", "Verifing config... Please wait...");
+    client.logger.info("Bot", "Config", "Verifying Config... Please wait...");
     if (config.main.token == config.extra.token && config.main.token.length > 0)
         showerrcoziamlazy("Main token is same as extra token!");
     if (config.extra.enable && config.extra.token.length == 0)
@@ -171,9 +172,11 @@ exports.verifyconfig = async (client, extrac, config) => {
 
     let vars = [
         config.main.commandschannelid,
+        config.main.huntbotchannelid,
         config.main.gamblechannelid,
         config.main.autoquestchannelid,
         config.extra.commandschannelid,
+        config.extra.huntbotchannelid,
         config.extra.gamblechannelid,
         config.extra.autoquestchannelid,
     ];
@@ -456,4 +459,9 @@ exports.isPortInUse = (port, host) => {
 
         server.listen(port, host);
     });
+};
+
+exports.removeInvisibleChars = (str) => {
+    const invisibleRegex = /[\u0000-\u001F\u007F\u200B-\u200D\uFEFF]/g;
+    return str.replace(invisibleRegex, "");
 };

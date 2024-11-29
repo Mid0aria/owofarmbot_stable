@@ -1,6 +1,5 @@
 const os = require("os");
 const cp = require("child_process");
-const net = require("net");
 
 let config, DEVELOPER_MODE;
 
@@ -53,6 +52,7 @@ let owofarmbot_stable = {
     type: "Main",
     captchadetected: false,
     paused: true,
+    owosupportserver: false,
     use: false,
     inventory: false,
     checklist: false,
@@ -95,6 +95,7 @@ let coolVariableName = {
     type: "Extra",
     captchadetected: false,
     paused: true,
+    owosupportserver: false,
     use: false,
     inventory: false,
     checklist: false,
@@ -170,6 +171,7 @@ client.delay = delay;
 client.global = owofarmbot_stable;
 client.rpc = rpc;
 client.logger = require("./utils/logger.js")(client);
+client.globalutil = globalutil;
 
 if (config.extra.enable) {
     extrac.chalk = chalk;
@@ -182,6 +184,7 @@ if (config.extra.enable) {
     extrac.global = coolVariableName;
     extrac.rpc = rpc;
     extrac.logger = require("./utils/logger.js")(extrac);
+    extrac.globalutil = globalutil;
 }
 
 var krf = `
@@ -236,29 +239,6 @@ process.title = `Owo Farm Bot Stable v${packageJson.version}`;
         await extrac.login(config.extra.token);
     }
 
-    if (config.settings.huntbot) {
-        globalutil
-            .isPortInUse(config.socket.port, "localhost")
-            .then((inUse) => {
-                if (inUse) {
-                    client.logger.warn(
-                        "Bot",
-                        "Huntbot",
-                        "HuntBot captcha solver already started..."
-                    );
-                    return 0;
-                } else {
-                    client.logger.warn(
-                        "Bot",
-                        "Huntbot",
-                        "HuntBot captcha solver starting..."
-                    );
-                    cp.spawn("py", [
-                        "./utils/huntbot_captcha/huntbotcaptcha.py",
-                    ]);
-                }
-            });
-    }
     client.logger.warn(
         "Bot",
         "Help",

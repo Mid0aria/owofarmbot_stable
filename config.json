@@ -5,6 +5,7 @@
         "token": "",
         "userid": "",
         "commandschannelid": "",
+        "huntbotchannelid": "",
         "owodmchannelid": "",
         "gamblechannelid": "",
         "autoquestchannelid": "",
@@ -14,6 +15,11 @@
             "battle": true,
             "pray": false,
             "curse": true,
+            "huntbot": {
+                "enable": true,
+                "upgrade": false,
+                "maxtime": 10
+            },
             "gamble": {
                 "coinflip": true,
                 "slot": true
@@ -30,6 +36,7 @@
         "token": "",
         "userid": "",
         "commandschannelid": "",
+        "huntbotchannelid": "",
         "owodmchannelid": "",
         "gamblechannelid": "",
         "autoquestchannelid": "",
@@ -39,6 +46,11 @@
             "battle": true,
             "pray": false,
             "curse": true,
+            "huntbot": {
+                "enable": true,
+                "upgrade": false,
+                "maxtime": 10
+            },
             "tomain": true,
             "gamble": {
                 "coinflip": true,
@@ -57,11 +69,8 @@
         "chatfeedback": true,
         "autophrases": true,
         "autoresume": false,
-        "logging": {
-            "newlog": true,
-            "loglength": 20,
-            "showlogbeforeexit": false
-        },
+        "autojoingiveaways": false,
+
         "checklist": {
             "types": {
                 "daily": true,
@@ -69,20 +78,13 @@
                 "vote": false
             }
         },
+
         "inventory": {
             "use": {
                 "lootbox": true,
                 "fabledlootbox": false,
                 "crate": true,
                 "gems": true
-            }
-        },
-        "captcha": {
-            "alerttype": {
-                "notification": true,
-                "prompt": true,
-                "webhook": true,
-                "webhookurl": "xxx"
             }
         },
         "gamble": {
@@ -95,6 +97,21 @@
                 "default_amount": 1000,
                 "max_amount": 250000,
                 "multiplier": 1.0
+            }
+        },
+
+        "logging": {
+            "newlog": true,
+            "loglength": 20,
+            "showlogbeforeexit": false
+        },
+
+        "captcha": {
+            "alerttype": {
+                "notification": true,
+                "prompt": true,
+                "webhook": true,
+                "webhookurl": "xxx"
             }
         }
     },

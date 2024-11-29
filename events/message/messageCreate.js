@@ -1,5 +1,6 @@
 module.exports = async (client, message) => {
-    let msgcontent = message.content.toLowerCase();
+    let rawmsgcontent = message.content.toLowerCase();
+    let msgcontent = client.globalutil.removeInvisibleChars(rawmsgcontent); // I think it will fix these captcha detect problems
     if (
         message.author.id === "408785106942164992" &&
         (message.channel.id === client.basic.commandschannelid ||
@@ -7,6 +8,8 @@ module.exports = async (client, message) => {
             message.channel.id === client.basic.gamblechannelid ||
             message.channel.id === client.basic.autoquestchannelid)
     ) {
+        // console.log("RAW MSG :\n" + rawmsgcontent);
+        // console.log("Edited MSG :\n" + msgcontent);
         if (
             (msgcontent.includes("please complete your captcha") ||
                 msgcontent.includes("verify that you are human") ||
@@ -73,8 +76,7 @@ module.exports = async (client, message) => {
                     username: "OwO Farm Bot Stable",
                 });
             }
-            console.log(msgcontent);
-            console.log(msgcontent.includes("owobot.com/captcha"));
+
             if (msgcontent.includes("owobot.com/captcha")) {
                 switch (process.platform) {
                     case "android":
