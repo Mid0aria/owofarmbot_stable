@@ -18,13 +18,25 @@ if (DEVELOPER_MODE) {
 }
 
 // auto install dependencies
+const isTermux =
+    process.env.PREFIX && process.env.PREFIX.includes("com.termux");
 const packageJson = require("./package.json");
+
 for (let dep of Object.keys(packageJson.dependencies)) {
+    if (isTermux && dep === "puppeteer") {
+        console.log("Skipping Puppeteer");
+        continue;
+    }
+
     try {
         require.resolve(dep);
     } catch (err) {
         console.log(`Installing dependencies...`);
-        cp.execSync(`npm i`);
+        try {
+            cp.execSync(`npm install ${dep}`, { stdio: "inherit" });
+        } catch (installErr) {
+            console.error(`Failed to install ${dep}:`, installErr.message);
+        }
     }
 }
 
