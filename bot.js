@@ -1,5 +1,6 @@
 const os = require("os");
 const cp = require("child_process");
+const net = require("net");
 
 let config, DEVELOPER_MODE;
 
@@ -221,6 +222,30 @@ process.title = `Owo Farm Bot Stable v${packageJson.version}`;
         });
         extrac.logger.warn("Bot", "Startup", "Logging in...");
         await extrac.login(config.extra.token);
+    }
+
+    if (config.settings.huntbot) {
+        globalutil
+            .isPortInUse(config.socket.port, "localhost")
+            .then((inUse) => {
+                if (inUse) {
+                    client.logger.warn(
+                        "Bot",
+                        "Huntbot",
+                        "HuntBot captcha solver already started..."
+                    );
+                    return 0;
+                } else {
+                    client.logger.warn(
+                        "Bot",
+                        "Huntbot",
+                        "HuntBot captcha solver starting..."
+                    );
+                    cp.spawn("py", [
+                        "./utils/huntbot_captcha/huntbotcaptcha.py",
+                    ]);
+                }
+            });
     }
     client.logger.warn(
         "Bot",
