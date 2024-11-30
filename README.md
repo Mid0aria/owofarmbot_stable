@@ -408,10 +408,9 @@ In config.json, type [prefix]resume (example: e!resume) with the prefix you set 
 
 ```bash
 # Install:
+apt update -y && apt upgrade -y
+curl https://raw.githubusercontent.com/mid0aria/owofarmbot_stable/main/termux-setup.sh | bash
 
-apt update -y && apt upgrade -y && pkg install wget
-wget https://raw.githubusercontent.com/mid0aria/owofarmbot_stable/main/termux-setup.sh
-sh termux-setup.sh
 
 # Configure the bot:
 

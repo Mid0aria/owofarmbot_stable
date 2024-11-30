@@ -1,3 +1,6 @@
+#!/usr/bin/env bash
+# shellcheck disable=SC2059
+
 RESTORE='\033[0m'
 
 RED='\033[00;31m'
@@ -30,7 +33,7 @@ apt update -y && apt upgrade -y
 echo "${GREEN} [+] ${BLUE} Successfully updated termux ${RESTORE}"
 echo "${GREEN} [+] ${BLUE} Installing necessary packages ${RESTORE}"
 sleep 3
-pkg install git python nodejs 
+pkg install wget git python nodejs python-pillow python-numpy -y
 sleep 1
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 # sleep 1
