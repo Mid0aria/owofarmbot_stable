@@ -32,7 +32,7 @@
     },
     "dependencies": {
         "adm-zip": "^0.5.16",
-        "axios": "^1.7.7",
+        "axios": "^1.7.8",
         "chalk": "^4.1.2",
         "discord.js-selfbot-v13": "^3.4.2",
         "fs-extra": "^11.2.0",
