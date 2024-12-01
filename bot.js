@@ -1,7 +1,8 @@
 const os = require("os");
 const cp = require("child_process");
 
-let config, DEVELOPER_MODE;
+let config,
+    DEVELOPER_MODE = false;
 
 if (
     os.userInfo().username === "Mido" ||
@@ -11,7 +12,7 @@ if (
 }
 
 if (DEVELOPER_MODE) {
-    config = require("./config-developer.json");
+    config = require("./developer/config.json");
 } else {
     config = require("./config.json");
 }
@@ -50,6 +51,7 @@ const extrac = new Client();
 let owofarmbot_stable = {
     name: "owofarmbot_stable",
     type: "Main",
+    devmod: DEVELOPER_MODE,
     captchadetected: false,
     paused: true,
     owosupportserver: false,
@@ -95,6 +97,7 @@ let owofarmbot_stable = {
 let coolVariableName = {
     name: "owofarmbot_stable_extra",
     type: "Extra",
+    devmod: DEVELOPER_MODE,
     captchadetected: false,
     paused: true,
     owosupportserver: false,

@@ -9,7 +9,7 @@ module.exports = async (client, message) => {
             message.channel.id === client.basic.autoquestchannelid)
     ) {
         // console.log("RAW MSG :\n" + rawmsgcontent);
-        console.log("Edited MSG :\n" + msgcontent);
+        // console.log("Edited MSG :\n" + msgcontent);
         if (
             (msgcontent.includes("please complete your captcha") ||
                 msgcontent.includes("verify that you are human") ||
