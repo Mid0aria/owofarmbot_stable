@@ -94,7 +94,7 @@ let owofarmbot_stable = {
     },
 };
 
-let coolVariableName = {
+let owofarmbot_stable_extra = {
     name: "owofarmbot_stable_extra",
     type: "Extra",
     devmod: DEVELOPER_MODE,
@@ -188,7 +188,7 @@ if (config.extra.enable) {
     extrac.config = config;
     extrac.basic = config.extra;
     extrac.delay = delay;
-    extrac.global = coolVariableName;
+    extrac.global = owofarmbot_stable_extra;
     extrac.rpc = rpc;
     extrac.logger = require("./utils/logger.js")(extrac);
     extrac.globalutil = globalutil;

@@ -5,7 +5,7 @@ module.exports = async (client) => {
         __dirname,
         "../../data/enteredGiveaways.json"
     );
-    if (client.devmod) {
+    if (client.global.devmod) {
         ENTERED_GIVEAWAYS_FILE = path.join(
             __dirname,
             "../../developer/enteredGiveaways.json"
