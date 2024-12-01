@@ -191,10 +191,10 @@ exports.verifyconfig = async (client, extrac, config) => {
             if (vars[i] == vars[j] && vars[i].length > 0) {
                 showerrcoziamlazy(`There are some duplicate channel id!`);
                 console.log(
-                    "Please use three different channel for one tokentype for best efficiency!"
+                    "Please use four different channel for one tokentype for best efficiency!"
                 );
                 console.log(
-                    "That mean if you use both main and extra, and farm, quest and gamble, you need six channel!"
+                    "That mean if you use both main and extra, and farm, huntbot, quest and gamble, you need eight channel!"
                 );
                 break;
             }
