@@ -61,7 +61,10 @@ exports.checkUpdate = async (client, cp, packageJson) => {
         const version = packageJson.version;
         if (ghVersion > version) {
             client.logger.warn("Bot", "Updater", "A new update is available.");
-
+            client.logger.info(
+                "Bot",
+                "Updater"`New Version Notes: ${response.data.version_note}`
+            );
             const userResponse = await askUser(
                 "Would you like to update now? (yes/no): "
             );
