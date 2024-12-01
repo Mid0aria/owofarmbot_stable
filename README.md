@@ -63,7 +63,6 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 ## ❗・Important (Anyone using the bot is deemed to have read and accepted these)
 
 -   Use of this farm bot may lead to actions being taken against your OwO profile and/or your Discord account. We are not responsible for them.
--   Discord may restart as a result of discord RPC overload.
 -   FARM, QUEST AND GAMBLE NEED TO PLACE IN DIFFERENT CHANNEL. That mean if you use all of them, you need three different channel. And if you use extra token, that will be six.
 
 ## 👑・Features
