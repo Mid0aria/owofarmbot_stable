@@ -9,6 +9,7 @@ const admZip = require("adm-zip");
 const os = require("os");
 const fse = require("fs-extra");
 const net = require("net");
+const readline = require("readline");
 
 /**
  *
@@ -33,6 +34,19 @@ const net = require("net");
  */
 
 exports.checkUpdate = async (client, cp, packageJson) => {
+    const askUser = (question) => {
+        const rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout,
+        });
+
+        return new Promise((resolve) => {
+            rl.question(question, (answer) => {
+                rl.close();
+                resolve(answer.trim().toLowerCase());
+            });
+        });
+    };
     client.logger.info("Bot", "Updater", `Checking Update`);
     try {
         const headers = {
@@ -41,37 +55,45 @@ exports.checkUpdate = async (client, cp, packageJson) => {
         };
         const response = await axios.get(
             `https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/package.json`,
-            {
-                headers,
-            }
+            { headers }
         );
         const ghVersion = response.data.version;
         const version = packageJson.version;
         if (ghVersion > version) {
-            client.logger.warn(
-                "Bot",
-                "Updater",
-                "Please wait while the farm bot is updating..."
+            client.logger.warn("Bot", "Updater", "A new update is available.");
+
+            const userResponse = await askUser(
+                "Would you like to update now? (yes/no): "
             );
-            if (fse.existsSync(".git")) {
-                try {
-                    cp.execSync("git --version");
-                    client.logger.warn(
-                        "Bot",
-                        "Updater",
-                        `Updating with Git...`
-                    );
-                    gitUpdate(client, cp);
-                } catch (error) {
-                    client.logger.alert(
-                        "Bot",
-                        "Updater",
-                        "Git is not installed on this device. Files will be updated with cache system"
-                    );
+
+            if (userResponse === "yes" || userResponse === "y") {
+                client.logger.warn(
+                    "Bot",
+                    "Updater",
+                    "Please wait while the farm bot is updating..."
+                );
+                if (fse.existsSync(".git")) {
+                    try {
+                        cp.execSync("git --version");
+                        client.logger.warn(
+                            "Bot",
+                            "Updater",
+                            `Updating with Git...`
+                        );
+                        gitUpdate(client, cp);
+                    } catch (error) {
+                        client.logger.alert(
+                            "Bot",
+                            "Updater",
+                            "Git is not installed on this device. Files will be updated with cache system"
+                        );
+                        await manualUpdate(client);
+                    }
+                } else {
                     await manualUpdate(client);
                 }
             } else {
-                await manualUpdate(client);
+                client.logger.info("Bot", "Updater", "Update skipped by user.");
             }
         } else {
             client.logger.info("Bot", "Updater", "No Update Found");
