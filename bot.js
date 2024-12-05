@@ -1,19 +1,23 @@
-const os = require("os");
 const cp = require("child_process");
 
 let config,
     DEVELOPER_MODE = false;
+try {
+    const os = require("os");
+    if (
+        os.userInfo().username === "Mido" ||
+        os.userInfo().username === "enter ur pc username here"
+    ) {
+        DEVELOPER_MODE = true;
+    }
 
-if (
-    os.userInfo().username === "Mido" ||
-    os.userInfo().username === "enter ur pc username here"
-) {
-    DEVELOPER_MODE = true;
-}
-
-if (DEVELOPER_MODE) {
-    config = require("./developer/config.json");
-} else {
+    if (DEVELOPER_MODE) {
+        config = require("./developer/config.json");
+    } else {
+        config = require("./config.json");
+    }
+} catch (error) {
+    console.log("ur bot hosting is gay");
     config = require("./config.json");
 }
 
