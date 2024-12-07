@@ -6,7 +6,7 @@ module.exports = async (client, message) => {
     if (client.config.settings.owoprefix.length <= 0) {
         client.config.settings.owoprefix = "owo";
     }
-    
+
     if (client.basic.commands.hunt) {
         hunt(client, channel);
     }
@@ -16,7 +16,7 @@ module.exports = async (client, message) => {
             battle(client, channel);
         }
     }
-}
+};
 
 async function hunt(client, channel) {
     while (
@@ -34,7 +34,8 @@ async function hunt(client, channel) {
     client.global.hunt = true;
     let interval = getrand(
         client.config.interval.hunt.min,
-        client.config.interval.hunt.max);
+        client.config.interval.hunt.max
+    );
     let id;
     await channel
         .send({
@@ -56,11 +57,12 @@ async function hunt(client, channel) {
                 async function getMessage() {
                     return new Promise((resolve) => {
                         const filter = (msg) =>
-                            (msg.content.includes("and caught a") || msg.content.includes("You found:")) &&
+                            (msg.content.includes("and caught a") ||
+                                msg.content.includes("You found:")) &&
                             msg.author.id === "408785106942164992" &&
                             msg.channel.id === channel.id &&
                             msg.id.localeCompare(id) > 0;
-                            
+
                         const listener = (msg) => {
                             if (filter(msg)) {
                                 clearTimeout(timer);
@@ -68,10 +70,13 @@ async function hunt(client, channel) {
                                 resolve(msg);
                             }
                         };
-                        
+
                         const timer = setTimeout(() => {
                             client.off("messageCreate", listener);
-                            const collector = channel.createMessageCollector({ filter, time: 6100});
+                            const collector = channel.createMessageCollector({
+                                filter,
+                                time: 6100,
+                            });
                             collector.on("collect", (msg) => {
                                 if (filter(msg)) {
                                     collector.stop();
@@ -84,19 +89,20 @@ async function hunt(client, channel) {
                         client.on("messageCreate", listener);
                     });
                 }
-                
+
                 if (message == null) {
                     client.global.hunt = false;
                     client.logger.alert(
                         "Farm",
                         "Hunt",
-                        "Cannot found hunt result!");
+                        "Cannot found hunt result!"
+                    );
                     setTimeout(() => {
                         hunt(client, channel);
                     }, interval);
                     return;
                 }
-                
+
                 let huntmsgcontent = message.content;
                 client.global.gems.need = [];
                 client.global.gems.use = "";
@@ -107,7 +113,7 @@ async function hunt(client, channel) {
                             client.global.gems.need.push(gem);
                         }
                     });
-                    
+
                     if (client.global.gems.isevent) {
                         if (!huntmsgcontent.includes("star")) {
                             if (!client.global.temp.usedevent) {
@@ -115,18 +121,22 @@ async function hunt(client, channel) {
                                 client.global.temp.usedevent = true;
                             } else {
                                 client.global.gems.isevent = false;
-                                client.logger.info("Farm", "Hunt", "Event not found");
+                                client.logger.info(
+                                    "Farm",
+                                    "Hunt",
+                                    "Event not found"
+                                );
                             }
                         } else client.global.temp.usedevent = false;
                     }
-                    
+
                     if (client.global.gems.need.length > 0) {
                         client.logger.warn(
                             "Farm",
                             "Hunt",
                             `Missing gems: ${client.global.gems.need}`
                         );
-                        
+
                         if (client.basic.commands.inventory) {
                             setTimeout(() => {
                                 require("./inventory.js")(client, message);
@@ -137,15 +147,13 @@ async function hunt(client, channel) {
             }
             await client.delay(1000);
             client.global.hunt = false;
-            
+
             setTimeout(() => {
                 hunt(client, channel);
             }, interval);
         });
     if (client.config.settings.autophrases) {
-        setTimeout(() => {
-            elaina2(client, channel);
-        }, 4000);
+        await elaina2(client, channel);
     }
 }
 
@@ -166,7 +174,8 @@ async function battle(client, channel) {
     client.global.battle = true;
     let interval = getrand(
         client.config.interval.battle.min,
-        client.config.interval.battle.max);
+        client.config.interval.battle.max
+    );
     await channel
         .send({
             content: `${commandrandomizer([
@@ -183,7 +192,7 @@ async function battle(client, channel) {
             );
             client.global.battle = false;
         });
-    
+
     setTimeout(() => {
         battle(client, channel);
     }, interval);
@@ -207,6 +216,57 @@ async function elaina2(client, channel) {
 
         channel.sendTyping();
         await channel.send({ content: ilu });
-        client.logger.info("Farm", "Phrases", `Successfuly Sended`);
+        client.logger.info("Farm", "Phrases", "Successfuly Sended");
     });
 }
+
+/*
+async function elaina2(client, channel) {
+    if (client.global.captchadetected || client.global.paused) return;
+
+    client.fs.readFile("./phrases/phrases.json", "utf8", async (err, data) => {
+        if (err) {
+            client.logger.error(
+                "Farm",
+                "Phrases",
+                "Error reading phrases file."
+            );
+            return;
+        }
+
+        const phrasesObject = JSON.parse(data);
+        const phrases = phrasesObject.phrases;
+
+        if (!phrases || !phrases.length) {
+            return client.logger.alert(
+                "Farm",
+                "Phrases",
+                "Phrases array is undefined or empty."
+            );
+        }
+
+        let randomCount = Math.floor(Math.random() * 5) + 1;
+
+        for (let i = 0; i < randomCount; i++) {
+            let result = Math.floor(Math.random() * phrases.length);
+            let ilu = phrases[result];
+            channel.sendTyping();
+            await channel.send({ content: ilu });
+            client.logger.info(
+                "Farm",
+                "Phrases",
+                `Gönderilen Phrases: (${i + 1} / ${randomCount})`
+            );
+            let randomDelayTime = Math.floor(Math.random() * 4000) + 1000;
+
+            await client.delay(randomDelayTime);
+        }
+
+        client.logger.info(
+            "Farm",
+            "Phrases",
+            "Successfully sent phrases with random delays."
+        );
+    });
+}
+*/
