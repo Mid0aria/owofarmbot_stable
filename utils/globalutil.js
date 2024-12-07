@@ -47,7 +47,8 @@ exports.checkUpdate = async (client, cp, packageJson) => {
             });
         });
     };
-    client.logger.info("Bot", "Updater", `Checking Update`);
+
+    client.logger.info("Bot", "Updater", `Checking for updates...`);
     try {
         const headers = {
             "User-Agent":
@@ -59,6 +60,7 @@ exports.checkUpdate = async (client, cp, packageJson) => {
         );
         const ghVersion = response.data.version;
         const version = packageJson.version;
+
         if (ghVersion > version) {
             client.logger.warn("Bot", "Updater", "A new update is available.");
             client.logger.info(
@@ -74,39 +76,122 @@ exports.checkUpdate = async (client, cp, packageJson) => {
                 client.logger.warn(
                     "Bot",
                     "Updater",
-                    "Please wait while the farm bot is updating..."
+                    "Updating bot. Please wait..."
                 );
+
+                const configPath = path.resolve(__dirname, "../config.json");
+                const backupPath = await backupConfig(client, configPath);
+
                 if (fse.existsSync(".git")) {
                     try {
                         cp.execSync("git --version");
                         client.logger.warn(
                             "Bot",
                             "Updater",
-                            `Updating with Git...`
+                            "Updating with Git..."
                         );
                         gitUpdate(client, cp);
                     } catch (error) {
                         client.logger.alert(
                             "Bot",
                             "Updater",
-                            "Git is not installed on this device. Files will be updated with cache system"
+                            "Git is not installed. Falling back to manual update."
                         );
                         await manualUpdate(client);
                     }
                 } else {
                     await manualUpdate(client);
                 }
+
+                updateConfigFile(client, configPath, backupPath);
+
+                client.logger.warn("Bot", "Updater", "Please restart bot...");
             } else {
                 client.logger.info("Bot", "Updater", "Update skipped by user.");
             }
         } else {
-            client.logger.info("Bot", "Updater", "No Update Found");
+            client.logger.info("Bot", "Updater", "No updates available.");
         }
     } catch (error) {
         client.logger.alert(
             "Bot",
             "Updater",
-            `Failed To Check For Update: ${error}`
+            `Failed to check for updates: ${error.message}`
+        );
+    }
+};
+
+const backupConfig = async (client, configPath) => {
+    try {
+        const tempDir = os.tmpdir();
+        const backupPath = path.join(tempDir, "config.backup.json");
+
+        if (!fse.existsSync(tempDir)) {
+            client.logger.alert(
+                "Updater",
+                "Config",
+                `Temp directory does not exist: ${tempDir}`
+            );
+            throw new Error("Temp directory does not exist.");
+        }
+
+        if (!fse.existsSync(configPath)) {
+            client.logger.alert(
+                "Updater",
+                "Config",
+                `Config file does not exist: ${configPath}`
+            );
+            throw new Error("Config file does not exist.");
+        }
+
+        fse.copySync(configPath, backupPath);
+        client.logger.info(
+            "Updater",
+            "Config",
+            `Config backed up successfully to ${backupPath}.`
+        );
+
+        return backupPath;
+    } catch (error) {
+        client.logger.alert(
+            "Updater",
+            "Config",
+            `Failed to back up config: ${error.message}`
+        );
+        throw error;
+    }
+};
+
+const updateConfigFile = (client, configPath, backupPath) => {
+    try {
+        if (!fse.existsSync(backupPath)) {
+            client.logger.alert(
+                "Updater",
+                "Config",
+                "Backup file not found in temp directory. Skipping config update."
+            );
+            return;
+        }
+
+        const backupConfig = fse.readJsonSync(backupPath);
+        const updatedConfig = fse.readJsonSync(configPath);
+
+        const mergedConfig = { ...updatedConfig, ...backupConfig };
+
+        for (const key in backupConfig) {
+            if (updatedConfig.hasOwnProperty(key)) {
+                mergedConfig[key] = backupConfig[key];
+            }
+        }
+
+        fse.writeJsonSync(configPath, mergedConfig, { spaces: 2 });
+        client.logger.info("Updater", "Config", "Config updated successfully.");
+        fse.unlinkSync(backupPath);
+    } catch (error) {
+        client.logger.alert(
+            "Updater",
+            "Config",
+            `Failed to update config: ${error.message}`
         );
     }
 };
@@ -116,13 +201,12 @@ const gitUpdate = (client, cp) => {
         cp.execSync("git stash");
         cp.execSync("git pull --force");
         client.logger.info("Updater", "Git", "Git pull successful!");
-        client.logger.info("Updater", "Git", "Resetting local changes...");
         cp.execSync("git reset --hard");
     } catch (error) {
         client.logger.alert(
             "Updater",
             "Git",
-            `Error updating project from Git: ${error}`
+            `Error updating project from Git: ${error.message}`
         );
     }
 };
@@ -145,28 +229,15 @@ const manualUpdate = async (client) => {
         fse.writeFileSync(updatePath, res.data);
 
         const zip = new admZip(updatePath);
-        const zipEntries = zip.getEntries();
-        zip.extractAllTo(os.tmpdir(), true);
-
-        const updateFolder = path.join(os.tmpdir(), zipEntries[0].entryName);
-        if (!fse.existsSync(updateFolder)) {
-            client.logger.alert(
-                "Updater",
-                "Zip",
-                "Failed To Extract Files! Please update on https://github.com/Mid0aria/owofarmbot_stable/"
-            );
-        }
-
-        fse.copySync(updateFolder, process.cwd(), { overwrite: true });
-        client.logger.info("Updater", "Zip", "Project updated successfully.");
+        zip.extractAllTo(path.resolve(__dirname), true);
 
         fse.unlinkSync(updatePath);
-        client.logger, info("Updater", "Zip", "Temporary zip file deleted.");
+        client.logger.info("Updater", "Zip", "Temporary zip file deleted.");
     } catch (error) {
         client.logger.alert(
             "Updater",
             "Zip",
-            `Error updating project from GitHub Repo: ${error}`
+            `Error updating project from GitHub Repo: ${error.message}`
         );
     }
 };

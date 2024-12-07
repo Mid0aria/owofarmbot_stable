@@ -10,5 +10,4 @@ module.exports = async (client) => {
                 client.aliases.set(a, pull.config.name)
             );
     }
-    client.logger.info("Bot", "Commands", "Succesfully loaded");
 };

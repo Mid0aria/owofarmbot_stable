@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.4.4",
-    "version_note": "gamble quest fixed & update system changed",
+    "version": "0.0.4.5",
+    "version_note": "NEW UPDATE SYSTEM. The contents of your config file will no longer be reset on updates",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "bot.js",
     "repository": {
