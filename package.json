@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.4.5",
-    "version_note": "NEW UPDATE SYSTEM. The contents of your config file will no longer be reset on updates",
+    "version": "0.0.4.6",
+    "version_note": "Captcha detection fixed (I think)",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "bot.js",
     "repository": {

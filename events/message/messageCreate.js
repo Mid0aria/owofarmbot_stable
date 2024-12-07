@@ -1,6 +1,4 @@
 module.exports = async (client, message) => {
-    let rawmsgcontent = message.content.toLowerCase();
-    let msgcontent = client.globalutil.removeInvisibleChars(rawmsgcontent); // I think it will fix these captcha detect problems
     if (
         message.author.id === "408785106942164992" &&
         (message.channel.id === client.basic.commandschannelid ||
@@ -8,6 +6,10 @@ module.exports = async (client, message) => {
             message.channel.id === client.basic.gamblechannelid ||
             message.channel.id === client.basic.autoquestchannelid)
     ) {
+        let rawmsgcontent = message.content.toLowerCase();
+        let msgcontent = client.globalutil.removeInvisibleChars(rawmsgcontent); // I think it will fix these captcha detect problems
+        let helloChristopher = false;
+
         if (
             (msgcontent.includes("please complete your captcha") ||
                 msgcontent.includes("verify that you are human") ||
@@ -32,6 +34,13 @@ module.exports = async (client, message) => {
                 "Captcha",
                 `Bot Paused: ${client.global.paused}`
             );
+
+            if (message.components[0]) {
+                helloChristopher = message.components[0].components.find(
+                    (button) => button.url.toLowerCase() === "owobot.com"
+                );
+            }
+
             if (client.config.settings.captcha.alerttype.notification) {
                 client.notifier.notify({
                     title: "Captcha Detected!",
@@ -76,9 +85,11 @@ module.exports = async (client, message) => {
             }
 
             if (
-                msgcontent.includes(".com") &&
-                (msgcontent.includes("are you a real human") ||
-                    msgcontent.includes("please complete your captcha"))
+                (msgcontent.includes(".com") &&
+                    (msgcontent.includes("are you a real human") ||
+                        msgcontent.includes("please complete your captcha"))) ||
+                msgcontent.includes("plea​se u​se th​e lin​k") ||
+                helloChristopher
             ) {
                 switch (process.platform) {
                     case "android":
