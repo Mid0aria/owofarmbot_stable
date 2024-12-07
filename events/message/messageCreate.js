@@ -35,7 +35,11 @@ module.exports = async (client, message) => {
                 `Bot Paused: ${client.global.paused}`
             );
 
-            if (message.components[0]) {
+            if (
+                message.components.length > 0 &&
+                message.components[0].components[0]
+            ) {
+                // some homo's saying "C a" XD
                 helloChristopher = message.components[0].components.find(
                     (button) => button.url.toLowerCase() === "owobot.com"
                 );
