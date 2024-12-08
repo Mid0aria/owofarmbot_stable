@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.4.9",
-    "version_note": "Captcha link detection fixed",
+    "version": "0.0.4.10",
+    "version_note": "Fix a copy + paste bug",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "bot.js",
     "repository": {
