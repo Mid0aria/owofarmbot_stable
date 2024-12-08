@@ -1,3 +1,13 @@
+function isWebCaptchaMessage(msgcontent, helloChristopher, canulickmymonster) {
+    const suspiciousPhrases = [".com", "plea​se u​se th​e lin​k"];
+
+    const hasSuspiciousContent = suspiciousPhrases.some((phrase) =>
+        msgcontent.includes(phrase)
+    );
+
+    return hasSuspiciousContent || helloChristopher || canulickmymonster;
+}
+
 module.exports = async (client, message) => {
     if (
         message.author.id === "408785106942164992" &&
@@ -7,8 +17,8 @@ module.exports = async (client, message) => {
             message.channel.id === client.basic.autoquestchannelid)
     ) {
         let rawmsgcontent = message.content.toLowerCase();
-        let msgcontent = client.globalutil.removeInvisibleChars(rawmsgcontent); // I think it will fix these captcha detect problems
-        let helloChristopher = false;
+        let msgcontent = client.globalutil.removeInvisibleChars(rawmsgcontent);
+        let helloChristopher, canulickmymonster;
 
         if (
             (msgcontent.includes("please complete your captcha") ||
@@ -43,6 +53,9 @@ module.exports = async (client, message) => {
                 helloChristopher = message.components[0].components.find(
                     (button) => button.url.toLowerCase() === "owobot.com"
                 );
+                canulickmymonster = message.components[0].components[0].url
+                    .toLowerCase()
+                    .includes("owobot.com");
             }
 
             if (client.config.settings.captcha.alerttype.notification) {
@@ -89,11 +102,11 @@ module.exports = async (client, message) => {
             }
 
             if (
-                (msgcontent.includes(".com") &&
-                    (msgcontent.includes("are you a real human") ||
-                        msgcontent.includes("please complete your captcha"))) ||
-                msgcontent.includes("plea​se u​se th​e lin​k") ||
-                helloChristopher
+                isWebCaptchaMessage(
+                    msgcontent,
+                    helloChristopher,
+                    canulickmymonster
+                )
             ) {
                 switch (process.platform) {
                     case "android":
