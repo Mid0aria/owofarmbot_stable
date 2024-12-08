@@ -41,7 +41,7 @@ module.exports = async (client, message) => {
     }
 
     // await client.delay(16000);
-    if (client.basic.commands.animals) {
+    if (client.basic.commands.animals)
         sell(
             client,
             channel,
@@ -49,9 +49,9 @@ module.exports = async (client, message) => {
             client.global.temp.animaltype
         );
 
-        await client.delay(32000);
-        require("./function/luck.js")(client, message);
-    }
+    await client.delay(32000);
+    require("./function/luck.js")(client, message);
+
     if (client.basic.commands.huntbot.enable) {
         let huntbotcaptchaprocess;
 
