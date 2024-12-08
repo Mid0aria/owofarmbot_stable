@@ -343,7 +343,7 @@ exports.verifyconfig = async (client, extrac, config) => {
                 default:
                     normal = false;
                     client.logger.warn(
-                        "Bot" + chalk.white(" >> ") + client.global.type,
+                        "Bot" + client.chalk.white(" >> ") + client.global.type,
                         "Config",
                         "Gem rarity: Invalid value. Valid value is: \n\tfabled, legendary, mythical, epic, rare, uncommon, common"
                     ); //not a critical error, no halting
@@ -408,7 +408,7 @@ exports.verifyconfig = async (client, extrac, config) => {
             if (client.global.temp.animaltype.length < 1) {
                 normal = false;
                 client.logger.warn(
-                    "Bot" + chalk.white(" >> ") + client.global.type,
+                    "Bot" + client.chalk.white(" >> ") + client.global.type,
                     "Config",
                     "Animals: no active animaltype found!?"
                 );
