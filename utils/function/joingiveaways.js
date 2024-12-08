@@ -1,5 +1,12 @@
 const fs = require("fs");
 const path = require("path");
+const CHANNEL_IDS = [
+    "1099453684691243098",
+    "1168797748343099444",
+    "1168797827464429618",
+];
+const OWO_ID = "408785106942164992";
+
 module.exports = async (client) => {
     let ENTERED_GIVEAWAYS_FILE = path.join(
         __dirname,
@@ -21,13 +28,6 @@ module.exports = async (client) => {
 
     async function joingiveaways(client) {
         const mylovetiffani = client.guilds.cache.get("420104212895105044");
-
-        const CHANNEL_IDS = [
-            "1099453684691243098",
-            "1168797748343099444",
-            "1168797827464429618",
-        ];
-        const OWO_ID = "408785106942164992";
 
         for (const channelId of CHANNEL_IDS) {
             const channel = mylovetiffani.channels.cache.get(channelId);
@@ -92,7 +92,7 @@ module.exports = async (client) => {
                         client.logger.warn(
                             "Farm",
                             "Auto Join Giveaways",
-                            "YEEEYYY you joined in all the giveaways"
+                            `YEEEYYY you joined in all the giveaways on channel ${channel.name}`
                         );
                     }
                 } else {
@@ -161,4 +161,38 @@ module.exports = async (client) => {
             JSON.stringify(enteredGiveaways, null, 2)
         );
     }
+
+    client.on("messageCreate", async (message) => {
+        if (
+            CHANNEL_IDS.includes(message.channel.id) &&
+            message.author.id === OWO_ID &&
+            message.embeds.length > 0
+        ) {
+            const buttonQueue = [];
+
+            message.components.forEach((row) => {
+                row.components.forEach((component) => {
+                    if (
+                        component.type === "BUTTON" &&
+                        !component.disabled &&
+                        !hasUserEntered(message.id, client.user.id)
+                    ) {
+                        buttonQueue.push({
+                            customId: component.customId,
+                            message: message,
+                        });
+                    }
+                });
+            });
+
+            if (buttonQueue.length > 0) {
+                client.logger.info(
+                    "Farm",
+                    "Auto Join Giveaways",
+                    `New giveaway detected in ${message.channel.name}, joining...`
+                );
+                await pressButtonsSequentially(client, buttonQueue);
+            }
+        }
+    });
 };

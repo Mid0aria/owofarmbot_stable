@@ -41,14 +41,14 @@ module.exports = async (client, message) => {
     }
 
     // await client.delay(16000);
-    if (client.basic.commands.animals)
+    if (client.basic.commands.animals) {
         sell(
             client,
             channel,
             client.config.animals.type.sell ? "sell" : "sacrifice",
             client.global.temp.animaltype
         );
-
+    }
     await client.delay(32000);
     require("./function/luck.js")(client, message);
 
