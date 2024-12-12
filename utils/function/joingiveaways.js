@@ -36,14 +36,14 @@ module.exports = async (client) => {
                 client.logger.alert(
                     "Farm",
                     "Auto Join Giveaways",
-                    `Channel (${channelId}) not found or not a text channel.`
+                    `Channel (${channelId}) not found or is not a text channel.`
                 );
                 continue;
             }
             client.logger.info(
                 "Farm",
                 "Auto Join Giveaways",
-                `Searching for messages on channel ${channel.name}`
+                `Searching for messages in channel ${channel.name}...`
             );
 
             try {
@@ -92,21 +92,21 @@ module.exports = async (client) => {
                         client.logger.warn(
                             "Farm",
                             "Auto Join Giveaways",
-                            `YEEEYYY you joined in all the giveaways on channel ${channel.name}`
+                            `You have joined all the giveaways in the channel ${channel.name}`
                         );
                     }
                 } else {
                     client.logger.warn(
                         "Farm",
                         "Auto Join Giveaways",
-                        "No giveaways found :("
+                        "No giveaways found."
                     );
                 }
             } catch (error) {
                 client.logger.alert(
                     "Farm",
                     "Auto Join Giveaways",
-                    `Error receiving giveaway messages from ${channel.name}: ${error}`
+                    `Error retrieving giveaway messages from ${channel.name}: ${error}`
                 );
             }
         }
@@ -119,13 +119,13 @@ module.exports = async (client) => {
                 client.logger.info(
                     "Farm",
                     "Auto Join Giveaways",
-                    "Joining in the giveaway..."
+                    "Joining the giveaway..."
                 );
                 await message.clickButton(customId);
                 client.logger.info(
                     "Farm",
                     "Auto Join Giveaways",
-                    "Successfully joined the giveaway ^^"
+                    "Successfully joined the giveaway."
                 );
                 addUserEntry(message.id, client.user.id);
                 await client.delay(15000);
@@ -133,7 +133,7 @@ module.exports = async (client) => {
                 client.logger.alert(
                     "Farm",
                     "Auto Join Giveaways",
-                    `Error joining the giveaway: ${error}`
+                    `Error joining giveaway: ${error}`
                 );
             }
         }

@@ -62,7 +62,7 @@ module.exports = async (client, message) => {
                     client.logger.warn(
                         "Bot",
                         "Huntbot",
-                        "HuntBot captcha solver already started..."
+                        "HuntBot captcha solver already started."
                     );
                     require("./function/huntbot.js")(client);
                     return 0;
@@ -119,7 +119,7 @@ async function checklist(client, channel) {
             client.logger.info(
                 "Farm",
                 "Checklist",
-                `Paused: ${client.global.checklist}! Reading Checklist`
+                `Paused: ${client.global.checklist}! Reading checklist`
             );
             let message = await getMessage();
             async function getMessage() {
@@ -169,7 +169,7 @@ async function checklist(client, channel) {
                 client.logger.alert(
                     "Farm",
                     "Checklist",
-                    "Cannot get checklist"
+                    "Cannot retrieve checklist."
                 );
                 require("./function/farm.js")(client, message);
                 return;
@@ -179,7 +179,7 @@ async function checklist(client, channel) {
             if (client.global.captchadetected || client.global.paused) return;
             let checklistmsg = message.embeds[0].description.toLowerCase();
             if (checklistmsg.includes("☑️ 🎉")) {
-                client.logger.info("Farm", "Checklist", "Checklist Completed");
+                client.logger.info("Farm", "Checklist", "Checklist completed.");
             } else {
                 const checklistlines = checklistmsg.trim().split("\n");
                 checklistlines.forEach(async (line) => {
@@ -243,7 +243,7 @@ async function checklist(client, channel) {
                                 client.logger.info(
                                     "Farm",
                                     "Checklist - Vote",
-                                    "Opening Browser."
+                                    "Opening browser..."
                                 );
                                 executeCommand(
                                     `${votebrowserexecute} https://top.gg/bot/408785106942164992/vote`
@@ -266,7 +266,7 @@ async function checklist(client, channel) {
                                     client.logger.info(
                                         "Farm",
                                         "Checklist - Cookie",
-                                        `Cookie Sended`
+                                        `Cookie sent`
                                     );
                                 });
                             await client.delay(3000);
@@ -280,7 +280,7 @@ async function checklist(client, channel) {
                             client.logger.info(
                                 "Farm",
                                 "Checklist",
-                                "Completed daily lootbox"
+                                "Daily lootbox completed"
                             );
                             break;
 
@@ -288,7 +288,7 @@ async function checklist(client, channel) {
                             client.logger.info(
                                 "Farm",
                                 "Checklist",
-                                "Completed daily crate"
+                                "Daily crate completed"
                             );
                             break;
                     }
