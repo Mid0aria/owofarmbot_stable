@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.4.9.1",
-    "version_note": "Fix a copy + paste bug",
+    "version": "0.0.4.9.2",
+    "version_note": "Fixing vote page opening for linux and darwin & adding canujoinmyserver (if u dont want it, set false a variable in bot.js)",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "bot.js",
     "repository": {
