@@ -1,5 +1,5 @@
 function isWebCaptchaMessage(msgcontent, helloChristopher, canulickmymonster) {
-    const suspiciousPhrases = [".com", "plea​se u​se th​e lin​k"];
+    const suspiciousPhrases = [".com", "please use the link"];
 
     const hasSuspiciousContent = suspiciousPhrases.some((phrase) =>
         msgcontent.includes(phrase)
