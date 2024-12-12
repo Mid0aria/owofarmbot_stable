@@ -225,11 +225,11 @@ const manualUpdate = async (client) => {
             }
         );
 
-        const updatePath = path.resolve(__dirname, "updateCache.zip");
+        const updatePath = path.resolve(__dirname, "../../updateCache.zip");
         fse.writeFileSync(updatePath, res.data);
 
         const zip = new admZip(updatePath);
-        zip.extractAllTo(path.resolve(__dirname), true);
+        zip.extractAllTo(path.resolve(__dirname, "../../"), true); // is it correct ?
 
         fse.unlinkSync(updatePath);
         client.logger.info("Updater", "Zip", "Temporary zip file deleted.");
