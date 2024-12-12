@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.4.10",
-    "version_note": "Fix a copy + paste bug",
+    "version": "0.0.4.9.3",
+    "version_note": "autoopencaptchapage setting added to config.json",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "bot.js",
     "repository": {
@@ -33,15 +33,14 @@
     },
     "dependencies": {
         "adm-zip": "^0.5.16",
-        "axios": "^1.7.8",
+        "axios": "^1.7.9",
         "chalk": "^4.1.2",
         "dialog": "^0.3.1",
         "discord.js-selfbot-v13": "^3.4.2",
         "fs-extra": "^11.2.0",
         "node-notifier": "^10.0.1",
-        "puppeteer": "^23.9.0",
+        "puppeteer": "^23.10.1",
         "socket.io-client": "^4.8.1",
-        "systeminformation": "^5.23.5",
         "yargs": "^17.7.2"
     },
     "bugs": {

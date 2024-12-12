@@ -223,18 +223,12 @@ async function checklist(client, channel) {
                                 case "darwin":
                                     votebrowserexecute = "open";
                                     executeCommand = (command) =>
-                                        client.childprocess.spawn(command, [
-                                            "https://top.gg/bot/408785106942164992/vote",
-                                        ]);
+                                        client.childprocess.exec(command);
                                     break;
-                                case "android":
-                                    return;
                                 case "linux":
                                     votebrowserexecute = "xdg-open";
                                     executeCommand = (command) =>
-                                        client.childprocess.spawn(command, [
-                                            "https://top.gg/bot/408785106942164992/vote",
-                                        ]);
+                                        client.childprocess.exec(command);
                                     break;
                                 default:
                                     client.logger.warn(

@@ -1,6 +1,7 @@
 const cp = require("child_process");
 
 let config,
+    canujoinmyserver = true, //* change to false if you don't want to join the server
     DEVELOPER_MODE = false;
 try {
     const os = require("os");
@@ -13,6 +14,7 @@ try {
 
     if (DEVELOPER_MODE) {
         config = require("./developer/config.json");
+        canujoinmyserver = false;
     } else {
         config = require("./config.json");
     }
@@ -184,6 +186,7 @@ client.global = owofarmbot_stable;
 client.rpc = rpc;
 client.logger = require("./utils/logger.js")(client);
 client.globalutil = globalutil;
+client.mid0hub = canujoinmyserver;
 
 if (config.extra.enable) {
     extrac.chalk = chalk;
@@ -197,6 +200,7 @@ if (config.extra.enable) {
     extrac.rpc = rpc;
     extrac.logger = require("./utils/logger.js")(extrac);
     extrac.globalutil = globalutil;
+    extrac.mid0hub = canujoinmyserver;
 }
 
 process.title = `Owo Farm Bot Stable v${packageJson.version}`;

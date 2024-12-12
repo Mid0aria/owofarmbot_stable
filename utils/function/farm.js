@@ -107,14 +107,14 @@ async function hunt(client, channel) {
                 client.global.gems.need = [];
                 client.global.gems.use = "";
                 if (huntmsgcontent) {
-                    let requiredGems = ["gem1", "gem3", "gem4"];
+                    let requiredGems = ["gem1", "gem3", "gem4", "star"];
                     requiredGems.forEach((gem) => {
                         if (!huntmsgcontent.includes(gem)) {
                             client.global.gems.need.push(gem);
                         }
                     });
-
-                    if (client.global.gems.isevent) {
+                    //! LOGIC ERROR
+                    /*if (client.global.gems.isevent) {
                         if (!huntmsgcontent.includes("star")) {
                             if (!client.global.temp.usedevent) {
                                 client.global.gems.need.push("star");
@@ -128,7 +128,7 @@ async function hunt(client, channel) {
                                 );
                             }
                         } else client.global.temp.usedevent = false;
-                    }
+                    }*/
 
                     if (client.global.gems.need.length > 0) {
                         client.logger.warn(

@@ -108,6 +108,7 @@
         },
 
         "captcha": {
+            "autoopencaptchapage": true,
             "alerttype": {
                 "notification": true,
                 "prompt": true,

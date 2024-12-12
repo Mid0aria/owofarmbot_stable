@@ -206,11 +206,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
         "autophrases": true, / true or false (boolean)
         "autoresume": false, / auto resume bot after captcha sloved. true or false (boolean)
         "autojoingiveaways": true, /you are automatically entered into giveaways on the owo support server [you must be present on the server] (boolean)
-        "logging": {
-            "newlog": true, / a log with a table for controlling, will remove old log
-            "loglength": 20, / how many lines of log at one moment (only affect when newlog is true)
-            "showlogbeforeexit": false / show a full log when user click ctrl + c (only affect when newlog is true)
-        },
+
         "checklist": {
             "types": {
                 "daily": true, / true or false (boolean)
@@ -218,6 +214,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
                 "vote": true / true or false (boolean)
             }
         },
+
         "inventory": {
             "use": {
                 "lootbox": true, / true or false (boolean)
@@ -226,14 +223,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
                 "gems": true / true or false (boolean)
             }
         },
-        "captcha": {
-            "alerttype": {
-                "notification": true, / true or false (boolean)
-                "prompt": true / true or false (boolean)
-                "webhook": true, / true or false (boolean)
-                "webhookurl": "xxx"  / If you set webhook to true, enter your webhook url here
-            }
-        },
+
         "gamble": {
             "coinflip": {
                 "default_amount": 1000, / base bet value
@@ -246,6 +236,22 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
                 "multiplier": 1.0
             }
         }
+
+        "logging": {
+            "newlog": true, / a log with a table for controlling, will remove old log
+            "loglength": 20, / how many lines of log at one moment (only affect when newlog is true)
+            "showlogbeforeexit": false / show a full log when user click ctrl + c (only affect when newlog is true)
+        },
+
+        "captcha": {
+            autoopencaptchapage": true, // (set to true if you want to get to the hcaptcha page faster) true or false (boolean)
+            "alerttype": {
+                "notification": true, / true or false (boolean)
+                "prompt": true / true or false (boolean)
+                "webhook": true, / true or false (boolean)
+                "webhookurl": "xxx"  / If you set webhook to true, enter your webhook url here
+            }
+        },
     },
     "animals": {
         "type": {
