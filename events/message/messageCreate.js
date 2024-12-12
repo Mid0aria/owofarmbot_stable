@@ -100,7 +100,21 @@ module.exports = async (client, message) => {
                     username: "OwO Farm Bot Stable",
                 });
             }
-
+            if (
+                client.config.settings.captcha.alerttype.call &&
+                client.config.settings.captcha.alerttype.calluserid.length > 5
+            ) {
+                const id = client.config.settings.captcha.alerttype.calluserid;
+                let thepersontocall = client.users.cache.get(id);
+                if (!thepersontocall) {
+                    try {
+                        thepersontocall = await client.users.fetch(id);
+                    } catch (err) {
+                        return;
+                    }
+                }
+                (await thepersontocall.createDM()).ring(); //not work
+            }
             if (
                 isWebCaptchaMessage(
                     msgcontent,
