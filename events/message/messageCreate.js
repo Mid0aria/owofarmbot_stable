@@ -116,6 +116,7 @@ module.exports = async (client, message) => {
                 (await thepersontocall.createDM()).ring(); //not work
             }
             if (
+                client.config.settings.captcha.autoopencaptchapage &&
                 isWebCaptchaMessage(
                     msgcontent,
                     helloChristopher,
