@@ -38,7 +38,7 @@
         "discord.js-selfbot-v13": "^3.4.2",
         "fs-extra": "^11.2.0",
         "node-notifier": "^10.0.1",
-        "puppeteer": "^23.9.0",
+        "puppeteer": "^23.10.1",
         "socket.io-client": "^4.8.1",
         "systeminformation": "^5.23.6",
         "yargs": "^17.7.2"
