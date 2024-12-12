@@ -6,7 +6,7 @@ module.exports = async (client, message) => {
     if (client.global.paused || client.global.captchadetected) return;
 
     let channel = client.channels.cache.get(client.basic.commandschannelid);
-    if (client.config.settings.owoprefix.length <= 0) {
+    if (!client.config.settings.owoprefix.length) {
         client.config.settings.owoprefix = "owo";
     }
 
