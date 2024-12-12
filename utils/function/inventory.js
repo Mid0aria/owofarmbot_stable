@@ -16,7 +16,7 @@ async function inventory(client, channel) {
         client.global.inventory) return;
     channel.sendTyping();
     client.global.inventory = true;
-    client.logger.info("Farm", "Inventory", `Paused: ${client.global.inventory}! Getting Inventory ...`);
+    client.logger.info("Farm", "Inventory", `Paused: ${client.global.inventory}! Retrieving inventory...`);
     let id;
     await channel
         .send({
@@ -62,7 +62,7 @@ async function inventory(client, channel) {
                 client.logger.alert(
                     "Farm",
                     "inventory",
-                    "Cannot get inventory");
+                    "Couldn't retrieve inventory");
                 return;
             }
             

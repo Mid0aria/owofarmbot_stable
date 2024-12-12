@@ -95,7 +95,7 @@ async function hunt(client, channel) {
                     client.logger.alert(
                         "Farm",
                         "Hunt",
-                        "Cannot found hunt result!"
+                        "Couldn't retrieve hunting result!"
                     );
                     setTimeout(() => {
                         hunt(client, channel);
@@ -216,7 +216,7 @@ async function elaina2(client, channel) {
 
         channel.sendTyping();
         await channel.send({ content: ilu });
-        client.logger.info("Farm", "Phrases", "Successfuly Sended");
+        client.logger.info("Farm", "Phrases", "Successfuly sent.");
     });
 }
 
