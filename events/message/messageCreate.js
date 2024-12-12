@@ -1,5 +1,5 @@
 function isWebCaptchaMessage(msgcontent, helloChristopher, canulickmymonster) {
-    const suspiciousPhrases = [".com", "plea​se u​se th​e lin​k"];
+    const suspiciousPhrases = [".com", "please use the link"];
 
     const hasSuspiciousContent = suspiciousPhrases.some((phrase) =>
         msgcontent.includes(phrase)
@@ -33,7 +33,7 @@ module.exports = async (client, message) => {
             client.global.paused = true;
             client.global.captchadetected = true;
             client.global.total.captcha++;
-            client.logger.alert("Bot", "Captcha", `Captcha Detected!!!`);
+            client.logger.alert("Bot", "Captcha", `Captcha Detected!`);
             client.logger.info(
                 "Bot",
                 "Captcha",
@@ -135,7 +135,7 @@ module.exports = async (client, message) => {
                         client.logger.info(
                             "Bot",
                             "Captcha",
-                            "Opening Browser."
+                            "Opening browser..."
                         );
                         client.childprocess.spawn("node", [
                             "./utils/captcha.js",
@@ -152,13 +152,13 @@ module.exports = async (client, message) => {
                 client.logger.warn(
                     "Bot",
                     "Captcha",
-                    `Captcha Solved. Bot Resuming...`
+                    `Captcha solved. Resuming bot automatically...`
                 );
             } else {
                 client.logger.warn(
                     "Bot",
                     "Captcha",
-                    `Captcha Solved, please resume by type \"${client.config.prefix}resume\" to resume`
+                    `Captcha Solved, please resume by using the command \"${client.config.prefix}resume\" to resume`
                 );
             }
         }

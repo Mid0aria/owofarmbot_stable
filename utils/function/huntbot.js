@@ -76,7 +76,7 @@ async function huntbotHandler(client, channel) {
                 client.logger.alert(
                     "Farm",
                     "HuntBot",
-                    "Cannot found huntbot message"
+                    "Couldn't find huntbot message!"
                 );
                 return;
             }
@@ -149,7 +149,7 @@ async function huntbotHandler(client, channel) {
                 }
 
                 if (isHunting) {
-                    client.logger.warn("Farm", "Huntbot", "Currently hunting");
+                    client.logger.warn("Farm", "Huntbot", "Currently hunting.");
                 } else {
                     setTimeout(() => {
                         triggerHB(client, channel);
@@ -216,7 +216,7 @@ async function triggerHB(client, channel) {
                 client.logger.alert(
                     "Farm",
                     "HuntBot",
-                    "Cannot found huntbot captcha message"
+                    "Couldn't find huntbot captcha message!"
                 );
                 return;
             }
@@ -228,7 +228,7 @@ async function triggerHB(client, channel) {
                 client.logger.warn(
                     "Farm",
                     "Huntbot",
-                    "Cannot get captcha image URL"
+                    "Couldn't get captcha image URL!"
                 );
                 return;
             }
@@ -252,7 +252,7 @@ async function triggerHB(client, channel) {
                     ])} ${client.global.temp.huntbotmaxtime}h ${solution}`,
                 });
 
-                client.logger.info("Farm", "Huntbot", "Huntbot is hunting :3");
+                client.logger.info("Farm", "Huntbot", "Huntbot is hunting.");
             });
         });
 }

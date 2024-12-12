@@ -50,14 +50,14 @@ module.exports = async (client) => {
             client.logger.info(
                 "Bot",
                 "Startup",
-                "You are on the OwO Bot Support server. I will automatically enter the giveaways :)"
+                "You are in the OwO Bot Support server. I will automatically enter the giveaways :)"
             );
             client.global.owosupportserver = true;
         } else {
             client.logger.alert(
                 "Bot",
                 "Startup",
-                "You are not on the OwO Bot Support server. Please join to the server and restart the bot to automatically enter giveaways"
+                "You are not in the OwO Bot Support server. Please join to the server and restart the bot to automatically enter giveaways"
             );
         }
     }

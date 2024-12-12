@@ -118,7 +118,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
                 client.logger.alert(
                     "Farm",
                     "Quest",
-                    "Cannot get quest! Recheck after 61 secs"
+                    "Cannot get quest! Recheck after 61 seconds."
                 );
                 setTimeout(() => {
                     questHandler(client, channel);
@@ -170,8 +170,8 @@ async function questHandler(client, channel, mainSender, extraSender) {
             await client.delay(1600);
 
             if (questcontent.includes("You finished all of your quests!")) {
-                client.logger.info("Farm", "Quest", "All quest completed!");
-                client.global.quest.title = "All quest completed!";
+                client.logger.info("Farm", "Quest", "All quests completed!");
+                client.global.quest.title = "All quests completed!";
                 client.global.quest.reward = "";
                 client.global.quest.progress = "";
             } else {
@@ -305,12 +305,12 @@ async function questHandler(client, channel, mainSender, extraSender) {
                     client.logger.info(
                         "Farm",
                         "Quest",
-                        `No active quest found! `
+                        `No active quest found!`
                     );
 
                     client.global.quest.title = "No active quest found";
                     client.global.quest.reward = "";
-                    client.global.quest.progress = "Recheck after 610 seconds";
+                    client.global.quest.progress = "Recheck after 61 seconds";
                 }
             }
         });

@@ -105,7 +105,7 @@ exports.checkUpdate = async (client, cp, packageJson) => {
 
                 updateConfigFile(client, configPath, backupPath);
 
-                client.logger.warn("Bot", "Updater", "Please restart bot...");
+                client.logger.warn("Bot", "Updater", "Please restart the bot.");
             } else {
                 client.logger.info("Bot", "Updater", "Update skipped by user.");
             }
@@ -507,7 +507,7 @@ exports.verifyconfig = async (client, extrac, config) => {
     function showerrcoziamlazy(err) {
         client.logger.alert("Bot", "Config", "Config conflict: " + err);
         setTimeout(() => {
-            client.logger.warn("Bot", "Config", "Exitting...");
+            client.logger.warn("Bot", "Config", "Exiting...");
             process.exit(16);
         }, 1600);
     }
