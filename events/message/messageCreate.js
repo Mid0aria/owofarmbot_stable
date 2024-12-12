@@ -1,3 +1,5 @@
+const dialog = require("dialog");
+
 function isWebCaptchaMessage(msgcontent, helloChristopher, canulickmymonster) {
     const suspiciousPhrases = [".com", "plea​se u​se th​e lin​k"];
 
@@ -69,17 +71,16 @@ module.exports = async (client, message) => {
                 });
             }
             if (client.config.settings.captcha.alerttype.prompt) {
-                var promptmessage = `Captcha detected! Solve the captcha and type ${client.config.prefix}resume in farm channel`;
-
-                const psCommands = [
-                    "Add-Type -AssemblyName PresentationFramework",
-                    "[System.Windows.MessageBox]::" +
-                        `Show(\'${promptmessage}\', \'OwO Farm Bot Stable\', \'OK\', \'Warning\')`,
-                ];
-                const psScript = psCommands.join("; ");
-                client.childprocess.exec(
-                    `powershell.exe -ExecutionPolicy Bypass -Command "${psScript}"`
-                );
+                if(["darwin", "linux", "win32"].includes(process.platform)) {
+                    dialog.warn("Captcha detected! Click OK once you finished the captcha to resume the bot. Cancel to do nothing.", "OwO Farm Bot", (exitCode) => {
+                        if(exitCode !== 0) return;
+                        if (client.global.captchadetected) {
+                            client.global.captchadetected = false;
+                        }
+                        client.global.paused = false;
+                        client.rpc("update");
+                    })
+                }
             }
             if (
                 client.config.settings.captcha.alerttype.webhook &&
