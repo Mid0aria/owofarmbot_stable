@@ -1,5 +1,5 @@
 /**
- * TODO backup the config file before updates and integrate it into the new config
+ * ! zip updater not working properly, missing variables are not printed when printing back after config backup
  *
  */
 
@@ -90,17 +90,18 @@ exports.checkUpdate = async (client, cp, packageJson) => {
                             "Updater",
                             "Updating with Git..."
                         );
-                        gitUpdate(client, cp);
+                        await gitUpdate(client, cp);
                     } catch (error) {
                         client.logger.alert(
                             "Bot",
                             "Updater",
-                            "Git is not installed. Falling back to manual update."
+                            `Git update error: ${error}`
                         );
-                        await manualUpdate(client);
+                        // await manualUpdate(client);
                     }
                 } else {
-                    await manualUpdate(client);
+                    // await manualUpdate(client);
+                    await downloaddotgit(client, cp);
                 }
 
                 updateConfigFile(client, configPath, backupPath);
@@ -196,7 +197,7 @@ const updateConfigFile = (client, configPath, backupPath) => {
     }
 };
 
-const gitUpdate = (client, cp) => {
+const gitUpdate = async (client, cp) => {
     try {
         cp.execSync("git stash");
         cp.execSync("git pull --force");
@@ -209,6 +210,19 @@ const gitUpdate = (client, cp) => {
             `Error updating project from Git: ${error.message}`
         );
     }
+};
+
+const downloaddotgit = async (client, cp) => {
+    const repoUrl = "https://github.com/Mid0aria/owofarmbot_stable.git";
+    const targetFolder = path.join(__dirname, "../.git");
+
+    if (!fse.existsSync(targetFolder)) {
+        fse.mkdirSync(targetFolder, { recursive: true });
+    }
+    const cloneCommand = `git clone --bare ${repoUrl} ${targetFolder}`;
+
+    cp.execSync(cloneCommand, { stdio: "inherit" });
+    await gitUpdate(client, cp);
 };
 
 const manualUpdate = async (client) => {
