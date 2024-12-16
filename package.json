@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.4.9.3",
-    "version_note": "autoopencaptchapage setting added to config.json",
+    "version": "0.0.4.9.4",
+    "version_note": "fixed disabling battle when you disable hunt & .git folder installer added(for updates)",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "bot.js",
     "repository": {

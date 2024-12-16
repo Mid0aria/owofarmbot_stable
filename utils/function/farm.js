@@ -14,6 +14,8 @@ module.exports = async (client, message) => {
         if (client.basic.commands.hunt) {
             await client.delay(2000);
             battle(client, channel);
+        } else {
+            battle(client, channel);
         }
     }
 };
