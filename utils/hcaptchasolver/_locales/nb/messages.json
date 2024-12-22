@@ -1,0 +1,68 @@
+{
+   "extAuthor": {
+      "message": "miniRPA \u003Cservice@minirpa.net>"
+   },
+   "extDesc": {
+      "message": "løs hCAPTCHA og reCAPTCHA ved hjelp av AI på alle sider. Sømløs integrasjon med NoCoding Data Scraper for enklere datainnsamling"
+   },
+   "extName": {
+      "message": "CAPTCHA Solver: auto hCAPTCHA reCAPTCHA fritt"
+   },
+   "extShortName": {
+      "message": ""
+   },
+   "lbl_addon_link_status": {
+      "message": "Partner-tillegg"
+   },
+   "lbl_col_addonName": {
+      "message": "Tillegg"
+   },
+   "lbl_col_connected": {
+      "message": "Linked"
+   },
+   "lbl_col_msg": {
+      "message": "Notater"
+   },
+   "lbl_comment_1": {
+      "message": "Vi setter pris på tilbakemeldingen din!"
+   },
+   "lbl_comment_2": {
+      "message": "Vennligst ta 5 sekunder på å dele kommentarene dine."
+   },
+   "lbl_logo": {
+      "message": "MiniRPA CAPTCHA Solver"
+   },
+   "lbl_no_addons": {
+      "message": "Ingen tillegg kan kobles til ennå."
+   },
+   "lbl_rm_addon": {
+      "message": "aktiv fane og faner fra partnertillegg synkront"
+   },
+   "lbl_rm_curtab": {
+      "message": "aktiv fane"
+   },
+   "lbl_rm_no": {
+      "message": "ingen (slutt å oppdage)"
+   },
+   "lbl_run_scope": {
+      "message": "Automatisk oppdage og løse CAPTCHA på"
+   },
+   "lbl_setting": {
+      "message": "Innstilling"
+   },
+   "partner_nds": {
+      "message": "NoCoding Data Scraper"
+   },
+   "tip_partner_tab_1": {
+      "message": "Med partnertilleggene kan du:"
+   },
+   "tip_partner_tab_2": {
+      "message": "\u003Cul>\u003Cli>løs flere CAPTCHAer parallelt\u003C/li>\u003Cli>gjør løsningen raskere ved å justere forsinkelsestiden\u003C/li>\u003Cli>erklær posthandlinger etter at CAPTCHA er løst\u003C/li>\u003Cli> li>\u003Cli>spesifiser typen CAPTCHA som skal løses\u003C/li>\u003C/ul>"
+   },
+   "tip_partner_tab_3": {
+      "message": "for å gjøre nettleserautomatisering enkelt på forskjellige nettsteder."
+   },
+   "tip_partner_tab_4": {
+      "message": "\u003Ci>(aktivert når et partnertillegg er koblet til)\u003C/i>"
+   }
+}

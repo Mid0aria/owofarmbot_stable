@@ -1,0 +1,68 @@
+{
+   "extAuthor": {
+      "message": "miniRPA \u003Cservice@minirpa.net>"
+   },
+   "extDesc": {
+      "message": "rozwiąż hCAPTCHA i reCAPTCHA przy użyciu sztucznej inteligencji na dowolnych stronach. Bezproblemowa integracja z NoCoding Data Scraper dla łatwiejszego gromadzenia danych"
+   },
+   "extName": {
+      "message": "Solver CAPTCHA: auto hCAPTCHA reCAPTCHA swobodnie"
+   },
+   "extShortName": {
+      "message": ""
+   },
+   "lbl_addon_link_status": {
+      "message": "Dodatki dla partnerów"
+   },
+   "lbl_col_addonName": {
+      "message": "Dodatek"
+   },
+   "lbl_col_connected": {
+      "message": "Połączono"
+   },
+   "lbl_col_msg": {
+      "message": "Notatki"
+   },
+   "lbl_comment_1": {
+      "message": "Cenimy Twoją opinię!"
+   },
+   "lbl_comment_2": {
+      "message": "Poświęć 5 sekund na udostępnienie swoich komentarzy."
+   },
+   "lbl_logo": {
+      "message": "Rozwiązywanie problemów MiniRPA CAPTCHA"
+   },
+   "lbl_no_addons": {
+      "message": "Nie można jeszcze podłączyć żadnego dodatku."
+   },
+   "lbl_rm_addon": {
+      "message": "aktywna karta i karty z dodatków partnerów synchronicznie"
+   },
+   "lbl_rm_curtab": {
+      "message": "aktywna karta"
+   },
+   "lbl_rm_no": {
+      "message": "none (przestań wykrywać)"
+   },
+   "lbl_run_scope": {
+      "message": "Automatyczne wykrywanie i rozwiązywanie CAPTCHA włączone"
+   },
+   "lbl_setting": {
+      "message": "Ustawienie"
+   },
+   "partner_nds": {
+      "message": "Skrobak danych NoCoding"
+   },
+   "tip_partner_tab_1": {
+      "message": "Dzięki dodatkom partnera możesz:"
+   },
+   "tip_partner_tab_2": {
+      "message": "\u003Cul>\u003Cli>rozwiązuj wiele CAPTCHA równolegle\u003C/li>\u003Cli>przyspiesz rozwiązywanie, dostosowując czas opóźnienia\u003C/li>\u003Cli>deklaruj działania po rozwiązaniu CAPTCHA\u003C/ li>\u003Cli>określ typ CAPTCHA do rozwiązania\u003C/li>\u003C/ul>"
+   },
+   "tip_partner_tab_3": {
+      "message": "aby ułatwić automatyzację przeglądarki na różnych stronach internetowych."
+   },
+   "tip_partner_tab_4": {
+      "message": "\u003Ci>(włączone, gdy podłączony jest dowolny dodatek partnera)\u003C/i>"
+   }
+}

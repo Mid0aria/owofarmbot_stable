@@ -1,0 +1,68 @@
+{
+   "extAuthor": {
+      "message": "miniRPA \u003Cservice@minirpa.net>"
+   },
+   "extDesc": {
+      "message": "giải hCAPTCHA và reCAPTCHA bằng AI trên bất kỳ trang nào. Tích hợp liền mạch với NoCoding Data Scraper để thu thập dữ liệu dễ dàng hơn"
+   },
+   "extName": {
+      "message": "CAPTCHA Solver: tự động hCAPTCHA reCAPTCHA một cách tự do"
+   },
+   "extShortName": {
+      "message": ""
+   },
+   "lbl_addon_link_status": {
+      "message": "Tiện ích bổ sung của đối tác"
+   },
+   "lbl_col_addonName": {
+      "message": "Tiện ích bổ sung"
+   },
+   "lbl_col_connected": {
+      "message": "Đã liên kết"
+   },
+   "lbl_col_msg": {
+      "message": "Ghi chú"
+   },
+   "lbl_comment_1": {
+      "message": "Chúng tôi đánh giá cao phản hồi của bạn!"
+   },
+   "lbl_comment_2": {
+      "message": "Vui lòng dành 5 giây để chia sẻ nhận xét của bạn."
+   },
+   "lbl_logo": {
+      "message": "Bộ giải mã CAPTCHA MiniRPA"
+   },
+   "lbl_no_addons": {
+      "message": "Chưa kết nối được tiện ích bổ sung nào."
+   },
+   "lbl_rm_addon": {
+      "message": "tab hoạt động và các tab từ tiện ích bổ sung của đối tác một cách đồng bộ"
+   },
+   "lbl_rm_curtab": {
+      "message": "tab hoạt động"
+   },
+   "lbl_rm_no": {
+      "message": "none (ngừng phát hiện)"
+   },
+   "lbl_run_scope": {
+      "message": "Tự động phát hiện và giải CAPTCHA trên"
+   },
+   "lbl_setting": {
+      "message": "Setting"
+   },
+   "partner_nds": {
+      "message": "NoCoding Data Scraper"
+   },
+   "tip_partner_tab_1": {
+      "message": "Với các tiện ích bổ sung của đối tác, bạn có thể:"
+   },
+   "tip_partner_tab_2": {
+      "message": "\u003Cul>\u003Cli>giải song song nhiều CAPTCHA\u003C/li>\u003Cli>giúp giải quyết nhanh hơn bằng cách điều chỉnh thời gian trễ\u003C/li>\u003Cli>khai báo hành động đăng sau khi giải CAPTCHA\u003C/li>\u003Cli>khai báo hành động đăng sau khi giải CAPTCHA\u003C/li>\u003Cli> li>\u003Cli>chỉ định loại CAPTCHA để giải\u003C/li>\u003C/ul>"
+   },
+   "tip_partner_tab_3": {
+      "message": "để dễ dàng tự động hóa trình duyệt trên các trang web khác nhau."
+   },
+   "tip_partner_tab_4": {
+      "message": "\u003Ci>(được bật khi bất kỳ tiện ích bổ sung nào của đối tác được kết nối)\u003C/i>"
+   }
+}

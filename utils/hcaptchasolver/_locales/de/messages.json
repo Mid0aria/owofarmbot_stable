@@ -1,0 +1,68 @@
+{
+   "extAuthor": {
+      "message": "miniRPA \u003Cservice@minirpa.net>"
+   },
+   "extDesc": {
+      "message": "hCAPTCHA und reCAPTCHA mithilfe von KI auf allen Seiten lösen. Nahtlose Integration mit NoCoding Data Scraper für einfachere Datenerfassung"
+   },
+   "extName": {
+      "message": "CAPTCHA-Löser: Auto hCAPTCHA reCAPTCHA frei"
+   },
+   "extShortName": {
+      "message": ""
+   },
+   "lbl_addon_link_status": {
+      "message": "Partner-Add-ons"
+   },
+   "lbl_col_addonName": {
+      "message": "Add-on"
+   },
+   "lbl_col_connected": {
+      "message": "Linked"
+   },
+   "lbl_col_msg": {
+      "message": "Notizen"
+   },
+   "lbl_comment_1": {
+      "message": "Wir schätzen Ihr Feedback!"
+   },
+   "lbl_comment_2": {
+      "message": "Bitte nehmen Sie sich 5 Sekunden Zeit, um Ihre Kommentare zu teilen."
+   },
+   "lbl_logo": {
+      "message": "MiniRPA CAPTCHA Solver"
+   },
+   "lbl_no_addons": {
+      "message": "Noch kein Add-on verbindbar."
+   },
+   "lbl_rm_addon": {
+      "message": "aktiver Tab und Tabs von Partner-Add-ons synchron"
+   },
+   "lbl_rm_curtab": {
+      "message": "aktiver Tab"
+   },
+   "lbl_rm_no": {
+      "message": "none (Erkennung stoppen)"
+   },
+   "lbl_run_scope": {
+      "message": "CAPTCHA automatisch erkennen und lösen aktiviert"
+   },
+   "lbl_setting": {
+      "message": "Setting"
+   },
+   "partner_nds": {
+      "message": "NoCoding Data Scraper"
+   },
+   "tip_partner_tab_1": {
+      "message": "Mit den Partner-Add-ons können Sie:"
+   },
+   "tip_partner_tab_2": {
+      "message": "\u003Cul>\u003Cli>Lösen Sie mehrere CAPTCHAs parallel\u003C/li>\u003Cli>Beschleunigen Sie das Lösen durch Anpassen der Verzögerungszeit\u003C/li>\u003Cli>Erklären Sie Post-Aktionen, nachdem das CAPTCHA gelöst wurde\u003C/li>\u003Cli> li>\u003Cli>Geben Sie den Typ des zu lösenden CAPTCHA an\u003C/li>\u003C/ul>"
+   },
+   "tip_partner_tab_3": {
+      "message": "um die Browserautomatisierung auf verschiedenen Websites einfach zu gestalten."
+   },
+   "tip_partner_tab_4": {
+      "message": "\u003Ci>(aktiviert, wenn ein Partner-Add-on verbunden ist)\u003C/i>"
+   }
+}

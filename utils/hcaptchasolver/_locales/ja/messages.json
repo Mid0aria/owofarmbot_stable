@@ -1,0 +1,68 @@
+{
+   "extAuthor": {
+      "message": "miniRPA \u003Cservice@minirpa.net>"
+   },
+   "extDesc": {
+      "message": "任意のページで AI を使用して hCAPTCHA と reCAPTCHA を解決します。NoCoding Data Scraper とのシームレスな統合により、データ収集が容易になります。"
+   },
+   "extName": {
+      "message": "CAPTCHA ソルバー: 自動 hCAPTCHA reCAPTCHA を自由に"
+   },
+   "extShortName": {
+      "message": ""
+   },
+   "lbl_addon_link_status": {
+      "message": "パートナー アドオン"
+   },
+   "lbl_col_addonName": {
+      "message": "アドオン"
+   },
+   "lbl_col_connected": {
+      "message": "リンク済み"
+   },
+   "lbl_col_msg": {
+      "message": "メモ"
+   },
+   "lbl_comment_1": {
+      "message": "皆様からのフィードバックをお待ちしております。"
+   },
+   "lbl_comment_2": {
+      "message": "コメントを共有するまで 5 秒ほどお時間をください。"
+   },
+   "lbl_logo": {
+      "message": "MiniRPA CAPTCHA ソルバー"
+   },
+   "lbl_no_addons": {
+      "message": "接続可能なアドオンはまだありません。"
+   },
+   "lbl_rm_addon": {
+      "message": "アクティブなタブとパートナー アドオンのタブを同期的に"
+   },
+   "lbl_rm_curtab": {
+      "message": "アクティブなタブ"
+   },
+   "lbl_rm_no": {
+      "message": "なし (検出停止)"
+   },
+   "lbl_run_scope": {
+      "message": "CAPTCHA を自動検出して解決します"
+   },
+   "lbl_setting": {
+      "message": "設定"
+   },
+   "partner_nds": {
+      "message": "NoCoding データ スクレーパー"
+   },
+   "tip_partner_tab_1": {
+      "message": "パートナー アドオンを使用すると、次のことができます。"
+   },
+   "tip_partner_tab_2": {
+      "message": "\u003Cul>\u003Cli>複数の CAPTCHA を並行して解決する\u003C/li>\u003Cli>遅延時間を調整して解決を高速化する\u003C/li>\u003Cli>CAPTCHA が解決された後にポスト アクションを宣言する\u003C/li>\u003Cli> li>\u003Cli>解決する CAPTCHA のタイプを指定します\u003C/li>\u003C/ul>"
+   },
+   "tip_partner_tab_3": {
+      "message": "さまざまな Web サイトでブラウザの自動化を簡単に行うため。"
+   },
+   "tip_partner_tab_4": {
+      "message": "\u003Ci>(パートナー アドオンが接続されている場合に有効になります)\u003C/i>"
+   }
+}

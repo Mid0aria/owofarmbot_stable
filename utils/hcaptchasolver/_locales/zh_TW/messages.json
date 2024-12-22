@@ -1,0 +1,68 @@
+{
+   "extAuthor": {
+      "message": "miniRPA \u003Cservice@minirpa.net>"
+   },
+   "extDesc": {
+      "message": "使用人工智慧自動辨識處理網頁上出現的hCAPTCHA和reCAPTCHA. 與迷你派采集器無縫整合,實現絲滑的資料擷取"
+   },
+   "extName": {
+      "message": "驗證碼自動辨識器: 自動辨識處理hCAPTCHA和reCAPTCHA"
+   },
+   "extShortName": {
+      "message": "驗證碼自動辨識器"
+   },
+   "lbl_addon_link_status": {
+      "message": "合作夥伴擴充程式"
+   },
+   "lbl_col_addonName": {
+      "message": "名稱"
+   },
+   "lbl_col_connected": {
+      "message": "已連結"
+   },
+   "lbl_col_msg": {
+      "message": "說明"
+   },
+   "lbl_comment_1": {
+      "message": "我們重視您的回饋!"
+   },
+   "lbl_comment_2": {
+      "message": "請花 5 秒分享您的評論."
+   },
+   "lbl_logo": {
+      "message": "MiniRPA驗證碼識別器"
+   },
+   "lbl_no_addons": {
+      "message": "尚無可連接的合作夥伴擴充程式."
+   },
+   "lbl_rm_addon": {
+      "message": "目前標籤頁和來自合作擴充程式的標籤頁(多頁同時處理)"
+   },
+   "lbl_rm_curtab": {
+      "message": "目前標籤頁"
+   },
+   "lbl_rm_no": {
+      "message": "無 (停止偵測)"
+   },
+   "lbl_run_scope": {
+      "message": "自動偵測並解決驗證碼的範圍"
+   },
+   "lbl_setting": {
+      "message": "設定"
+   },
+   "partner_nds": {
+      "message": "迷你派采集器"
+   },
+   "tip_partner_tab_1": {
+      "message": "透過合作夥伴擴充程式，您可以："
+   },
+   "tip_partner_tab_2": {
+      "message": "\u003Cul>\u003Cli>並行解決多個驗證碼\u003C/li>\u003Cli>透過調整延遲時間加快速度\u003C/li>\u003Cli>在驗證碼解決後聲明後續操作\u003C/li>\u003Cli> li>\u003Cli>指定要解決的驗證碼類型\u003C/li>\u003C/ul>"
+   },
+   "tip_partner_tab_3": {
+      "message": "在不同網站上輕鬆實現瀏覽器自動化."
+   },
+   "tip_partner_tab_4": {
+      "message": "\u003Ci>（連接上任何合作夥伴後可啟用）\u003C/i>"
+   }
+}

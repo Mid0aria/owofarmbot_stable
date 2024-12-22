@@ -1,0 +1,68 @@
+{
+   "extAuthor": {
+      "message": "miniRPA \u003Cservice@minirpa.net>"
+   },
+   "extDesc": {
+      "message": "решайте hCAPTCHA и reCAPTCHA с помощью искусственного интеллекта на любых страницах. Полная интеграция с NoCoding Data Scraper для упрощения сбора данных"
+   },
+   "extName": {
+      "message": "CAPTCHA Solver: автоматически hCAPTCHA, reCAPTCHA бесплатно"
+   },
+   "extShortName": {
+      "message": ""
+   },
+   "lbl_addon_link_status": {
+      "message": "Партнерские надстройки"
+   },
+   "lbl_col_addonName": {
+      "message": "Дополнение"
+   },
+   "lbl_col_connected": {
+      "message": "Linked"
+   },
+   "lbl_col_msg": {
+      "message": "Заметки"
+   },
+   "lbl_comment_1": {
+      "message": "Мы ценим ваши отзывы!"
+   },
+   "lbl_comment_2": {
+      "message": "Пожалуйста, уделите 5 секунд, чтобы поделиться своими комментариями."
+   },
+   "lbl_logo": {
+      "message": "MiniRPA CAPTCHA Solver"
+   },
+   "lbl_no_addons": {
+      "message": "Дополнения пока не доступны для подключения."
+   },
+   "lbl_rm_addon": {
+      "message": "активная вкладка и вкладки партнерских надстроек синхронно"
+   },
+   "lbl_rm_curtab": {
+      "message": "активная вкладка"
+   },
+   "lbl_rm_no": {
+      "message": "none (прекратить обнаружение)"
+   },
+   "lbl_run_scope": {
+      "message": "Автоматическое обнаружение и решение CAPTCHA включено"
+   },
+   "lbl_setting": {
+      "message": "Setting"
+   },
+   "partner_nds": {
+      "message": "Сборщик данных NoCoding"
+   },
+   "tip_partner_tab_1": {
+      "message": "С помощью партнерских надстроек вы можете:"
+   },
+   "tip_partner_tab_2": {
+      "message": "\u003Cul>\u003Cli>решать несколько CAPTCHA параллельно\u003C/li>\u003Cli>ускорять решение, регулируя время задержки\u003C/li>\u003Cli>объявлять действия после решения CAPTCHA\u003C/li>\u003Cli>объявлять действия после решения CAPTCHA\u003C/li>\u003Cli> li>\u003Cli>укажите тип CAPTCHA для решения\u003C/li>\u003C/ul>"
+   },
+   "tip_partner_tab_3": {
+      "message": "чтобы упростить автоматизацию браузера на разных веб-сайтах."
+   },
+   "tip_partner_tab_4": {
+      "message": "\u003Ci>(включается при подключении любого партнёрского дополнения)\u003C/i>"
+   }
+}

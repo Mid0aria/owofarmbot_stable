@@ -1,0 +1,68 @@
+{
+   "extAuthor": {
+      "message": "miniRPA \u003Cservice@minirpa.net>"
+   },
+   "extDesc": {
+      "message": "lös hCAPTCHA och reCAPTCHA med AI på alla sidor. Sömlös integration med NoCoding Data Scraper för enklare datainsamling"
+   },
+   "extName": {
+      "message": "CAPTCHA Solver: auto hCAPTCHA reCAPTCHA fritt"
+   },
+   "extShortName": {
+      "message": ""
+   },
+   "lbl_addon_link_status": {
+      "message": "Partner-tillägg"
+   },
+   "lbl_col_addonName": {
+      "message": "Tillägg"
+   },
+   "lbl_col_connected": {
+      "message": "Länkad"
+   },
+   "lbl_col_msg": {
+      "message": "Anteckningar"
+   },
+   "lbl_comment_1": {
+      "message": "Vi värdesätter din feedback!"
+   },
+   "lbl_comment_2": {
+      "message": "Ta 5 sekunder för att dela dina kommentarer."
+   },
+   "lbl_logo": {
+      "message": "MiniRPA CAPTCHA Solver"
+   },
+   "lbl_no_addons": {
+      "message": "Inget tillägg kan anslutas ännu."
+   },
+   "lbl_rm_addon": {
+      "message": "aktiv flik och flikar från partnertillägg synkront"
+   },
+   "lbl_rm_curtab": {
+      "message": "aktiv flik"
+   },
+   "lbl_rm_no": {
+      "message": "ingen (sluta upptäcka)"
+   },
+   "lbl_run_scope": {
+      "message": "Automatisk upptäckt och lös CAPTCHA på"
+   },
+   "lbl_setting": {
+      "message": "Inställning"
+   },
+   "partner_nds": {
+      "message": "NoCoding Data Scraper"
+   },
+   "tip_partner_tab_1": {
+      "message": "Med partnertilläggen kan du:"
+   },
+   "tip_partner_tab_2": {
+      "message": "\u003Cul>\u003Cli>lös flera CAPTCHAs parallellt\u003C/li>\u003Cli>gör lösningen snabbare genom att justera fördröjningstiden\u003C/li>\u003Cli>deklarera poståtgärder efter CAPTCHA löst\u003C/li>\u003Cli> li>\u003Cli>ange vilken typ av CAPTCHA som ska lösas\u003C/li>\u003C/ul>"
+   },
+   "tip_partner_tab_3": {
+      "message": "för att göra webbläsarautomatisering enkelt på olika webbplatser."
+   },
+   "tip_partner_tab_4": {
+      "message": "\u003Ci>(aktiverat när något partnertillägg anslutits)\u003C/i>"
+   }
+}

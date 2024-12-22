@@ -1,0 +1,68 @@
+{
+   "extAuthor": {
+      "message": "miniRPA \u003Cservice@minirpa.net>"
+   },
+   "extDesc": {
+      "message": "使用人工智能自动识别处理网页上出现的hCAPTCHA和reCAPTCHA. 与迷你派采集器无缝集成,实现丝滑的数据采集"
+   },
+   "extName": {
+      "message": "验证码自动识别器: 自动识别处理hCAPTCHA和reCAPTCHA"
+   },
+   "extShortName": {
+      "message": "验证码自动识别器"
+   },
+   "lbl_addon_link_status": {
+      "message": "合作伙伴插件"
+   },
+   "lbl_col_addonName": {
+      "message": "名称"
+   },
+   "lbl_col_connected": {
+      "message": "已连接"
+   },
+   "lbl_col_msg": {
+      "message": "说明"
+   },
+   "lbl_comment_1": {
+      "message": "我们重视您的反馈!"
+   },
+   "lbl_comment_2": {
+      "message": "请花 5 秒 分享您的体验."
+   },
+   "lbl_logo": {
+      "message": "MiniRPA验证码识别器"
+   },
+   "lbl_no_addons": {
+      "message": "尚无可连接的合作伙伴插件."
+   },
+   "lbl_rm_addon": {
+      "message": "当前标签页和来自合作插件的标签页(多页同时处理)"
+   },
+   "lbl_rm_curtab": {
+      "message": "当前标签页"
+   },
+   "lbl_rm_no": {
+      "message": "无 (停止检测)"
+   },
+   "lbl_run_scope": {
+      "message": "自动检测并解决验证码的范围"
+   },
+   "lbl_setting": {
+      "message": "设置"
+   },
+   "partner_nds": {
+      "message": "迷你派采集器"
+   },
+   "tip_partner_tab_1": {
+      "message": "通过合作伙伴插件，您可以："
+   },
+   "tip_partner_tab_2": {
+      "message": "\u003Cul>\u003Cli>并行解决多个验证码\u003C/li>\u003Cli>通过调整延迟时间加快速度\u003C/li>\u003Cli>在验证码解决后声明后续操作\u003C/li>\u003Cli> li>\u003Cli>指定要解决的验证码类型\u003C/li>\u003C/ul>"
+   },
+   "tip_partner_tab_3": {
+      "message": "在不同网站上轻松实现浏览器自动化."
+   },
+   "tip_partner_tab_4": {
+      "message": "\u003Ci>（连接上任何合作伙伴后可启用）\u003C/i>"
+   }
+}

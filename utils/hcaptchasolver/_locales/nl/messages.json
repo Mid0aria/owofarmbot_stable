@@ -1,0 +1,68 @@
+{
+   "extAuthor": {
+      "message": "miniRPA \u003Cservice@minirpa.net>"
+   },
+   "extDesc": {
+      "message": "los hCAPTCHA en reCAPTCHA op met behulp van AI op elke pagina. Naadloze integratie met NoCoding Data Scraper voor eenvoudiger gegevensverzameling"
+   },
+   "extName": {
+      "message": "CAPTCHA-oplosser: auto hCAPTCHA reCAPTCHA vrij"
+   },
+   "extShortName": {
+      "message": ""
+   },
+   "lbl_addon_link_status": {
+      "message": "Partner-add-ons"
+   },
+   "lbl_col_addonName": {
+      "message": "Add-on"
+   },
+   "lbl_col_connected": {
+      "message": "Gekoppeld"
+   },
+   "lbl_col_msg": {
+      "message": "Opmerkingen"
+   },
+   "lbl_comment_1": {
+      "message": "Wij waarderen uw feedback!"
+   },
+   "lbl_comment_2": {
+      "message": "Neem vijf seconden de tijd om uw opmerkingen te delen."
+   },
+   "lbl_logo": {
+      "message": "MiniRPA CAPTCHA-oplosser"
+   },
+   "lbl_no_addons": {
+      "message": "Er kan nog geen add-on worden aangesloten."
+   },
+   "lbl_rm_addon": {
+      "message": "actief tabblad en tabbladen van partner-add-ons synchroon"
+   },
+   "lbl_rm_curtab": {
+      "message": "actief tabblad"
+   },
+   "lbl_rm_no": {
+      "message": "none (stop met detecteren)"
+   },
+   "lbl_run_scope": {
+      "message": "CAPTCHA automatisch detecteren en oplossen aan"
+   },
+   "lbl_setting": {
+      "message": "Instelling"
+   },
+   "partner_nds": {
+      "message": "NoCoding Data Scraper"
+   },
+   "tip_partner_tab_1": {
+      "message": "Met de partner-add-ons kunt u:"
+   },
+   "tip_partner_tab_2": {
+      "message": "\u003Cul>\u003Cli>los meerdere CAPTCHA's parallel op\u003C/li>\u003Cli>maak het oplossen sneller door de vertragingstijd aan te passen\u003C/li>\u003Cli>verklaar berichtacties nadat CAPTCHA is opgelost\u003C/li>\u003Cli> li>\u003Cli>specificeer het type CAPTCHA dat moet worden opgelost\u003C/li>\u003C/ul>"
+   },
+   "tip_partner_tab_3": {
+      "message": "om browserautomatisering eenvoudig te maken op verschillende websites."
+   },
+   "tip_partner_tab_4": {
+      "message": "\u003Ci>(ingeschakeld wanneer een partner-add-on is aangesloten)\u003C/i>"
+   }
+}
