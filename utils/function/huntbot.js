@@ -1,4 +1,11 @@
 /*
+ * OwO Farm Bot Stable
+ * Copyright (C) 2024 Mido
+ * This software is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+ * For more information, see README.md and LICENSE
+ */
+
+/*
  *idea to remember:
  *first run: check if huntbot is ready (whether non-embed (hunt result) or embed (running or free))
  *then, if free or found hunt result, run the huntbot again with captcha solver

@@ -1,3 +1,10 @@
+/*
+ * OwO Farm Bot Stable
+ * Copyright (C) 2024 Mido
+ * This software is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+ * For more information, see README.md and LICENSE
+ */
+
 /**
  * This file is an example of a socket for huntbot
  * You can solve the huntbot captcha by communicating between this code and python code

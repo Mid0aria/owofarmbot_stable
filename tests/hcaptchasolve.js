@@ -1,3 +1,10 @@
+/*
+ * OwO Farm Bot Stable
+ * Copyright (C) 2024 Mido
+ * This software is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+ * For more information, see README.md and LICENSE
+ */
+
 const { connect } = require("puppeteer-real-browser");
 const path = require("path");
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

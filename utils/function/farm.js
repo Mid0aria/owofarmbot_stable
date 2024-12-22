@@ -1,3 +1,10 @@
+/*
+ * OwO Farm Bot Stable
+ * Copyright (C) 2024 Mido
+ * This software is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+ * For more information, see README.md and LICENSE
+ */
+
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getrand = (min, max) => Math.random() * (max - min) + min;
 
