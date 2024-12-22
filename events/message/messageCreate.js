@@ -49,7 +49,7 @@ module.exports = async (client, message) => {
                 message.components.length > 0 &&
                 message.components[0].components[0]
             ) {
-                // some homo's saying "C a" XD
+                // some homo's saying "Challenge accepted". What challenge are you talking about, asshole oe XD
                 helloChristopher = message.components[0].components.find(
                     (button) => button.url.toLowerCase() === "owobot.com"
                 );

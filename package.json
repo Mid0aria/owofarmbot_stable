@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.4.9.4",
-    "version_note": "fixed disabling battle when you disable hunt & .git folder installer added(for updates)",
+    "version": "0.0.5",
+    "version_note": "added auto voter ^^",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "bot.js",
     "repository": {
@@ -39,6 +39,7 @@
         "fs-extra": "^11.2.0",
         "node-notifier": "^10.0.1",
         "puppeteer": "^23.10.1",
+        "puppeteer-real-browser": "^1.3.20",
         "socket.io-client": "^4.8.1",
         "yargs": "^17.7.2"
     },

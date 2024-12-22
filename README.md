@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.4(BETA)</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.5(BETA)</h1>
 <p align="center">
 
 [![Total Views](https://hits.sh/github.com/Mid0aria/owofarmbot_stable.svg?view=today-total&label=Repo%20Today/Total%20Views&color=770ca1&labelColor=007ec6)](https://github.com/Mid0aria/owofarmbot_stable)
@@ -95,7 +95,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
     -   Auto Claim Daily
     -   Auto Cookie
-    -   Auto Open Vote PAGE
+    -   Auto Vote (ONLY WORKS ON DESKTOP)
 
 -   Inventory:
 
@@ -115,7 +115,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
     -   Features:
         -   Command Randomizer
         -   Suspends all farm operations when captcha is detected
-        -   Auto open captcha solve page (only works on desktop)
+        -   Auto open captcha solve page (ONLY WORKS ON DESKTOP)
         -   When the captcha is solved, farm operations continue automatically
         -   NEW CAPTCHA FEATURES WILL COME WITH UPDATES
 
@@ -205,13 +205,13 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
         "chatfeedback": true, / true or false (boolean)
         "autophrases": true, / true or false (boolean)
         "autoresume": false, / auto resume bot after captcha sloved. true or false (boolean)
-        "autojoingiveaways": true, /you are automatically entered into giveaways on the owo support server [you must be present on the server] (boolean)
+        "autojoingiveaways": true, / you are automatically entered into giveaways on the owo support server [you must be present on the server] (boolean)
 
         "checklist": {
             "types": {
                 "daily": true, / true or false (boolean)
                 "cookie": true, / true or false (boolean)
-                "vote": true / true or false (boolean)
+                "vote": true / make true if you want automatic voting. true or false (boolean)
             }
         },
 

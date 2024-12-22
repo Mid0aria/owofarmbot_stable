@@ -175,7 +175,7 @@ async function checklist(client, channel) {
                 return;
             }
 
-            await client.delay(2000);
+            await client.delay(3000);
             if (client.global.captchadetected || client.global.paused) return;
             let checklistmsg = message.embeds[0].description.toLowerCase();
             if (checklistmsg.includes("☑️ 🎉")) {
@@ -201,7 +201,7 @@ async function checklist(client, channel) {
                                         `Daily Claimed`
                                     );
                                 });
-                            await client.delay(3000);
+                            await client.delay(6000);
                             break;
 
                         case line.startsWith("⬛ 📝") &&
@@ -211,44 +211,27 @@ async function checklist(client, channel) {
                                 "Checklist - Vote",
                                 `Platform: ${process.platform}`
                             );
-
-                            let votebrowserexecute, executeCommand;
-
                             switch (process.platform) {
-                                case "win32":
-                                    votebrowserexecute = "start";
-                                    executeCommand = (command) =>
-                                        client.childprocess.exec(command);
-                                    break;
-                                case "darwin":
-                                    votebrowserexecute = "open";
-                                    executeCommand = (command) =>
-                                        client.childprocess.exec(command);
-                                    break;
-                                case "linux":
-                                    votebrowserexecute = "xdg-open";
-                                    executeCommand = (command) =>
-                                        client.childprocess.exec(command);
-                                    break;
-                                default:
+                                case "android":
                                     client.logger.warn(
-                                        "Farm",
+                                        "Bot",
                                         "Checklist - Vote",
                                         "Unsupported platform!"
                                     );
                                     return;
+                                default:
+                                    client.logger.info(
+                                        "Bot",
+                                        "Checklist - Vote",
+                                        "Opening browser..."
+                                    );
+                                    client.childprocess.spawn("node", [
+                                        "./utils/autovote.js",
+                                        `--token=${client.basic.token} --bid=408785106942164992`,
+                                    ]);
+                                    return;
                             }
 
-                            if (votebrowserexecute) {
-                                client.logger.info(
-                                    "Farm",
-                                    "Checklist - Vote",
-                                    "Opening browser..."
-                                );
-                                executeCommand(
-                                    `${votebrowserexecute} https://top.gg/bot/408785106942164992/vote`
-                                );
-                            }
                             break;
 
                         case line.startsWith("⬛ 🍪") &&
