@@ -36,8 +36,8 @@ const isTermux =
 const packageJson = require("./package.json");
 
 for (let dep of Object.keys(packageJson.dependencies)) {
-    if (isTermux && dep === "puppeteer") {
-        console.log("Skipping Puppeteer");
+    if (isTermux && (dep === "puppeteer" || dep === "puppeteer-real-browser")) {
+        console.log("Skipping Puppeteer in Termux environment");
         continue;
     }
 
@@ -45,6 +45,26 @@ for (let dep of Object.keys(packageJson.dependencies)) {
         require.resolve(dep);
     } catch (err) {
         console.log(`Installing dependencies...`);
+        try {
+            cp.execSync(`npm install ${dep}`, { stdio: "inherit" });
+        } catch (installErr) {
+            console.error(`Failed to install ${dep}:`, installErr.message);
+        }
+    }
+}
+
+const additionalDeps = ["puppeteer", "puppeteer-real-browser"];
+
+for (let dep of additionalDeps) {
+    if (isTermux) {
+        console.log(`Termux environment detected. Skipping ${dep}.`);
+        continue;
+    }
+
+    try {
+        require.resolve(dep);
+    } catch (err) {
+        console.log(`${dep} is not installed. Installing ${dep}...`);
         try {
             cp.execSync(`npm install ${dep}`, { stdio: "inherit" });
         } catch (installErr) {
@@ -66,6 +86,7 @@ let owofarmbot_stable = {
     name: "owofarmbot_stable",
     type: "Main",
     devmod: DEVELOPER_MODE,
+    istermux: isTermux,
     captchadetected: false,
     paused: true,
     owosupportserver: false,
@@ -112,6 +133,7 @@ let owofarmbot_stable_extra = {
     name: "owofarmbot_stable_extra",
     type: "Extra",
     devmod: DEVELOPER_MODE,
+    istermux: isTermux,
     captchadetected: false,
     paused: true,
     owosupportserver: false,

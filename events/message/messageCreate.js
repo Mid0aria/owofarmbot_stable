@@ -65,7 +65,10 @@ module.exports = async (client, message) => {
                     .includes("owobot.com");
             }
 
-            if (client.config.settings.captcha.alerttype.notification) {
+            if (
+                !client.global.istermux &&
+                client.config.settings.captcha.alerttype.notification
+            ) {
                 client.notifier.notify({
                     title: "Captcha Detected!",
                     message: `Solve the captcha and type ${client.config.prefix}resume in farm channel`,
@@ -75,7 +78,10 @@ module.exports = async (client, message) => {
                     appID: "OwO Farm Bot Stable",
                 });
             }
-            if (client.config.settings.captcha.alerttype.prompt) {
+            if (
+                !client.global.istermux &&
+                client.config.settings.captcha.alerttype.prompt
+            ) {
                 var promptmessage = `Captcha detected! Solve the captcha and type ${client.config.prefix}resume in farm channel`;
 
                 const psCommands = [
@@ -116,7 +122,7 @@ module.exports = async (client, message) => {
                     canulickmymonster,
                 )
             ) {
-                switch (process.platform) {
+                switch (process.platform || client.global.istermux) {
                     case "android":
                         client.logger.warn(
                             "Bot",

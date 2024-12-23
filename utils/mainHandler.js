@@ -218,14 +218,17 @@ async function checklist(client, channel) {
                                 "Checklist - Vote",
                                 `Platform: ${process.platform}`,
                             );
-                            switch (process.platform) {
+                            switch (
+                                process.platform ||
+                                client.global.istermux
+                            ) {
                                 case "android":
                                     client.logger.warn(
                                         "Bot",
                                         "Checklist - Vote",
                                         "Unsupported platform!",
                                     );
-                                    return;
+                                    break;
                                 default:
                                     client.logger.info(
                                         "Bot",
@@ -239,7 +242,7 @@ async function checklist(client, channel) {
                                         `--bid=408785106942164992`,
                                     ]);
 
-                                    return;
+                                    break;
                             }
                             break;
 
