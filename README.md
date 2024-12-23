@@ -111,6 +111,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
         -   Notification
         -   Prompt
+        -   Webhook
 
     -   Features:
         -   Auto Solving HCAPTCHA (ONLY WORKS ON DESKTOP)
@@ -243,7 +244,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
         },
 
         "captcha": {
-            autoopencaptchapage": true, // (set to true if you want to get to the hcaptcha page faster) true or false (boolean)
+            autosolvecaptcha": true, // (set to true if you want hcaptcha to solve) true or false (boolean)
             "alerttype": {
                 "notification": true, / true or false (boolean)
                 "prompt": true / true or false (boolean)

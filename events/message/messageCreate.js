@@ -109,7 +109,7 @@ module.exports = async (client, message) => {
             }
 
             if (
-                client.config.settings.captcha.autoopencaptchapage &&
+                client.config.settings.captcha.autosolvecaptcha &&
                 isWebCaptchaMessage(
                     msgcontent,
                     helloChristopher,
