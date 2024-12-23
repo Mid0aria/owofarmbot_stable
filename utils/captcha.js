@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /*
  * OwO Farm Bot Stable
  * Copyright (C) 2024 Mido
@@ -79,8 +80,8 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         await page.goto(captchaUrl, { waitUntil: "load" });
         console.log("Waiting for the captcha to be solved...");
 
-        let refreshCount = 0;
-        const maxRefreshAttempts = 35;
+        // let refreshCount = 0;
+        // const maxRefreshAttempts = 35;
 
         while (true) {
             const isCaptchaOk = await page.evaluate(() => {
@@ -125,7 +126,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                 refreshCount = 0;
             }*/ else {
                 console.log("Captcha not solved yet");
-                refreshCount++;
+                // refreshCount++;
                 await delay(2500);
             }
         }

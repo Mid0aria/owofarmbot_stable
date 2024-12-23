@@ -9,7 +9,7 @@ module.exports = {
     config: {
         name: "stats",
     },
-    run: async (client, message, args) => {
+    run: async (client, message) => {
         let totals = client.global.total;
 
         const seconds = Math.floor(process.uptime());

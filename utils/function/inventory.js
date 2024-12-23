@@ -7,7 +7,7 @@
 
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
-module.exports = async (client, message) => {
+module.exports = async (client) => {
     let channel = client.channels.cache.get(client.basic.commandschannelid);
     if (client.config.settings.owoprefix.length <= 0) {
         client.config.settings.owoprefix = "owo";
@@ -283,6 +283,7 @@ async function inventory(client, channel) {
                                 "inventory"
                             );
                         await client.delay(2500);
+                        break;
                     default:
                         break;
                 }

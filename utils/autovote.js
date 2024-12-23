@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /*
  * OwO Farm Bot Stable
  * Copyright (C) 2024 Mido

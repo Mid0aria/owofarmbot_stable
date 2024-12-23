@@ -241,7 +241,6 @@ async function checklist(client, channel) {
 
                                     return;
                             }
-
                             break;
 
                         case line.startsWith("⬛ 🍪") &&

@@ -5,7 +5,6 @@
  * For more information, see README.md and LICENSE
  */
 
-const fs = require("fs");
 let type = "single";
 let mainclient, extraclient, mainSender, extraSender;
 let mainready = false;
@@ -13,7 +12,7 @@ let extraready = false;
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getrand = (min, max) => Math.random() * (max - min) + min;
 
-module.exports = async (client, message) => {
+module.exports = async (client) => {
     let channel;
 
     if (client.config.extra.enable && client.config.extra.token.length > 0)

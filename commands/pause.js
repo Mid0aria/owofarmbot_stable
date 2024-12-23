@@ -10,7 +10,7 @@ module.exports = {
         name: "pause",
         aliases: ["stop"],
     },
-    run: async (client, message, args) => {
+    run: async (client, message) => {
         if (client.global.paused) {
             await message.delete();
             if (client.config.settings.chatfeedback) {

@@ -8,7 +8,7 @@
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getrand = (min, max) => Math.random() * (max - min) + min;
 
-module.exports = async (client, message) => {
+module.exports = async (client) => {
     if (client.config.settings.owoprefix.length <= 0) {
         client.config.settings.owoprefix = "owo";
     }

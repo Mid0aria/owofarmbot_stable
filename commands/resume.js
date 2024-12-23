@@ -9,7 +9,7 @@ module.exports = {
     config: {
         name: "resume",
     },
-    run: async (client, message, args) => {
+    run: async (client, message) => {
         if (client.global.paused) {
             if (client.global.captchadetected) {
                 client.global.captchadetected = false;

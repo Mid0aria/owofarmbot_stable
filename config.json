@@ -8,6 +8,7 @@
         "owodmchannelid": "",
         "gamblechannelid": "",
         "autoquestchannelid": "",
+        "autostart": false,
 
         "commands": {
             "hunt": true,
@@ -40,6 +41,7 @@
         "owodmchannelid": "",
         "gamblechannelid": "",
         "autoquestchannelid": "",
+        "autostart": false,
 
         "commands": {
             "hunt": true,

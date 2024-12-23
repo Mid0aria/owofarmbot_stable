@@ -144,6 +144,8 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
         "owodmchannelid": "", / OwO DM Channel ID
         "gamblechannelid": "", / Gamble Channel ID
         "autoquestchannelid": "", / Quest Channel ID
+        "autostart": false, / set to true if you want the farm bot to run as soon as you run the code, true or false (boolean)
+
 
         "commands": {
             "hunt": true, / true or false (boolean)
@@ -176,6 +178,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
         "owodmchannelid": "",
         "gamblechannelid": "",
         "autoquestchannelid": "",
+        "autostart": false,
 
         "commands": {
             "hunt": true,

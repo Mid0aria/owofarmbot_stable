@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.6.0.1",
-    "version_note": "Fixed autovote not opening",
+    "version": "0.0.6.0.2",
+    "version_note": "Added autostart on startup. If you want to use it, change the autostart value to true in config.json",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "bot.js",
     "repository": {

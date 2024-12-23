@@ -9,7 +9,7 @@ module.exports = {
     config: {
         name: "start",
     },
-    run: async (client, message, args) => {
+    run: async (client, message) => {
         if (client.global.paused) {
             if (client.global.captchadetected) {
                 client.global.captchadetected = false;
@@ -26,7 +26,7 @@ module.exports = {
                 }
 
                 setTimeout(() => {
-                    require("../utils/mainHandler.js")(client, message);
+                    require("../utils/mainHandler.js")(client);
                 }, 1000);
             } else {
                 if (client.config.settings.chatfeedback) {
