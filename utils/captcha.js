@@ -6,7 +6,8 @@
  */
 
 /*
- * using puppeteer it goes to the auth connection and opens the captcha page for you, you just need to solve the captcha
+ * BENDE VARRR 🤙🤙🤙🤙
+ * https://open.spotify.com/track/1Ma4fLShd0hpZSNH37mEkR?si=fa52965f89434731
  */
 
 const { connect } = require("puppeteer-real-browser");
