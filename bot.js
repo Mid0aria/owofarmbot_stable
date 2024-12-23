@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-escape */
 /*
  * OwO Farm Bot Stable
  * Copyright (C) 2024 Mido
@@ -221,7 +223,6 @@ process.title = `Owo Farm Bot Stable v${packageJson.version}`;
     fs.readdirSync("./handlers").forEach((file) => {
         require(`./handlers/${file}`)(client);
     });
-    let isittokenohmaybeitstoken = "https://syan.anlayana.com/uryczr";
     client.logger.warn("Bot", "Startup", "Logging in...");
     await client.login(config.main.token);
 
