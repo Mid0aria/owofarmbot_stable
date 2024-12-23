@@ -19,8 +19,8 @@ dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM=
 ### Text
 
 - [🎈・Installation](#Installation)
-  - [Windows / Linux](#windows--linux) - Official
-  - [Android / iOS (Termux)](#android--ios-termux) - Official
+    - [Windows / Linux](#windows--linux) - Official
+    - [Android / iOS (Termux)](#android--ios-termux) - Official
 
 If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt6C)
 
@@ -70,63 +70,63 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
 - Auto Commands:
 
-  - Hunt
-  - Battle
-  - Pray
-  - Curse
-  - HuntBot (with captcha solver)
-  - Upgrade HuntBot
-  - Gamble
-    - Coinflip
-    - Slot
+    - Hunt
+    - Battle
+    - Pray
+    - Curse
+    - HuntBot (with captcha solver)
+    - Upgrade HuntBot
+    - Gamble
+        - Coinflip
+        - Slot
 
 - Questing:
 
-  - Do quest that require one user to done
-  - If extratoken is enabled, both can do quest for each other
+    - Do quest that require one user to done
+    - If extratoken is enabled, both can do quest for each other
 
 - Animals:
 
-  - Type:
-    - Sell
-    - Sacrifice
-  - Choose which animal types to use
+    - Type:
+        - Sell
+        - Sacrifice
+    - Choose which animal types to use
 
 - CheckList:
 
-  - Auto Claim Daily
-  - Auto Cookie
-  - Auto Vote (ONLY WORKS ON DESKTOP)
+    - Auto Claim Daily
+    - Auto Cookie
+    - Auto Vote (ONLY WORKS ON DESKTOP)
 
 - Inventory:
 
-  - Auto Check Inventory
-  - Auto Use Lootbox
-  - Auto Use Fabled Lootbox
-  - Auto Use Crate
-  - Auto Use Gems
+    - Auto Check Inventory
+    - Auto Use Lootbox
+    - Auto Use Fabled Lootbox
+    - Auto Use Crate
+    - Auto Use Gems
 
 - Captcha:
 
-  - Alert Type:
+    - Alert Type:
 
-    - Notification
-    - Prompt
-    - Webhook
+        - Notification
+        - Prompt
+        - Webhook
 
-  - Features:
-    - Auto Solving HCAPTCHA (ONLY WORKS ON DESKTOP)
-    - Command Randomizer
-    - Suspends all farm operations when captcha is detected
-    - When the captcha is solved, farm operations continue automatically
+    - Features:
+        - Auto Solving HCAPTCHA (ONLY WORKS ON DESKTOP)
+        - Command Randomizer
+        - Suspends all farm operations when captcha is detected
+        - When the captcha is solved, farm operations continue automatically
 
 - Auto Join OwO Support Server Giveaways
 - Discord RPC
 - Auto Phrases Send
 - Chat FeedBack
 - Extra Token:
-  - All Maintoken feature
-  - Pray/curse to main
+    - All Maintoken feature
+    - Pray/curse to main
 - All commands now controlable
 
 - NEW FEATURES WILL COME WITH UPDATES
@@ -324,15 +324,15 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
 ```js
 (webpackChunkdiscord_app.push([
-	[""],
-	{},
-	(e) => {
-		for (let t in ((m = []), e.c)) m.push(e.c[t]);
-	},
+    [""],
+    {},
+    (e) => {
+        for (let t in ((m = []), e.c)) m.push(e.c[t]);
+    },
 ]),
 m)
-	.find((e) => e?.exports?.default?.getToken !== void 0)
-	.exports.default.getToken();
+    .find((e) => e?.exports?.default?.getToken !== void 0)
+    .exports.default.getToken();
 ```
 
 ### Mobile/Android
@@ -340,9 +340,9 @@ m)
 1. Open Chrome
 2. Create a bookmark (by clicking on star button in 3 dots menu)
 3. Edit it and set name to Token Finder and url to the following code:
-   ```javascript
-   javascript: (webpackChunkdiscord_app.push([[""],{},(e)=>{m=[];for (let c in e.c) m.push(e.c[c]);},]),m).find((m) => m?.exports?.default?.getToken%20!==%20void%200)%20%20%20%20.exports.default.getToken();
-   ```
+    ```javascript
+    javascript: (webpackChunkdiscord_app.push([[""],{},(e)=>{m=[];for (let c in e.c) m.push(e.c[c]);},]),m).find((m) => m?.exports?.default?.getToken%20!==%20void%200)%20%20%20%20.exports.default.getToken();
+    ```
 4. Open https://discord.com/app and log in.
 5. Tap on search bar and type Token Finder (don't search it just type)
 6. Click on the bookmark named Token Finder.

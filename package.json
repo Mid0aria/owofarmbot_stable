@@ -1,54 +1,54 @@
 {
-	"name": "owofarmbot_stable",
-	"version": "0.0.6.0.1",
-	"version_note": "Fixed autovote not opening",
-	"description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
-	"main": "bot.js",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Mid0aria/owofarmbot_stable.git"
-	},
-	"keywords": [
-		"nodejs",
-		"bot",
-		"selfbot",
-		"selfbot-for-discord",
-		"owo",
-		"owo-bot",
-		"owo-self-bot",
-		"owofarm",
-		"discord-owo-selfbot",
-		"self-owo",
-		"owofarmbot",
-		"owoautofarm",
-		"owobot",
-		"owoautofarmer"
-	],
-	"author": "Mid0aria",
-	"license": "ISC",
-	"scripts": {
-		"start": "node bot.js",
-		"run": "node bot.js",
-		"setup": "npm i",
-		"format": "prettier -w ."
-	},
-	"dependencies": {
-		"adm-zip": "^0.5.16",
-		"axios": "^1.7.9",
-		"chalk": "^4.1.2",
-		"discord.js-selfbot-v13": "^3.4.2",
-		"fs-extra": "^11.2.0",
-		"node-notifier": "^10.0.1",
-		"puppeteer": "^23.10.1",
-		"puppeteer-real-browser": "^1.3.20",
-		"socket.io-client": "^4.8.1",
-		"yargs": "^17.7.2"
-	},
-	"bugs": {
-		"url": "https://github.com/Mid0aria/owofarmbot_stable/issues"
-	},
-	"homepage": "https://github.com/Mid0aria/owofarmbot_stable#readme",
-	"devDependencies": {
-		"prettier": "^3.4.2"
-	}
+    "name": "owofarmbot_stable",
+    "version": "0.0.6.0.1",
+    "version_note": "Fixed autovote not opening",
+    "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
+    "main": "bot.js",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Mid0aria/owofarmbot_stable.git"
+    },
+    "keywords": [
+        "nodejs",
+        "bot",
+        "selfbot",
+        "selfbot-for-discord",
+        "owo",
+        "owo-bot",
+        "owo-self-bot",
+        "owofarm",
+        "discord-owo-selfbot",
+        "self-owo",
+        "owofarmbot",
+        "owoautofarm",
+        "owobot",
+        "owoautofarmer"
+    ],
+    "author": "Mid0aria",
+    "license": "ISC",
+    "scripts": {
+        "start": "node bot.js",
+        "run": "node bot.js",
+        "setup": "npm i",
+        "format": "prettier -w ."
+    },
+    "dependencies": {
+        "adm-zip": "^0.5.16",
+        "axios": "^1.7.9",
+        "chalk": "^4.1.2",
+        "discord.js-selfbot-v13": "^3.4.2",
+        "fs-extra": "^11.2.0",
+        "node-notifier": "^10.0.1",
+        "puppeteer": "^23.10.1",
+        "puppeteer-real-browser": "^1.3.20",
+        "socket.io-client": "^4.8.1",
+        "yargs": "^17.7.2"
+    },
+    "bugs": {
+        "url": "https://github.com/Mid0aria/owofarmbot_stable/issues"
+    },
+    "homepage": "https://github.com/Mid0aria/owofarmbot_stable#readme",
+    "devDependencies": {
+        "prettier": "^3.4.2"
+    }
 }
