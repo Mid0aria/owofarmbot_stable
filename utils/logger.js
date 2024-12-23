@@ -40,7 +40,7 @@ module.exports = (client) => {
                 //     ? "" //idk why i put this on
                 //     :
                 `${client.chalk.white(" >> ")}${client.chalk.cyan(
-                    client.chalk.bold(client.global.type)
+                    client.chalk.bold(client.global.type),
                 )}`
             } > ` +
             `${client.chalk.magenta(module)} > ` +
@@ -138,7 +138,7 @@ module.exports = (client) => {
                     extrac.global.quest.progress
                 }
 ╚══════════╩═══════════════════════╩════════════════════════════════════════════════
->>> Log`
+>>> Log`,
             );
             for (const logs of reallog) console.log(logs);
         } else if (client.config.settings.logging.newlog) {
@@ -158,7 +158,7 @@ module.exports = (client) => {
 ║ Safety level         ║ ${mainCaptcha} ║ > Progress
 ║ Running?             ║ ${mainPause} ║ ${client.global.quest.progress}
 ╚══════════════════════╩══════════╩═══════════════════════════════════════════════
->>> Log`
+>>> Log`,
             );
             for (const logs of reallog) console.log(logs);
         } else console.log(reallog[reallog.length - 1]);

@@ -177,7 +177,7 @@ function rpc(type) {
                 " > " +
                 chalk.magenta(type) +
                 " > " +
-                chalk.green(`${client.global.paused ? "Paused" : "Running"}`)
+                chalk.green(`${client.global.paused ? "Paused" : "Running"}`),
         );
     }
 }
@@ -235,7 +235,7 @@ process.title = `Owo Farm Bot Stable v${packageJson.version}`;
     client.logger.warn(
         "Bot",
         "Help",
-        `Use \"${config.prefix}start\" to start the bot, \"${config.prefix}resume\" to resume, and \"${config.prefix}pause\" to pause.`
+        `Use \"${config.prefix}start\" to start the bot, \"${config.prefix}resume\" to resume, and \"${config.prefix}pause\" to pause.`,
     );
 })();
 

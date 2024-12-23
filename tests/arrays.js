@@ -14,7 +14,7 @@ function createClient(token, userid) {
         userid: userid,
         connect: function () {
             console.log(
-                `Client created: Token -> ${this.token}, UserID -> ${this.userid}`
+                `Client created: Token -> ${this.token}, UserID -> ${this.userid}`,
             );
         },
     };

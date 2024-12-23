@@ -13,14 +13,14 @@ dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM=
 
 ### Videos
 
--   [Windows FOR V0.0.6](https://www.youtube.com/watch?v=U4Q6joLF2Qo) - Official
--   [Termux](https://youtu.be/w2tvj1oRSO8?si=ueve5EIC9usVpxIT) - ZungHieu
+- [Windows FOR V0.0.6](https://www.youtube.com/watch?v=U4Q6joLF2Qo) - Official
+- [Termux](https://youtu.be/w2tvj1oRSO8?si=ueve5EIC9usVpxIT) - ZungHieu
 
 ### Text
 
--   [🎈・Installation](#Installation)
-    -   [Windows / Linux](#windows--linux) - Official
-    -   [Android / iOS (Termux)](#android--ios-termux) - Official
+- [🎈・Installation](#Installation)
+    - [Windows / Linux](#windows--linux) - Official
+    - [Android / iOS (Termux)](#android--ios-termux) - Official
 
 If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt6C)
 
@@ -63,73 +63,73 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
 ## ❗・Important (Anyone using the bot is deemed to have read and accepted these)
 
--   Use of this farm bot may lead to actions being taken against your OwO profile and/or your Discord account. We are not responsible for them.
--   FARM, HUNTBOT, QUEST AND GAMBLE NEED TO PLACE IN DIFFERENT CHANNEL. That mean if you use all of them, you need four different channel. And if you use extra token, that will be eight.
+- Use of this farm bot may lead to actions being taken against your OwO profile and/or your Discord account. We are not responsible for them.
+- FARM, HUNTBOT, QUEST AND GAMBLE NEED TO PLACE IN DIFFERENT CHANNEL. That mean if you use all of them, you need four different channel. And if you use extra token, that will be eight.
 
 ## 👑・Features
 
--   Auto Commands:
+- Auto Commands:
 
-    -   Hunt
-    -   Battle
-    -   Pray
-    -   Curse
-    -   HuntBot (with captcha solver)
-    -   Upgrade HuntBot
-    -   Gamble
-        -   Coinflip
-        -   Slot
+    - Hunt
+    - Battle
+    - Pray
+    - Curse
+    - HuntBot (with captcha solver)
+    - Upgrade HuntBot
+    - Gamble
+        - Coinflip
+        - Slot
 
--   Questing:
+- Questing:
 
-    -   Do quest that require one user to done
-    -   If extratoken is enabled, both can do quest for each other
+    - Do quest that require one user to done
+    - If extratoken is enabled, both can do quest for each other
 
--   Animals:
+- Animals:
 
-    -   Type:
-        -   Sell
-        -   Sacrifice
-    -   Choose which animal types to use
+    - Type:
+        - Sell
+        - Sacrifice
+    - Choose which animal types to use
 
--   CheckList:
+- CheckList:
 
-    -   Auto Claim Daily
-    -   Auto Cookie
-    -   Auto Vote (ONLY WORKS ON DESKTOP)
+    - Auto Claim Daily
+    - Auto Cookie
+    - Auto Vote (ONLY WORKS ON DESKTOP)
 
--   Inventory:
+- Inventory:
 
-    -   Auto Check Inventory
-    -   Auto Use Lootbox
-    -   Auto Use Fabled Lootbox
-    -   Auto Use Crate
-    -   Auto Use Gems
+    - Auto Check Inventory
+    - Auto Use Lootbox
+    - Auto Use Fabled Lootbox
+    - Auto Use Crate
+    - Auto Use Gems
 
--   Captcha:
+- Captcha:
 
-    -   Alert Type:
+    - Alert Type:
 
-        -   Notification
-        -   Prompt
-        -   Webhook
+        - Notification
+        - Prompt
+        - Webhook
 
-    -   Features:
-        -   Auto Solving HCAPTCHA (ONLY WORKS ON DESKTOP)
-        -   Command Randomizer
-        -   Suspends all farm operations when captcha is detected
-        -   When the captcha is solved, farm operations continue automatically
+    - Features:
+        - Auto Solving HCAPTCHA (ONLY WORKS ON DESKTOP)
+        - Command Randomizer
+        - Suspends all farm operations when captcha is detected
+        - When the captcha is solved, farm operations continue automatically
 
--   Auto Join OwO Support Server Giveaways
--   Discord RPC
--   Auto Phrases Send
--   Chat FeedBack
--   Extra Token:
-    -   All Maintoken feature
-    -   Pray/curse to main
--   All commands now controlable
+- Auto Join OwO Support Server Giveaways
+- Discord RPC
+- Auto Phrases Send
+- Chat FeedBack
+- Extra Token:
+    - All Maintoken feature
+    - Pray/curse to main
+- All commands now controlable
 
--   NEW FEATURES WILL COME WITH UPDATES
+- NEW FEATURES WILL COME WITH UPDATES
 
 ## ⚙・config.json example
 
@@ -442,8 +442,8 @@ In config.json, type [prefix]resume (example: e!resume) with the prefix you set 
 
 ## 🥰・Contributors
 
--   Random-629671 [(GitHub)](https://github.com/Random-629671)
--   Hiếu LoneLy [(YouTube)](https://www.youtube.com/watch?v=w2tvj1oRSO8)
+- Random-629671 [(GitHub)](https://github.com/Random-629671)
+- Hiếu LoneLy [(YouTube)](https://www.youtube.com/watch?v=w2tvj1oRSO8)
 
 ## 📑・License
 
@@ -451,14 +451,14 @@ In config.json, type [prefix]resume (example: e!resume) with the prefix you set 
 
 The CC-BY-NC-SA-4.0 allows you to:
 
--   [x] **Share** -- copy and redistribute the material in any medium or format
--   [x] **Adapt** -- remix, transform, and build upon the material
+- [x] **Share** -- copy and redistribute the material in any medium or format
+- [x] **Adapt** -- remix, transform, and build upon the material
 
 Under the following terms:
 
--   **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
--   **NonCommercial** — You may not use the material for commercial purposes.
--   **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+- **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+- **NonCommercial** — You may not use the material for commercial purposes.
+- **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
 
 More information can be found [here](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 

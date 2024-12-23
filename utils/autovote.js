@@ -83,7 +83,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
         await page.evaluate(() => {
             const button = document.querySelector(
-                "div.css-1yn6pjb button.chakra-button.css-1xwhzbv"
+                "div.css-1yn6pjb button.chakra-button.css-1xwhzbv",
             );
 
             if (!button || button.disabled) {

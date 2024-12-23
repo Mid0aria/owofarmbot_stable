@@ -25,7 +25,7 @@ module.exports = async (client) => {
         mainclient = client;
         channel = client.channels.cache.get(client.basic.autoquestchannelid);
         extraSender = client.channels.cache.get(
-            client.config.extra.autoquestchannelid
+            client.config.extra.autoquestchannelid,
         );
         mainready = true;
     }
@@ -33,7 +33,7 @@ module.exports = async (client) => {
         extraclient = client;
         channel = client.channels.cache.get(client.basic.autoquestchannelid);
         mainSender = client.channels.cache.get(
-            client.config.main.autoquestchannelid
+            client.config.main.autoquestchannelid,
         );
         extraready = true;
     }
@@ -96,7 +96,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
                         client.logger.warn(
                             "Farm",
                             "Quest",
-                            "Rechecking quest..."
+                            "Rechecking quest...",
                         );
                         client.off("messageCreate", listener);
                         const result = (message) =>
@@ -124,7 +124,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
                 client.logger.alert(
                     "Farm",
                     "Quest",
-                    "Cannot get quest! Recheck after 61 seconds."
+                    "Cannot get quest! Recheck after 61 seconds.",
                 );
                 setTimeout(() => {
                     questHandler(client, channel);
@@ -144,7 +144,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
                 const title = line.match(/\*\*\d+\.\s(.+?)\*\*/)[1];
 
                 const rewardGroup = line.match(
-                    /Reward:\`\s*(?<reward>\d*)\s*<:(?<rewardtype>[\w]+):\d+>/
+                    /Reward:\`\s*(?<reward>\d*)\s*<:(?<rewardtype>[\w]+):\d+>/,
                 );
                 const reward =
                     rewardGroup && rewardGroup.groups
@@ -156,7 +156,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
                         : "";
 
                 const progressGroup = line.match(
-                    /Progress:\s*\[(\d+)\/(\d+)\]/
+                    /Progress:\s*\[(\d+)\/(\d+)\]/,
                 );
                 const [progress1, progress2] = progressGroup
                     ? [parseInt(progressGroup[1]), parseInt(progressGroup[2])]
@@ -199,7 +199,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
                                 }
                                 break;
                             case quest.title.includes(
-                                "Use an action command on someone"
+                                "Use an action command on someone",
                             ):
                                 questActionOther(client, channel, quest);
                                 selectedQuest = true;
@@ -210,43 +210,43 @@ async function questHandler(client, channel, mainSender, extraSender) {
                         if (type == "duo" && !selectedQuest) {
                             switch (true) {
                                 case quest.title.includes(
-                                    "Have a friend curse you"
+                                    "Have a friend curse you",
                                 ):
                                     questCurse(
                                         client,
                                         channel,
                                         quest,
                                         mainSender,
-                                        extraSender
+                                        extraSender,
                                     );
                                     selectedQuest = true;
                                     break;
                                 case quest.title.includes(
-                                    "Have a friend pray to you"
+                                    "Have a friend pray to you",
                                 ):
                                     questPray(
                                         client,
                                         channel,
                                         quest,
                                         mainSender,
-                                        extraSender
+                                        extraSender,
                                     );
                                     selectedQuest = true;
                                     break;
                                 case quest.title.includes(
-                                    "Battle with a friend"
+                                    "Battle with a friend",
                                 ):
                                     questBattle(
                                         client,
                                         channel,
                                         quest,
                                         mainSender,
-                                        extraSender
+                                        extraSender,
                                     );
                                     selectedQuest = true;
                                     break;
                                 case quest.title.includes(
-                                    "Receive a cookie from"
+                                    "Receive a cookie from",
                                 ) &&
                                     mainclient.global.temp.usedcookie ==
                                         false &&
@@ -256,19 +256,19 @@ async function questHandler(client, channel, mainSender, extraSender) {
                                         channel,
                                         quest,
                                         mainSender,
-                                        extraSender
+                                        extraSender,
                                     );
                                     selectedQuest = true;
                                     break;
                                 case quest.title.includes(
-                                    "Have a friend use an action command"
+                                    "Have a friend use an action command",
                                 ):
                                     questActionMe(
                                         client,
                                         channel,
                                         quest,
                                         mainSender,
-                                        extraSender
+                                        extraSender,
                                     );
                                     selectedQuest = true;
                                     break;
@@ -282,7 +282,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
                         client.logger.info(
                             "Farm",
                             "Quest",
-                            `Quest found: ${quest.title}`
+                            `Quest found: ${quest.title}`,
                         );
                         let rwKind = "";
                         switch (true) {
@@ -311,7 +311,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
                     client.logger.info(
                         "Farm",
                         "Quest",
-                        `No active quest found!`
+                        `No active quest found!`,
                     );
 
                     client.global.quest.title = "No active quest found";

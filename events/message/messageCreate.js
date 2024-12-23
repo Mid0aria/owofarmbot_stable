@@ -9,7 +9,7 @@ function isWebCaptchaMessage(msgcontent, helloChristopher, canulickmymonster) {
     const suspiciousPhrases = [".com", "please use the link"];
 
     const hasSuspiciousContent = suspiciousPhrases.some((phrase) =>
-        msgcontent.includes(phrase)
+        msgcontent.includes(phrase),
     );
 
     return hasSuspiciousContent || helloChristopher || canulickmymonster;
@@ -32,7 +32,7 @@ module.exports = async (client, message) => {
                 msgcontent.includes("verify that you are human") ||
                 msgcontent.includes("are you a real human") ||
                 msgcontent.includes(
-                    "please use the link below so i can check"
+                    "please use the link below so i can check",
                 ) ||
                 msgcontent.includes("captcha")) &&
             !client.global.captchadetected
@@ -44,12 +44,12 @@ module.exports = async (client, message) => {
             client.logger.info(
                 "Bot",
                 "Captcha",
-                `Total Captcha: ${client.global.total.captcha}`
+                `Total Captcha: ${client.global.total.captcha}`,
             );
             client.logger.warn(
                 "Bot",
                 "Captcha",
-                `Bot Paused: ${client.global.paused}`
+                `Bot Paused: ${client.global.paused}`,
             );
 
             if (
@@ -58,7 +58,7 @@ module.exports = async (client, message) => {
             ) {
                 // some homo's saying "Challenge accepted". What challenge are you talking about, asshole oe XD
                 helloChristopher = message.components[0].components.find(
-                    (button) => button.url.toLowerCase() === "owobot.com"
+                    (button) => button.url.toLowerCase() === "owobot.com",
                 );
                 canulickmymonster = message.components[0].components[0].url
                     .toLowerCase()
@@ -85,7 +85,7 @@ module.exports = async (client, message) => {
                 ];
                 const psScript = psCommands.join("; ");
                 client.childprocess.exec(
-                    `powershell.exe -ExecutionPolicy Bypass -Command "${psScript}"`
+                    `powershell.exe -ExecutionPolicy Bypass -Command "${psScript}"`,
                 );
             }
             if (
@@ -113,7 +113,7 @@ module.exports = async (client, message) => {
                 isWebCaptchaMessage(
                     msgcontent,
                     helloChristopher,
-                    canulickmymonster
+                    canulickmymonster,
                 )
             ) {
                 switch (process.platform) {
@@ -121,14 +121,14 @@ module.exports = async (client, message) => {
                         client.logger.warn(
                             "Bot",
                             "Captcha",
-                            "Unsupported platform!"
+                            "Unsupported platform!",
                         );
                         return;
                     default:
                         client.logger.info(
                             "Bot",
                             "Captcha",
-                            "Opening browser..."
+                            "Opening browser...",
                         );
                         client.childprocess.spawn("node", [
                             "./utils/captcha.js",
@@ -145,13 +145,13 @@ module.exports = async (client, message) => {
                 client.logger.warn(
                     "Bot",
                     "Captcha",
-                    `Captcha solved. Resuming bot automatically...`
+                    `Captcha solved. Resuming bot automatically...`,
                 );
             } else {
                 client.logger.warn(
                     "Bot",
                     "Captcha",
-                    `Captcha Solved, please resume by using the command \"${client.config.prefix}resume\" to resume`
+                    `Captcha Solved, please resume by using the command \"${client.config.prefix}resume\" to resume`,
                 );
             }
         }
@@ -164,7 +164,7 @@ module.exports = async (client, message) => {
 
     const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const prefixRegex = new RegExp(
-        `^(<@!?${client.user.id}>|${escapeRegex(PREFIX)})\\s*`
+        `^(<@!?${client.user.id}>|${escapeRegex(PREFIX)})\\s*`,
     );
     if (!prefixRegex.test(message.content)) return;
     const [matchedPrefix] = message.content.match(prefixRegex);

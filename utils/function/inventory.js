@@ -28,7 +28,7 @@ async function inventory(client, channel) {
     client.logger.info(
         "Farm",
         "Inventory",
-        `Paused: ${client.global.inventory}! Retrieving inventory...`
+        `Paused: ${client.global.inventory}! Retrieving inventory...`,
     );
     let id;
     await channel
@@ -78,7 +78,7 @@ async function inventory(client, channel) {
                 client.logger.alert(
                     "Farm",
                     "inventory",
-                    "Couldn't retrieve inventory"
+                    "Couldn't retrieve inventory",
                 );
                 return;
             }
@@ -258,7 +258,7 @@ async function inventory(client, channel) {
                                 channel,
                                 `${commandrandomizer(["lb", "lootbox"])}`,
                                 "all",
-                                "inventory"
+                                "inventory",
                             );
                         await client.delay(2500);
                         break;
@@ -269,7 +269,7 @@ async function inventory(client, channel) {
                                 channel,
                                 "lootbox fabled",
                                 "all",
-                                "inventory"
+                                "inventory",
                             );
                         await client.delay(2500);
                         break;
@@ -280,7 +280,7 @@ async function inventory(client, channel) {
                                 channel,
                                 `${commandrandomizer(["wc", "crate"])}`,
                                 "all",
-                                "inventory"
+                                "inventory",
                             );
                         await client.delay(2500);
                         break;
@@ -295,7 +295,7 @@ async function inventory(client, channel) {
                     channel,
                     `use ${client.global.gems.use}`,
                     "",
-                    "inventory"
+                    "inventory",
                 );
                 client.global.gems.need = [];
                 client.global.gems.use = "";
@@ -306,7 +306,7 @@ async function inventory(client, channel) {
             client.logger.info(
                 "Farm",
                 "Inventory",
-                `Paused: ${client.global.inventory}`
+                `Paused: ${client.global.inventory}`,
             );
         });
 }

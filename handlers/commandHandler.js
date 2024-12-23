@@ -7,7 +7,7 @@ module.exports = async (client) => {
         client.commands.set(pull.config.name, pull);
         if (pull.config.aliases)
             pull.config.aliases.forEach((a) =>
-                client.aliases.set(a, pull.config.name)
+                client.aliases.set(a, pull.config.name),
             );
     }
 };

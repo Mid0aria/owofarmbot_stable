@@ -53,7 +53,7 @@ module.exports = async (client, message) => {
             client,
             channel,
             client.config.animals.type.sell ? "sell" : "sacrifice",
-            client.global.temp.animaltype
+            client.global.temp.animaltype,
         );
     }
     await client.delay(32000);
@@ -69,7 +69,7 @@ module.exports = async (client, message) => {
                     client.logger.warn(
                         "Bot",
                         "Huntbot",
-                        "HuntBot captcha solver already started."
+                        "HuntBot captcha solver already started.",
                     );
                     require("./function/huntbot.js")(client);
                     return 0;
@@ -77,12 +77,12 @@ module.exports = async (client, message) => {
                     client.logger.warn(
                         "Bot",
                         "Huntbot",
-                        "HuntBot captcha solver starting..."
+                        "HuntBot captcha solver starting...",
                     );
                     huntbotcaptchaprocess = client.childprocess.spawn("py", [
                         path.join(
                             __dirname,
-                            "./huntbot_captcha/huntbotcaptcha.py"
+                            "./huntbot_captcha/huntbotcaptcha.py",
                         ),
                     ]);
 
@@ -94,7 +94,7 @@ module.exports = async (client, message) => {
             client.logger.warn(
                 "Bot",
                 "Huntbot",
-                "Killing huntBot captcha solver..."
+                "Killing huntBot captcha solver...",
             );
             huntbotcaptchaprocess.kill("SIGINT");
         });
@@ -102,7 +102,7 @@ module.exports = async (client, message) => {
             client.logger.warn(
                 "Bot",
                 "Huntbot",
-                "Killing huntBot captcha solver..."
+                "Killing huntBot captcha solver...",
             );
             huntbotcaptchaprocess.kill("SIGINT");
         });
@@ -126,7 +126,7 @@ async function checklist(client, channel) {
             client.logger.info(
                 "Farm",
                 "Checklist",
-                `Paused: ${client.global.checklist}! Reading checklist`
+                `Paused: ${client.global.checklist}! Reading checklist`,
             );
             let message = await getMessage();
             async function getMessage() {
@@ -151,7 +151,7 @@ async function checklist(client, channel) {
                         client.logger.warn(
                             "Farm",
                             "Checklist",
-                            "Rechecking checklist..."
+                            "Rechecking checklist...",
                         );
                         client.off("messageCreate", listener);
                         const collector = channel.createMessageCollector({
@@ -176,7 +176,7 @@ async function checklist(client, channel) {
                 client.logger.alert(
                     "Farm",
                     "Checklist",
-                    "Cannot retrieve checklist."
+                    "Cannot retrieve checklist.",
                 );
                 require("./function/farm.js")(client, message);
                 return;
@@ -205,7 +205,7 @@ async function checklist(client, channel) {
                                     client.logger.info(
                                         "Farm",
                                         "Checklist - Daily",
-                                        `Daily Claimed`
+                                        `Daily Claimed`,
                                     );
                                 });
                             await client.delay(6000);
@@ -216,21 +216,21 @@ async function checklist(client, channel) {
                             client.logger.info(
                                 "Farm",
                                 "Checklist - Vote",
-                                `Platform: ${process.platform}`
+                                `Platform: ${process.platform}`,
                             );
                             switch (process.platform) {
                                 case "android":
                                     client.logger.warn(
                                         "Bot",
                                         "Checklist - Vote",
-                                        "Unsupported platform!"
+                                        "Unsupported platform!",
                                     );
                                     return;
                                 default:
                                     client.logger.info(
                                         "Bot",
                                         "Checklist - Vote",
-                                        "Opening browser..."
+                                        "Opening browser...",
                                     );
 
                                     client.childprocess.spawn("node", [
@@ -258,7 +258,7 @@ async function checklist(client, channel) {
                                     client.logger.info(
                                         "Farm",
                                         "Checklist - Cookie",
-                                        `Cookie sent`
+                                        `Cookie sent`,
                                     );
                                 });
                             await client.delay(3000);
@@ -272,7 +272,7 @@ async function checklist(client, channel) {
                             client.logger.info(
                                 "Farm",
                                 "Checklist",
-                                "Daily lootbox completed"
+                                "Daily lootbox completed",
                             );
                             break;
 
@@ -280,7 +280,7 @@ async function checklist(client, channel) {
                             client.logger.info(
                                 "Farm",
                                 "Checklist",
-                                "Daily crate completed"
+                                "Daily crate completed",
                             );
                             break;
                     }
@@ -299,7 +299,7 @@ async function checklist(client, channel) {
             client.logger.info(
                 "Farm",
                 "Checklist",
-                `Paused: ${client.global.checklist}`
+                `Paused: ${client.global.checklist}`,
             );
             require("./function/farm.js")(client, message);
         });
@@ -319,7 +319,13 @@ async function sell(client, channel, choose, types) {
             client.config.settings.owoprefix,
         ])} ${choose} ${types}`,
     });
-    setTimeout(() => {
-        sell(client, channel, choose, types);
-    }, getrand(client.config.interval.animals.min, client.config.interval.animals.max));
+    setTimeout(
+        () => {
+            sell(client, channel, choose, types);
+        },
+        getrand(
+            client.config.interval.animals.min,
+            client.config.interval.animals.max,
+        ),
+    );
 }

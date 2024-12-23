@@ -43,7 +43,7 @@ async function hunt(client, channel) {
     client.global.hunt = true;
     let interval = getrand(
         client.config.interval.hunt.min,
-        client.config.interval.hunt.max
+        client.config.interval.hunt.max,
     );
     let id;
     await channel
@@ -59,7 +59,7 @@ async function hunt(client, channel) {
             client.logger.info(
                 "Farm",
                 "Hunt",
-                `Total Hunt: ${client.global.total.hunt}`
+                `Total Hunt: ${client.global.total.hunt}`,
             );
             if (client.config.settings.inventory.use.gems) {
                 let message = await getMessage();
@@ -104,7 +104,7 @@ async function hunt(client, channel) {
                     client.logger.alert(
                         "Farm",
                         "Hunt",
-                        "Couldn't retrieve hunting result!"
+                        "Couldn't retrieve hunting result!",
                     );
                     setTimeout(() => {
                         hunt(client, channel);
@@ -143,7 +143,7 @@ async function hunt(client, channel) {
                         client.logger.warn(
                             "Farm",
                             "Hunt",
-                            `Missing gems: ${client.global.gems.need}`
+                            `Missing gems: ${client.global.gems.need}`,
                         );
 
                         if (client.basic.commands.inventory) {
@@ -183,7 +183,7 @@ async function battle(client, channel) {
     client.global.battle = true;
     let interval = getrand(
         client.config.interval.battle.min,
-        client.config.interval.battle.max
+        client.config.interval.battle.max,
     );
     await channel
         .send({
@@ -197,7 +197,7 @@ async function battle(client, channel) {
             client.logger.info(
                 "Farm",
                 "Battle",
-                `Total Battle: ${client.global.total.battle}`
+                `Total Battle: ${client.global.total.battle}`,
             );
             client.global.battle = false;
         });
@@ -217,7 +217,7 @@ async function elaina2(client, channel) {
             return client.logger.alert(
                 "Farm",
                 "Phrases",
-                "Phrases array is undefined or empty."
+                "Phrases array is undefined or empty.",
             );
         }
         let result = Math.floor(Math.random() * phrases.length);

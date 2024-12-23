@@ -63,7 +63,7 @@ exports.checkUpdate = async (client, cp, packageJson) => {
         };
         const response = await axios.get(
             `https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/package.json`,
-            { headers }
+            { headers },
         );
         const ghVersion = response.data.version;
         const version = packageJson.version;
@@ -73,17 +73,17 @@ exports.checkUpdate = async (client, cp, packageJson) => {
             client.logger.info(
                 "Bot",
                 "Updater",
-                `New Version Notes: ${response.data.version_note}`
+                `New Version Notes: ${response.data.version_note}`,
             );
             const userResponse = await askUser(
-                "Would you like to update now? (yes/no): "
+                "Would you like to update now? (yes/no): ",
             );
 
             if (userResponse === "yes" || userResponse === "y") {
                 client.logger.warn(
                     "Bot",
                     "Updater",
-                    "Updating bot. Please wait..."
+                    "Updating bot. Please wait...",
                 );
 
                 const configPath = path.resolve(__dirname, "../config.json");
@@ -95,14 +95,14 @@ exports.checkUpdate = async (client, cp, packageJson) => {
                         client.logger.warn(
                             "Bot",
                             "Updater",
-                            "Updating with Git..."
+                            "Updating with Git...",
                         );
                         await gitUpdate(client, cp);
                     } catch (error) {
                         client.logger.alert(
                             "Bot",
                             "Updater",
-                            `Git update error: ${error}`
+                            `Git update error: ${error}`,
                         );
                         // await manualUpdate(client);
                     }
@@ -124,7 +124,7 @@ exports.checkUpdate = async (client, cp, packageJson) => {
         client.logger.alert(
             "Bot",
             "Updater",
-            `Failed to check for updates: ${error.message}`
+            `Failed to check for updates: ${error.message}`,
         );
     }
 };
@@ -138,7 +138,7 @@ const backupConfig = async (client, configPath) => {
             client.logger.alert(
                 "Updater",
                 "Config",
-                `Temp directory does not exist: ${tempDir}`
+                `Temp directory does not exist: ${tempDir}`,
             );
             throw new Error("Temp directory does not exist.");
         }
@@ -147,7 +147,7 @@ const backupConfig = async (client, configPath) => {
             client.logger.alert(
                 "Updater",
                 "Config",
-                `Config file does not exist: ${configPath}`
+                `Config file does not exist: ${configPath}`,
             );
             throw new Error("Config file does not exist.");
         }
@@ -156,7 +156,7 @@ const backupConfig = async (client, configPath) => {
         client.logger.info(
             "Updater",
             "Config",
-            `Config backed up successfully to ${backupPath}.`
+            `Config backed up successfully to ${backupPath}.`,
         );
 
         return backupPath;
@@ -164,7 +164,7 @@ const backupConfig = async (client, configPath) => {
         client.logger.alert(
             "Updater",
             "Config",
-            `Failed to back up config: ${error.message}`
+            `Failed to back up config: ${error.message}`,
         );
         throw error;
     }
@@ -176,7 +176,7 @@ const updateConfigFile = (client, configPath, backupPath) => {
             client.logger.alert(
                 "Updater",
                 "Config",
-                "Backup file not found in temp directory. Skipping config update."
+                "Backup file not found in temp directory. Skipping config update.",
             );
             return;
         }
@@ -199,7 +199,7 @@ const updateConfigFile = (client, configPath, backupPath) => {
         client.logger.alert(
             "Updater",
             "Config",
-            `Failed to update config: ${error.message}`
+            `Failed to update config: ${error.message}`,
         );
     }
 };
@@ -214,7 +214,7 @@ const gitUpdate = async (client, cp) => {
         client.logger.alert(
             "Updater",
             "Git",
-            `Error updating project from Git: ${error.message}`
+            `Error updating project from Git: ${error.message}`,
         );
     }
 };
@@ -243,7 +243,7 @@ const manualUpdate = async (client) => {
             {
                 responseType: "arraybuffer",
                 headers,
-            }
+            },
         );
 
         const updatePath = path.resolve(__dirname, "../../updateCache.zip");
@@ -258,7 +258,7 @@ const manualUpdate = async (client) => {
         client.logger.alert(
             "Updater",
             "Zip",
-            `Error updating project from GitHub Repo: ${error.message}`
+            `Error updating project from GitHub Repo: ${error.message}`,
         );
     }
 };
@@ -309,10 +309,10 @@ exports.verifyconfig = async (client, extrac, config) => {
             if (vars[i] == vars[j] && vars[i].length > 0) {
                 showerrcoziamlazy(`There are some duplicate channel id!`);
                 console.log(
-                    "Please use four different channel for one tokentype for best efficiency!"
+                    "Please use four different channel for one tokentype for best efficiency!",
                 );
                 console.log(
-                    "That mean if you use both main and extra, and farm, huntbot, quest and gamble, you need eight channel!"
+                    "That mean if you use both main and extra, and farm, huntbot, quest and gamble, you need eight channel!",
                 );
                 break;
             }
@@ -366,7 +366,7 @@ exports.verifyconfig = async (client, extrac, config) => {
                     client.logger.warn(
                         "Bot" + client.chalk.white(" >> ") + client.global.type,
                         "Config",
-                        "Gem rarity: Invalid value. Valid value is: \n\tfabled, legendary, mythical, epic, rare, uncommon, common"
+                        "Gem rarity: Invalid value. Valid value is: \n\tfabled, legendary, mythical, epic, rare, uncommon, common",
                     ); //not a critical error, no halting
                     client.global.rareLevel = 7;
                     break;
@@ -431,7 +431,7 @@ exports.verifyconfig = async (client, extrac, config) => {
                 client.logger.warn(
                     "Bot" + client.chalk.white(" >> ") + client.global.type,
                     "Config",
-                    "Animals: no active animaltype found!?"
+                    "Animals: no active animaltype found!?",
                 );
             }
         }
@@ -443,7 +443,7 @@ exports.verifyconfig = async (client, extrac, config) => {
     ) {
         if (config.animals.type.sell && config.animals.type.sacrifice) {
             showerrcoziamlazy(
-                "Sell and sacrifice cannot be turn on at the same time!"
+                "Sell and sacrifice cannot be turn on at the same time!",
             );
         }
     }
@@ -453,13 +453,13 @@ exports.verifyconfig = async (client, extrac, config) => {
         minValue,
         minDefault,
         maxValue,
-        maxDefault
+        maxDefault,
     ) => {
         if (minValue < minDefault) {
             client.logger.warn(
                 "Bot",
                 "Config",
-                `${type} min interval is too low, resetting to default!`
+                `${type} min interval is too low, resetting to default!`,
             );
             config.interval[type].min = minDefault;
         }
@@ -467,7 +467,7 @@ exports.verifyconfig = async (client, extrac, config) => {
             client.logger.warn(
                 "Bot",
                 "Config",
-                `${type} max interval is too low or less than min, resetting to default!`
+                `${type} max interval is too low or less than min, resetting to default!`,
             );
             config.interval[type].max = maxDefault;
         }
@@ -475,7 +475,7 @@ exports.verifyconfig = async (client, extrac, config) => {
 
     const intervals = ["hunt", "battle", "pray", "coinflip", "slot", "animals"];
     let missingValue = intervals.some(
-        (type) => !config.interval[type].min || !config.interval[type].max
+        (type) => !config.interval[type].min || !config.interval[type].max,
     );
 
     if (missingValue) {
@@ -486,42 +486,42 @@ exports.verifyconfig = async (client, extrac, config) => {
             config.interval.hunt.min,
             12000,
             config.interval.hunt.max,
-            16000
+            16000,
         );
         verifyInterval(
             "battle",
             config.interval.battle.min,
             12000,
             config.interval.battle.max,
-            16000
+            16000,
         );
         verifyInterval(
             "pray",
             config.interval.pray.min,
             316000,
             config.interval.pray.max,
-            332000
+            332000,
         );
         verifyInterval(
             "coinflip",
             config.interval.coinflip.min,
             12000,
             config.interval.coinflip.max,
-            16000
+            16000,
         );
         verifyInterval(
             "slot",
             config.interval.slot.min,
             12000,
             config.interval.slot.max,
-            16000
+            16000,
         );
         verifyInterval(
             "animals",
             config.interval.animals.min,
             610000,
             config.interval.animals.max,
-            661000
+            661000,
         );
     }
     //does it change? idk!
@@ -538,7 +538,7 @@ exports.verifyconfig = async (client, extrac, config) => {
         "Config",
         normal
             ? "Config verified, things seem to be okey :3"
-            : "Config verified, there are some config error but bot can still run"
+            : "Config verified, there are some config error but bot can still run",
     );
 };
 

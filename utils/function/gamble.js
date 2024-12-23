@@ -44,7 +44,7 @@ async function coinflip(client, channel) {
         channel.sendTyping();
         let interval = getrand(
             client.config.interval.coinflip.min,
-            client.config.interval.coinflip.max
+            client.config.interval.coinflip.max,
         );
         const content =
             commandrandomizer(["owo", client.config.settings.owoprefix]) +
@@ -61,7 +61,7 @@ async function coinflip(client, channel) {
             client.logger.info(
                 "Farm",
                 "Coinflip",
-                `Betting: ${currentBet}. Total time: ${client.global.gamble.coinflip}`
+                `Betting: ${currentBet}. Total time: ${client.global.gamble.coinflip}`,
             );
 
             const updateCFListener = (oldMsg, newMsg) => {
@@ -85,7 +85,7 @@ async function coinflip(client, channel) {
                     client.logger.info(
                         "Farm",
                         "Coinflip",
-                        `${isWin ? "Won" : "Lost"} ${currentBet}!`
+                        `${isWin ? "Won" : "Lost"} ${currentBet}!`,
                     );
                     currentBet = isWin
                         ? defaultBet
@@ -121,13 +121,13 @@ async function coinflip(client, channel) {
                         client.logger.info(
                             "Farm",
                             "Coinflip",
-                            `${isWin ? "Won" : "Lost"} ${currentBet}!`
+                            `${isWin ? "Won" : "Lost"} ${currentBet}!`,
                         );
                         currentBet = isWin
                             ? defaultBet
                             : Math.min(
                                   Math.round(currentBet * multiplier),
-                                  maxBet
+                                  maxBet,
                               );
                     }
 
@@ -142,7 +142,7 @@ async function coinflip(client, channel) {
                         client.logger.info(
                             "Farm",
                             "Coinflip",
-                            "Failed to gamble!"
+                            "Failed to gamble!",
                         );
                         setTimeout(() => {
                             smol();
@@ -181,7 +181,7 @@ function slot(client, channel) {
         channel.sendTyping();
         let interval = getrand(
             client.config.interval.slot.min,
-            client.config.interval.slot.max
+            client.config.interval.slot.max,
         );
         const content =
             commandrandomizer(["owo", client.config.settings.owoprefix]) +
@@ -196,7 +196,7 @@ function slot(client, channel) {
             client.logger.info(
                 "Farm",
                 "Slot",
-                `Betting: ${currentBet}. Total time: ${client.global.gamble.slot}`
+                `Betting: ${currentBet}. Total time: ${client.global.gamble.slot}`,
             );
 
             const updateSlotListener = (oldMsg, newMsg) => {
@@ -215,7 +215,7 @@ function slot(client, channel) {
                 if (isWin || isLoss) {
                     if (isWin) {
                         const match = newMsg.content.match(
-                            /and won <:\w+:\d+> (\d[\d,]*)/
+                            /and won <:\w+:\d+> (\d[\d,]*)/,
                         );
                         let won =
                             Number(match[1].replace(/,/g, "")) - currentBet;
@@ -227,11 +227,11 @@ function slot(client, channel) {
                         client.logger.info(
                             "Farm",
                             "Slot",
-                            `Lost ${currentBet}!`
+                            `Lost ${currentBet}!`,
                         );
                         currentBet = Math.min(
                             Math.round(currentBet * multiplier),
-                            maxBet
+                            maxBet,
                         );
                     }
 
@@ -259,7 +259,7 @@ function slot(client, channel) {
                         !msg.content.includes("nothing...")
                     ) {
                         const match = msg.content.match(
-                            /and won <:\w+:\d+> (\d[\d,]*)/
+                            /and won <:\w+:\d+> (\d[\d,]*)/,
                         );
                         let won =
                             Number(match[1].replace(/,/g, "")) - currentBet;
@@ -271,11 +271,11 @@ function slot(client, channel) {
                         client.logger.info(
                             "Farm",
                             "Slot",
-                            `Lost ${currentBet}!`
+                            `Lost ${currentBet}!`,
                         );
                         currentBet = Math.min(
                             Math.round(currentBet * multiplier),
-                            maxBet
+                            maxBet,
                         );
                     }
                     setTimeout(() => {

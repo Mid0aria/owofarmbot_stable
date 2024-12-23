@@ -4,7 +4,7 @@ module.exports = (client) => {
             client.chalk.blue(client.chalk.bold(`[antiCrash]`)),
             client.chalk.white(`>>`),
             client.chalk.magenta(`Unhandled Rejection/Catch`),
-            client.chalk.red(reason, p)
+            client.chalk.red(reason, p),
         );
     });
     process.on("uncaughtException", (err, origin) => {
@@ -12,7 +12,7 @@ module.exports = (client) => {
             client.chalk.blue(client.chalk.bold(`[antiCrash]`)),
             client.chalk.white(`>>`),
             client.chalk.magenta(`Unhandled Exception/Catch`),
-            client.chalk.red(err, origin)
+            client.chalk.red(err, origin),
         );
     });
     process.on("uncaughtExceptionMonitor", (err, origin) => {
@@ -20,7 +20,7 @@ module.exports = (client) => {
             client.chalk.blue(client.chalk.bold(`[antiCrash]`)),
             client.chalk.white(`>>`),
             client.chalk.magenta(`Uncaught Exception/Catch`),
-            client.chalk.red(err, origin)
+            client.chalk.red(err, origin),
         );
     });
     client.logger.info("Bot", "AntiCrash", "Ready");

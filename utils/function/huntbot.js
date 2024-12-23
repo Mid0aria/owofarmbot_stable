@@ -46,7 +46,7 @@ async function huntbotHandler(client, channel) {
                             (msg.embeds[0] &&
                                 msg.embeds[0].author &&
                                 msg.embeds[0].author.name.includes(
-                                    "HuntBot"
+                                    "HuntBot",
                                 ))) &&
                         msg.author.id === "408785106942164992" &&
                         msg.channel.id === channel.id &&
@@ -83,7 +83,7 @@ async function huntbotHandler(client, channel) {
                 client.logger.alert(
                     "Farm",
                     "HuntBot",
-                    "Couldn't find huntbot message!"
+                    "Couldn't find huntbot message!",
                 );
                 return;
             }
@@ -141,12 +141,12 @@ async function huntbotHandler(client, channel) {
                     }
                     if (field.name.includes("Animal Essence")) {
                         const match = field.name.match(
-                            /Animal Essence - `(\d[\d,]*)`/
+                            /Animal Essence - `(\d[\d,]*)`/,
                         );
                         if (match) {
                             const essence = parseInt(
                                 match[1].replace(/,/g, ""),
-                                10
+                                10,
                             );
                             if (essence > 0) {
                                 client.global.temp.huntbotessence = true;
@@ -223,7 +223,7 @@ async function triggerHB(client, channel) {
                 client.logger.alert(
                     "Farm",
                     "HuntBot",
-                    "Couldn't find huntbot captcha message!"
+                    "Couldn't find huntbot captcha message!",
                 );
                 return;
             }
@@ -235,7 +235,7 @@ async function triggerHB(client, channel) {
                 client.logger.warn(
                     "Farm",
                     "Huntbot",
-                    "Couldn't get captcha image URL!"
+                    "Couldn't get captcha image URL!",
                 );
                 return;
             }
@@ -279,6 +279,6 @@ async function upgradeHuntbot(client, channel) {
     client.logger.info(
         "Farm",
         "Huntbot",
-        "Upgraded trait: " + client.basic.commands.huntbot.upgradetype
+        "Upgraded trait: " + client.basic.commands.huntbot.upgradetype,
     );
 }

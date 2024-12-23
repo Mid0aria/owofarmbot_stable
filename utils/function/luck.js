@@ -31,7 +31,7 @@ async function pray(client, channel) {
     let content;
     let interval = getrand(
         client.config.interval.pray.min,
-        client.config.interval.pray.max
+        client.config.interval.pray.max,
     );
     if (client.basic.commands.tomain) {
         content =
@@ -53,7 +53,7 @@ async function pray(client, channel) {
             client.logger.info(
                 "Farm",
                 "Pray",
-                `Total prayed time: ${client.global.total.pray}`
+                `Total prayed time: ${client.global.total.pray}`,
             );
         });
 
@@ -75,7 +75,7 @@ async function curse(client, channel) {
     let content;
     let interval = getrand(
         client.config.interval.pray.min,
-        client.config.interval.pray.max
+        client.config.interval.pray.max,
     );
     if (client.basic.commands.tomain) {
         content =
@@ -97,7 +97,7 @@ async function curse(client, channel) {
             client.logger.info(
                 "Farm",
                 "Curse",
-                `Total prayed time: ${client.global.total.curse}`
+                `Total prayed time: ${client.global.total.curse}`,
             );
         });
 

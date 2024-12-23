@@ -11,7 +11,7 @@ module.exports = async (client) => {
     client.logger.info(
         "Bot",
         "Startup",
-        client.chalk.red(`${client.user.username}`) + " is ready!"
+        client.chalk.red(`${client.user.username}`) + " is ready!",
     );
 
     client.global.temp.isready = true;
@@ -22,14 +22,14 @@ module.exports = async (client) => {
             client.logger.info(
                 "Bot",
                 "Startup",
-                "You are in the OwO Bot Support server. I will automatically enter the giveaways :)"
+                "You are in the OwO Bot Support server. I will automatically enter the giveaways :)",
             );
             client.global.owosupportserver = true;
         } else {
             client.logger.alert(
                 "Bot",
                 "Startup",
-                "You are not in the OwO Bot Support server. Please join to the server and restart the bot to automatically enter giveaways"
+                "You are not in the OwO Bot Support server. Please join to the server and restart the bot to automatically enter giveaways",
             );
         }
     }
@@ -48,7 +48,7 @@ module.exports = async (client) => {
                 client.logger.info(
                     "Bot",
                     "AutoStart",
-                    "BOT started have fun ;)"
+                    "BOT started have fun ;)",
                 );
 
                 setTimeout(() => {
@@ -58,7 +58,7 @@ module.exports = async (client) => {
                 client.logger.info(
                     "Bot",
                     "AutoStart",
-                    "Restarted BOT after a pause :3"
+                    "Restarted BOT after a pause :3",
                 );
             }
         } else {
