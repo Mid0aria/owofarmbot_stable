@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.6",
-    "version_note": "ADDED CAPTCHA SOLVER, GIVE STAR OR no more update oki doki",
+    "version": "0.0.6.0.1",
+    "version_note": "Fixed autovote not opening",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "bot.js",
     "repository": {

@@ -232,10 +232,13 @@ async function checklist(client, channel) {
                                         "Checklist - Vote",
                                         "Opening browser..."
                                     );
+
                                     client.childprocess.spawn("node", [
-                                        "./utils/autovote.js",
-                                        `--token=${client.basic.token} --bid=408785106942164992`,
+                                        path.join(__dirname, "./autovote.js"),
+                                        `--token=${client.basic.token}`,
+                                        `--bid=408785106942164992`,
                                     ]);
+
                                     return;
                             }
 
