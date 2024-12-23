@@ -79,12 +79,15 @@ module.exports = async (client, message) => {
                         "Huntbot",
                         "HuntBot captcha solver starting...",
                     );
-                    huntbotcaptchaprocess = client.childprocess.spawn("py", [
-                        path.join(
-                            __dirname,
-                            "./huntbot_captcha/huntbotcaptcha.py",
-                        ),
-                    ]);
+                    huntbotcaptchaprocess = client.childprocess.spawn(
+                        "python", //? linux does not accept "py" ahh goofy
+                        [
+                            path.join(
+                                __dirname,
+                                "./huntbot_captcha/huntbotcaptcha.py",
+                            ),
+                        ],
+                    );
 
                     require("./function/huntbot.js")(client);
                 }
