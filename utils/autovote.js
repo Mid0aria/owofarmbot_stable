@@ -7,6 +7,8 @@
 
 /*
  * autovoter for top.gg
+ * Arabam yapar hız
+ * https://open.spotify.com/track/0K791kh3oLkBD5KVWg1LJ8?si=951700dbd6894508
  */
 
 const { connect } = require("puppeteer-real-browser");
