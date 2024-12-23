@@ -19,7 +19,7 @@ module.exports = {
         const uptime = `${days}d ${hours}h ${minutes}m ${seconds % 60}s`;
 
         let stats = `
-OwO Bot Statistics:
+OwO Farm Bot Stable Statistics:
 ===================
 - Hunt: ${totals.hunt}
 - Battle: ${totals.battle}
