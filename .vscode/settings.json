@@ -1,0 +1,16 @@
+{
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.formatOnPaste": true,
+	"files.exclude": {
+		"**/.git": true,
+		"**/.svn": true,
+		"**/.hg": true,
+		"**/CVS": true,
+		"**/.DS_Store": true,
+		"**/Thumbs.db": true,
+		"node_modules": true,
+		"LICENSE": true,
+		"package-lock.json": true
+	}
+}

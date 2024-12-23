@@ -1,171 +1,171 @@
 {
-    "prefix": "!",
-    "main": {
-        "token": "",
-        "userid": "",
-        "commandschannelid": "",
-        "huntbotchannelid": "",
-        "owodmchannelid": "",
-        "gamblechannelid": "",
-        "autoquestchannelid": "",
+	"prefix": "!",
+	"main": {
+		"token": "",
+		"userid": "",
+		"commandschannelid": "",
+		"huntbotchannelid": "",
+		"owodmchannelid": "",
+		"gamblechannelid": "",
+		"autoquestchannelid": "",
 
-        "commands": {
-            "hunt": true,
-            "battle": true,
-            "pray": false,
-            "curse": true,
-            "huntbot": {
-                "enable": true,
-                "maxtime": 10,
-                "upgrade": false,
-                "upgradetype": "duration"
-            },
-            "gamble": {
-                "coinflip": true,
-                "slot": true
-            },
-            "animals": false,
-            "inventory": true,
-            "checklist": true,
-            "autoquest": true
-        },
-        "maximum_gem_rarity": "Mythical"
-    },
-    "extra": {
-        "enable": false,
-        "token": "",
-        "userid": "",
-        "commandschannelid": "",
-        "huntbotchannelid": "",
-        "owodmchannelid": "",
-        "gamblechannelid": "",
-        "autoquestchannelid": "",
+		"commands": {
+			"hunt": true,
+			"battle": true,
+			"pray": false,
+			"curse": true,
+			"huntbot": {
+				"enable": true,
+				"maxtime": 10,
+				"upgrade": false,
+				"upgradetype": "duration"
+			},
+			"gamble": {
+				"coinflip": true,
+				"slot": true
+			},
+			"animals": false,
+			"inventory": true,
+			"checklist": true,
+			"autoquest": true
+		},
+		"maximum_gem_rarity": "Mythical"
+	},
+	"extra": {
+		"enable": false,
+		"token": "",
+		"userid": "",
+		"commandschannelid": "",
+		"huntbotchannelid": "",
+		"owodmchannelid": "",
+		"gamblechannelid": "",
+		"autoquestchannelid": "",
 
-        "commands": {
-            "hunt": true,
-            "battle": true,
-            "pray": false,
-            "curse": true,
-            "huntbot": {
-                "enable": true,
-                "maxtime": 10,
-                "upgrade": false,
-                "upgradetype": "duration"
-            },
-            "tomain": true,
-            "gamble": {
-                "coinflip": true,
-                "slot": true
-            },
-            "animals": false,
-            "inventory": true,
-            "checklist": true,
-            "autoquest": true
-        },
-        "maximum_gem_rarity": "Mythical"
-    },
-    "settings": {
-        "owoprefix": "owo",
-        "discordrpc": false,
-        "chatfeedback": true,
-        "autophrases": true,
-        "autoresume": false,
-        "autojoingiveaways": false,
+		"commands": {
+			"hunt": true,
+			"battle": true,
+			"pray": false,
+			"curse": true,
+			"huntbot": {
+				"enable": true,
+				"maxtime": 10,
+				"upgrade": false,
+				"upgradetype": "duration"
+			},
+			"tomain": true,
+			"gamble": {
+				"coinflip": true,
+				"slot": true
+			},
+			"animals": false,
+			"inventory": true,
+			"checklist": true,
+			"autoquest": true
+		},
+		"maximum_gem_rarity": "Mythical"
+	},
+	"settings": {
+		"owoprefix": "owo",
+		"discordrpc": false,
+		"chatfeedback": true,
+		"autophrases": true,
+		"autoresume": false,
+		"autojoingiveaways": false,
 
-        "checklist": {
-            "types": {
-                "daily": true,
-                "cookie": false,
-                "vote": false
-            }
-        },
+		"checklist": {
+			"types": {
+				"daily": true,
+				"cookie": false,
+				"vote": false
+			}
+		},
 
-        "inventory": {
-            "use": {
-                "lootbox": true,
-                "fabledlootbox": false,
-                "crate": true,
-                "gems": true
-            }
-        },
-        "gamble": {
-            "coinflip": {
-                "default_amount": 1000,
-                "max_amount": 250000,
-                "multiplier": 1.0
-            },
-            "slot": {
-                "default_amount": 1000,
-                "max_amount": 250000,
-                "multiplier": 1.0
-            }
-        },
+		"inventory": {
+			"use": {
+				"lootbox": true,
+				"fabledlootbox": false,
+				"crate": true,
+				"gems": true
+			}
+		},
+		"gamble": {
+			"coinflip": {
+				"default_amount": 1000,
+				"max_amount": 250000,
+				"multiplier": 1.0
+			},
+			"slot": {
+				"default_amount": 1000,
+				"max_amount": 250000,
+				"multiplier": 1.0
+			}
+		},
 
-        "logging": {
-            "newlog": true,
-            "loglength": 20,
-            "showlogbeforeexit": false
-        },
+		"logging": {
+			"newlog": true,
+			"loglength": 20,
+			"showlogbeforeexit": false
+		},
 
-        "captcha": {
-            "autosolvecaptcha": true,
-            "alerttype": {
-                "notification": true,
-                "prompt": true,
-                "webhook": true,
-                "webhookurl": "xxx"
-            }
-        }
-    },
-    "animals": {
-        "type": {
-            "sell": false,
-            "sacrifice": false
-        },
-        "animaltype": {
-            "common": false,
-            "uncommon": false,
-            "rare": false,
-            "epic": false,
-            "mythical": false,
-            "patreon": false,
-            "cpatreon": false,
-            "legendary": false,
-            "gem": false,
-            "bot": false,
-            "distorted": false,
-            "fabled": false,
-            "special": false,
-            "hidden": false
-        }
-    },
-    "interval": {
-        "hunt": {
-            "max": 32000,
-            "min": 16000
-        },
-        "battle": {
-            "max": 32000,
-            "min": 16000
-        },
-        "pray": {
-            "max": 332000,
-            "min": 316000
-        },
-        "coinflip": {
-            "max": 32000,
-            "min": 16000
-        },
-        "slot": {
-            "max": 32000,
-            "min": 16000
-        },
-        "animals": {
-            "max": 661000,
-            "min": 610000
-        }
-    },
-    "socket": {
-        "port": 65432
-    }
+		"captcha": {
+			"autosolvecaptcha": true,
+			"alerttype": {
+				"notification": true,
+				"prompt": true,
+				"webhook": true,
+				"webhookurl": "xxx"
+			}
+		}
+	},
+	"animals": {
+		"type": {
+			"sell": false,
+			"sacrifice": false
+		},
+		"animaltype": {
+			"common": false,
+			"uncommon": false,
+			"rare": false,
+			"epic": false,
+			"mythical": false,
+			"patreon": false,
+			"cpatreon": false,
+			"legendary": false,
+			"gem": false,
+			"bot": false,
+			"distorted": false,
+			"fabled": false,
+			"special": false,
+			"hidden": false
+		}
+	},
+	"interval": {
+		"hunt": {
+			"max": 32000,
+			"min": 16000
+		},
+		"battle": {
+			"max": 32000,
+			"min": 16000
+		},
+		"pray": {
+			"max": 332000,
+			"min": 316000
+		},
+		"coinflip": {
+			"max": 32000,
+			"min": 16000
+		},
+		"slot": {
+			"max": 32000,
+			"min": 16000
+		},
+		"animals": {
+			"max": 661000,
+			"min": 610000
+		}
+	},
+	"socket": {
+		"port": 65432
+	}
 }

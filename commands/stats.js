@@ -6,19 +6,19 @@
  */
 
 module.exports = {
-    config: {
-        name: "stats",
-    },
-    run: async (client, message, args) => {
-        let totals = client.global.total;
+	config: {
+		name: "stats",
+	},
+	run: async (client, message, args) => {
+		let totals = client.global.total;
 
-        const seconds = Math.floor(process.uptime());
-        const days = Math.floor(seconds / 86400);
-        const hours = Math.floor((seconds % 86400) / 3600);
-        const minutes = Math.floor((seconds % 3600) / 60);
-        const uptime = `${days}d ${hours}h ${minutes}m ${seconds % 60}s`;
+		const seconds = Math.floor(process.uptime());
+		const days = Math.floor(seconds / 86400);
+		const hours = Math.floor((seconds % 86400) / 3600);
+		const minutes = Math.floor((seconds % 3600) / 60);
+		const uptime = `${days}d ${hours}h ${minutes}m ${seconds % 60}s`;
 
-        let stats = `
+		let stats = `
 OwO Farm Bot Stable Statistics:
 ===================
 - Hunt: ${totals.hunt}
@@ -30,7 +30,7 @@ OwO Farm Bot Stable Statistics:
 - Uptime: ${uptime}
         `;
 
-        await message.delete();
-        await message.channel.send("```" + stats + "```");
-    },
+		await message.delete();
+		await message.channel.send("```" + stats + "```");
+	},
 };
