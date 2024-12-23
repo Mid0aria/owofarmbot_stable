@@ -3,6 +3,7 @@
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
 <h1 align="center">OwO Farm Bot Stable V0.0.6(BETA) WITH CAPTCHA SOLVER ✒️</h1>
+<h2 align ="center">The best owo farm bot until i do better. coded with the great ideas and love of a Turkish engineer, mid0hub team and users.<br> 💖 Thank you to everyone who contributed 💖</h2>
 <p align="center">
 
 [![Total Views](https://hits.sh/github.com/Mid0aria/owofarmbot_stable.svg?view=today-total&label=Repo%20Today/Total%20Views&color=770ca1&labelColor=007ec6)](https://github.com/Mid0aria/owofarmbot_stable)
