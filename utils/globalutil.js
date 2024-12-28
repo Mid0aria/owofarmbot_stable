@@ -563,7 +563,7 @@ exports.verifyconfig = async (client, extrac, config) => {
  *
  *
  */
-exports.isPortInUse = (port, host = "localhost") => {
+exports.isPortInUse = async (port, host = "localhost") => {
     return new Promise((resolve, reject) => {
         const socket = new net.Socket();
 

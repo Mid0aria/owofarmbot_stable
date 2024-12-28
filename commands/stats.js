@@ -26,6 +26,8 @@ OwO Farm Bot Stable Statistics:
 - Captcha: ${totals.captcha}
 - Pray: ${totals.pray}
 - Curse: ${totals.curse}
+- Vote: ${totals.vote}
+- Giveaway: ${totals.giveaway}
 ===================
 - Uptime: ${uptime}
         `;

@@ -36,6 +36,9 @@ module.exports = async (client) => {
 
     client.rpc("start");
     if (client.basic.autostart) {
+        if (client.global.type === "Extra") {
+            await client.delay(3500);
+        }
         if (client.global.paused) {
             if (client.global.captchadetected) {
                 client.global.captchadetected = false;

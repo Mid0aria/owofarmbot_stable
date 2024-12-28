@@ -101,6 +101,8 @@ let owofarmbot_stable = {
         captcha: 0,
         pray: 0,
         curse: 0,
+        vote: 0,
+        giveaway: 0,
     },
     gems: {
         need: [],
@@ -122,8 +124,12 @@ let owofarmbot_stable = {
         usedevent: false,
         usedcookie: false,
         animaltype: "",
-        huntbotmaxtime: "",
-        huntbotessence: false,
+        huntbot: {
+            maxtime: "",
+            recalltime: 0,
+            essence: false,
+        },
+
         isready: false,
         started: false,
     },
@@ -148,6 +154,8 @@ let owofarmbot_stable_extra = {
         captcha: 0,
         pray: 0,
         curse: 0,
+        vote: 0,
+        giveaway: 0,
     },
     gems: {
         need: [],
@@ -169,8 +177,11 @@ let owofarmbot_stable_extra = {
         usedevent: false,
         usedcookie: false,
         animaltype: "",
-        huntbotmaxtime: "",
-        huntbotessence: false,
+        huntbot: {
+            maxtime: "",
+            recalltime: 0,
+            essence: false,
+        },
         isready: false,
         started: false,
     },

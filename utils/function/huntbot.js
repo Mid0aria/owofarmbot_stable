@@ -20,7 +20,7 @@ module.exports = async (client) => {
         client.config.settings.owoprefix = "owo";
     }
 
-    huntbotHandler(client, channel);
+    await huntbotHandler(client, channel);
 };
 
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -83,46 +83,59 @@ async function huntbotHandler(client, channel) {
                 client.logger.alert(
                     "Farm",
                     "HuntBot",
-                    "Couldn't find huntbot message!",
+                    "Couldn't find huntbot message! Retry after 61 seconds.",
                 );
+                setTimeout(async () => {
+                    await huntbotHandler(client, channel);
+                }, 61000);
                 return;
             }
 
             if (!message.embeds[0]) {
-                client.global.temp.huntbotessence = true;
-                client.global.temp.huntbotmaxtime =
+                client.global.temp.huntbot.essence = true;
+                client.global.temp.huntbot.maxtime =
                     client.basic.commands.huntbot.maxtime;
-                setTimeout(() => {
-                    triggerHB(client, channel);
+                setTimeout(async () => {
+                    await triggerHB(client, channel);
                 }, 6100);
             } else {
                 let isHunting = false;
 
                 for (const field of message.embeds[0].fields) {
                     if (field.name.includes("is currently hunting")) {
-                        const regex = /(\d+)([SMHD])/;
-                        const match = field.value.match(regex);
+                        const regex = /(\d+)([SMHD])/g;
+                        const matches = field.value.matchAll(regex);
 
-                        if (match) {
+                        let milliseconds = 0;
+
+                        for (const match of matches) {
                             const time = parseInt(match[1]);
                             const unit = match[2];
 
-                            console.log(time + unit);
-                            let milliseconds = 0;
-
                             if (unit === "S") {
-                                milliseconds = time * 1000;
+                                milliseconds += time * 1000;
                             } else if (unit === "M") {
-                                milliseconds = time * 60 * 1000;
+                                milliseconds += time * 60 * 1000;
                             } else if (unit === "H") {
-                                milliseconds = time * 60 * 60 * 1000;
+                                milliseconds += time * 60 * 60 * 1000;
                             } else if (unit === "D") {
-                                milliseconds = time * 24 * 60 * 60 * 1000;
+                                milliseconds += time * 24 * 60 * 60 * 1000;
                             }
-                            //TODO use for interval ^^
-                            console.log(milliseconds);
+                        }
+
+                        if (milliseconds > 0) {
+                            client.global.temp.huntbot.recalltime =
+                                milliseconds + 5000;
                         } else {
-                            console.log("No valid duration format found.");
+                            client.logger.alert(
+                                "Farm",
+                                "HuntBot",
+                                "Couldn't find valid duration format! Retry after 61 seconds.",
+                            );
+                            setTimeout(async () => {
+                                await huntbotHandler(client, channel);
+                            }, 61000);
+                            return;
                         }
 
                         isHunting = true;
@@ -133,9 +146,9 @@ async function huntbotHandler(client, channel) {
 
                         if (match) {
                             const duration = match[1];
-                            client.global.temp.huntbotmaxtime = duration;
+                            client.global.temp.huntbot.maxtime = duration;
                         } else {
-                            client.global.temp.huntbotmaxtime =
+                            client.global.temp.huntbot.maxtime =
                                 client.basic.commands.huntbot.maxtime;
                         }
                     }
@@ -149,24 +162,32 @@ async function huntbotHandler(client, channel) {
                                 10,
                             );
                             if (essence > 0) {
-                                client.global.temp.huntbotessence = true;
+                                client.global.temp.huntbot.essence = true;
                             }
                         }
                     }
                 }
 
                 if (isHunting) {
-                    client.logger.warn("Farm", "Huntbot", "Currently hunting.");
+                    client.logger.warn(
+                        "Farm",
+                        "Huntbot",
+                        `Currently hunting. It will restart in ${client.global.temp.huntbot.recalltime} milliseconds`,
+                    );
+                    //? will it work
+                    setTimeout(async () => {
+                        await huntbotHandler(client, channel);
+                    }, client.global.temp.huntbot.recalltime);
                 } else {
-                    setTimeout(() => {
-                        triggerHB(client, channel);
+                    setTimeout(async () => {
+                        await triggerHB(client, channel);
                     }, 6100);
                 }
             }
 
-            if (client.global.temp.huntbotessence) {
+            if (client.global.temp.huntbot.essence) {
                 await client.delay(6100);
-                upgradeHuntbot(client, channel);
+                await upgradeHuntbot(client, channel);
             }
         });
 }
@@ -178,7 +199,7 @@ async function triggerHB(client, channel) {
                 "owo",
                 client.config.settings.owoprefix,
             ])} ${commandrandomizer(["autohunt", "huntbot", "hb", "ah"])} ${
-                client.global.temp.huntbotmaxtime
+                client.global.temp.huntbot.maxtime
             }h`,
         })
         .then(async (msg) => {
@@ -256,7 +277,7 @@ async function triggerHB(client, channel) {
                         "huntbot",
                         "hb",
                         "ah",
-                    ])} ${client.global.temp.huntbotmaxtime}h ${solution}`,
+                    ])} ${client.global.temp.huntbot.maxtime}h ${solution}`,
                 });
 
                 client.logger.info("Farm", "Huntbot", "Huntbot is hunting.");

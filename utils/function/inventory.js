@@ -253,7 +253,7 @@ async function inventory(client, channel) {
                 switch (value) {
                     case "050":
                         if (client.config.settings.inventory.use.lootbox)
-                            use(
+                            await use(
                                 client,
                                 channel,
                                 `${commandrandomizer(["lb", "lootbox"])}`,
@@ -264,7 +264,7 @@ async function inventory(client, channel) {
                         break;
                     case "049":
                         if (client.config.settings.inventory.use.fabledlootbox)
-                            use(
+                            await use(
                                 client,
                                 channel,
                                 "lootbox fabled",
@@ -275,7 +275,7 @@ async function inventory(client, channel) {
                         break;
                     case "100":
                         if (client.config.settings.inventory.use.crate)
-                            use(
+                            await use(
                                 client,
                                 channel,
                                 `${commandrandomizer(["wc", "crate"])}`,
@@ -290,7 +290,7 @@ async function inventory(client, channel) {
             }
 
             if (client.global.gems.use.length > 0) {
-                use(
+                await use(
                     client,
                     channel,
                     `use ${client.global.gems.use}`,

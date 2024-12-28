@@ -10,7 +10,12 @@ const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getrand = (min, max) => Math.random() * (max - min) + min;
 
 module.exports = async (client, message) => {
-    if (client.global.paused || client.global.captchadetected) return;
+    if (client.global.paused || client.global.captchadetected) {
+        while (true) {
+            if (!(client.global.paused || client.global.captchadetected)) break;
+            await client.delay(3000);
+        }
+    }
 
     let channel = client.channels.cache.get(client.basic.commandschannelid);
     if (!client.config.settings.owoprefix.length) {
@@ -25,8 +30,22 @@ module.exports = async (client, message) => {
     }
 
     if (client.basic.commands.checklist) {
-        checklist(client, channel);
+        if (client.global.paused || client.global.captchadetected) {
+            while (true) {
+                if (!(client.global.paused || client.global.captchadetected))
+                    break;
+                await client.delay(3000);
+            }
+        }
+        await checklist(client, channel);
     } else {
+        if (client.global.paused || client.global.captchadetected) {
+            while (true) {
+                if (!(client.global.paused || client.global.captchadetected))
+                    break;
+                await client.delay(3000);
+            }
+        }
         await client.delay(2000);
         require("./function/farm.js")(client, message);
     }
@@ -38,10 +57,24 @@ module.exports = async (client, message) => {
         client.basic.commands.gamble.coinflip ||
         client.basic.commands.gamble.slot
     ) {
+        if (client.global.paused || client.global.captchadetected) {
+            while (true) {
+                if (!(client.global.paused || client.global.captchadetected))
+                    break;
+                await client.delay(3000);
+            }
+        }
         require("./function/gamble.js")(client, message);
         await client.delay(8000);
     }
     if (client.basic.commands.autoquest) {
+        if (client.global.paused || client.global.captchadetected) {
+            while (true) {
+                if (!(client.global.paused || client.global.captchadetected))
+                    break;
+                await client.delay(3000);
+            }
+        }
         require("./function/quest.js")(client, message);
     } else {
         client.global.quest.title = "Quest not enabled";
@@ -49,20 +82,44 @@ module.exports = async (client, message) => {
 
     // await client.delay(16000);
     if (client.basic.commands.animals) {
-        sell(
+        if (client.global.paused || client.global.captchadetected) {
+            while (true) {
+                if (!(client.global.paused || client.global.captchadetected))
+                    break;
+                await client.delay(3000);
+            }
+        }
+
+        await sell(
             client,
             channel,
             client.config.animals.type.sell ? "sell" : "sacrifice",
             client.global.temp.animaltype,
         );
     }
-    await client.delay(32000);
-    require("./function/luck.js")(client, message);
 
+    if (client.basic.commands.pray || client.basic.commands.curse) {
+        if (client.global.paused || client.global.captchadetected) {
+            while (true) {
+                if (!(client.global.paused || client.global.captchadetected))
+                    break;
+                await client.delay(3000);
+            }
+        }
+        await client.delay(32000);
+        require("./function/luck.js")(client, message);
+    }
     if (client.basic.commands.huntbot.enable) {
+        if (client.global.paused || client.global.captchadetected) {
+            while (true) {
+                if (!(client.global.paused || client.global.captchadetected))
+                    break;
+                await client.delay(3000);
+            }
+        }
         let huntbotcaptchaprocess;
 
-        client.globalutil
+        await client.globalutil
             .isPortInUse(client.config.socket.port, "localhost")
             .then((inUse) => {
                 if (inUse) {
@@ -244,7 +301,7 @@ async function checklist(client, channel) {
                                         `--token=${client.basic.token}`,
                                         `--bid=408785106942164992`,
                                     ]);
-
+                                    client.global.total.vote++;
                                     break;
                             }
                             break;

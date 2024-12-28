@@ -15,14 +15,14 @@ module.exports = async (client) => {
     }
 
     if (client.basic.commands.hunt) {
-        hunt(client, channel);
+        await hunt(client, channel);
     }
     if (client.basic.commands.battle) {
         if (client.basic.commands.hunt) {
             await client.delay(2000);
-            battle(client, channel);
+            await battle(client, channel);
         } else {
-            battle(client, channel);
+            await battle(client, channel);
         }
     }
 };
@@ -116,14 +116,14 @@ async function hunt(client, channel) {
                 client.global.gems.need = [];
                 client.global.gems.use = "";
                 if (huntmsgcontent) {
-                    let requiredGems = ["gem1", "gem3", "gem4", "star"];
+                    let requiredGems = ["gem1", "gem3", "gem4"];
                     requiredGems.forEach((gem) => {
                         if (!huntmsgcontent.includes(gem)) {
                             client.global.gems.need.push(gem);
                         }
                     });
-                    //! LOGIC ERROR
-                    /*if (client.global.gems.isevent) {
+
+                    if (client.global.gems.isevent) {
                         if (!huntmsgcontent.includes("star")) {
                             if (!client.global.temp.usedevent) {
                                 client.global.gems.need.push("star");
@@ -133,11 +133,11 @@ async function hunt(client, channel) {
                                 client.logger.info(
                                     "Farm",
                                     "Hunt",
-                                    "Event not found"
+                                    "Event not found",
                                 );
                             }
                         } else client.global.temp.usedevent = false;
-                    }*/
+                    }
 
                     if (client.global.gems.need.length > 0) {
                         client.logger.warn(

@@ -134,6 +134,7 @@ module.exports = async (client) => {
                     "Auto Join Giveaways",
                     "Successfully joined the giveaway.",
                 );
+                client.global.total.giveaway++;
                 addUserEntry(message.id, client.user.id);
                 await client.delay(15000);
             } catch (error) {
