@@ -5,6 +5,18 @@
  * For more information, see README.md and LICENSE
  */
 
+/**
+ * Executes the "curse" command in the specified channel at random intervals.
+ * The function will wait if certain global conditions are met (e.g., captcha detected, paused, inventory open, checklist open).
+ * It sends a typing indicator before sending the "curse" command.
+ * The command can be customized based on the configuration settings.
+ * The function recursively calls itself after a random interval.
+ *
+ * @param {Object} client - The client object containing global settings and methods.
+ * @param {Object} channel - The channel object where the command will be sent.
+ * @returns {Promise<void>} - A promise that resolves when the function completes.
+ */
+
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getrand = (min, max) => Math.random() * (max - min) + min;
 

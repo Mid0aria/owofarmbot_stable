@@ -5,6 +5,15 @@
  * For more information, see README.md and LICENSE
  */
 
+/**
+ * Checks if a message contains suspicious content that might indicate a web captcha message.
+ *
+ * @param {string} msgcontent - The content of the message to check.
+ * @param {boolean} helloChristopher - A flag indicating if a specific condition is met.
+ * @param {boolean} canulickmymonster - Another flag indicating if a different specific condition is met.
+ * @returns {boolean} - Returns true if the message contains suspicious content or if either of the flags are true.
+ */
+
 function isWebCaptchaMessage(msgcontent, helloChristopher, canulickmymonster) {
     const suspiciousPhrases = [".com", "please use the link"];
 

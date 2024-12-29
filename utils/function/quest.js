@@ -5,6 +5,17 @@
  * For more information, see README.md and LICENSE
  */
 
+/**
+ * Handles the questing process for the client.
+ * 
+ * @param {Object} client - The client object.
+ * @param {Object} channel - The channel object where the quest command will be sent.
+ * @param {Object} mainSender - The main sender object for duo quests.
+ * @param {Object} extraSender - The extra sender object for duo quests.
+ * 
+ * @returns {Promise<void>} - A promise that resolves when the quest handling process is complete.
+ */
+
 let type = "single";
 let mainclient, extraclient, mainSender, extraSender;
 let mainready = false;

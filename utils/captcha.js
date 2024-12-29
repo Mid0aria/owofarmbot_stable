@@ -11,6 +11,12 @@
  * https://open.spotify.com/track/1Ma4fLShd0hpZSNH37mEkR?si=fa52965f89434731
  */
 
+/**
+ * Evaluates the page content to determine if the captcha verification is successful.
+ *
+ * @returns {Promise<boolean>} A promise that resolves to `true` if the captcha verification text is found, otherwise `false`.
+ */
+
 const { connect } = require("puppeteer-real-browser");
 const yargs = require("yargs");
 const path = require("path");

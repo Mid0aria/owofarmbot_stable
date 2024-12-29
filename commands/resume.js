@@ -5,6 +5,20 @@
  * For more information, see README.md and LICENSE
  */
 
+/**
+ * Command to resume the bot's operations if it is paused.
+ * 
+ * @module resume
+ * @property {Object} config - Configuration for the command.
+ * @property {string} config.name - The name of the command.
+ * @function run
+ * @async
+ * @param {Object} client - The client instance of the bot.
+ * @param {Object} message - The message object that triggered the command.
+ * @returns {Promise<void>}
+ * @description This command checks if the bot is paused. If it is, it resumes the bot's operations and sends a feedback message if chat feedback is enabled. If the bot is not paused, it informs the user that the bot is already working.
+ */
+
 module.exports = {
     config: {
         name: "resume",

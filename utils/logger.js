@@ -1,3 +1,25 @@
+/*
+ * OwO Farm Bot Stable
+ * Copyright (C) 2024 Mido
+ * This software is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+ * For more information, see README.md and LICENSE
+ */
+
+/**
+ * Displays logs and status information in a formatted console output.
+ *
+ * @param {Array} reallog - An array of log messages to be displayed.
+ *
+ * The function checks if the client and extrac (if available) are ready. If not, it logs the last message in the reallog array.
+ * If the client and extrac are ready, it gathers various status information such as hunt count, battle count, event status,
+ * coinflip count, slot count, cowoncy won, captcha detection status, and pause status from both client and extrac.
+ * It then formats and displays this information in a structured console output.
+ *
+ * The function also includes a helper function `padder` to format the values for display.
+ *
+ * The output format varies based on the configuration settings for logging.
+ */
+
 let reallog = [];
 let fulllog = [];
 let client, extrac;

@@ -5,6 +5,15 @@
  * For more information, see README.md and LICENSE
  */
 
+/**
+ * Executes a slot gambling function for a specified client and channel.
+ * The function places bets, checks for wins or losses, and adjusts the bet amount accordingly.
+ * It also handles delays and retries based on the client's global state.
+ *
+ * @param {Object} client - The client object containing configuration and global state.
+ * @param {Object} channel - The channel object where the slot command will be sent.
+ */
+
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getrand = (min, max) => Math.random() * (max - min) + min;
 

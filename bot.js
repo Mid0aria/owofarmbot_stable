@@ -7,6 +7,54 @@
  * For more information, see README.md and LICENSE
  */
 
+/*
+ * Represents the extra configuration and state for the owofarmbot.
+ * @typedef {Object} owofarmbot_stable_extra
+ * @property {string} name - The name of the configuration.
+ * @property {string} type - The type of the configuration.
+ * @property {boolean} devmod - Indicates if the developer mode is enabled.
+ * @property {boolean} istermux - Indicates if the bot is running on Termux.
+ * @property {boolean} captchadetected - Indicates if a captcha has been detected.
+ * @property {boolean} paused - Indicates if the bot is paused.
+ * @property {boolean} owosupportserver - Indicates if the bot is connected to the owo support server.
+ * @property {boolean} use - Indicates if the bot is in use.
+ * @property {boolean} inventory - Indicates if the inventory feature is enabled.
+ * @property {boolean} checklist - Indicates if the checklist feature is enabled.
+ * @property {boolean} hunt - Indicates if the hunt feature is enabled.
+ * @property {boolean} battle - Indicates if the battle feature is enabled.
+ * @property {Object} total - The total counts of various activities.
+ * @property {number} total.hunt - The total number of hunts.
+ * @property {number} total.battle - The total number of battles.
+ * @property {number} total.captcha - The total number of captchas.
+ * @property {number} total.pray - The total number of prays.
+ * @property {number} total.curse - The total number of curses.
+ * @property {number} total.vote - The total number of votes.
+ * @property {number} total.giveaway - The total number of giveaways.
+ * @property {Object} gems - The configuration for gems.
+ * @property {Array} gems.need - The list of needed gems.
+ * @property {string} gems.use - The gem currently in use.
+ * @property {boolean} gems.isevent - Indicates if there is an ongoing event.
+ * @property {string} gems.rareLevel - The rare level of the gem.
+ * @property {Object} gamble - The configuration for gambling.
+ * @property {number} gamble.coinflip - The number of coin flips.
+ * @property {number} gamble.slot - The number of slots played.
+ * @property {number} gamble.cowoncywon - The amount of cowoncy won.
+ * @property {Object} quest - The current quest information.
+ * @property {string} quest.title - The title of the current quest.
+ * @property {string} quest.reward - The reward for the current quest.
+ * @property {string} quest.progress - The progress of the current quest.
+ * @property {Object} temp - Temporary state information.
+ * @property {boolean} temp.usedevent - Indicates if an event has been used.
+ * @property {boolean} temp.usedcookie - Indicates if a cookie has been used.
+ * @property {string} temp.animaltype - The type of animal currently being used.
+ * @property {Object} temp.huntbot - The configuration for the hunt bot.
+ * @property {string} temp.huntbot.maxtime - The maximum time for the hunt bot.
+ * @property {number} temp.huntbot.recalltime - The recall time for the hunt bot.
+ * @property {boolean} temp.huntbot.essence - Indicates if the hunt bot has essence.
+ * @property {boolean} temp.isready - Indicates if the bot is ready.
+ * @property {boolean} temp.started - Indicates if the bot has started.
+ */
+
 const cp = require("child_process");
 
 let config,
