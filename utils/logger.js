@@ -1,11 +1,12 @@
-let reallog = [];
-let fulllog = [];
-let client, extrac;
 module.exports = (client) => {
-    let logger = [];
+    let reallog = [],
+        fulllog = [],
+        loggerextrac;
+
     let length = client ? client.config.settings.logging.loglength : 16;
-    if (client.global.type == "Main") client = client;
-    else extrac = client;
+    if (client.global.type == "Extra") {
+        loggerextrac = client;
+    }
     let exitlog =
         client.config.settings.logging.showlogbeforeexit &&
         client.config.settings.logging.newlog;
@@ -18,31 +19,25 @@ module.exports = (client) => {
     });
 
     function info(type, module, result = "") {
-        logging(type, module, result, client.chalk.green);
+        logging("ℹ️", type, module, result, client.chalk.green);
     }
 
     function warn(type, module, result = "") {
-        logging(type, module, result, client.chalk.yellow);
+        logging("⚠️", type, module, result, client.chalk.yellow);
     }
 
     function alert(type, module, result = "") {
-        logging(type, module, result, client.chalk.red);
+        logging("❗", type, module, result, client.chalk.red);
     }
 
-    function logging(type, module, result, color) {
+    function logging(emoji, type, module, result, color) {
         const logMessage =
             `${client.chalk.white(`[${new Date().toLocaleTimeString()}]`)} ` +
+            `${client.chalk.white(emoji)} ` +
             `${client.chalk.blue(client.chalk.bold(type))}` +
-            `${
-                // (type == "Bot" || type == "Updater") &&
-                // module != "Startup" &&
-                // module != "Captcha"
-                //     ? "" //idk why i put this on
-                //     :
-                `${client.chalk.white(" >> ")}${client.chalk.cyan(
-                    client.chalk.bold(client.global.type),
-                )}`
-            } > ` +
+            `${`${client.chalk.white(" >> ")}${client.chalk.cyan(
+                client.chalk.bold(client.global.type),
+            )}`} > ` +
             `${client.chalk.magenta(module)} > ` +
             `${color(result)}`;
 
@@ -56,7 +51,7 @@ module.exports = (client) => {
         //no client
         if (
             !client.global.temp.isready ||
-            (extrac && !extrac.global.temp.isready)
+            (loggerextrac && !loggerextrac.global.temp.isready)
         ) {
             console.log(reallog[reallog.length - 1]);
             return;
@@ -66,8 +61,8 @@ module.exports = (client) => {
         var mainHunt = client.global.total.hunt;
         var mainBattle = client.global.total.battle;
         var mainEvent = client.global.gems.isevent ? "Yes" : "No";
-        var mainCF = client.global.gamble.coinflip;
-        var mainSlot = client.global.gamble.slot;
+        // var mainCF = client.global.gamble.coinflip;
+        // var mainSlot = client.global.gamble.slot;
         var mainCow = client.global.gamble.cowoncywon;
         var mainCaptcha = client.global.captchadetected
             ? client.chalk.red("Danger  ")
@@ -76,17 +71,17 @@ module.exports = (client) => {
             ? client.chalk.yellow("Paused  ")
             : client.chalk.cyan("Running ");
 
-        if (extrac) {
-            var extraHunt = extrac.global.total.hunt;
-            var extraBattle = extrac.global.total.battle;
-            var extraEvent = extrac.global.gems.isevent ? "Yes" : "No";
-            var extraCF = extrac.global.gamble.coinflip;
-            var extraSlot = extrac.global.gamble.slot;
-            var extraCow = extrac.global.gamble.cowoncywon;
-            var extraCaptcha = extrac.global.captchadetected
+        if (loggerextrac) {
+            var extraHunt = loggerextrac.global.total.hunt;
+            var extraBattle = loggerextrac.global.total.battle;
+            // var extraEvent = loggerextrac.global.gems.isevent ? "Yes" : "No";
+            // var extraCF = loggerextrac.global.gamble.coinflip;
+            // var extraSlot = loggerextrac.global.gamble.slot;
+            var extraCow = loggerextrac.global.gamble.cowoncywon;
+            var extraCaptcha = loggerextrac.global.captchadetected
                 ? client.chalk.red("Danger  ")
                 : client.chalk.green("Safe    ");
-            var extraPause = extrac.global.paused
+            var extraPause = loggerextrac.global.paused
                 ? client.chalk.yellow("Paused  ")
                 : client.chalk.cyan("Running ");
         }
@@ -98,7 +93,6 @@ module.exports = (client) => {
             else return "null";
             temp = temp.trim();
 
-            let length = temp.length;
             if (temp.length < 9) {
                 paddedText = temp.padEnd(8, " ");
                 return paddedText;
@@ -110,7 +104,7 @@ module.exports = (client) => {
 
         if (
             client.config.extra.enable &&
-            extrac &&
+            loggerextrac &&
             client.config.settings.logging.newlog
         ) {
             console.clear();
@@ -129,18 +123,20 @@ module.exports = (client) => {
                 }
 ╠══════════╬═══════════════════════╬════════════════════════════════════════════════
 ║ Extra    ║ Total hunt: ${padder(extraHunt, false)}  ║ ${
-                    extrac.global.quest.title
+                    loggerextrac.global.quest.title
                 }
 ║ ${extraCaptcha} ║ Total battle: ${padder(extraBattle, false)}║ ${
-                    extrac.global.quest.reward
+                    loggerextrac.global.quest.reward
                 }
 ║ ${extraPause} ║ Cowoncy won: ${padder(extraCow, false)} ║ ${
-                    extrac.global.quest.progress
+                    loggerextrac.global.quest.progress
                 }
 ╚══════════╩═══════════════════════╩════════════════════════════════════════════════
 >>> Log`,
             );
-            for (const logs of reallog) console.log(logs);
+            for (const logs of reallog) {
+                console.log(logs);
+            }
         } else if (client.config.settings.logging.newlog) {
             console.clear();
             console.log(
@@ -160,8 +156,12 @@ module.exports = (client) => {
 ╚══════════════════════╩══════════╩═══════════════════════════════════════════════
 >>> Log`,
             );
-            for (const logs of reallog) console.log(logs);
-        } else console.log(reallog[reallog.length - 1]);
+            for (const logs of reallog) {
+                console.log(logs);
+            }
+        } else {
+            console.log(reallog[reallog.length - 1]);
+        }
     }
 
     return {
