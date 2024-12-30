@@ -10,6 +10,15 @@
  *
  */
 
+/**
+ * Backs up the configuration file to a temporary directory.
+ *
+ * @param {Object} client - The client object that contains the logger.
+ * @param {string} configPath - The path to the configuration file to be backed up.
+ * @returns {Promise<string>} - A promise that resolves to the path of the backup file.
+ * @throws {Error} - Throws an error if the temp directory or config file does not exist, or if the backup fails.
+ */
+
 const axios = require("axios");
 const path = require("path");
 const admZip = require("adm-zip");
@@ -18,27 +27,6 @@ const fse = require("fs-extra");
 const net = require("net");
 const readline = require("readline");
 
-/**
- *
- *
- *
- *
- *
- *
- *  *
- *
- *
- *
- *
- *
- *  *
- *
- *
- *
- *
- *
- *
- */
 
 exports.checkUpdate = async (client, cp, packageJson) => {
     const askUser = (question) => {

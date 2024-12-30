@@ -5,6 +5,16 @@
  * For more information, see README.md and LICENSE
  */
 
+/**
+ * Initiates a hunting process in the specified channel.
+ * The function will wait if certain global flags are set and will retry hunting after a delay if necessary.
+ * It also handles gem usage and inventory checks based on the hunt results.
+ *
+ * @param {Object} client - The client object representing the bot.
+ * @param {Object} channel - The channel object where the hunt command will be sent.
+ * @returns {Promise<void>} - A promise that resolves when the hunting process is complete.
+ */
+
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getrand = (min, max) => Math.random() * (max - min) + min;
 

@@ -1,3 +1,25 @@
+/*
+ * OwO Farm Bot Stable
+ * Copyright (C) 2024 Mido
+ * This software is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+ * For more information, see README.md and LICENSE
+ */
+
+/**
+ * Displays logs and status information in a formatted manner.
+ *
+ * @param {Array} reallog - An array of log messages to be displayed.
+ *
+ * The function checks if the client and loggerextrac are ready. If not, it logs the last message in the reallog array.
+ * If ready, it retrieves various status information from the client and loggerextrac objects, formats them, and displays them in a structured format.
+ * The function also includes a helper function `padder` to format text with padding.
+ *
+ * The display format varies based on the configuration settings:
+ * - If extra logging is enabled, it displays detailed information for both main and extra clients.
+ * - If only new logging is enabled, it displays detailed information for the main client.
+ * - Otherwise, it logs the last message in the reallog array.
+ */
+
 module.exports = (client) => {
     let reallog = [],
         fulllog = [],

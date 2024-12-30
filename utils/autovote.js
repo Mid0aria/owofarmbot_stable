@@ -12,6 +12,16 @@
  * https://open.spotify.com/track/0K791kh3oLkBD5KVWg1LJ8?si=951700dbd6894508
  */
 
+/**
+ * Parses and returns command line arguments.
+ *
+ * @typedef {Object} Argv
+ * @property {string} token - User token.
+ * @property {string} botid - Id of the bot to vote for.
+ *
+ * @type {Argv}
+ */
+
 const { connect } = require("puppeteer-real-browser");
 const yargs = require("yargs");
 const argv = yargs.options({

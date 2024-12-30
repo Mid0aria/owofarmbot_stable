@@ -12,6 +12,17 @@
  *if fail, report to the user (idk how)
  */
 
+/**
+ * Handles the huntbot functionality by sending a command to the specified channel,
+ * waiting for a response, and processing the response to determine the next action.
+ *
+ * @async
+ * @function huntbotHandler
+ * @param {Object} client - The client object representing the bot.
+ * @param {Object} channel - The channel object where the command will be sent.
+ * @returns {Promise<void>} - A promise that resolves when the handler completes its execution.
+ */
+
 const io = require("socket.io-client");
 
 module.exports = async (client) => {

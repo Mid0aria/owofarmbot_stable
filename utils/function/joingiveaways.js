@@ -5,6 +5,20 @@
  * For more information, see README.md and LICENSE
  */
 
+/**
+ * Automatically joins giveaways in specified channels.
+ *
+ * @param {object} client - The Discord client instance.
+ * @returns {Promise<void>} - A promise that resolves when the function completes.
+ *
+ * @async
+ * @function joingiveaways
+ *
+ * @example
+ * // Call the function with the Discord client instance
+ * joingiveaways(client);
+ */
+
 const fs = require("fs");
 const path = require("path");
 const CHANNEL_IDS = [

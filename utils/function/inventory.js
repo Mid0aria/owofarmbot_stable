@@ -5,6 +5,23 @@
  * For more information, see README.md and LICENSE
  */
 
+/**
+ * Handles the inventory management for the client.
+ * 
+ * @param {Object} client - The client object.
+ * @param {Object} channel - The channel object where the inventory command will be sent.
+ * @returns {Promise<void>} - A promise that resolves when the inventory process is complete.
+ * 
+ * @description
+ * This function checks the client's global state for captcha detection, pause status, and inventory status.
+ * If any of these conditions are met, the function returns early. Otherwise, it sends a typing indicator
+ * and retrieves the inventory by sending a command to the channel. It then processes the inventory message
+ * to extract item codes and uses specific items based on the client's configuration and requirements.
+ * 
+ * The function also handles gem usage based on the client's rare level and required gems. It uses a delay
+ * between actions to ensure proper execution and updates the client's global state accordingly.
+ */
+
 const commandrandomizer = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
 module.exports = async (client) => {
