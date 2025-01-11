@@ -52,8 +52,6 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
 [📑・License](#license)<br>
 
-[🤓・For the curious](#for-the-curious)<br>
-
 ## ⭐・Star History
 
 <h2 align="center">Goal: <a href="https://github.com/Mid0aria/owofarmbot_stable/stargazers"><img src="https://img.shields.io/github/stars/Mid0aria/owofarmbot_stable" /></a> / 512</h2>
@@ -462,26 +460,3 @@ Under the following terms:
 - **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
 
 More information can be found [here](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-
-## 🤓・For the curious
-
-> Which module was used for what:
-
-```bash
-Update System:
-adm-zip
-axios
-fs-extra
-
-Selfbot System:
-discord.js-selfbot-v13
-
-Captcha System:
-node-notifier
-
-Diagnostic System: (disabled for now)
-axios
-systeminformation
-
-
-```
