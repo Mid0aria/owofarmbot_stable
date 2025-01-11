@@ -33,7 +33,7 @@ apt update -y && apt upgrade -y
 echo "${GREEN} [+] ${BLUE} Successfully updated termux ${RESTORE}"
 echo "${GREEN} [+] ${BLUE} Installing necessary packages ${RESTORE}"
 sleep 3
-pkg install wget git python nodejs python-pillow python-numpy -y
+pkg install wget git termux-api python nodejs python-pillow python-numpy -y
 sleep 1
 # curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 # sleep 1

@@ -113,10 +113,18 @@
             "autosolve": true,
             "autosolve_thread": 1,
             "alerttype": {
-                "notification": true,
-                "prompt": true,
                 "webhook": true,
-                "webhookurl": "xxx"
+                "webhookurl": "xxx",
+                "desktop": {
+                    "notification": true,
+                    "prompt": true
+                },
+                "termux": {
+                    "notification": true,
+                    "vibration": true,
+                    "vibration_time": 5000,
+                    "toast": true
+                }
             }
         }
     },

@@ -75,10 +75,13 @@ module.exports = async (client, message) => {
                     .includes("owobot.com");
             }
 
+            /**
+             * Desktop Notifications
+             */
             if (
                 !client.config.settings.captcha.autosolve &&
                 !client.global.istermux &&
-                client.config.settings.captcha.alerttype.notification
+                client.config.settings.captcha.alerttype.desktop.notification
             ) {
                 client.notifier.notify({
                     title: "Captcha Detected!",
@@ -92,7 +95,7 @@ module.exports = async (client, message) => {
             if (
                 !client.config.settings.captcha.autosolve &&
                 !client.global.istermux &&
-                client.config.settings.captcha.alerttype.prompt
+                client.config.settings.captcha.alerttype.desktop.prompt
             ) {
                 var promptmessage = `Captcha detected! Solve the captcha and type ${client.config.prefix}resume in farm channel`;
 
@@ -107,7 +110,8 @@ module.exports = async (client, message) => {
                 );
             }
             if (
-                !client.config.settings.captcha.autosolve &&
+                (!client.config.settings.captcha.autosolve ||
+                    client.global.istermux) &&
                 client.config.settings.captcha.alerttype.webhook &&
                 client.config.settings.captcha.alerttype.webhookurl.length > 10
             ) {
@@ -127,6 +131,35 @@ module.exports = async (client, message) => {
                 });
             }
 
+            /**
+             * Termux Notifications
+             */
+            if (client.global.istermux) {
+                if (
+                    client.config.settings.captcha.alerttype.termux.notification
+                ) {
+                    const termuxnotificationCommand = `termux-notification --title "OwO Farm Bot Stable" --content "Captcha Detected" --priority high --button1 "Open Captcha Page" --button1-action "termux-open-url https://owobot.com/captcha"`;
+
+                    client.childprocess.exec(termuxnotificationCommand);
+                }
+
+                if (client.config.settings.captcha.alerttype.termux.vibration) {
+                    let vibrationtime =
+                        client.config.settings.captcha.alerttype.termux
+                            .vibration;
+                    if (isNaN(vibrationtime) || vibrationtime < 1000) {
+                        vibrationtime = 1000;
+                    }
+                    const termuxvibrationCommand = `termux-vibrate -f -d ${vibrationtime}`;
+
+                    client.childprocess.exec(termuxvibrationCommand);
+                }
+                if (client.config.settings.captcha.alerttype.termux.toast) {
+                    const termuxtoastCommand = `termux-toast -c black -b red 'OwO Farm Bot Stable - Captcha Detected!'`;
+
+                    client.childprocess.exec(termuxtoastCommand);
+                }
+            }
             if (
                 client.config.settings.captcha.autosolve &&
                 isWebCaptchaMessage(

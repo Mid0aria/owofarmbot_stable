@@ -20,7 +20,7 @@ dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM=
 
 - [🎈・Installation](#Installation)
     - [Windows / Linux](#windows--linux) - Official
-    - [Android / iOS (Termux)](#android--ios-termux) - Official
+    - [Android (Termux)](#android-termux) - Official
 
 If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt6C)
 
@@ -249,10 +249,18 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
             "autosolve": true, // (set to true if you want hcaptcha to solve) true or false (boolean)
             "autosolve_thread": 1, // you choose how many threads the hcaptcha solver will run with (higher threads = faster captcha solver, you may need a powerful cpu for higher threads) (integer)
             "alerttype": {
-                "notification": true, / true or false (boolean)
-                "prompt": true / true or false (boolean)
                 "webhook": true, / true or false (boolean)
                 "webhookurl": "xxx"  / If you set webhook to true, enter your webhook url here
+                "desktop": {
+                    "notification": true, / true or false (boolean)
+                    "prompt": true / true or false (boolean)
+                },
+                "termux": {
+                    "notification": true, / true or false (boolean)
+                    "vibration": true, / true or false (boolean)
+                    "vibration_time": 5000, / recommended minimum of 3000 milliseconds (integer)
+                    "toast": true / true or false (boolean)
+                }
             }
         },
     },
@@ -411,7 +419,11 @@ In config.json, type [prefix]stop (example: e!stop) with the prefix you set in c
 In config.json, type [prefix]resume (example: e!resume) with the prefix you set in config.json to the channel whose ID you entered in channelid
 ```
 
-### 📱・Android / iOS (Termux)
+### 📱・Android (Termux)
+
+You need to download the following two applications:<br>
+[Termux](https://f-droid.org/tr/packages/com.termux/)<br>
+[Termux-API for notifications](https://f-droid.org/tr/packages/com.termux.api/)
 
 ```bash
 # Install:
