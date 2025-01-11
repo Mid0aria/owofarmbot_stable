@@ -9,7 +9,7 @@
 
 /**
  * Retrieves the guild with the specified ID from the client's guild cache.
- * 
+ *
  * @type {Guild}
  * @constant
  */

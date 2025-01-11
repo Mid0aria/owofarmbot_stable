@@ -21,12 +21,10 @@
 
 const axios = require("axios");
 const path = require("path");
-const admZip = require("adm-zip");
 const os = require("os");
 const fse = require("fs-extra");
 const net = require("net");
 const readline = require("readline");
-
 
 exports.checkUpdate = async (client, cp, packageJson) => {
     const askUser = (question) => {
@@ -218,37 +216,6 @@ const downloaddotgit = async (client, cp) => {
 
     cp.execSync(cloneCommand, { stdio: "inherit" });
     await gitUpdate(client, cp);
-};
-
-const manualUpdate = async (client) => {
-    try {
-        const headers = {
-            "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537",
-        };
-        const res = await axios.get(
-            `https://github.com/Mid0aria/owofarmbot_stable/archive/master.zip`,
-            {
-                responseType: "arraybuffer",
-                headers,
-            },
-        );
-
-        const updatePath = path.resolve(__dirname, "../../updateCache.zip");
-        fse.writeFileSync(updatePath, res.data);
-
-        const zip = new admZip(updatePath);
-        zip.extractAllTo(path.resolve(__dirname, "../../"), true); // is it correct ?
-
-        fse.unlinkSync(updatePath);
-        client.logger.info("Updater", "Zip", "Temporary zip file deleted.");
-    } catch (error) {
-        client.logger.alert(
-            "Updater",
-            "Zip",
-            `Error updating project from GitHub Repo: ${error.message}`,
-        );
-    }
 };
 
 /**

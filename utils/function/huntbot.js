@@ -278,6 +278,7 @@ async function triggerHB(client, channel) {
             });
 
             socket.on("captcha_solution", async (solution) => {
+                let isstartedhunting = false;
                 await client.delay(1600);
                 await channel.send({
                     content: `${commandrandomizer([
@@ -290,8 +291,52 @@ async function triggerHB(client, channel) {
                         "ah",
                     ])} ${client.global.temp.huntbot.maxtime}h ${solution}`,
                 });
+                const regex = /(\d+)([SMHD])/g;
+                const matches = message.content.matchAll(regex);
 
-                client.logger.info("Farm", "Huntbot", "Huntbot is hunting.");
+                let milliseconds = 0;
+
+                for (const match of matches) {
+                    const time = parseInt(match[1]);
+                    const unit = match[2];
+
+                    if (unit === "S") {
+                        milliseconds += time * 1000;
+                    } else if (unit === "M") {
+                        milliseconds += time * 60 * 1000;
+                    } else if (unit === "H") {
+                        milliseconds += time * 60 * 60 * 1000;
+                    } else if (unit === "D") {
+                        milliseconds += time * 24 * 60 * 60 * 1000;
+                    }
+                }
+
+                if (milliseconds > 0) {
+                    client.global.temp.huntbot.recalltime = milliseconds + 5000;
+                    isstartedhunting = true;
+                } else {
+                    client.logger.alert(
+                        "Farm",
+                        "HuntBot",
+                        "Couldn't find valid duration format! Retry after 61 seconds.",
+                    );
+                    setTimeout(async () => {
+                        await huntbotHandler(client, channel);
+                    }, 61000);
+                    return;
+                }
+                if (isstartedhunting) {
+                    client.logger.info(
+                        "Farm",
+                        "Huntbot",
+                        `Huntbot has started to hunt. It will restart in ${client.global.temp.huntbot.recalltime} milliseconds`,
+                    );
+
+                    //? will it work
+                    setTimeout(async () => {
+                        await huntbotHandler(client, channel);
+                    }, client.global.temp.huntbot.recalltime);
+                }
             });
         });
 }

@@ -7,18 +7,18 @@
 
 /**
  * Handles the checklist process for the given client and channel.
- * 
+ *
  * @async
  * @function checklist
  * @param {Object} client - The client object.
  * @param {Object} channel - The channel object where the checklist command will be sent.
  * @returns {Promise<void>}
- * 
+ *
  * @description
  * This function sends a checklist command to the specified channel and processes the response.
  * It checks for various checklist items such as daily, vote, and cookie, and performs the necessary actions.
  * If a captcha is detected or the client is paused, the function will return early.
- * 
+ *
  * @example
  * checklist(client, channel);
  */
@@ -311,7 +311,7 @@ async function checklist(client, channel) {
                                     client.logger.info(
                                         "Bot",
                                         "Checklist - Vote",
-                                        "Opening browser...",
+                                        "Opening automated chromium browser...",
                                     );
 
                                     client.childprocess.spawn("node", [

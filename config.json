@@ -110,7 +110,8 @@
         },
 
         "captcha": {
-            "autosolvecaptcha": true,
+            "autosolve": true,
+            "autosolve_thread": 1,
             "alerttype": {
                 "notification": true,
                 "prompt": true,

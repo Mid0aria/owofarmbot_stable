@@ -7,7 +7,7 @@
 
 /**
  * Starts the OwO Farm Bot if it is paused.
- * 
+ *
  * @module start
  * @property {Object} config - Configuration for the command.
  * @property {string} config.name - The name of the command.
@@ -16,11 +16,11 @@
  * @param {Object} client - The client instance of the bot.
  * @param {Object} message - The message object that triggered the command.
  * @returns {Promise<void>}
- * 
+ *
  * @example
  * // Usage in a Discord message
  * !start
- * 
+ *
  * @description
  * This command checks if the bot is paused. If it is, it resumes the bot's operation,
  * updates the bot's status, and optionally sends feedback to the chat. If the bot is

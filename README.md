@@ -115,7 +115,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
         - Webhook
 
     - Features:
-        - Auto Solving HCAPTCHA (ONLY WORKS ON DESKTOP)
+        - Auto Solving HCAPTCHA(web captcha) with thread system(ONLY WORKS ON DESKTOP)
         - Command Randomizer
         - Suspends all farm operations when captcha is detected
         - When the captcha is solved, farm operations continue automatically
@@ -169,7 +169,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
         },
         "maximum_gem_rarity": "Mythical" / "common", "uncommon", "rare", "epic", "mythical", "legendary", "fabled"
     },
-    "extra": { / not required, same as main
+    "extra": { / not required for explain, same as main
         "enable": true,
         "token": "",
         "userid": "",
@@ -248,7 +248,8 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
         },
 
         "captcha": {
-            autosolvecaptcha": true, // (set to true if you want hcaptcha to solve) true or false (boolean)
+            "autosolve": true, // (set to true if you want hcaptcha to solve) true or false (boolean)
+            "autosolve_thread": 1, // you choose how many threads the hcaptcha solver will run with (higher threads = faster captcha solver, you may need a powerful cpu for higher threads) (integer)
             "alerttype": {
                 "notification": true, / true or false (boolean)
                 "prompt": true / true or false (boolean)

@@ -86,54 +86,53 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         await page.goto(captchaUrl, { waitUntil: "load" });
         console.log("Waiting for the captcha to be solved...");
 
-        // let refreshCount = 0;
-        // const maxRefreshAttempts = 35;
-
         while (true) {
+            let needsRefresh = false;
             const isCaptchaOk = await page.evaluate(() => {
-                if (
-                    [
-                        "I have verified that you're a human",
-                        "You're free to go! c:",
-                    ].some((text) => document.body.innerText.includes(text))
-                ) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return document.body.innerText.includes("Challenge Success!");
             });
 
-            /*  const needsRefresh = await page.evaluate(() => {
-                if (
-                    [
+            const iframeHandle = await page.$(
+                'iframe[src*="hcaptcha"][src*="frame=challenge"]',
+            );
+            if (iframeHandle) {
+                const iframe = await iframeHandle.contentFrame(); // Access to iframe's content Frame object
+
+                if (iframe) {
+                    const iframecontent = await iframe.evaluate(
+                        () => document.body.innerText,
+                    );
+                    console.log(iframecontent);
+                    const captchaTexts = [
+                        "Please click on the character that represents a quantity or can be used for counting",
+                        "Please click, hold, and drag the shape to complete the pattern",
+                        "Please click, hold, and drag one of the elements on the right to complete the pairs",
                         "Please click on the shape that breaks the pattern",
                         "Please click on the object that is not shiny",
                         "Fill the boxes with the required number of objects indicated.",
                         "click, hold and drag",
+                        "click, hold, and drag",
                         "click on the shape that breaks the pattern",
-                    ].some((text) =>
-                        document.body.innerText
-                            .toLowerCase()
-                            .includes(text.toLowerCase())
-                    )
-                ) {
-                    return true;
-                } else {
-                    return false;
+                    ];
+                    needsRefresh = captchaTexts.some((text) =>
+                        iframecontent.includes(text),
+                    );
                 }
-            });*/
+            } else {
+                console.log(
+                    "Iframe with hcaptcha and frame=challenge not found.",
+                );
+            }
 
             if (isCaptchaOk) {
                 console.log("Successfully solved captcha.");
                 break;
-            } /*else if (needsRefresh || refreshCount >= maxRefreshAttempts) {
+            } else if (needsRefresh) {
                 console.log("Refreshing captcha page...");
                 await page.reload({ waitUntil: "load" });
-                refreshCount = 0;
-            }*/ else {
+            } else {
                 console.log("Captcha not solved yet");
-                // refreshCount++;
-                await delay(2500);
+                await delay(1000);
             }
         }
     } else {

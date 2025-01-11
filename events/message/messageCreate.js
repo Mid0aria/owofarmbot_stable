@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /*
  * OwO Farm Bot Stable
  * Copyright (C) 2024 Mido
@@ -27,10 +28,7 @@ function isWebCaptchaMessage(msgcontent, helloChristopher, canulickmymonster) {
 module.exports = async (client, message) => {
     if (
         message.author.id === "408785106942164992" &&
-        (message.channel.id === client.basic.commandschannelid ||
-            message.channel.id === client.basic.owodmchannelid ||
-            message.channel.id === client.basic.gamblechannelid ||
-            message.channel.id === client.basic.autoquestchannelid)
+        message.content.toLowerCase().includes(`<@${client.user.id}>`)
     ) {
         let rawmsgcontent = message.content.toLowerCase();
         let msgcontent = client.globalutil.removeInvisibleChars(rawmsgcontent);
@@ -40,6 +38,10 @@ module.exports = async (client, message) => {
             (msgcontent.includes("please complete your captcha") ||
                 msgcontent.includes("verify that you are human") ||
                 msgcontent.includes("are you a real human") ||
+                msgcontent.includes("i​t m​ay resu​lt i​n a​ ban") ||
+                msgcontent.includes(
+                    "p​lease complet​e thi​s with​in 1​0 m​inutes",
+                ) ||
                 msgcontent.includes(
                     "please use the link below so i can check",
                 ) ||
@@ -65,7 +67,6 @@ module.exports = async (client, message) => {
                 message.components.length > 0 &&
                 message.components[0].components[0]
             ) {
-                // some homo's saying "Challenge accepted". What challenge are you talking about, asshole oe XD
                 helloChristopher = message.components[0].components.find(
                     (button) => button.url.toLowerCase() === "owobot.com",
                 );
@@ -75,6 +76,7 @@ module.exports = async (client, message) => {
             }
 
             if (
+                !client.config.settings.captcha.autosolve &&
                 !client.global.istermux &&
                 client.config.settings.captcha.alerttype.notification
             ) {
@@ -88,6 +90,7 @@ module.exports = async (client, message) => {
                 });
             }
             if (
+                !client.config.settings.captcha.autosolve &&
                 !client.global.istermux &&
                 client.config.settings.captcha.alerttype.prompt
             ) {
@@ -104,6 +107,7 @@ module.exports = async (client, message) => {
                 );
             }
             if (
+                !client.config.settings.captcha.autosolve &&
                 client.config.settings.captcha.alerttype.webhook &&
                 client.config.settings.captcha.alerttype.webhookurl.length > 10
             ) {
@@ -124,13 +128,18 @@ module.exports = async (client, message) => {
             }
 
             if (
-                client.config.settings.captcha.autosolvecaptcha &&
+                client.config.settings.captcha.autosolve &&
                 isWebCaptchaMessage(
                     msgcontent,
                     helloChristopher,
                     canulickmymonster,
                 )
             ) {
+                let spawnthread =
+                    client.config.settings.captcha.autosolve_thread;
+                if (isNaN(spawnthread) || spawnthread < 1) {
+                    spawnthread = 1;
+                }
                 switch (process.platform || client.global.istermux) {
                     case "android":
                         client.logger.warn(
@@ -143,17 +152,27 @@ module.exports = async (client, message) => {
                         client.logger.info(
                             "Bot",
                             "Captcha",
-                            "Opening browser...",
+                            `Opening automated Chromium browser... Thread Count: ${spawnthread}`,
                         );
-                        client.childprocess.spawn("node", [
-                            "./utils/captcha.js",
-                            `--token=${client.basic.token}`,
-                        ]);
-                        return;
+
+                        for (
+                            let spawncount = 0;
+                            spawncount < spawnthread;
+                            spawncount++
+                        ) {
+                            client.childprocess.spawn("node", [
+                                "./utils/captcha.js",
+                                `--token=${client.basic.token}`,
+                            ]);
+                        }
+                        break;
                 }
             }
         }
-        if (msgcontent.includes("i have verified that you are human")) {
+        if (
+            msgcontent.includes("i have verified") ||
+            msgcontent.includes("that you are human")
+        ) {
             client.global.captchadetected = false;
             if (client.config.settings.autoresume) {
                 client.global.paused = false;

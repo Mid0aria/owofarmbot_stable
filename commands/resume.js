@@ -7,7 +7,7 @@
 
 /**
  * Command to resume the bot's operations if it is paused.
- * 
+ *
  * @module resume
  * @property {Object} config - Configuration for the command.
  * @property {string} config.name - The name of the command.
