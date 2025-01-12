@@ -26,15 +26,14 @@ function isWebCaptchaMessage(msgcontent, helloChristopher, canulickmymonster) {
 }
 
 module.exports = async (client, message) => {
-    if (
-        message.author.id === "408785106942164992" &&
-        message.content.toLowerCase().includes(`<@${client.user.id}>`)
-    ) {
+    if (message.author.id === "408785106942164992") {
         let rawmsgcontent = message.content.toLowerCase();
+        let channeltype = message.channel.type;
         let msgcontent = client.globalutil.removeInvisibleChars(rawmsgcontent);
         let helloChristopher, canulickmymonster;
 
         if (
+            message.content.toLowerCase().includes(`<@${client.user.id}>`) &&
             (msgcontent.includes("please complete your captcha") ||
                 msgcontent.includes("verify that you are human") ||
                 msgcontent.includes("are you a real human") ||
@@ -138,7 +137,7 @@ module.exports = async (client, message) => {
                 if (
                     client.config.settings.captcha.alerttype.termux.notification
                 ) {
-                    const termuxnotificationCommand = `termux-notification --title "OwO Farm Bot Stable" --content "Captcha Detected" --priority high --button1 "Open Captcha Page" --button1-action "termux-open-url https://owobot.com/captcha"`;
+                    const termuxnotificationCommand = `termux-notification --title "OwO Farm Bot Stable" --content "${client.user.username} - Captcha Detected" --priority high --button1 "Open Captcha Page" --button1-action "termux-open-url https://owobot.com/captcha"`;
 
                     client.childprocess.exec(termuxnotificationCommand);
                 }
@@ -205,7 +204,8 @@ module.exports = async (client, message) => {
         }
         if (
             msgcontent.includes("i have verified") ||
-            msgcontent.includes("that you are human")
+            msgcontent.includes("that you are human") ||
+            channeltype === "DM"
         ) {
             client.global.captchadetected = false;
             if (client.config.settings.autoresume) {
