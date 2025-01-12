@@ -89,14 +89,36 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         while (true) {
             let needsRefresh = false;
             const isCaptchaOk = await page.evaluate(() => {
-                return document.body.innerText.includes("Challenge Success!");
+                if (
+                    [
+                        "I have verified that you're a human",
+                        "You're free to go! c:",
+                    ].some((t) => document.body.innerText.includes(t))
+                ) {
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+
+            const isCaptchaFail = await page.evaluate(() => {
+                if (
+                    [
+                        "Captcha failed",
+                        "Please reload the page and try again",
+                    ].some((t) => document.body.innerText.includes(t))
+                ) {
+                    return true;
+                } else {
+                    false;
+                }
             });
 
             const iframeHandle = await page.$(
                 'iframe[src*="hcaptcha"][src*="frame=challenge"]',
             );
             if (iframeHandle) {
-                const iframe = await iframeHandle.contentFrame(); // Access to iframe's content Frame object
+                const iframe = await iframeHandle.contentFrame();
 
                 if (iframe) {
                     const iframecontent = await iframe.evaluate(
@@ -127,6 +149,10 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             if (isCaptchaOk) {
                 console.log("Successfully solved captcha.");
                 break;
+            } else if (isCaptchaFail) {
+                refreshcount = 0;
+                needsRefresh = false;
+                await page.reload({ waitUntil: "load" });
             } else if (needsRefresh) {
                 console.log("Refreshing captcha...");
                 if (refreshcount > 10) {
