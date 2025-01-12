@@ -197,6 +197,7 @@ module.exports = async (client, message) => {
                                 "./utils/captcha.js",
                                 `--token=${client.basic.token}`,
                             ]);
+                            await client.delay(3000);
                         }
                         break;
                 }

@@ -85,7 +85,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
         await page.goto(captchaUrl, { waitUntil: "load" });
         console.log("Waiting for the captcha to be solved...");
-
+        let refreshcount = 0;
         while (true) {
             let needsRefresh = false;
             const isCaptchaOk = await page.evaluate(() => {
@@ -102,7 +102,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                     const iframecontent = await iframe.evaluate(
                         () => document.body.innerText,
                     );
-                    console.log(iframecontent);
+
                     const captchaTexts = [
                         "Please click on the character that represents a quantity or can be used for counting",
                         "Please click, hold, and drag the shape to complete the pattern",
@@ -128,8 +128,19 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                 console.log("Successfully solved captcha.");
                 break;
             } else if (needsRefresh) {
-                console.log("Refreshing captcha page...");
-                await page.reload({ waitUntil: "load" });
+                console.log("Refreshing captcha...");
+                if (refreshcount > 10) {
+                    const refreshButton =
+                        await iframeContent.$("div#refresh-button");
+                    if (refreshButton) {
+                        await refreshButton.click();
+                    } else {
+                        console.log("Refresh button not found");
+                    }
+                } else {
+                    await page.reload({ waitUntil: "load" });
+                    refreshcount++;
+                }
             } else {
                 console.log("Captcha not solved yet");
                 await delay(1000);
