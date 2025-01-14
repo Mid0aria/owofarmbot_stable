@@ -32,154 +32,180 @@ const argv = yargs.options({
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 (async () => {
-    const authUrl =
-        "https://discord.com/api/v9/oauth2/authorize?client_id=408785106942164992&response_type=code&redirect_uri=https%3A%2F%2Fowobot.com%2Fapi%2Fauth%2Fdiscord%2Fredirect&scope=identify%20guilds%20email%20guilds.members.read";
-    const extentionpopup =
-        "chrome-extension://hlifkpholllijblknnmbfagnkjneagid/popup/popup.html";
+    let captchasolved = false;
+    while (true) {
+        const authUrl =
+            "https://discord.com/api/v9/oauth2/authorize?client_id=408785106942164992&response_type=code&redirect_uri=https%3A%2F%2Fowobot.com%2Fapi%2Fauth%2Fdiscord%2Fredirect&scope=identify%20guilds%20email%20guilds.members.read";
+        const extentionpopup =
+            "chrome-extension://hlifkpholllijblknnmbfagnkjneagid/popup/popup.html";
 
-    const userToken = argv.token;
+        const userToken = argv.token;
 
-    const extensionPath = path.resolve(__dirname, "../utils/hcaptchasolver");
+        const extensionPath = path.resolve(
+            __dirname,
+            "../utils/hcaptchasolver",
+        );
 
-    const { browser, page } = await connect({
-        headless: false,
-        turnstile: false,
-        args: [
-            `--disable-extensions-except=${extensionPath}`,
-            `--load-extension=${extensionPath}`,
-        ],
-    });
+        const { browser, page } = await connect({
+            headless: false,
+            turnstile: false,
+            args: [
+                `--disable-extensions-except=${extensionPath}`,
+                `--load-extension=${extensionPath}`,
+            ],
+        });
 
-    await page.setViewport({
-        width: 1200,
-        height: 1080,
-    });
+        await page.setViewport({
+            width: 1200,
+            height: 1080,
+        });
 
-    await page.goto(extentionpopup);
+        await page.goto(extentionpopup);
 
-    await delay(3000);
+        await delay(3000);
 
-    await page.evaluateOnNewDocument((token) => {
-        window.localStorage.setItem("token", `"${token}"`);
-    }, userToken);
+        await page.evaluateOnNewDocument((token) => {
+            window.localStorage.setItem("token", `"${token}"`);
+        }, userToken);
 
-    await page.goto(authUrl, { waitUntil: "load" });
+        await page.goto(authUrl, { waitUntil: "load" });
 
-    await page.waitForSelector("div.action_c5a065 button", { visible: true });
-    await page.locator("div.action_c5a065 button").setTimeout(3000).click();
+        await page.waitForSelector("div.action_c5a065 button", {
+            visible: true,
+        });
+        await page.locator("div.action_c5a065 button").setTimeout(3000).click();
 
-    await page.waitForNavigation({ waitUntil: "load" });
+        await page.waitForNavigation({ waitUntil: "load" });
 
-    const redirectedUrl = page.url();
-    console.log(`Redirected URL: ${redirectedUrl}`);
+        const redirectedUrl = page.url();
+        console.log(`Redirected URL: ${redirectedUrl}`);
 
-    const isLoggedIn = await page.evaluate(() => {
-        return !document.body.innerText.includes("Unauthorized");
-    });
-    const isInvalidAuth = await page.evaluate(() => {
-        return document.body.innerText.includes('Invalid "code" in request.');
-    });
-    if (isLoggedIn && !isInvalidAuth) {
-        console.log("Authorization successful! The user has logged in.");
-
-        const captchaUrl = `https://owobot.com/captcha`;
-        console.log(`Captcha URL: ${captchaUrl}`);
-
-        await page.goto(captchaUrl, { waitUntil: "load" });
-        console.log("Waiting for the captcha to be solved...");
-        let refreshcount = 0;
-        while (true) {
-            let needsRefresh = false;
-            const isCaptchaOk = await page.evaluate(() => {
-                if (
-                    [
-                        "I have verified that you're a human",
-                        "You're free to go! c:",
-                    ].some((t) => document.body.innerText.includes(t))
-                ) {
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-
-            const isCaptchaFail = await page.evaluate(() => {
-                if (
-                    [
-                        "Captcha failed",
-                        "Please reload the page and try again",
-                    ].some((t) => document.body.innerText.includes(t))
-                ) {
-                    return true;
-                } else {
-                    false;
-                }
-            });
-
-            const iframeHandle = await page.$(
-                'iframe[src*="hcaptcha"][src*="frame=challenge"]',
+        const isLoggedIn = await page.evaluate(() => {
+            return !document.body.innerText.includes("Unauthorized");
+        });
+        const isInvalidAuth = await page.evaluate(() => {
+            return document.body.innerText.includes(
+                'Invalid "code" in request.',
             );
-            let iframeDocument;
-            if (iframeHandle) {
-                iframe = await iframeHandle.contentFrame();
+        });
+        const isRateLimit = await page.evaluate(() => {
+            return document.body.innerText.includes(
+                "You are being rate limited for requesting too many tokens",
+            );
+        });
+        if (isRateLimit) {
+            console.log("Rate limit detected. Waiting for 5 minutes...");
+            await browser.close();
+            await delay(300000);
+            continue;
+        } else if (isLoggedIn && !isInvalidAuth) {
+            console.log("Authorization successful! The user has logged in.");
 
-                if (iframe) {
-                    const iframecontent = await iframe.evaluate(
-                        () => document.body.innerText,
-                    );
-                    iframeDocument =
-                        iframe.contentDocument || iframe.contentWindow.document;
+            const captchaUrl = `https://owobot.com/captcha`;
+            console.log(`Captcha URL: ${captchaUrl}`);
 
-                    const captchaTexts = [
-                        "Please click on the character that represents a quantity or can be used for counting",
-                        "Please click, hold, and drag the shape to complete the pattern",
-                        "Please click, hold, and drag one of the elements on the right to complete the pairs",
-                        "Please click on the shape that breaks the pattern",
-                        "Please click on the object that is not shiny",
-                        "Fill the boxes with the required number of objects indicated.",
-                        "click, hold and drag",
-                        "click, hold, and drag",
-                        "click on the shape that breaks the pattern",
-                    ];
-                    needsRefresh = captchaTexts.some((text) =>
-                        iframecontent.includes(text),
-                    );
-                }
-            } else {
-                console.log(
-                    "Iframe with hcaptcha and frame=challenge not found.",
-                );
-            }
-
-            if (isCaptchaOk) {
-                console.log("Successfully solved captcha.");
-                break;
-            } else if (isCaptchaFail) {
-                refreshcount = 0;
-                needsRefresh = false;
-                await page.reload({ waitUntil: "load" });
-            } else if (needsRefresh) {
-                console.log("Refreshing captcha...");
-                if (refreshcount > 1) {
-                    const refreshButton =
-                        await iframeDocument.querySelector(".refresh.button");
-                    if (refreshButton) {
-                        await refreshButton.click();
+            await page.goto(captchaUrl, { waitUntil: "load" });
+            console.log("Waiting for the captcha to be solved...");
+            let refreshcount = 0;
+            while (true) {
+                let needsRefresh = false;
+                const isCaptchaOk = await page.evaluate(() => {
+                    if (
+                        [
+                            "I have verified that you're a human",
+                            "You're free to go! c:",
+                        ].some((t) => document.body.innerText.includes(t))
+                    ) {
+                        return true;
                     } else {
-                        console.log("Refresh button not found");
+                        return false;
+                    }
+                });
+
+                const isCaptchaFail = await page.evaluate(() => {
+                    if (
+                        [
+                            "Captcha failed",
+                            "Please reload the page and try again",
+                        ].some((t) => document.body.innerText.includes(t))
+                    ) {
+                        return true;
+                    } else {
+                        false;
+                    }
+                });
+
+                const iframeHandle = await page.$(
+                    'iframe[src*="hcaptcha"][src*="frame=challenge"]',
+                );
+                let iframeDocument;
+                if (iframeHandle) {
+                    iframe = await iframeHandle.contentFrame();
+
+                    if (iframe) {
+                        const iframecontent = await iframe.evaluate(
+                            () => document.body.innerText,
+                        );
+                        iframeDocument = iframe.contentDocument;
+                        console.log(iframeDocument);
+
+                        const captchaTexts = [
+                            "Please click on the character that represents a quantity or can be used for counting",
+                            "Please click, hold, and drag the shape to complete the pattern",
+                            "Please click, hold, and drag one of the elements on the right to complete the pairs",
+                            "Please click on the shape that breaks the pattern",
+                            "Please click on the object that is not shiny",
+                            "Fill the boxes with the required number of objects indicated.",
+                            "click, hold and drag",
+                            "click, hold, and drag",
+                            "click on the shape that breaks the pattern",
+                        ];
+                        needsRefresh = captchaTexts.some((text) =>
+                            iframecontent.includes(text),
+                        );
                     }
                 } else {
-                    await page.reload({ waitUntil: "load" });
-                    refreshcount++;
+                    console.log(
+                        "Iframe with hcaptcha and frame=challenge not found.",
+                    );
                 }
-            } else {
-                console.log("Captcha not solved yet");
-                await delay(1000);
-            }
-        }
-    } else {
-        console.log("Authorization failed.");
-    }
 
-    await browser.close();
+                if (isCaptchaOk) {
+                    console.log("Successfully solved captcha.");
+                    captchasolved = true;
+                    break;
+                } else if (isCaptchaFail) {
+                    refreshcount = 0;
+                    needsRefresh = false;
+                    await page.reload({ waitUntil: "load" });
+                } else if (needsRefresh) {
+                    console.log("Refreshing captcha...");
+                    if (refreshcount < 1) {
+                        await page.reload({ waitUntil: "load" });
+                        refreshcount++;
+                    } else {
+                        /**
+                         * TODO REFRESH BUTON BULMUYOR OE
+                         */
+                        // const refreshButton =
+                        //     await iframeDocument.querySelector(".refresh.button");
+                        // if (refreshButton) {
+                        //     await refreshButton.click();
+                        // } else {
+                        //     console.log("Refresh button not found");
+                        // }
+                    }
+                } else {
+                    console.log("Captcha not solved yet");
+                    await delay(1000);
+                }
+            }
+        } else {
+            console.log("Authorization failed.");
+        }
+        if (captchasolved) {
+            await browser.close();
+            break;
+        }
+    }
 })();
