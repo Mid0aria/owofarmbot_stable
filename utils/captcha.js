@@ -76,11 +76,13 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     const isLoggedIn = await page.evaluate(() => {
         return !document.body.innerText.includes("Unauthorized");
     });
-
-    if (isLoggedIn) {
+    const isInvalidAuth = await page.evaluate(() => {
+        return document.body.innerText.includes('Invalid "code" in request.');
+    });
+    if (isLoggedIn && !isInvalidAuth) {
         console.log("Authorization successful! The user has logged in.");
 
-        const captchaUrl = `${redirectedUrl}captcha`;
+        const captchaUrl = `https://owobot.com/captcha`;
         console.log(`Captcha URL: ${captchaUrl}`);
 
         await page.goto(captchaUrl, { waitUntil: "load" });
@@ -117,13 +119,16 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             const iframeHandle = await page.$(
                 'iframe[src*="hcaptcha"][src*="frame=challenge"]',
             );
+            let iframeDocument;
             if (iframeHandle) {
-                const iframe = await iframeHandle.contentFrame();
+                iframe = await iframeHandle.contentFrame();
 
                 if (iframe) {
                     const iframecontent = await iframe.evaluate(
                         () => document.body.innerText,
                     );
+                    iframeDocument =
+                        iframe.contentDocument || iframe.contentWindow.document;
 
                     const captchaTexts = [
                         "Please click on the character that represents a quantity or can be used for counting",
@@ -155,9 +160,9 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                 await page.reload({ waitUntil: "load" });
             } else if (needsRefresh) {
                 console.log("Refreshing captcha...");
-                if (refreshcount > 10) {
+                if (refreshcount > 1) {
                     const refreshButton =
-                        await iframeContent.$("div#refresh-button");
+                        await iframeDocument.querySelector(".refresh.button");
                     if (refreshButton) {
                         await refreshButton.click();
                     } else {

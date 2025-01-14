@@ -202,11 +202,7 @@ module.exports = async (client, message) => {
                 }
             }
         }
-        if (
-            msgcontent.includes("i have verified") ||
-            msgcontent.includes("that you are human") ||
-            channeltype === "DM"
-        ) {
+        if (msgcontent.includes("i have verified") || channeltype === "DM") {
             client.global.captchadetected = false;
             if (client.config.settings.autoresume) {
                 client.global.paused = false;

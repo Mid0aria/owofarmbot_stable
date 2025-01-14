@@ -1,5 +1,3 @@
-/* eslint-disable no-empty */
-/* eslint-disable no-unused-vars */
 /*
  * OwO Farm Bot Stable
  * Copyright (C) 2024 Mido
@@ -20,6 +18,7 @@ module.exports = async (client) => {
         "Startup",
         client.chalk.red(`${client.user.username}`) + " is ready!",
     );
+    setupSweeper(client);
 
     client.global.temp.isready = true;
     if (client.config.settings.autojoingiveaways) {
@@ -76,3 +75,17 @@ module.exports = async (client) => {
         }
     }
 };
+
+function setupSweeper(botClient) {
+    setInterval(
+        () => {
+            botClient.channels.cache.forEach((channel) => {
+                if (channel.messages) {
+                    channel.messages.cache.clear();
+                }
+            });
+            console.log(`[${botClient.user.username}] Message cache cleared.`);
+        },
+        5 * 60 * 1000,
+    );
+}
