@@ -637,8 +637,13 @@ async function questBattle(client, channel, quest, mainSender, extraSender) {
 
 async function questCookie(client, channel, quest, mainSender, extraSender) {
     if (client.global.type == "Main") {
-        while (client.global.captchadetected || client.global.paused)
-            await client.delay(16000);
+        if (client.global.paused || client.global.captchadetected) {
+            while (true) {
+                if (!(client.global.paused || client.global.captchadetected))
+                    break;
+                await client.delay(3000);
+            }
+        }
 
         mainSender
             .send({
@@ -653,8 +658,13 @@ async function questCookie(client, channel, quest, mainSender, extraSender) {
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             });
     } else if (client.global.type == "Extra") {
-        while (client.global.captchadetected || client.global.paused)
-            await client.delay(16000);
+        if (client.global.paused || client.global.captchadetected) {
+            while (true) {
+                if (!(client.global.paused || client.global.captchadetected))
+                    break;
+                await client.delay(3000);
+            }
+        }
 
         extraSender
             .send({
@@ -679,8 +689,15 @@ async function questCookie(client, channel, quest, mainSender, extraSender) {
 async function questActionMe(client, channel, quest, mainSender, extraSender) {
     if (client.global.type == "Main") {
         while (quest.pro1 < quest.pro2) {
-            while (client.global.captchadetected || client.global.paused)
-                await client.delay(16000);
+            if (client.global.paused || client.global.captchadetected) {
+                while (true) {
+                    if (
+                        !(client.global.paused || client.global.captchadetected)
+                    )
+                        break;
+                    await client.delay(3000);
+                }
+            }
 
             mainSender.sendTyping();
             mainSender
@@ -713,8 +730,15 @@ async function questActionMe(client, channel, quest, mainSender, extraSender) {
         }
     } else if (client.global.type == "Extra") {
         while (quest.pro1 < quest.pro2) {
-            while (client.global.captchadetected || client.global.paused)
-                await client.delay(16000);
+            if (client.global.paused || client.global.captchadetected) {
+                while (true) {
+                    if (
+                        !(client.global.paused || client.global.captchadetected)
+                    )
+                        break;
+                    await client.delay(3000);
+                }
+            }
 
             extraSender.sendTyping();
             extraSender

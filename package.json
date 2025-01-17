@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.6.0.7",
-    "version_note": "Fixed FUCKING IDIOT CAPTCHA DETECTION SYSTEM ITS NOW WORK PROPERLY & client sweeper addod for ram optimization",
+    "version": "0.0.6.0.8",
+    "version_note": "Fixed huntbot not stopping when captcha detected",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "bot.js",
     "repository": {

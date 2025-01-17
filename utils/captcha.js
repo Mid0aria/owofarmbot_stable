@@ -127,6 +127,9 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                         [
                             "Captcha failed",
                             "Please reload the page and try again",
+                            "reload the page",
+                            "failed.",
+                            "the page and try again.",
                         ].some((t) => document.body.innerText.includes(t))
                     ) {
                         return true;

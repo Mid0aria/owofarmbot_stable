@@ -91,6 +91,18 @@ async function huntbotHandler(client, channel) {
             }
 
             if (message == null) {
+                if (client.global.paused || client.global.captchadetected) {
+                    while (true) {
+                        if (
+                            !(
+                                client.global.paused ||
+                                client.global.captchadetected
+                            )
+                        )
+                            break;
+                        await client.delay(3000);
+                    }
+                }
                 client.logger.alert(
                     "Farm",
                     "HuntBot",
@@ -138,6 +150,21 @@ async function huntbotHandler(client, channel) {
                             client.global.temp.huntbot.recalltime =
                                 milliseconds + 5000;
                         } else {
+                            if (
+                                client.global.paused ||
+                                client.global.captchadetected
+                            ) {
+                                while (true) {
+                                    if (
+                                        !(
+                                            client.global.paused ||
+                                            client.global.captchadetected
+                                        )
+                                    )
+                                        break;
+                                    await client.delay(3000);
+                                }
+                            }
                             client.logger.alert(
                                 "Farm",
                                 "HuntBot",
@@ -315,6 +342,18 @@ async function triggerHB(client, channel) {
                     client.global.temp.huntbot.recalltime = milliseconds + 5000;
                     isstartedhunting = true;
                 } else {
+                    if (client.global.paused || client.global.captchadetected) {
+                        while (true) {
+                            if (
+                                !(
+                                    client.global.paused ||
+                                    client.global.captchadetected
+                                )
+                            )
+                                break;
+                            await client.delay(3000);
+                        }
+                    }
                     client.logger.alert(
                         "Farm",
                         "HuntBot",
