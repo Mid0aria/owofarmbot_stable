@@ -39,7 +39,8 @@
         "fs-extra": "^11.2.0",
         "node-notifier": "^10.0.1",
         "socket.io-client": "^4.8.1",
-        "yargs": "^17.7.2"
+        "yargs": "^17.7.2",
+        "ws": "^8.18.0"
     },
     "bugs": {
         "url": "https://github.com/Mid0aria/owofarmbot_stable/issues"
