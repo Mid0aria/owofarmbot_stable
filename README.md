@@ -367,7 +367,7 @@ m)
 
 ## 🖥️・WEBUI
 
-![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/assets/webui.jpg)
+![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/assets/webui.png)
 
 <!-- ## 📚・Discord RPC
 
