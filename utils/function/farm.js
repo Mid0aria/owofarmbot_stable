@@ -66,6 +66,12 @@ async function hunt(client, channel) {
         .then(async (huntmsg) => {
             id = huntmsg.id;
             client.global.total.hunt++;
+            client.broadcast({
+                action: "update",
+                type: "hunt",
+                progress: client.global.total.hunt,
+                global: client.global,
+            });
             client.logger.info(
                 "Farm",
                 "Hunt",
@@ -204,6 +210,12 @@ async function battle(client, channel) {
         })
         .then(() => {
             client.global.total.battle++;
+            client.broadcast({
+                action: "update",
+                type: "battle",
+                progress: client.global.total.battle,
+                global: client.global,
+            });
             client.logger.info(
                 "Farm",
                 "Battle",

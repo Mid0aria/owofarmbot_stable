@@ -320,6 +320,12 @@ async function checklist(client, channel) {
                                         `--bid=408785106942164992`,
                                     ]);
                                     client.global.total.vote++;
+                                    client.broadcast({
+                                        action: "update",
+                                        type: "vote",
+                                        progress: client.global.total.vote,
+                                        global: client.global,
+                                    });
                                     break;
                             }
                             break;

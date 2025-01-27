@@ -177,6 +177,8 @@
         }
     },
     "socket": {
-        "port": 65432
+        "port": 65432,
+        "expressport": 1243,
+        "websocket": 31085
     }
 }

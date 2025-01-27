@@ -243,10 +243,17 @@ const downloaddotgit = async (client, cp) => {
 exports.verifyconfig = async (client, extrac, config) => {
     let normal = true;
     client.logger.info("Bot", "Config", "Verifying Config... Please wait...");
-    if (config.main.token == config.extra.token && config.main.token.length > 0)
+    if (
+        config.main.token == config.extra.token &&
+        config.main.token.length > 0
+    ) {
+        normal = false;
         showerrcoziamlazy("Main token is same as extra token!");
-    if (config.extra.enable && config.extra.token.length == 0)
+    }
+    if (config.extra.enable && config.extra.token.length == 0) {
+        normal = false;
         showerrcoziamlazy("Extra token enabled but no token found");
+    }
 
     let vars = [
         config.main.commandschannelid,
@@ -262,6 +269,7 @@ exports.verifyconfig = async (client, extrac, config) => {
     for (let i = 0; i < vars.length; i++) {
         for (let j = i + 1; j < vars.length; j++) {
             if (vars[i] == vars[j] && vars[i].length > 0) {
+                normal = false;
                 showerrcoziamlazy(`There are some duplicate channel id!`);
                 console.log(
                     "Please use four different channel for one tokentype for best efficiency!",
@@ -277,9 +285,10 @@ exports.verifyconfig = async (client, extrac, config) => {
     if (
         (config.main.commands.pray && config.main.commands.curse) ||
         (config.extra.commands.pray && config.main.commands.curse)
-    )
+    ) {
+        normal = false;
         showerrcoziamlazy("Curse and pray cannot be turn on at the same time!");
-
+    }
     if (
         (config.main.commands.gamble.coinflip ||
             config.main.commands.gamble.slot ||
@@ -287,8 +296,10 @@ exports.verifyconfig = async (client, extrac, config) => {
             config.extra.commands.gamble.slot) &&
         (config.settings.gamble.coinflip.default_amount <= 0 ||
             config.settings.gamble.coinflip.default_amount <= 0)
-    )
+    ) {
+        normal = false;
         showerrcoziamlazy("Invalid gamble amount!");
+    }
 
     let clients = [client];
     if (config.extra.enable) clients.push(extrac);
@@ -397,6 +408,7 @@ exports.verifyconfig = async (client, extrac, config) => {
         (config.extra.enable && extrac.basic.commands.animals)
     ) {
         if (config.animals.type.sell && config.animals.type.sacrifice) {
+            normal = false;
             showerrcoziamlazy(
                 "Sell and sacrifice cannot be turn on at the same time!",
             );
@@ -484,17 +496,23 @@ exports.verifyconfig = async (client, extrac, config) => {
         client.logger.alert("Bot", "Config", "Config conflict: " + err);
         setTimeout(() => {
             client.logger.warn("Bot", "Config", "Exiting...");
-            process.exit(16);
+            process.exit(0);
         }, 1600);
     }
 
-    client.logger.info(
-        "Bot",
-        "Config",
-        normal
-            ? "Config verified, things seem to be okey :3"
-            : "Config verified, there are some config error but bot can still run",
-    );
+    if (normal) {
+        client.logger.info(
+            "Bot",
+            "Config",
+            "Config verified, things seem to be okey :3",
+        );
+    } else {
+        client.logger.alert(
+            "Bot",
+            "Config",
+            "Config is not verified or contains errors, please check the logs and fix the errors!",
+        );
+    }
 };
 
 /**

@@ -20,10 +20,17 @@
 const { connect } = require("puppeteer-real-browser");
 const yargs = require("yargs");
 const path = require("path");
+const config = require("../config.json");
 const argv = yargs.options({
     token: {
         alias: "t",
         describe: "User token",
+        type: "string",
+        demandOption: true,
+    },
+    userid: {
+        alias: "uid",
+        describe: "User ID",
         type: "string",
         demandOption: true,
     },
@@ -33,6 +40,36 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 (async () => {
     let captchasolved = false;
+    let socketcaptchastatus = false;
+    let socket;
+    function connectWebSocket() {
+        socket = new WebSocket(`ws://localhost:${config.socket.websocket}`);
+
+        socket.onopen = function () {
+            console.log("WebSocket bağlantısı başarılı.");
+        };
+
+        socket.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+            console.log("Gelen mesaj:", data);
+            if (data.action == "closechrome" && data.userid == argv.userid) {
+                socketcaptchastatus = true;
+            }
+        };
+
+        socket.onerror = function (error) {
+            console.error("WebSocket Hatası:", error);
+        };
+
+        socket.onclose = function () {
+            console.log("ws baglantisi yok amk");
+
+            setTimeout(connectWebSocket, 1000);
+        };
+    }
+
+    connectWebSocket();
+
     while (true) {
         const authUrl =
             "https://discord.com/api/v9/oauth2/authorize?client_id=408785106942164992&response_type=code&redirect_uri=https%3A%2F%2Fowobot.com%2Fapi%2Fauth%2Fdiscord%2Fredirect&scope=identify%20guilds%20email%20guilds.members.read";
@@ -108,6 +145,11 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
             console.log("Waiting for the captcha to be solved...");
             let refreshcount = 0;
             while (true) {
+                if (socketcaptchastatus) {
+                    console.log("Socket message received, closing browser...");
+                    captchasolved = true;
+                    break;
+                }
                 let needsRefresh = false;
                 const isCaptchaOk = await page.evaluate(() => {
                     if (

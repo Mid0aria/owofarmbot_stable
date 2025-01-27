@@ -26,6 +26,14 @@ function isWebCaptchaMessage(msgcontent, helloChristopher, canulickmymonster) {
 }
 
 module.exports = async (client, message) => {
+    const CHANNEL_IDS = [
+        client.basic.commandschannelid,
+        client.basic.huntbotchannelid,
+        client.basic.gamblechannelid,
+        client.basic.autoquestchannelid,
+        client.basic.owodmchannelid,
+    ];
+
     if (message.author.id === "408785106942164992") {
         let rawmsgcontent = message.content.toLowerCase();
         let channeltype = message.channel.type;
@@ -33,6 +41,7 @@ module.exports = async (client, message) => {
         let helloChristopher, canulickmymonster;
 
         if (
+            CHANNEL_IDS.includes(message.channel.id) &&
             message.content.toLowerCase().includes(`<@${client.user.id}>`) &&
             (msgcontent.includes("please complete your captcha") ||
                 msgcontent.includes("verify that you are human") ||
@@ -50,6 +59,12 @@ module.exports = async (client, message) => {
             client.global.paused = true;
             client.global.captchadetected = true;
             client.global.total.captcha++;
+            client.broadcast({
+                action: "update",
+                type: "captcha",
+                progress: client.global.total.captcha,
+                global: client.global,
+            });
             client.logger.alert("Bot", "Captcha", `Captcha Detected!`);
             client.logger.info(
                 "Bot",
@@ -195,6 +210,7 @@ module.exports = async (client, message) => {
                             client.childprocess.spawn("node", [
                                 "./utils/captcha.js",
                                 `--token=${client.basic.token}`,
+                                `--userid=${client.user.id}`,
                             ]);
                             await client.delay(3000);
                         }
@@ -202,8 +218,22 @@ module.exports = async (client, message) => {
                 }
             }
         }
-        if (msgcontent.includes("i have verified") || channeltype === "DM") {
+        if (msgcontent.includes("i have verified") && channeltype === "DM") {
+            client.broadcast({
+                action: "closechrome",
+                type: "captcha",
+                status: "solved",
+                userid: client.user.id,
+            });
+
             client.global.captchadetected = false;
+            client.global.total.captcha++;
+            client.broadcast({
+                action: "update",
+                type: "solvedcaptcha",
+                progress: client.global.total.solvedcaptcha,
+                global: client.global,
+            });
             if (client.config.settings.autoresume) {
                 client.global.paused = false;
                 client.logger.warn(

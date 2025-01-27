@@ -123,6 +123,18 @@ for (let dep of additionalDeps) {
 
 const fs = require("fs");
 const chalk = require("chalk");
+const path = require("path");
+const express = require("express");
+const app = express();
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "webui"));
+app.use("/assets", express.static(path.join(__dirname, "webui", "assets")));
+app.get("/", (req, res) => {
+    res.render("index");
+});
+
+const { initializeWebSocket, broadcast } = require("./utils/webserver.js");
 const globalutil = require("./utils/globalutil.js");
 const { getRandomBanner } = require("./utils/banner.js");
 
@@ -147,10 +159,12 @@ let owofarmbot_stable = {
         hunt: 0,
         battle: 0,
         captcha: 0,
+        solvedcaptcha: 0,
         pray: 0,
         curse: 0,
         vote: 0,
         giveaway: 0,
+        huntbot: 0,
     },
     gems: {
         need: [],
@@ -200,10 +214,12 @@ let owofarmbot_stable_extra = {
         hunt: 0,
         battle: 0,
         captcha: 0,
+        solvedcaptcha: 0,
         pray: 0,
         curse: 0,
         vote: 0,
         giveaway: 0,
+        huntbot: 0,
     },
     gems: {
         need: [],
@@ -274,6 +290,7 @@ client.global = owofarmbot_stable;
 client.rpc = rpc;
 client.logger = require("./utils/logger.js")(client);
 client.globalutil = globalutil;
+client.broadcast = broadcast;
 
 if (config.extra.enable) {
     extrac.chalk = chalk;
@@ -287,6 +304,7 @@ if (config.extra.enable) {
     extrac.rpc = rpc;
     extrac.logger = require("./utils/logger.js")(extrac);
     extrac.globalutil = globalutil;
+    extrac.broadcast = broadcast;
 }
 
 process.title = `Owo Farm Bot Stable v${packageJson.version}`;
@@ -300,6 +318,7 @@ process.title = `Owo Farm Bot Stable v${packageJson.version}`;
     fs.readdirSync("./handlers").forEach((file) => {
         require(`./handlers/${file}`)(client);
     });
+
     client.logger.warn("Bot", "Startup", "Logging in...");
     await client.login(config.main.token);
 
@@ -311,6 +330,11 @@ process.title = `Owo Farm Bot Stable v${packageJson.version}`;
         });
         extrac.logger.warn("Bot", "Startup", "Logging in...");
         await extrac.login(config.extra.token);
+        client.logger.warn("WebUI", "Startup", "Web Server Starting...");
+        initializeWebSocket(client, extrac);
+    } else {
+        client.logger.warn("Bot", "Startup", "Web Server Starting...");
+        initializeWebSocket(client);
     }
 
     client.logger.warn(
@@ -318,6 +342,14 @@ process.title = `Owo Farm Bot Stable v${packageJson.version}`;
         "Help",
         `Use \"${config.prefix}start\" to start the bot, \"${config.prefix}resume\" to resume, and \"${config.prefix}pause\" to pause.`,
     );
+
+    app.listen(config.socket.expressport, () => {
+        client.logger.info(
+            "WebUI",
+            "Startup",
+            `WebUI started on http://localhost:${config.socket.expressport}`,
+        );
+    });
 })();
 
 /*FOR DEBUGGING

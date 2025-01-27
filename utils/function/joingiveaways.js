@@ -149,6 +149,12 @@ module.exports = async (client) => {
                     "Successfully joined the giveaway.",
                 );
                 client.global.total.giveaway++;
+                client.broadcast({
+                    action: "update",
+                    type: "giveaway",
+                    progress: client.global.total.giveaway,
+                    global: client.global,
+                });
                 addUserEntry(message.id, client.user.id);
                 await client.delay(15000);
             } catch (error) {

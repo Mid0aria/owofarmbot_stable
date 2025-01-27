@@ -365,6 +365,7 @@ async function triggerHB(client, channel) {
                     return;
                 }
                 if (isstartedhunting) {
+                    client.global.total.huntbot++;
                     client.logger.info(
                         "Farm",
                         "Huntbot",

@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.6(BETA) WITH CAPTCHA SOLVER ✒️</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.7(BETA) WITH CAPTCHA SOLVER ✒️</h1>
 <h2 align ="center">The best owo farm bot until i do better. coded with the great ideas and love of a Turkish engineer, mid0hub team and users.<br> 💖 Thank you to everyone who contributed 💖</h2>
 <p align="center">
 
@@ -40,7 +40,9 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
 [💎・Get Token](#get-token)<br>
 
-[📚・Discord RPC](#discord-rpc)<br>
+[🖥️・WEBUI](#webui)<br>
+
+<!-- [📚・Discord RPC](#discord-rpc)<br> -->
 
 [⚠️・Captcha Alert](#captcha-alert)<br>
 
@@ -65,6 +67,17 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 - FARM, HUNTBOT, QUEST AND GAMBLE NEED TO PLACE IN DIFFERENT CHANNEL. That mean if you use all of them, you need four different channel. And if you use extra token, that will be eight.
 
 ## 👑・Features
+
+- WEBUI
+- Auto Join OwO Support Server Giveaways
+- Discord RPC
+- Auto Phrases Send
+- Chat FeedBack
+- All commands now controlable
+- Extra Token:
+
+    - All Maintoken feature
+    - Pray/curse to main
 
 - Auto Commands:
 
@@ -117,15 +130,6 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
         - Command Randomizer
         - Suspends all farm operations when captcha is detected
         - When the captcha is solved, farm operations continue automatically
-
-- Auto Join OwO Support Server Giveaways
-- Discord RPC
-- Auto Phrases Send
-- Chat FeedBack
-- Extra Token:
-    - All Maintoken feature
-    - Pray/curse to main
-- All commands now controlable
 
 - NEW FEATURES WILL COME WITH UPDATES
 
@@ -312,8 +316,10 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
             "min": 610000
         }
     }
-    "socket": { / If another program is using port 65432 on your computer (I think it shouldn't be), you can avoid the conflict by changing the port here.
-        "port": 65432
+    "socket": {
+        "port": 65432,/ If another program is using port 65432 on your computer (I think it shouldn't be), you can avoid the conflict by changing the port here.
+        "expressport": 1243,/ If another program is using port 1243 on your computer (I think it shouldn't be), you can avoid the conflict by changing the port here.
+        "websocket": 31085        / If another program on your computer is using port 31085 (I don't think it should), you can avoid conflicts by changing the port here. you also need to find the websocket link in index.js in the webui/assets/js folder and enter the same port
     }
 }
 
@@ -323,7 +329,8 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
 ## 💎・Get Token
 
-[Geeks for Geeks - How to get discord token](https://www.geeksforgeeks.org/how-to-get-discord-token/)
+[BLOG - Geeks for Geeks - How to get discord token](https://www.geeksforgeeks.org/how-to-get-discord-token/)
+[YOUTUBE - GuideRealm - How To Get Your Token In Discord](https://www.youtube.com/watch?v=7J38Uy5Y4vA)
 
 ### PC
 
@@ -358,9 +365,13 @@ m)
 6. Click on the bookmark named Token Finder.
 7. A new page will open, the text in the page will be your Discord account token.
 
-## 📚・Discord RPC
+## 🖥️・WEBUI
 
-![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/images/rpc.jpg)
+![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/images/webui.jpg)
+
+<!-- ## 📚・Discord RPC
+
+![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/images/rpc.jpg) -->
 
 ## ❗・Captcha Alert
 

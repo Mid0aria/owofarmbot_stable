@@ -1,0 +1,248 @@
+body {
+    background-color: #121212;
+    color: white;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #1f1f1f;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    transition: width 0.3s ease;
+    z-index: 5;
+}
+
+.sidebar.closed {
+    width: 80px;
+}
+
+.sidebar h3 {
+    color: #4caf50;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar.closed h3 {
+    opacity: 0;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 10px 0;
+    font-size: 1.1rem;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.sidebar a i {
+    margin-right: 10px;
+}
+
+.sidebar a:hover {
+    background-color: #333;
+}
+
+.sidebar.closed a {
+    padding: 10px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.content {
+    margin-left: 270px;
+    padding: 20px;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.bg-dark {
+    background-color: #1f1f1f !important;
+}
+
+.bg-success {
+    background-color: #2e7d32 !important;
+}
+
+.text-success {
+    color: #4caf50 !important;
+}
+
+.text-danger {
+    color: #f44336 !important;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    background-color: #121212;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.stat-box {
+    background-color: #1f1f1f;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat-box .value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.stat-box .label {
+    font-size: 0.9rem;
+    color: #b0bec5;
+    margin-top: 5px;
+}
+
+.stat-box.highlight {
+    grid-column: span 4;
+    background-color: #1f2b1f;
+    border: 1px solid #4caf50;
+}
+
+.stat-box.highlight .value {
+    font-size: 2rem;
+    color: #4caf50;
+}
+
+.action-btns button {
+    width: 100px;
+    margin: 10px;
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition:
+        background 0.3s,
+        transform 0.2s;
+}
+
+.action-btns .start {
+    background-color: #4caf50;
+    border: none;
+}
+
+.action-btns .stop {
+    background-color: #f44336;
+    border: none;
+}
+
+.action-btns .resume {
+    background-color: #ff9800;
+    border: none;
+}
+
+.action-btns button:hover {
+    transform: scale(1.05);
+}
+
+.menu-toggle {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    background-color: #1f1f1f;
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.menu-toggle:focus {
+    outline: none;
+}
+
+.menu-toggle i {
+    color: #4caf50;
+}
+
+.menu-toggle.open i {
+    color: #ff9800;
+}
+
+.sidebar.closed {
+    width: 80px;
+}
+
+.sidebar.closed a span {
+    display: none;
+}
+
+.sidebar.closed a i {
+    font-size: 1.5rem;
+}
+.btn-custom {
+    margin: 10px;
+}
+/* Settings Styles */
+.settings-section {
+    background-color: #1f1f1f;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.form-check-input {
+    background-color: #333;
+    border-color: #4caf50;
+}
+
+.form-check-input:checked {
+    background-color: #4caf50;
+    border-color: #4caf50;
+}
+
+.nav-tabs {
+    border-bottom: 1px solid #4caf50;
+}
+
+.nav-tabs .nav-link {
+    color: #fff;
+    border: none;
+}
+
+.nav-tabs .nav-link.active {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+}
+
+.form-control,
+.form-select {
+    background-color: #333;
+    border: 1px solid #4caf50;
+    color: white;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #333;
+    border-color: #4caf50;
+    color: white;
+    box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+}
