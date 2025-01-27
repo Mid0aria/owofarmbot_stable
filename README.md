@@ -40,7 +40,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
 [💎・Get Token](#get-token)<br>
 
-[🖥️・WEBUI](#webui)<br>
+[🖥️・WEBUI](#%EF%B8%8Fwebui)<br>
 
 <!-- [📚・Discord RPC](#discord-rpc)<br> -->
 
@@ -367,7 +367,7 @@ m)
 
 ## 🖥️・WEBUI
 
-![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/images/webui.jpg)
+![](https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/assets/webui.jpg)
 
 <!-- ## 📚・Discord RPC
 
