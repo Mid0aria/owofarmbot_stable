@@ -395,6 +395,16 @@ Promt mode:
 
 ## 🎈・Installation
 
+## For Beginners:
+
+### 💻・Windows
+
+```bash
+irm "https://raw.githubusercontent.com/mid0aria/owofarmbot_stable/main/windows-setup.ps1" | iex
+```
+
+## For Advanced Users:
+
 ### 💻・Windows / Linux
 
 ```bash

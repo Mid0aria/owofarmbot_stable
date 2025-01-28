@@ -1,5 +1,12 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
+
+/*
+ * OwO Farm Bot Stable
+ * Copyright (C) 2024 Mido
+ * This software is licensed under Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+ * For more information, see README.md and LICENSE
+ */
 let startTime = null;
 
 function updateUptime() {
