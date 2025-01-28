@@ -322,7 +322,7 @@ async function triggerHB(client, channel) {
                 const matches = message.content.matchAll(regex);
 
                 let milliseconds = 0;
-
+                //TODO burdaki regex süreyi almıyor
                 for (const match of matches) {
                     const time = parseInt(match[1]);
                     const unit = match[2];
@@ -366,6 +366,12 @@ async function triggerHB(client, channel) {
                 }
                 if (isstartedhunting) {
                     client.global.total.huntbot++;
+                    client.broadcast({
+                        action: "update",
+                        type: "hunt",
+                        progress: client.global.total.hunt,
+                        global: client.global,
+                    });
                     client.logger.info(
                         "Farm",
                         "Huntbot",

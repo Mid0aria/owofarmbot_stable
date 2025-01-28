@@ -227,7 +227,7 @@ module.exports = async (client, message) => {
             });
 
             client.global.captchadetected = false;
-            client.global.total.captcha++;
+            client.global.total.solvedcaptcha++;
             client.broadcast({
                 action: "update",
                 type: "solvedcaptcha",
