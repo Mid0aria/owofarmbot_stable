@@ -48,4 +48,4 @@ git clone https://github.com/Mid0aria/owofarmbot_stable
 cd owofarmbot_stable
 echo "${GREEN} [+] ${BLUE} Installing nodejs packages${RESTORE}"
 npm i --no-bin-links #using --no-bin-links to not get any errors regarding symbolic links
-echo "${GREEN} [=] Installed Successfully , Please edit config.json"
+echo "${GREEN} [=] Installed Successfully , Please run 'node main.js'"

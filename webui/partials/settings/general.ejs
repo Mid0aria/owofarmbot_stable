@@ -1,0 +1,767 @@
+<!-- Main Settings Content -->
+<div id="general-settings-content" style="display: none">
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a
+                class="nav-link active"
+                data-bs-toggle="tab"
+                href="#general-settings"
+                >General Settings</a
+            >
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#general-checklist"
+                >Checklist</a
+            >
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#general-inventory"
+                >Inventory</a
+            >
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#general-animals"
+                >Animals</a
+            >
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#general-gambling"
+                >Gambling</a
+            >
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#general-captcha"
+                >Captcha</a
+            >
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#general-logging"
+                >Logging</a
+            >
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#general-interval"
+                >Intervals</a
+            >
+        </li>
+        <li class="nav-item ms-auto">
+            <button id="general-saveBtn" class="btn btn-danger save-btn">
+                <i class="bi bi-floppy2-fill"></i> Save
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <!-- General Settings Tab -->
+        <div class="tab-pane fade show active" id="general-settings">
+            <div class="settings-section">
+                <h4>General Settings</h4>
+                <div class="mb-3">
+                    <label class="form-label">SelfBot Prefix</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="prefix"
+                        value="!"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">OwO Prefix</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="settings-owoprefix"
+                        value="owo"
+                    />
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-discordrpc"
+                    />
+                    <label class="form-check-label" for="settings-discordrpc"
+                        >Discord RPC</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-chatfeedback"
+                    />
+                    <label class="form-check-label" for="settings-chatfeedback"
+                        >Chat Feedback</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-autophrases"
+                    />
+                    <label class="form-check-label" for="settings-autophrases"
+                        >Auto Phrases</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-autoresume"
+                    />
+                    <label class="form-check-label" for="settings-autoresume"
+                        >Auto Resume</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-autojoingiveaways"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-autojoingiveaways"
+                        >Auto Join Giveaways</label
+                    >
+                </div>
+            </div>
+        </div>
+
+        <!-- Checklist Tab -->
+        <div class="tab-pane fade" id="general-checklist">
+            <div class="settings-section">
+                <h4>Check Types</h4>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-checklist-types-daily"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-checklist-types-daily"
+                        >Daily</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-checklist-types-cookie"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-checklist-types-cookie"
+                        >Cookie</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-checklist-types-vote"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-checklist-types-vote"
+                        >Vote</label
+                    >
+                </div>
+            </div>
+        </div>
+        <!-- Inventory Tab -->
+        <div class="tab-pane fade" id="general-inventory">
+            <div class="settings-section">
+                <h4>Use Items</h4>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-inventory-use-lootbox"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-inventory-use-lootbox"
+                        >Lootbox</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-inventory-use-fabledlootbox"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-inventory-use-fabledlootbox"
+                        >Fabled Lootbox</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-inventory-use-crate"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-inventory-use-crate"
+                        >Crate</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-inventory-use-gems"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-inventory-use-gems"
+                        >Gems</label
+                    >
+                </div>
+            </div>
+        </div>
+        <!-- Animals Tab -->
+        <div class="tab-pane fade" id="general-animals">
+            <div class="settings-section">
+                <h4>Animal Use Type</h4>
+                <select class="form-select" id="animals-type">
+                    <option value="sell">Sell</option>
+                    <option value="sacrifice">Sacrifice</option>
+                </select>
+            </div>
+            <div class="settings-section">
+                <h4>Animal Types</h4>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-common"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-common"
+                        >Common</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-uncommon"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-uncommon"
+                        >Uncommon</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-rare"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-rare"
+                        >Rare</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-epic"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-epic"
+                        >Epic</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-mythical"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-mythical"
+                        >Mythical</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-patreon"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-patreon"
+                        >Patreon</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-cpatreon"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-cpatreon"
+                        >CPatreon</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-legendary"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-legendary"
+                        >Legendary</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-gem"
+                    />
+                    <label class="form-check-label" for="animals-animaltype-gem"
+                        >Gem</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-bot"
+                    />
+                    <label class="form-check-label" for="animals-animaltype-bot"
+                        >Bot</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-distorted"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-distorted"
+                        >Distorted</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-fabled"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-fabled"
+                        >Fabled</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-special"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-special"
+                        >Special</label
+                    >
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="animals-animaltype-hidden"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="animals-animaltype-hidden"
+                        >Hidden</label
+                    >
+                </div>
+            </div>
+        </div>
+        <!-- Gambling Tab -->
+        <div class="tab-pane fade" id="general-gambling">
+            <div class="settings-section">
+                <h4>Coinflip Settings</h4>
+                <div class="mb-3">
+                    <label class="form-label">Default Amount</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="settings-gamble-coinflip-default_amount"
+                        value="1000"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Max Amount</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="settings-gamble-coinflip-max_amount"
+                        value="250000"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Multiplier</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="settings-gamble-coinflip-multiplier"
+                        value="1.0"
+                        step="0.1"
+                    />
+                </div>
+            </div>
+            <div class="settings-section">
+                <h4>Slot Settings</h4>
+                <div class="mb-3">
+                    <label class="form-label">Default Amount</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="settings-gamble-slot-default_amount"
+                        value="1000"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Max Amount</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="settings-gamble-slot-max_amount"
+                        value="250000"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Multiplier</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="settings-gamble-slot-multiplier"
+                        value="1.0"
+                        step="0.1"
+                    />
+                </div>
+            </div>
+        </div>
+        <!-- Captcha Tab -->
+        <div class="tab-pane fade" id="general-captcha">
+            <div class="settings-section">
+                <h3>Captcha Settings</h3>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-captcha-autosolve"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-captcha-autosolve"
+                        >Auto Solve</label
+                    >
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Auto Solve Threads</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="settings-captcha-autosolve_thread"
+                        value="1"
+                    />
+                </div>
+            </div>
+            <div class="settings-section">
+                <h3>Alert Settings</h3>
+                <div class="mb-3">
+                    <div class="form-check mb-2">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="settings-captcha-alerttype-webhook"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="settings-captcha-alerttype-webhook"
+                            >Webhook Alert</label
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Webhook URL</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="settings-captcha-alerttype-webhookurl"
+                        />
+                    </div>
+                </div>
+                <h4>Desktop Settings</h4>
+                <div class="mb-3">
+                    <div class="form-check mb-2">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="settings-captcha-alerttype-desktop-notification"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="settings-captcha-alerttype-desktop-notification"
+                            >Notification</label
+                        >
+                    </div>
+                    <div class="form-check mb-2">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="settings-captcha-alerttype-desktop-prompt"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="settings-captcha-alerttype-desktop-prompt"
+                            >Prompt</label
+                        >
+                    </div>
+                </div>
+
+                <h4>Termux Settings</h4>
+                <div class="mb-3">
+                    <div class="form-check mb-2">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="settings-captcha-alerttype-termux-notification"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="settings-captcha-alerttype-termux-notification"
+                            >Notification</label
+                        >
+                    </div>
+                    <div class="form-check mb-2">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="settings-captcha-alerttype-termux-toast"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="settings-captcha-alerttype-termux-toast"
+                            >Toast</label
+                        >
+                    </div>
+                    <div class="form-check mb-2">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="settings-captcha-alerttype-termux-vibration"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="settings-captcha-alerttype-termux-vibration"
+                            >Vibration</label
+                        >
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Vibration Time</label>
+                        <input
+                            type="number"
+                            class="form-control"
+                            id="settings-captcha-alerttype-termux-vibration_time"
+                            value="5000"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Logging Tab -->
+        <div class="tab-pane fade" id="general-logging">
+            <div class="settings-section">
+                <h4>Logging Settings</h4>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-logging-newlog"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-logging-newlog"
+                        >New Log</label
+                    >
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Log Length</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="settings-logging-loglength"
+                        value="20"
+                    />
+                </div>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-logging-showlogbeforeexit"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-logging-showlogbeforeexit"
+                        >Show log before exit</label
+                    >
+                </div>
+            </div>
+        </div>
+        <!-- Interval Tab -->
+        <div class="tab-pane fade" id="general-interval">
+            <div class="settings-section">
+                <h4>Hunt</h4>
+                <div class="mb-3">
+                    <label class="form-label">Minimum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-huntmininterval"
+                        value="16000"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Maximum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-huntmaxinterval"
+                        value="32000"
+                    />
+                </div>
+            </div>
+            <div class="settings-section">
+                <h4>Battle</h4>
+                <div class="mb-3">
+                    <label class="form-label">Minimum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-battlemininterval"
+                        value="16000"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Maximum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-battlemaxinterval"
+                        value="32000"
+                    />
+                </div>
+            </div>
+            <div class="settings-section">
+                <h4>Pray</h4>
+                <div class="mb-3">
+                    <label class="form-label">Minimum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-praymininterval"
+                        value="316000"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Maximum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-praymaxinterval"
+                        value="332000"
+                    />
+                </div>
+            </div>
+            <div class="settings-section">
+                <h4>Coinflip</h4>
+                <div class="mb-3">
+                    <label class="form-label">Minimum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-coinflipmininterval"
+                        value="16000"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Maximum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-coinflipmaxinterval"
+                        value="32000"
+                    />
+                </div>
+            </div>
+            <div class="settings-section">
+                <h4>Slot</h4>
+                <div class="mb-3">
+                    <label class="form-label">Minimum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-slotmininterval"
+                        value="16000"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Maximum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-slotmaxinterval"
+                        value="32000"
+                    />
+                </div>
+            </div>
+            <div class="settings-section">
+                <h4>Animals</h4>
+                <div class="mb-3">
+                    <label class="form-label">Minimum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-animalsmininterval"
+                        value="610000"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Maximum interval</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="intervals-animalsmaxinterval"
+                        value="661000"
+                    />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

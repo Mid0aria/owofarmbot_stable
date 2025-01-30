@@ -55,6 +55,13 @@
  * @property {boolean} temp.started - Indicates if the bot has started.
  */
 
+process.emitWarning = (warning, type) => {
+    if (type === "DeprecationWarning") {
+        return;
+    }
+    console.warn(warning);
+};
+
 const cp = require("child_process");
 
 let config,
@@ -78,64 +85,16 @@ try {
     config = require("./config.json");
 }
 
-// auto install dependencies
 const isTermux =
     process.env.PREFIX && process.env.PREFIX.includes("com.termux");
 const packageJson = require("./package.json");
 
-for (let dep of Object.keys(packageJson.dependencies)) {
-    if (isTermux && (dep === "puppeteer" || dep === "puppeteer-real-browser")) {
-        console.log("Skipping Puppeteer in Termux environment");
-        continue;
-    }
-
-    try {
-        require.resolve(dep);
-    } catch (err) {
-        console.log(`Installing dependencies...`);
-        try {
-            cp.execSync(`npm install ${dep}`, { stdio: "inherit" });
-        } catch (installErr) {
-            console.error(`Failed to install ${dep}:`, installErr.message);
-        }
-    }
-}
-
-const additionalDeps = ["puppeteer", "puppeteer-real-browser"];
-
-for (let dep of additionalDeps) {
-    if (isTermux) {
-        console.log(`Termux environment detected. Skipping ${dep}.`);
-        continue;
-    }
-
-    try {
-        require.resolve(dep);
-    } catch (err) {
-        console.log(`${dep} is not installed. Installing ${dep}...`);
-        try {
-            cp.execSync(`npm install ${dep}`, { stdio: "inherit" });
-        } catch (installErr) {
-            console.error(`Failed to install ${dep}:`, installErr.message);
-        }
-    }
-}
-
 const fs = require("fs");
 const chalk = require("chalk");
-const path = require("path");
-const express = require("express");
-const app = express();
-
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "webui"));
-app.use("/assets", express.static(path.join(__dirname, "webui", "assets")));
-app.get("/", (req, res) => {
-    res.render("index");
-});
 
 const { initializeWebSocket, broadcast } = require("./utils/webserver.js");
 const globalutil = require("./utils/globalutil.js");
+const updater = require("./utils/updater.js");
 const { getRandomBanner } = require("./utils/banner.js");
 
 //client
@@ -158,13 +117,13 @@ let owofarmbot_stable = {
     total: {
         hunt: 0,
         battle: 0,
-        captcha: 0,
-        solvedcaptcha: 0,
         pray: 0,
         curse: 0,
+        huntbot: 0,
+        captcha: 0,
+        solvedcaptcha: 0,
         vote: 0,
         giveaway: 0,
-        huntbot: 0,
     },
     gems: {
         need: [],
@@ -213,13 +172,13 @@ let owofarmbot_stable_extra = {
     total: {
         hunt: 0,
         battle: 0,
-        captcha: 0,
-        solvedcaptcha: 0,
         pray: 0,
         curse: 0,
+        huntbot: 0,
+        captcha: 0,
+        solvedcaptcha: 0,
         vote: 0,
         giveaway: 0,
-        huntbot: 0,
     },
     gems: {
         need: [],
@@ -307,12 +266,63 @@ if (config.extra.enable) {
     extrac.broadcast = broadcast;
 }
 
-process.title = `Owo Farm Bot Stable v${packageJson.version}`;
-(async () => {
-    console.log(getRandomBanner());
-    await globalutil.checkUpdate(client, cp, packageJson);
-    await globalutil.verifyconfig(client, extrac, config);
+process.title = `OwO Farm Bot Stable v${packageJson.version}`;
 
+if (
+    config.firstrun &&
+    !(config.main.token.length > 0 || config.main.token.length > 0)
+) {
+    (async () => {
+        console.clear();
+        console.log("Welcome to OwO Farm Bot Stable!");
+        await globalutil.gatherUserDetails(config, "main", client);
+
+        const userextratokenanswer = await globalutil.askUser(
+            "Do you want to use extra token? (yes/no): ",
+        );
+        if (
+            userextratokenanswer.toLowerCase() === "yes" ||
+            userextratokenanswer.toLowerCase() === "y"
+        ) {
+            await globalutil.gatherUserDetails(config, "extra", extrac);
+        }
+        if (DEVELOPER_MODE) {
+            config = require("./developer/config.json");
+        } else {
+            config = require("./config.json");
+        }
+        client.config = config;
+        client.basic = config.main;
+        if (config.extra.enable) {
+            extrac.config = config;
+            extrac.basic = config.extra;
+        }
+        console.clear();
+        console.log(getRandomBanner());
+        await initializeBot();
+    })();
+} else {
+    (async () => {
+        console.log(getRandomBanner());
+        await updater.checkUpdate(client, cp, packageJson);
+        await globalutil.verifyconfig(client, extrac, config);
+
+        await initializeBot();
+
+        client.logger.info(
+            "WebUI",
+            "Startup",
+            `WebUI started on http://localhost:${config.socket.expressport}`,
+        );
+        client.logger.warn(
+            "Bot",
+            "Help",
+            `Use \"${config.prefix}start\" to start the bot, \"${config.prefix}resume\" to resume, and \"${config.prefix}pause\" to pause.`,
+        );
+    })();
+}
+
+async function initializeBot() {
     ["aliases", "commands"].forEach((x) => (client[x] = new Collection()));
 
     fs.readdirSync("./handlers").forEach((file) => {
@@ -336,21 +346,7 @@ process.title = `Owo Farm Bot Stable v${packageJson.version}`;
         client.logger.warn("Bot", "Startup", "Web Server Starting...");
         initializeWebSocket(client);
     }
-
-    client.logger.warn(
-        "Bot",
-        "Help",
-        `Use \"${config.prefix}start\" to start the bot, \"${config.prefix}resume\" to resume, and \"${config.prefix}pause\" to pause.`,
-    );
-
-    app.listen(config.socket.expressport, () => {
-        client.logger.info(
-            "WebUI",
-            "Startup",
-            `WebUI started on http://localhost:${config.socket.expressport}`,
-        );
-    });
-})();
+}
 
 /*FOR DEBUGGING
 Bot flow to remember:

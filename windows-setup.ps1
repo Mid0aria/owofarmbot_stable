@@ -76,4 +76,4 @@ Install-Node
 Install-Git
 Clone-Project
 
-Write-Host "Everything is ready. Please edit the config.json file." -ForegroundColor Cyan
+Write-Host "Everything is ready. Please type 'node main.js' in owofarmbot_stable folder" -ForegroundColor Cyan

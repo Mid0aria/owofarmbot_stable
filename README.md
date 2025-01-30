@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.7(BETA) WITH CAPTCHA SOLVER ✒️</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.7(BETA) WEBUI WITH CAPTCHA SOLVER ✒️</h1>
 <h2 align ="center">The best owo farm bot until i do better. coded with the great ideas and love of a Turkish engineer, mid0hub team and users.<br> 💖 Thank you to everyone who contributed 💖</h2>
 <p align="center">
 
@@ -137,6 +137,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
 ```
 {
+    "firstrun": true, / A necessary setting for the automatic config filling system. please do not change
     "prefix": "!", / SelfBot PREFIX
     "main": { / main account, required
         "token": "", / SelfBot Token (your discord token)
@@ -426,18 +427,29 @@ notepad config.json # On windows
 nano config.json # On linux, can also use any other preferred file writing software
 
 # Run the bot:
-start ./start.bat
-or
-node bot.js
+node main.js
 
 # Start Bot:
-In config.json, type [prefix]start (example: e!start) with the prefix you set in config.json to the channel whose ID you entered in channelid
+From WebUI, go to home and press the start button from the actions buttons there.
 
-# Stop Bot:
-In config.json, type [prefix]stop (example: e!stop) with the prefix you set in config.json to the channel whose ID you entered in channelid
+From Discord, In config.json, type [prefix]start (example: e!start) with the prefix you set in config.json to the channel whose ID you entered in channelid
+
+# Pause Bot:
+From WebUI, go to home and press the pause button from the actions buttons there.
+
+From Discord, In config.json, type [prefix]pause (example: e!pause) with the prefix you set in config.json to the channel whose ID you entered in channelid
 
 # Resume Bot:
-In config.json, type [prefix]resume (example: e!resume) with the prefix you set in config.json to the channel whose ID you entered in channelid
+From WebUI, go to home and press the resume button from the actions buttons there.
+
+From Discord, In config.json, type [prefix]resume (example: e!resume) with the prefix you set in config.json to the channel whose ID you entered in channelid
+
+# Stop Bot:
+From WebUI, go to home and press the reboot button from the actions buttons there.
+
+From Discord, In config.json, type [prefix]stop (example: e!reboot) with the prefix you set in config.json to the channel whose ID you entered in channelid
+
+
 ```
 
 ### 📱・Android (Termux)
@@ -458,18 +470,28 @@ cd owofarmbot_stable
 nano config.json
 
 # Run the bot:
-sh start.sh
-or
-node bot.js
+node main.js
 
 # Start Bot:
-In config.json, type [prefix]start (example: e!start) with the prefix you set in config.json to the channel whose ID you entered in channelid
+From WebUI, go to home and press the start button from the actions buttons there.
 
-# Stop Bot:
-In config.json, type [prefix]stop (example: e!stop) with the prefix you set in config.json to the channel whose ID you entered in channelid
+From Discord, In config.json, type [prefix]start (example: e!start) with the prefix you set in config.json to the channel whose ID you entered in channelid
+
+# Pause Bot:
+From WebUI, go to home and press the pause button from the actions buttons there.
+
+From Discord, In config.json, type [prefix]pause (example: e!pause) with the prefix you set in config.json to the channel whose ID you entered in channelid
 
 # Resume Bot:
-In config.json, type [prefix]resume (example: e!resume) with the prefix you set in config.json to the channel whose ID you entered in channelid
+From WebUI, go to home and press the resume button from the actions buttons there.
+
+From Discord, In config.json, type [prefix]resume (example: e!resume) with the prefix you set in config.json to the channel whose ID you entered in channelid
+
+# Stop Bot:
+From WebUI, go to home and press the reboot button from the actions buttons there.
+
+From Discord, In config.json, type [prefix]stop (example: e!reboot) with the prefix you set in config.json to the channel whose ID you entered in channelid
+
 ```
 
 ## 🥰・Contributors

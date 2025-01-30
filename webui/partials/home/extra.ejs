@@ -1,0 +1,89 @@
+<!-- Extra Home Content -->
+<div id="home-content-extra" style="display: none">
+    <!-- User Info Section -->
+    <div class="userinfo-section" id="userinfo">
+        <h2>User Info</h2>
+        <p>
+            Nickname:
+            <span id="usernick-extra">çıkaramadım abi kimsin sen</span>
+            username:
+            <span id="username-extra">çıkaramadım abi kimsin sen</span>
+        </p>
+        <p>
+            Farm Bot Status:
+            <span id="bot-status-extra">Stopped</span>
+        </p>
+        <p>
+            WebSocket Status:
+            <span id="ws-status-extra">Disconnected</span>
+        </p>
+    </div>
+    <!-- Actions Section -->
+    <div class="actions-section" id="actions">
+        <h2>Actions</h2>
+        <div class="action-btns">
+            <button
+                class="btn btn-success btn-custom"
+                onclick="sendAction('start-extra')"
+            >
+                Start
+            </button>
+            <button
+                class="btn btn-info btn-custom"
+                onclick="sendAction('pause-extra')"
+            >
+                Pause</button
+            ><button
+                class="btn btn-warning btn-custom"
+                onclick="sendAction('resume-extra')"
+            >
+                Resume</button
+            ><button
+                class="btn btn-danger btn-custom"
+                onclick="showrebootalertPopup()"
+            >
+                Reboot
+            </button>
+        </div>
+    </div>
+    <!-- Stats Section -->
+    <h2>Extra Token Stats</h2>
+    <div class="stats-grid">
+        <div class="stat-box">
+            <span id="hunt-value-extra" class="value">0</span>
+            <span class="label">Hunt</span>
+        </div>
+        <div class="stat-box">
+            <span id="battle-value-extra" class="value">0</span>
+            <span class="label">Battle</span>
+        </div>
+        <div class="stat-box">
+            <span id="pray-value-extra" class="value">0</span>
+            <span class="label">Pray</span>
+        </div>
+        <div class="stat-box">
+            <span id="curse-value-extra" class="value">0</span>
+            <span class="label">Curse</span>
+        </div>
+        <div class="stat-box">
+            <span id="huntbot-value-extra" class="value">0</span>
+            <span class="label">Huntbot</span>
+        </div>
+        <div class="stat-box">
+            <span id="vote-value-extra" class="value">0</span>
+            <span class="label">Vote</span>
+        </div>
+        <div class="stat-box">
+            <span id="giveaway-value-extra" class="value">0</span>
+            <span class="label">Giveaway</span>
+        </div>
+        <div class="stat-box">
+            <span id="captcha-value-extra" class="value">0</span>
+            <span class="label">Captcha</span>
+        </div>
+        <div class="stat-box highlight">
+            <span id="solvedcaptcha-value-extra" class="value">0</span>
+            <span class="label">Solved Captcha</span>
+        </div>
+    </div>
+</div>

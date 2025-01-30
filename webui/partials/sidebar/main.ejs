@@ -1,0 +1,62 @@
+<div class="sidebar" id="sidebar">
+    <h3><i class="bi bi-menu-button-wide"></i> OwO Farm Bot Stable</h3>
+
+    <div id="sidebar-general-section">
+        <h2>General</h2>
+        <div id="general-menu">
+            <a id="general-settings-link" onclick="showSettings('general')">
+                <i class="bi bi-gear"></i> <span>General Bot Settings</span>
+            </a>
+
+            <a id="webui-settings-link" onclick="showPopup('webui')">
+                <i class="bi bi-gear"></i> <span>WebUI Settings</span>
+            </a>
+        </div>
+    </div>
+
+    <div id="sidebar-main-section">
+        <h4>Main</h4>
+        <div id="main-menu">
+            <a id="home-link" onclick="showHome('main')">
+                <i class="bi bi-house"></i> <span>Home</span>
+            </a>
+            <a id="settings-link" onclick="showSettings('main')">
+                <i class="bi bi-gear"></i> <span>Settings</span>
+            </a>
+        </div>
+    </div>
+
+    <div id="sidebar-extra-section" style="display: none">
+        <h4>Extra</h4>
+        <div id="extra-menu">
+            <a id="home-link-extra" onclick="showHome('extra')">
+                <i class="bi bi-house"></i> <span>Home</span>
+            </a>
+            <a id="settings-link-extra" onclick="showSettings('extra')">
+                <i class="bi bi-gear"></i> <span>Settings</span>
+            </a>
+        </div>
+    </div>
+
+    <div style="position: absolute; bottom: 100px; left: 20px; color: #b0bec5">
+        <i class="bi bi-clock"></i>
+        Uptime: <span id="uptime">0d 0h 0m 0s</span>
+    </div>
+
+    <div
+        style="
+            position: absolute;
+            bottom: 0px;
+            left: 20px;
+            display: flex;
+            gap: 10px;
+        "
+    >
+        <a href="https://github.com/mid0aria/owofarmbot_stable" target="_blank">
+            <i class="bi bi-github"></i>
+        </a>
+        <a href="https://github.com/sponsors/Mid0aria" target="_blank">
+            <i class="bi bi-cash-coin"></i>
+        </a>
+    </div>
+</div>

@@ -61,8 +61,8 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     await page.goto(authUrl, { waitUntil: "load" });
 
-    await page.waitForSelector("div.action_c5a065 button", { visible: true });
-    await page.locator("div.action_c5a065 button").setTimeout(3000).click();
+    await page.waitForSelector("div.action__3d3b0 button", { visible: true });
+    await page.locator("div.action__3d3b0 button").setTimeout(3000).click();
 
     await page.waitForNavigation({ waitUntil: "load" });
 

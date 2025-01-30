@@ -135,7 +135,7 @@ module.exports = async (client, message) => {
                 await client.delay(3000);
             }
         }
-        let huntbotcaptchaprocess;
+        let huntbotcaptchaprocess = null;
 
         await client.globalutil
             .isPortInUse(client.config.socket.port, "localhost")
@@ -169,20 +169,25 @@ module.exports = async (client, message) => {
             });
 
         process.on("exit", () => {
-            client.logger.warn(
-                "Bot",
-                "Huntbot",
-                "Killing huntBot captcha solver...",
-            );
-            huntbotcaptchaprocess.kill("SIGINT");
+            if (huntbotcaptchaprocess) {
+                client.logger.warn(
+                    "Bot",
+                    "Huntbot",
+                    "Killing huntBot captcha solver...",
+                );
+                huntbotcaptchaprocess.kill("SIGINT");
+            }
         });
+
         process.on("SIGINT", () => {
-            client.logger.warn(
-                "Bot",
-                "Huntbot",
-                "Killing huntBot captcha solver...",
-            );
-            huntbotcaptchaprocess.kill("SIGINT");
+            if (huntbotcaptchaprocess) {
+                client.logger.warn(
+                    "Bot",
+                    "Huntbot",
+                    "Killing huntBot captcha solver...",
+                );
+                huntbotcaptchaprocess.kill("SIGINT");
+            }
         });
     }
 };

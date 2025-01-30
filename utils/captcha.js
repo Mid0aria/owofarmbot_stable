@@ -107,10 +107,10 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
         await page.goto(authUrl, { waitUntil: "load" });
 
-        await page.waitForSelector("div.action_c5a065 button", {
+        await page.waitForSelector("div.action__3d3b0 button", {
             visible: true,
         });
-        await page.locator("div.action_c5a065 button").setTimeout(3000).click();
+        await page.locator("div.action__3d3b0 button").setTimeout(3000).click();
 
         await page.waitForNavigation({ waitUntil: "load" });
 
@@ -148,6 +148,8 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                 if (socketcaptchastatus) {
                     console.log("Socket message received, closing browser...");
                     captchasolved = true;
+                    await browser.close();
+                    process.exit(1);
                     break;
                 }
                 let needsRefresh = false;
@@ -201,6 +203,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                             "Please click on the shape that breaks the pattern",
                             "Please click on the object that is not shiny",
                             "Fill the boxes with the required number of objects indicated.",
+                            "drag each missing peach",
                             "click, hold and drag",
                             "click, hold, and drag",
                             "click on the shape that breaks the pattern",
@@ -250,6 +253,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         }
         if (captchasolved) {
             await browser.close();
+            process.exit(1);
             break;
         }
     }

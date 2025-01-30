@@ -22,7 +22,6 @@
 module.exports = {
     config: {
         name: "pause",
-        aliases: ["stop"],
     },
     run: async (client, message) => {
         if (client.global.paused) {
@@ -39,8 +38,6 @@ module.exports = {
             if (client.config.settings.chatfeedback) {
                 await message.channel.send({ content: "Paused :)" });
             }
-
-            // process.exit(0);
         }
     },
 };

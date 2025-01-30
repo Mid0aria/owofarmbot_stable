@@ -10,29 +10,41 @@ body {
     color: white;
     font-family: Arial, sans-serif;
     overflow-x: hidden;
+    margin: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
+/* Sidebar styles */
 .sidebar {
     height: 100vh;
     width: 250px;
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #1f1f1f;
+    background-color: #2c2f38;
     padding: 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
-    transition: width 0.3s ease;
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.3);
+    transition:
+        width 0.3s ease,
+        background-color 0.3s ease;
     z-index: 5;
+    overflow-y: auto;
 }
 
 .sidebar.closed {
     width: 80px;
+    background-color: #333;
 }
 
 .sidebar h3 {
-    color: #4caf50;
-    font-size: 1.5rem;
+    color: #00c853;
+    font-size: 1.6rem;
     margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
     transition: opacity 0.3s ease;
 }
 
@@ -41,31 +53,141 @@ body {
 }
 
 .sidebar a {
-    color: white;
+    color: #e1e1e1;
     text-decoration: none;
     display: block;
     margin: 10px 0;
     font-size: 1.1rem;
-    padding: 10px;
-    border-radius: 5px;
-    transition: background 0.3s;
+    padding: 12px;
+    border-radius: 8px;
+    transition:
+        background 0.3s,
+        padding-left 0.3s;
+    position: relative;
 }
 
 .sidebar a i {
-    margin-right: 10px;
+    margin-right: 12px;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+/* Active menu item styling */
+.sidebar a.active {
+    background-color: #4c66af;
+    color: white;
+}
+
+.sidebar a.active i {
+    color: white;
 }
 
 .sidebar a:hover {
-    background-color: #333;
+    background-color: #444;
+    padding-left: 15px;
+}
+
+.sidebar a:hover i {
+    transform: rotate(15deg);
 }
 
 .sidebar.closed a {
-    padding: 10px;
+    padding: 15px;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.sidebar h4 {
+    color: #90a4ae;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+/* GitHub and Sponsor logos section */
+.sidebar a i {
+    color: #b0bec5;
+    font-size: 1.3rem;
+}
+
+.sidebar a:hover i {
+    color: #64b5f6;
+}
+
+/* Clock and bottom section */
+.sidebar div {
+    font-size: 0.9rem;
+    color: #78909c;
+    font-weight: 500;
+}
+
+.sidebar div i {
+    margin-right: 6px;
+    color: #4caf50;
+}
+.waiting-connection {
+    color: rgb(238, 255, 0);
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dots::after {
+    content: "";
+    display: inline-block;
+    animation: dotsAnimation 1.5s infinite steps(3);
+}
+
+@keyframes dotsAnimation {
+    0% {
+        content: ".";
+    }
+    33% {
+        content: "..";
+    }
+    66% {
+        content: "...";
+    }
+    100% {
+        content: "";
+    }
+}
+
+.sidebar-footer {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding-bottom: 10px;
+}
+
+.sidebar-footer a {
+    font-size: 20px;
+    color: white;
+    transition:
+        transform 0.3s ease,
+        color 0.3s ease;
+}
+
+.sidebar-footer a:hover {
+    transform: scale(1.2);
+    color: #ffcc00;
+}
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .sidebar.closed {
+        width: 60px;
+    }
 }
 
 .content {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     margin-left: 270px;
     padding: 20px;
 }
@@ -237,6 +359,19 @@ body {
     background-color: #4caf50;
     color: white;
     border: none;
+}
+.save-btn {
+    margin-left: 10px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
 }
 
 .form-control,

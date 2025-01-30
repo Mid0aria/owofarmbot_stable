@@ -1,0 +1,323 @@
+<!-- Main Settings Content -->
+<div id="settings-content" style="display: none">
+    <ul class="nav nav-tabs mb-4">
+        <li class="nav-item">
+            <a
+                class="nav-link active"
+                data-bs-toggle="tab"
+                href="#main-requiredsettings"
+                >Required Settings</a
+            >
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#main-basiccommands"
+                >Basic Commands</a
+            >
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#main-huntbot"
+                >Huntbot</a
+            >
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#main-gambling">
+                Gambling
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#main-miscellaneous"
+                >Miscellaneous</a
+            >
+        </li>
+        <li class="nav-item ms-auto">
+            <button id="main-saveBtn" class="btn btn-danger save-btn">
+                <i class="bi bi-floppy2-fill"></i> Save
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content">
+        <!-- Required Settings Tab -->
+        <div class="tab-pane fade show active" id="main-requiredsettings">
+            <div class="settings-section">
+                <h4>Required Settings</h4>
+                <div class="mb-3">
+                    <label class="form-label">TOKEN</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="main-token"
+                        value="x"
+                    />
+
+                    <label class="form-label">USER ID</label>
+                    <input
+                        type="string"
+                        class="form-control"
+                        id="main-userid"
+                        value="x"
+                    />
+
+                    <label class="form-label">OwO DM Channel ID</label>
+                    <input
+                        type="string"
+                        class="form-control"
+                        id="main-owodmchannelid"
+                        value="x"
+                    />
+
+                    <label class="form-label">Commands Channel ID</label>
+                    <input
+                        type="string"
+                        class="form-control"
+                        id="main-commandschannelid"
+                        value="x"
+                    />
+
+                    <label class="form-label">Huntbot Channel ID</label>
+                    <input
+                        type="string"
+                        class="form-control"
+                        id="main-huntbotchannelid"
+                        value="x"
+                    />
+
+                    <label class="form-label">Gamble Channel ID</label>
+                    <input
+                        type="string"
+                        class="form-control"
+                        id="main-gamblechannelid"
+                        value="x"
+                    />
+
+                    <label class="form-label">Auto Quest Channel ID</label>
+                    <input
+                        type="string"
+                        class="form-control"
+                        id="main-autoquestchannelid"
+                        value="x"
+                    />
+                </div>
+            </div>
+        </div>
+        <!-- Basic Commands Tab -->
+        <div class="tab-pane fade" id="main-basiccommands">
+            <div class="settings-section">
+                <h4>Basic Commands</h4>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-hunt"
+                        />
+                        <label class="form-check-label" for="main-commands-hunt"
+                            >Hunt</label
+                        >
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-battle"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="main-commands-battle"
+                            >Battle</label
+                        >
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-pray"
+                        />
+                        <label class="form-check-label" for="main-commands-pray"
+                            >Pray</label
+                        >
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-curse"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="main-commands-curse"
+                            >Curse</label
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Huntbot Tab -->
+        <div class="tab-pane fade" id="main-huntbot">
+            <div class="settings-section">
+                <h4>Huntbot Settings</h4>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-huntbot-enable"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="main-commands-huntbot-enable"
+                            >Enable Huntbot</label
+                        >
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Max Time (hour)</label>
+                    <input
+                        type="number"
+                        class="form-control"
+                        id="main-commands-huntbot-maxtime"
+                        value="0"
+                    />
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <h4>Huntbot Upgrade Settings</h4>
+                <div class="form-check">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="main-commands-huntbot-upgrade"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="main-commands-huntbot-upgrade"
+                        >Auto Upgrade</label
+                    >
+                </div>
+                <h4>Upgrade Type</h4>
+                <select
+                    class="form-select"
+                    id="main-commands-huntbot-upgradetype"
+                >
+                    <option value="duration">Duration</option>
+                    <option value="efficiency">Efficiency</option>
+                    <option value="cost">Cost</option>
+                    <option value="gain">Gain</option>
+                    <option value="exp">Experience</option>
+                    <option value="radar">Radar</option>
+                </select>
+            </div>
+        </div>
+        <!-- Gambling Tab -->
+        <div class="tab-pane fade" id="main-gambling">
+            <div class="settings-section">
+                <h4>Gambling</h4>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-gamble-coinflip"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="main-commands-gamble-coinflip"
+                            >Coinflip</label
+                        >
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-gamble-slot"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="main-commands-gamble-slot"
+                            >Slot</label
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Miscellaneous Tab -->
+        <div class="tab-pane fade" id="main-miscellaneous">
+            <div class="settings-section">
+                <h4>Miscellaneous</h4>
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-autostart"
+                        />
+                        <label class="form-check-label" for="main-autostart"
+                            >Auto Start</label
+                        >
+                    </div>
+
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-animals"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="main-commands-animals"
+                            >Animals</label
+                        >
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-inventory"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="main-commands-inventory"
+                            >Inventory</label
+                        >
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-checklist"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="main-commands-checklist"
+                            >Checklist</label
+                        >
+                    </div>
+                    <div class="form-check">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="main-commands-autoquest"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="main-commands-autoquest"
+                            >Auto Quest</label
+                        >
+                    </div>
+                    <h4>Maximum Gem Rarity</h4>
+                    <select class="form-select" id="main-maximum_gem_rarity">
+                        <option value="common">Common</option>
+                        <option value="uncommon">Uncommon</option>
+                        <option value="rare">Rare</option>
+                        <option value="epic">Epic</option>
+                        <option value="mythical">Mythical</option>
+                        <option value="legendary">Legendary</option>
+                        <option value="fabled">Fabled</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

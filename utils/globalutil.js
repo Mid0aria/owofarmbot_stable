@@ -1,3 +1,4 @@
+/* eslint-disable no-control-regex */
 /*
  * OwO Farm Bot Stable
  * Copyright (C) 2024 Mido
@@ -19,226 +20,23 @@
  * @throws {Error} - Throws an error if the temp directory or config file does not exist, or if the backup fails.
  */
 
-const axios = require("axios");
 const path = require("path");
-const os = require("os");
 const fse = require("fs-extra");
 const net = require("net");
 const readline = require("readline");
+exports.askUser = async (question) => {
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+    });
 
-exports.checkUpdate = async (client, cp, packageJson) => {
-    const askUser = (question) => {
-        const rl = readline.createInterface({
-            input: process.stdin,
-            output: process.stdout,
+    return new Promise((resolve) => {
+        rl.question(question, (answer) => {
+            rl.close();
+            resolve(answer.trim());
         });
-
-        return new Promise((resolve) => {
-            rl.question(question, (answer) => {
-                rl.close();
-                resolve(answer.trim().toLowerCase());
-            });
-        });
-    };
-
-    client.logger.info("Bot", "Updater", `Checking for updates...`);
-    try {
-        const headers = {
-            "User-Agent":
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537",
-        };
-        const response = await axios.get(
-            `https://raw.githubusercontent.com/Mid0aria/owofarmbot_stable/main/package.json`,
-            { headers },
-        );
-        const ghVersion = response.data.version;
-        const version = packageJson.version;
-
-        if (ghVersion > version) {
-            client.logger.warn("Bot", "Updater", "A new update is available.");
-            client.logger.info(
-                "Bot",
-                "Updater",
-                `New Version Notes: ${response.data.version_note}`,
-            );
-            const userResponse = await askUser(
-                "Would you like to update now? (yes/no): ",
-            );
-
-            if (userResponse === "yes" || userResponse === "y") {
-                client.logger.warn(
-                    "Bot",
-                    "Updater",
-                    "Updating bot. Please wait...",
-                );
-
-                const configPath = path.resolve(__dirname, "../config.json");
-                const backupPath = await backupConfig(client, configPath);
-
-                if (fse.existsSync(".git")) {
-                    try {
-                        cp.execSync("git --version");
-                        client.logger.warn(
-                            "Bot",
-                            "Updater",
-                            "Updating with Git...",
-                        );
-                        await gitUpdate(client, cp);
-                    } catch (error) {
-                        client.logger.alert(
-                            "Bot",
-                            "Updater",
-                            `Git update error: ${error}`,
-                        );
-                        // await manualUpdate(client);
-                    }
-                } else {
-                    // await manualUpdate(client);
-                    await downloaddotgit(client, cp);
-                }
-
-                updateConfigFile(client, configPath, backupPath);
-
-                client.logger.warn("Bot", "Updater", "Please restart the bot.");
-            } else {
-                client.logger.info("Bot", "Updater", "Update skipped by user.");
-            }
-        } else {
-            client.logger.info("Bot", "Updater", "No updates available.");
-        }
-    } catch (error) {
-        client.logger.alert(
-            "Bot",
-            "Updater",
-            `Failed to check for updates: ${error.message}`,
-        );
-    }
+    });
 };
-
-const backupConfig = async (client, configPath) => {
-    try {
-        const tempDir = os.tmpdir();
-        const backupPath = path.join(tempDir, "config.backup.json");
-
-        if (!fse.existsSync(tempDir)) {
-            client.logger.alert(
-                "Updater",
-                "Config",
-                `Temp directory does not exist: ${tempDir}`,
-            );
-            throw new Error("Temp directory does not exist.");
-        }
-
-        if (!fse.existsSync(configPath)) {
-            client.logger.alert(
-                "Updater",
-                "Config",
-                `Config file does not exist: ${configPath}`,
-            );
-            throw new Error("Config file does not exist.");
-        }
-
-        fse.copySync(configPath, backupPath);
-        client.logger.info(
-            "Updater",
-            "Config",
-            `Config backed up successfully to ${backupPath}.`,
-        );
-
-        return backupPath;
-    } catch (error) {
-        client.logger.alert(
-            "Updater",
-            "Config",
-            `Failed to back up config: ${error.message}`,
-        );
-        throw error;
-    }
-};
-
-const updateConfigFile = (client, configPath, backupPath) => {
-    try {
-        if (!fse.existsSync(backupPath)) {
-            client.logger.alert(
-                "Updater",
-                "Config",
-                "Backup file not found in temp directory. Skipping config update.",
-            );
-            return;
-        }
-
-        const backupConfig = fse.readJsonSync(backupPath);
-        const updatedConfig = fse.readJsonSync(configPath);
-
-        const mergedConfig = { ...updatedConfig, ...backupConfig };
-
-        for (const key in backupConfig) {
-            if (updatedConfig.hasOwnProperty(key)) {
-                mergedConfig[key] = backupConfig[key];
-            }
-        }
-
-        fse.writeJsonSync(configPath, mergedConfig, { spaces: 2 });
-        client.logger.info("Updater", "Config", "Config updated successfully.");
-        fse.unlinkSync(backupPath);
-    } catch (error) {
-        client.logger.alert(
-            "Updater",
-            "Config",
-            `Failed to update config: ${error.message}`,
-        );
-    }
-};
-
-const gitUpdate = async (client, cp) => {
-    try {
-        cp.execSync("git stash");
-        cp.execSync("git pull --force");
-        client.logger.info("Updater", "Git", "Git pull successful!");
-        cp.execSync("git reset --hard");
-    } catch (error) {
-        client.logger.alert(
-            "Updater",
-            "Git",
-            `Error updating project from Git: ${error.message}`,
-        );
-    }
-};
-
-const downloaddotgit = async (client, cp) => {
-    const repoUrl = "https://github.com/Mid0aria/owofarmbot_stable.git";
-    const targetFolder = path.join(__dirname, "../.git");
-
-    if (!fse.existsSync(targetFolder)) {
-        fse.mkdirSync(targetFolder, { recursive: true });
-    }
-    const cloneCommand = `git clone --bare ${repoUrl} ${targetFolder}`;
-
-    cp.execSync(cloneCommand, { stdio: "inherit" });
-    await gitUpdate(client, cp);
-};
-
-/**
- *
- *
- *
- *
- *
- *
- *  *
- *
- *
- *
- *
- *
- *  *
- *
- *
- *
- *
- *
- *
- */
 
 exports.verifyconfig = async (client, extrac, config) => {
     let normal = true;
@@ -282,12 +80,20 @@ exports.verifyconfig = async (client, extrac, config) => {
         }
     }
 
-    if (
-        (config.main.commands.pray && config.main.commands.curse) ||
-        (config.extra.commands.pray && config.main.commands.curse)
-    ) {
-        normal = false;
-        showerrcoziamlazy("Curse and pray cannot be turn on at the same time!");
+    if (config.main.commands.pray && config.main.commands.curse) {
+        config.main.commands.curse = false;
+        client.basic.curse = false;
+
+        showerrcoziamlazy(
+            "Curse and pray cannot be turn on at the same time! By default pray will be used.",
+        );
+    }
+    if (config.extra.commands.pray && config.extra.commands.curse) {
+        config.extra.commands.curse = false;
+        client.basic.curse = false;
+        showerrcoziamlazy(
+            "Curse and pray cannot be turn on at the same time! By default pray will be used.",
+        );
     }
     if (
         (config.main.commands.gamble.coinflip ||
@@ -340,7 +146,7 @@ exports.verifyconfig = async (client, extrac, config) => {
         }
 
         if (client.basic.commands.animals) {
-            let type = "";
+            // let type = "";
             let animaltypes = client.config.animals.animaltype;
             for (const [type, isEnabled] of Object.entries(animaltypes)) {
                 if (!isEnabled) continue;
@@ -494,10 +300,6 @@ exports.verifyconfig = async (client, extrac, config) => {
     //does it change? idk!
     function showerrcoziamlazy(err) {
         client.logger.alert("Bot", "Config", "Config conflict: " + err);
-        setTimeout(() => {
-            client.logger.warn("Bot", "Config", "Exiting...");
-            process.exit(0);
-        }, 1600);
     }
 
     if (normal) {
@@ -507,6 +309,10 @@ exports.verifyconfig = async (client, extrac, config) => {
             "Config verified, things seem to be okey :3",
         );
     } else {
+        setTimeout(() => {
+            client.logger.warn("Bot", "Config", "Exiting...");
+            process.exit(0);
+        }, 1600);
         client.logger.alert(
             "Bot",
             "Config",
@@ -515,27 +321,6 @@ exports.verifyconfig = async (client, extrac, config) => {
     }
 };
 
-/**
- *
- *
- *
- *
- *
- *
- *  *
- *
- *
- *
- *
- *
- *  *
- *
- *
- *
- *
- *
- *
- */
 exports.isPortInUse = async (port, host = "localhost") => {
     return new Promise((resolve, reject) => {
         const socket = new net.Socket();
@@ -560,4 +345,131 @@ exports.isPortInUse = async (port, host = "localhost") => {
 exports.removeInvisibleChars = (str) => {
     const invisibleRegex = /[\u0000-\u001F\u007F\u200B-\u200D\uFEFF]/g;
     return str.replace(invisibleRegex, "");
+};
+
+exports.gatherUserDetails = async (config, tokentype, client) => {
+    const askValidInput = async (question, validator) => {
+        let input;
+        do {
+            input = await exports.askUser(question);
+            if (!validator(input)) {
+                console.log("❌ Invalid value! Please try again.");
+            }
+        } while (!validator(input));
+        return input;
+    };
+
+    const isValidToken = (token) =>
+        /^[\w-]{24}\.[\w-]{6}\.[\w-]{27}$|^mfa\.[\w-]+$|^[\w-]+\.[\w-]+\.[\w-]+$/.test(
+            token,
+        );
+
+    const isValidID = (id) => /^\d+$/.test(id);
+
+    if (tokentype == "main") {
+        const token = await askValidInput("Enter your token: ", isValidToken);
+        const userid = await askValidInput("Enter your user ID: ", isValidID);
+        const commandschannelid = await askValidInput(
+            "Enter your commands channel ID: ",
+            isValidID,
+        );
+        const huntbotchannelid = await askValidInput(
+            "Enter your hunt bot channel ID: ",
+            isValidID,
+        );
+        const owodmchannelid = await askValidInput(
+            "Enter your OwO DM channel ID: ",
+            isValidID,
+        );
+        const gamblechannelid = await askValidInput(
+            "Enter your gamble channel ID: ",
+            isValidID,
+        );
+        const autoquestchannelid = await askValidInput(
+            "Enter your autoquest channel ID: ",
+            isValidID,
+        );
+
+        config.firstrun = false;
+        config.main = {
+            token,
+            userid: userid.toString(),
+            commandschannelid: commandschannelid.toString(),
+            huntbotchannelid: huntbotchannelid.toString(),
+            owodmchannelid: owodmchannelid.toString(),
+            gamblechannelid: gamblechannelid.toString(),
+            autoquestchannelid: autoquestchannelid.toString(),
+        };
+        if (client.global.devmod) {
+            fse.writeFileSync(
+                path.join(__dirname, "../developer/config.json"),
+                JSON.stringify(config, null, 2),
+                "utf8",
+            );
+        } else {
+            fse.writeFileSync(
+                path.join(__dirname, "../config.json"),
+                JSON.stringify(config, null, 2),
+                "utf8",
+            );
+        }
+
+        console.log("✅ Config updated successfully!");
+    }
+
+    if (tokentype == "extra") {
+        const token = await askValidInput(
+            "Enter your Extra account token: ",
+            isValidToken,
+        );
+        const userid = await askValidInput(
+            "Enter your Extra account user ID: ",
+            isValidID,
+        );
+        const commandschannelid = await askValidInput(
+            "Enter your Extra account commands channel ID: ",
+            isValidID,
+        );
+        const huntbotchannelid = await askValidInput(
+            "Enter your Extra account hunt bot channel ID: ",
+            isValidID,
+        );
+        const owodmchannelid = await askValidInput(
+            "Enter your Extra account OwO DM channel ID: ",
+            isValidID,
+        );
+        const gamblechannelid = await askValidInput(
+            "Enter your Extra account gamble channel ID: ",
+            isValidID,
+        );
+        const autoquestchannelid = await askValidInput(
+            "Enter your Extra account autoquest channel ID: ",
+            isValidID,
+        );
+        config.firstrun = false;
+        config.extra = {
+            enable: true,
+            token,
+            userid: userid.toString(),
+            commandschannelid: commandschannelid.toString(),
+            huntbotchannelid: huntbotchannelid.toString(),
+            owodmchannelid: owodmchannelid.toString(),
+            gamblechannelid: gamblechannelid.toString(),
+            autoquestchannelid: autoquestchannelid.toString(),
+        };
+        if (client.global.devmod) {
+            fse.writeFileSync(
+                path.join(__dirname, "../developer/config.json"),
+                JSON.stringify(config, null, 2),
+                "utf8",
+            );
+        } else {
+            fse.writeFileSync(
+                path.join(__dirname, "../config.json"),
+                JSON.stringify(config, null, 2),
+                "utf8",
+            );
+        }
+        console.log("✅ Config updated successfully!");
+    }
 };

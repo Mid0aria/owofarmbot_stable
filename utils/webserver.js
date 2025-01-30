@@ -158,6 +158,11 @@ function startWebSocketServer(client, extraclient) {
                         });
                     }
                     break;
+                case "reboot":
+                    client.logger.warn("WEBUI", "Farm", "REBOOTING ...");
+                    client.destroy();
+                    process.exit(1);
+                    break;
                 default:
                     ws.send(
                         JSON.stringify({

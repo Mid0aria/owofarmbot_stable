@@ -1,9 +1,9 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.7",
-    "version_note": "I recommend re-downloading the bot to get this update without errors. WebUI added & fixed chrome tabs not closing when captcha solved",
+    "version": "0.0.8",
+    "version_note": "I recommend re-downloading the bot to get this update without errors. WebUI now has a new look and menus & minor bugs fixed",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
-    "main": "bot.js",
+    "main": "main.js",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/Mid0aria/owofarmbot_stable.git"
@@ -27,8 +27,8 @@
     "author": "Mid0aria",
     "license": "ISC",
     "scripts": {
-        "start": "node bot.js",
-        "run": "node bot.js",
+        "start": "node main.js",
+        "run": "node main.js",
         "setup": "npm i",
         "format": "prettier -w ."
     },
