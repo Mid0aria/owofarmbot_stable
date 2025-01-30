@@ -367,109 +367,96 @@ exports.gatherUserDetails = async (config, tokentype, client) => {
     const isValidID = (id) => /^\d+$/.test(id);
 
     if (tokentype == "main") {
-        const token = await askValidInput("Enter your token: ", isValidToken);
-        const userid = await askValidInput("Enter your user ID: ", isValidID);
-        const commandschannelid = await askValidInput(
-            "Enter your commands channel ID: ",
-            isValidID,
-        );
-        const huntbotchannelid = await askValidInput(
-            "Enter your hunt bot channel ID: ",
-            isValidID,
-        );
-        const owodmchannelid = await askValidInput(
-            "Enter your OwO DM channel ID: ",
-            isValidID,
-        );
-        const gamblechannelid = await askValidInput(
-            "Enter your gamble channel ID: ",
-            isValidID,
-        );
-        const autoquestchannelid = await askValidInput(
-            "Enter your autoquest channel ID: ",
-            isValidID,
-        );
+        const existingConfig = { ...config.main };
 
+        const updatedValues = {
+            token: await askValidInput("Enter your token: ", isValidToken),
+            userid: (
+                await askValidInput("Enter your user ID: ", isValidID)
+            ).toString(),
+            commandschannelid: (
+                await askValidInput(
+                    "Enter your commands channel ID: ",
+                    isValidID,
+                )
+            ).toString(),
+            huntbotchannelid: (
+                await askValidInput(
+                    "Enter your hunt bot channel ID: ",
+                    isValidID,
+                )
+            ).toString(),
+            owodmchannelid: (
+                await askValidInput("Enter your OwO DM channel ID: ", isValidID)
+            ).toString(),
+            gamblechannelid: (
+                await askValidInput("Enter your gamble channel ID: ", isValidID)
+            ).toString(),
+            autoquestchannelid: (
+                await askValidInput(
+                    "Enter your autoquest channel ID: ",
+                    isValidID,
+                )
+            ).toString(),
+        };
         config.firstrun = false;
         config.main = {
-            token,
-            userid: userid.toString(),
-            commandschannelid: commandschannelid.toString(),
-            huntbotchannelid: huntbotchannelid.toString(),
-            owodmchannelid: owodmchannelid.toString(),
-            gamblechannelid: gamblechannelid.toString(),
-            autoquestchannelid: autoquestchannelid.toString(),
+            ...existingConfig,
+            ...updatedValues,
         };
-        if (client.global.devmod) {
-            fse.writeFileSync(
-                path.join(__dirname, "../developer/config.json"),
-                JSON.stringify(config, null, 2),
-                "utf8",
-            );
-        } else {
-            fse.writeFileSync(
-                path.join(__dirname, "../config.json"),
-                JSON.stringify(config, null, 2),
-                "utf8",
-            );
-        }
+
+        const configPath = client.global.devmod
+            ? path.join(__dirname, "../developer/config.json")
+            : path.join(__dirname, "../config.json");
+
+        fse.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf8");
 
         console.log("✅ Config updated successfully!");
     }
 
     if (tokentype == "extra") {
-        const token = await askValidInput(
-            "Enter your Extra account token: ",
-            isValidToken,
-        );
-        const userid = await askValidInput(
-            "Enter your Extra account user ID: ",
-            isValidID,
-        );
-        const commandschannelid = await askValidInput(
-            "Enter your Extra account commands channel ID: ",
-            isValidID,
-        );
-        const huntbotchannelid = await askValidInput(
-            "Enter your Extra account hunt bot channel ID: ",
-            isValidID,
-        );
-        const owodmchannelid = await askValidInput(
-            "Enter your Extra account OwO DM channel ID: ",
-            isValidID,
-        );
-        const gamblechannelid = await askValidInput(
-            "Enter your Extra account gamble channel ID: ",
-            isValidID,
-        );
-        const autoquestchannelid = await askValidInput(
-            "Enter your Extra account autoquest channel ID: ",
-            isValidID,
-        );
+        const existingConfig = { ...config.extra };
+        const updatedValues = {
+            token: await askValidInput(
+                "Enter your Extra account token: ",
+                isValidToken,
+            ),
+            userid: await askValidInput(
+                "Enter your Extra account user ID: ",
+                isValidID,
+            ),
+            commandschannelid: await askValidInput(
+                "Enter your Extra account commands channel ID: ",
+                isValidID,
+            ),
+            huntbotchannelid: await askValidInput(
+                "Enter your Extra account hunt bot channel ID: ",
+                isValidID,
+            ),
+            owodmchannelid: await askValidInput(
+                "Enter your Extra account OwO DM channel ID: ",
+                isValidID,
+            ),
+            gamblechannelid: await askValidInput(
+                "Enter your Extra account gamble channel ID: ",
+                isValidID,
+            ),
+            autoquestchannelid: await askValidInput(
+                "Enter your Extra account autoquest channel ID: ",
+                isValidID,
+            ),
+        };
         config.firstrun = false;
         config.extra = {
-            enable: true,
-            token,
-            userid: userid.toString(),
-            commandschannelid: commandschannelid.toString(),
-            huntbotchannelid: huntbotchannelid.toString(),
-            owodmchannelid: owodmchannelid.toString(),
-            gamblechannelid: gamblechannelid.toString(),
-            autoquestchannelid: autoquestchannelid.toString(),
+            ...existingConfig,
+            ...updatedValues,
         };
-        if (client.global.devmod) {
-            fse.writeFileSync(
-                path.join(__dirname, "../developer/config.json"),
-                JSON.stringify(config, null, 2),
-                "utf8",
-            );
-        } else {
-            fse.writeFileSync(
-                path.join(__dirname, "../config.json"),
-                JSON.stringify(config, null, 2),
-                "utf8",
-            );
-        }
+
+        const configPath = client.global.devmod
+            ? path.join(__dirname, "../developer/config.json")
+            : path.join(__dirname, "../config.json");
+
+        fse.writeFileSync(configPath, JSON.stringify(config, null, 2), "utf8");
         console.log("✅ Config updated successfully!");
     }
 };
