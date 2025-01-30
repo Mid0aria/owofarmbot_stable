@@ -309,11 +309,6 @@ if (
 
         await initializeBot();
 
-        client.logger.info(
-            "WebUI",
-            "Startup",
-            `WebUI started on http://localhost:${config.socket.expressport}`,
-        );
         client.logger.warn(
             "Bot",
             "Help",
@@ -340,10 +335,18 @@ async function initializeBot() {
         });
         extrac.logger.warn("Bot", "Startup", "Logging in...");
         await extrac.login(config.extra.token);
-        client.logger.warn("WebUI", "Startup", "Web Server Starting...");
+        client.logger.info(
+            "WebUI",
+            "Startup",
+            `WebUI started on http://localhost:${config.socket.expressport}`,
+        );
         initializeWebSocket(client, extrac);
     } else {
-        client.logger.warn("Bot", "Startup", "Web Server Starting...");
+        client.logger.info(
+            "WebUI",
+            "Startup",
+            `WebUI started on http://localhost:${config.socket.expressport}`,
+        );
         initializeWebSocket(client);
     }
 }
