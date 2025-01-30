@@ -132,6 +132,18 @@ async function questHandler(client, channel, mainSender, extraSender) {
             }
 
             if (message == null) {
+                if (client.global.paused || client.global.captchadetected) {
+                    while (true) {
+                        if (
+                            !(
+                                client.global.paused ||
+                                client.global.captchadetected
+                            )
+                        )
+                            break;
+                        await client.delay(3000);
+                    }
+                }
                 client.logger.alert(
                     "Farm",
                     "Quest",
