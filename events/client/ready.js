@@ -84,7 +84,7 @@ function setupSweeper(botClient) {
                     channel.messages.cache.clear();
                 }
             });
-            console.log(`[${botClient.user.username}] Message cache cleared.`);
+            botClient.logger.warn("Bot", "Cache", "Cleared messsage cache.")
         },
         5 * 60 * 1000,
     );

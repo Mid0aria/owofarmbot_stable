@@ -201,17 +201,14 @@ if (cluster.isMaster) {
         }
     });
 
-    app.listen(config.socket.expressport, () => {
-        console.log(
-            `WebUI started on http://localhost:${config.socket.expressport}`,
-        );
-    });
-
     cluster.fork();
 
     cluster.on("exit", () => {
-        console.log("The bot is down, restarting...");
-        cluster.fork();
+        //this is useful when anticrash cannot anticrash, but i will make user define it
+        if (config.settings.autoresume) {
+            console.log("The bot is down, restarting...");
+            cluster.fork();
+        }
     });
 } else {
     require("./bot.js");

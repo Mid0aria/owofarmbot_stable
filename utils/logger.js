@@ -19,21 +19,29 @@
  * - If only new logging is enabled, it displays detailed information for the main client.
  * - Otherwise, it logs the last message in the reallog array.
  */
+const fs = require("fs");
+
+let reallog = [],
+    fulllog = [],
+    loggermaincl,
+    loggerextrac;
+
+const startDate = new Date();
+const formattedDate = `${startDate.getFullYear()}-${(startDate.getMonth() + 1).toString().padStart(2, "0")}-${startDate.getDate().toString().padStart(2, "0")}`;
+const formattedTime = `${startDate.getHours().toString().padStart(2, "0")}-${startDate.getMinutes().toString().padStart(2, "0")}-${startDate.getSeconds().toString().padStart(2, "0")}`;
+const logFileName = `./data/logs_${formattedDate}_${formattedTime}.log`;
 
 module.exports = (client) => {
-    let reallog = [],
-        fulllog = [],
-        loggerextrac;
-
     let length = client ? client.config.settings.logging.loglength : 16;
     if (client.global.type == "Extra") {
         loggerextrac = client;
-    }
+    } else loggermaincl = client;
     let exitlog =
         client.config.settings.logging.showlogbeforeexit &&
         client.config.settings.logging.newlog;
     process.on("SIGINT", () => {
         if (exitlog) {
+            console.log("//START OF LOG//");
             for (const logs of fulllog) console.log(logs);
             console.log("//END OF LOG//");
         }
@@ -67,6 +75,15 @@ module.exports = (client) => {
         if (exitlog) fulllog.push(logMessage);
         if (reallog.length >= length) reallog.shift();
         showlog(reallog);
+
+        const localLogMessage =
+            new Date().toLocaleTimeString() + " " + (color == client.chalk.green ? "[I]" : client.chalk.yellow ? "[W]" : "[E]") + " " +
+                type + " >> " + client.global.type + " > " + module + " > " + result;
+        fs.appendFile(logFileName, localLogMessage + "\n", (err) => {
+            if (err) {
+                console.error("Error writing to log file", err);
+            }
+        });
     }
 
     function showlog(reallog) {
@@ -80,16 +97,16 @@ module.exports = (client) => {
         }
 
         //leave the var here if future need
-        var mainHunt = client.global.total.hunt;
-        var mainBattle = client.global.total.battle;
-        var mainEvent = client.global.gems.isevent ? "Yes" : "No";
-        // var mainCF = client.global.gamble.coinflip;
-        // var mainSlot = client.global.gamble.slot;
-        var mainCow = client.global.gamble.cowoncywon;
-        var mainCaptcha = client.global.captchadetected
+        var mainHunt = loggermaincl.global.total.hunt;
+        var mainBattle = loggermaincl.global.total.battle;
+        var mainEvent = loggermaincl.global.gems.isevent ? "Yes" : "No";
+        // var mainCF = loggermaincl.global.gamble.coinflip;
+        // var mainSlot = loggermaincl.global.gamble.slot;
+        var mainCow = loggermaincl.global.gamble.cowoncywon;
+        var mainCaptcha = loggermaincl.global.captchadetected
             ? client.chalk.red("Danger  ")
             : client.chalk.green("Safe    ");
-        var mainPause = client.global.paused
+        var mainPause = loggermaincl.global.paused
             ? client.chalk.yellow("Paused  ")
             : client.chalk.cyan("Running ");
 
@@ -135,13 +152,13 @@ module.exports = (client) => {
 ║ Token    ║ Status                ║ Questing
 ╠══════════╬═══════════════════════╬════════════════════════════════════════════════
 ║ Main     ║ Total hunt: ${padder(mainHunt, false)}  ║ ${
-                    client.global.quest.title
+                    loggermaincl.global.quest.title
                 }
 ║ ${mainCaptcha} ║ Total battle: ${padder(mainBattle, false)}║ ${
-                    client.global.quest.reward
+                    loggermaincl.global.quest.reward
                 }
 ║ ${mainPause} ║ Cowoncy won: ${padder(mainCow, false)} ║ ${
-                    client.global.quest.progress
+                    loggermaincl.global.quest.progress
                 }
 ╠══════════╬═══════════════════════╬════════════════════════════════════════════════
 ║ Extra    ║ Total hunt: ${padder(extraHunt, false)}  ║ ${

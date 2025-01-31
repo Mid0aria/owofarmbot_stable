@@ -48,137 +48,139 @@ async function hunt(client, channel) {
     ) {
         await client.delay(16000);
     }
-    channel.sendTyping();
-    if (client.global.battle) await client.delay(1500);
-    client.global.hunt = true;
+
     let interval = getrand(
         client.config.interval.hunt.min,
         client.config.interval.hunt.max,
     );
-    let id;
-    await channel
-        .send({
-            content: `${commandrandomizer([
-                "owo",
-                client.config.settings.owoprefix,
-            ])} ${commandrandomizer(["h", "hunt"])}`,
-        })
-        .then(async (huntmsg) => {
-            id = huntmsg.id;
-            client.global.total.hunt++;
-            client.broadcast({
-                action: "update",
-                type: "hunt",
-                progress: client.global.total.hunt,
-                global: client.global,
-            });
-            client.logger.info(
-                "Farm",
-                "Hunt",
-                `Total Hunt: ${client.global.total.hunt}`,
-            );
-            if (client.config.settings.inventory.use.gems) {
-                let message = await getMessage();
-                async function getMessage() {
-                    return new Promise((resolve) => {
-                        const filter = (msg) =>
-                            (msg.content.includes("and caught a") ||
-                                msg.content.includes("You found:")) &&
-                            msg.author.id === "408785106942164992" &&
-                            msg.channel.id === channel.id &&
-                            msg.id.localeCompare(id) > 0;
+    
+    try {
+        channel.sendTyping();
+        if (client.global.battle) await client.delay(1500);
+        client.global.hunt = true;
+        let id;
+        await channel
+            .send({
+                content: `${commandrandomizer([
+                    "owo",
+                    client.config.settings.owoprefix,
+                ])} ${commandrandomizer(["h", "hunt"])}`,
+            })
+            .then(async (huntmsg) => {
+                id = huntmsg.id;
+                client.global.total.hunt++;
+                client.broadcast({
+                    action: "update",
+                    type: "hunt",
+                    progress: client.global.total.hunt,
+                    global: client.global,
+                });
+                client.logger.info(
+                    "Farm",
+                    "Hunt",
+                    `Total Hunt: ${client.global.total.hunt}`,
+                );
+                if (client.config.settings.inventory.use.gems) {
+                    let message = await getMessage();
+                    async function getMessage() {
+                        return new Promise((resolve) => {
+                            const filter = (msg) =>
+                                (msg.content.includes("and caught a") ||
+                                    msg.content.includes("You found:")) &&
+                                msg.author.id === "408785106942164992" &&
+                                msg.channel.id === channel.id &&
+                                msg.id.localeCompare(id) > 0;
 
-                        const listener = (msg) => {
-                            if (filter(msg)) {
-                                clearTimeout(timer);
-                                client.off("messageCreate", listener);
-                                resolve(msg);
-                            }
-                        };
-
-                        const timer = setTimeout(() => {
-                            client.off("messageCreate", listener);
-                            const collector = channel.createMessageCollector({
-                                filter,
-                                time: 6100,
-                            });
-                            collector.on("collect", (msg) => {
+                            const listener = (msg) => {
                                 if (filter(msg)) {
-                                    collector.stop();
+                                    clearTimeout(timer);
+                                    client.off("messageCreate", listener);
                                     resolve(msg);
                                 }
-                            });
-                            collector.on("end", () => resolve(null));
-                        }, 6100);
+                            };
 
-                        client.on("messageCreate", listener);
-                    });
-                }
+                            const timer = setTimeout(() => {
+                                client.off("messageCreate", listener);
+                                const collector = channel.createMessageCollector({
+                                    filter,
+                                    time: 6100,
+                                });
+                                collector.on("collect", (msg) => {
+                                    if (filter(msg)) {
+                                        collector.stop();
+                                        resolve(msg);
+                                    }
+                                });
+                                collector.on("end", () => resolve(null));
+                            }, 6100);
 
-                if (message == null) {
-                    client.global.hunt = false;
-                    client.logger.alert(
-                        "Farm",
-                        "Hunt",
-                        "Couldn't retrieve hunting result!",
-                    );
-                    setTimeout(() => {
-                        hunt(client, channel);
-                    }, interval);
-                    return;
-                }
-
-                let huntmsgcontent = message.content;
-                client.global.gems.need = [];
-                client.global.gems.use = "";
-                if (huntmsgcontent) {
-                    let requiredGems = ["gem1", "gem3", "gem4"];
-                    requiredGems.forEach((gem) => {
-                        if (!huntmsgcontent.includes(gem)) {
-                            client.global.gems.need.push(gem);
-                        }
-                    });
-
-                    if (client.global.gems.isevent) {
-                        if (!huntmsgcontent.includes("star")) {
-                            if (!client.global.temp.usedevent) {
-                                client.global.gems.need.push("star");
-                                client.global.temp.usedevent = true;
-                            } else {
-                                client.global.gems.isevent = false;
-                                client.logger.info(
-                                    "Farm",
-                                    "Hunt",
-                                    "Event not found",
-                                );
-                            }
-                        } else client.global.temp.usedevent = false;
+                            client.on("messageCreate", listener);
+                        });
                     }
 
-                    if (client.global.gems.need.length > 0) {
-                        client.logger.warn(
+                    if (message == null) {
+                        client.logger.alert(
                             "Farm",
                             "Hunt",
-                            `Missing gems: ${client.global.gems.need}`,
+                            "Couldn't retrieve hunting result!",
                         );
+                        return;
+                    }
 
-                        if (client.basic.commands.inventory) {
-                            setTimeout(() => {
-                                require("./inventory.js")(client, message);
-                            }, 2000);
-                        } //put it here to only check inv when missing gem
+                    let huntmsgcontent = message.content;
+                    client.global.gems.need = [];
+                    client.global.gems.use = "";
+                    if (huntmsgcontent) {
+                        let requiredGems = ["gem1", "gem3", "gem4"];
+                        requiredGems.forEach((gem) => {
+                            if (!huntmsgcontent.includes(gem)) {
+                                client.global.gems.need.push(gem);
+                            }
+                        });
+
+                        if (client.global.gems.isevent) {
+                            if (!huntmsgcontent.includes("star")) {
+                                if (!client.global.temp.usedevent) {
+                                    client.global.gems.need.push("star");
+                                    client.global.temp.usedevent = true;
+                                } else {
+                                    client.global.gems.isevent = false;
+                                    client.logger.info(
+                                        "Farm",
+                                        "Hunt",
+                                        "Event not found",
+                                    );
+                                }
+                            } else client.global.temp.usedevent = false;
+                        }
+
+                        if (client.global.gems.need.length > 0) {
+                            client.logger.warn(
+                                "Farm",
+                                "Hunt",
+                                `Missing gems: ${client.global.gems.need}`,
+                            );
+
+                            if (client.basic.commands.inventory) {
+                                setTimeout(() => {
+                                    require("./inventory.js")(client, message);
+                                }, 2000);
+                            } //put it here to only check inv when missing gem
+                        }
                     }
                 }
-            }
-            await client.delay(1000);
-            client.global.hunt = false;
-
-            setTimeout(() => {
-                hunt(client, channel);
-            }, interval);
-        });
-    if (client.config.settings.autophrases) {
-        await elaina2(client, channel);
+                await client.delay(1000);
+            });
+        if (client.config.settings.autophrases) {
+            await elaina2(client, channel);
+        }
+    } catch (err) {
+        client.logger.alert("Farm", "Hunt", "Error while hunting: " + err);
+    } finally {
+        client.global.hunt = false;
+        setTimeout(() => {
+            hunt(client, channel);
+        }, interval);
     }
 }
 
@@ -194,39 +196,46 @@ async function battle(client, channel) {
     ) {
         await client.delay(16000);
     }
-    channel.sendTyping();
-    if (client.global.hunt) await client.delay(1500);
-    client.global.battle = true;
+
     let interval = getrand(
         client.config.interval.battle.min,
         client.config.interval.battle.max,
     );
-    await channel
-        .send({
-            content: `${commandrandomizer([
-                "owo",
-                client.config.settings.owoprefix,
-            ])} ${commandrandomizer(["b", "battle"])}`,
-        })
-        .then(() => {
-            client.global.total.battle++;
-            client.broadcast({
-                action: "update",
-                type: "battle",
-                progress: client.global.total.battle,
-                global: client.global,
-            });
-            client.logger.info(
-                "Farm",
-                "Battle",
-                `Total Battle: ${client.global.total.battle}`,
-            );
-            client.global.battle = false;
-        });
 
-    setTimeout(() => {
-        battle(client, channel);
-    }, interval);
+    try {
+        channel.sendTyping();
+        if (client.global.hunt) await client.delay(1500);
+        client.global.battle = true;
+        
+        await channel
+            .send({
+                content: `${commandrandomizer([
+                    "owo",
+                    client.config.settings.owoprefix,
+                ])} ${commandrandomizer(["b", "battle"])}`,
+            })
+            .then(() => {
+                client.global.total.battle++;
+                client.broadcast({
+                    action: "update",
+                    type: "battle",
+                    progress: client.global.total.battle,
+                    global: client.global,
+                });
+                client.logger.info(
+                    "Farm",
+                    "Battle",
+                    `Total Battle: ${client.global.total.battle}`,
+                );
+            });
+    } catch (err) {
+        client.logger.alert("Farm", "Battle", "Error while battling: " + err);
+    } finally {
+        client.global.battle = false;
+        setTimeout(() => {
+            battle(client, channel);
+        }, interval);
+    }
 }
 
 async function elaina2(client, channel) {

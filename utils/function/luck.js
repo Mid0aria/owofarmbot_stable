@@ -39,39 +39,44 @@ async function pray(client, channel) {
     ) {
         await client.delay(16000);
     }
-    channel.sendTyping();
-    let content;
     let interval = getrand(
         client.config.interval.pray.min,
         client.config.interval.pray.max,
     );
-    if (client.basic.commands.tomain) {
-        content =
-            commandrandomizer(["owo", client.config.settings.owoprefix]) +
-            "pray <@" +
-            client.config.main.userid +
-            ">";
-    } else {
-        content =
-            commandrandomizer(["owo", client.config.settings.owoprefix]) +
-            "pray";
+    try {
+        channel.sendTyping();
+        let content;
+        
+        if (client.basic.commands.tomain) {
+            content =
+                commandrandomizer(["owo", client.config.settings.owoprefix]) +
+                "pray <@" +
+                client.config.main.userid +
+                ">";
+        } else {
+            content =
+                commandrandomizer(["owo", client.config.settings.owoprefix]) +
+                "pray";
+        }
+        channel
+            .send({
+                content: `${content}`,
+            })
+            .then(() => {
+                client.global.total.pray++;
+                client.logger.info(
+                    "Farm",
+                    "Pray",
+                    `Total prayed time: ${client.global.total.pray}`,
+                );
+            });
+    } catch (err) {
+        client.logger.alert("Farm", "Pray", "Error while praying: " + err);
+    } finally {
+        setTimeout(() => {
+            pray(client, channel);
+        }, interval);
     }
-    channel
-        .send({
-            content: `${content}`,
-        })
-        .then(() => {
-            client.global.total.pray++;
-            client.logger.info(
-                "Farm",
-                "Pray",
-                `Total prayed time: ${client.global.total.pray}`,
-            );
-        });
-
-    setTimeout(() => {
-        pray(client, channel);
-    }, interval);
 }
 
 async function curse(client, channel) {
@@ -83,37 +88,43 @@ async function curse(client, channel) {
     ) {
         await client.delay(16000);
     }
-    channel.sendTyping();
-    let content;
     let interval = getrand(
         client.config.interval.pray.min,
         client.config.interval.pray.max,
     );
-    if (client.basic.commands.tomain) {
-        content =
-            commandrandomizer(["owo", client.config.settings.owoprefix]) +
-            "curse  <@" +
-            client.config.main.userid +
-            ">";
-    } else {
-        content =
-            commandrandomizer(["owo", client.config.settings.owoprefix]) +
-            "curse";
-    }
-    channel
-        .send({
-            content: `${content}`,
-        })
-        .then(() => {
-            client.global.total.curse++;
-            client.logger.info(
-                "Farm",
-                "Curse",
-                `Total prayed time: ${client.global.total.curse}`,
-            );
-        });
+    try {
+        channel.sendTyping();
+        let content;
+        
+        if (client.basic.commands.tomain) {
+            content =
+                commandrandomizer(["owo", client.config.settings.owoprefix]) +
+                "curse  <@" +
+                client.config.main.userid +
+                ">";
+        } else {
+            content =
+                commandrandomizer(["owo", client.config.settings.owoprefix]) +
+                "curse";
+        }
+        channel
+            .send({
+                content: `${content}`,
+            })
+            .then(() => {
+                client.global.total.curse++;
+                client.logger.info(
+                    "Farm",
+                    "Curse",
+                    `Total prayed time: ${client.global.total.curse}`,
+                );
+            });
 
-    setTimeout(() => {
-        curse(client, channel);
-    }, interval);
+    } catch (err) {
+        client.logger.alert("Farm", "Curse", "Error while cursing: " + err);
+    } finally {
+        setTimeout(() => {
+            curse(client, channel);
+        }, interval);
+    }
 }
