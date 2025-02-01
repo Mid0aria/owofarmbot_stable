@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.8",
-    "version_note": "I recommend re-downloading the bot to get this update without errors. WebUI now has a new look and menus & minor bugs fixed",
+    "version": "0.0.8.0.1",
+    "version_note": "Fixed a bug related to when to use the huntbot function again after huntbot has been started.",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "main.js",
     "repository": {

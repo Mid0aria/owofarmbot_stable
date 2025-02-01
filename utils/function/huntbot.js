@@ -307,63 +307,108 @@ async function triggerHB(client, channel) {
             socket.on("captcha_solution", async (solution) => {
                 let isstartedhunting = false;
                 await client.delay(1600);
-                await channel.send({
-                    content: `${commandrandomizer([
-                        "owo",
-                        client.config.settings.owoprefix,
-                    ])} ${commandrandomizer([
-                        "autohunt",
-                        "huntbot",
-                        "hb",
-                        "ah",
-                    ])} ${client.global.temp.huntbot.maxtime}h ${solution}`,
-                });
-                const regex = /(\d+)([SMHD])/g;
-                const matches = message.content.matchAll(regex);
+                await channel
+                    .send({
+                        content: `${commandrandomizer([
+                            "owo",
+                            client.config.settings.owoprefix,
+                        ])} ${commandrandomizer([
+                            "autohunt",
+                            "huntbot",
+                            "hb",
+                            "ah",
+                        ])} ${client.global.temp.huntbot.maxtime}h ${solution}`,
+                    })
+                    .then(async (msg) => {
+                        let id = msg.id;
+                        let huntbotsuccessmsg =
+                            await getHuntbotSuccessMessage();
+                        async function getHuntbotSuccessMessage() {
+                            return new Promise((resolve) => {
+                                const filter = (msg) =>
+                                    msg.content.includes("YOU SPENT") &&
+                                    msg.author.id === "408785106942164992" &&
+                                    msg.channel.id === channel.id &&
+                                    msg.id.localeCompare(id) > 0;
 
-                let milliseconds = 0;
-                //TODO burdaki regex süreyi almıyor
-                for (const match of matches) {
-                    const time = parseInt(match[1]);
-                    const unit = match[2];
+                                const listener = (msg) => {
+                                    if (filter(msg)) {
+                                        clearTimeout(timer);
+                                        client.off("messageCreate", listener);
+                                        resolve(msg);
+                                    }
+                                };
 
-                    if (unit === "S") {
-                        milliseconds += time * 1000;
-                    } else if (unit === "M") {
-                        milliseconds += time * 60 * 1000;
-                    } else if (unit === "H") {
-                        milliseconds += time * 60 * 60 * 1000;
-                    } else if (unit === "D") {
-                        milliseconds += time * 24 * 60 * 60 * 1000;
-                    }
-                }
+                                const timer = setTimeout(() => {
+                                    client.off("messageCreate", listener);
+                                    const collector =
+                                        channel.createMessageCollector({
+                                            filter,
+                                            time: 6100,
+                                        });
+                                    collector.on("collect", (msg) => {
+                                        if (filter(msg)) {
+                                            collector.stop();
+                                            resolve(msg);
+                                        }
+                                    });
+                                    collector.on("end", () => resolve(null));
+                                }, 6100);
 
-                if (milliseconds > 0) {
-                    client.global.temp.huntbot.recalltime = milliseconds + 5000;
-                    isstartedhunting = true;
-                } else {
-                    if (client.global.paused || client.global.captchadetected) {
-                        while (true) {
-                            if (
-                                !(
-                                    client.global.paused ||
-                                    client.global.captchadetected
-                                )
-                            )
-                                break;
-                            await client.delay(3000);
+                                client.on("messageCreate", listener);
+                            });
                         }
-                    }
-                    client.logger.alert(
-                        "Farm",
-                        "HuntBot",
-                        "Couldn't find valid duration format! Retry after 61 seconds.",
-                    );
-                    setTimeout(async () => {
-                        await huntbotHandler(client, channel);
-                    }, 61000);
-                    return;
-                }
+
+                        const regex = /(\d+)([SMHD])/g;
+                        const matches =
+                            huntbotsuccessmsg.content.matchAll(regex);
+                        let milliseconds = 0;
+                        for (const match of matches) {
+                            const time = parseInt(match[1]);
+                            const unit = match[2];
+                            if (unit === "S") {
+                                milliseconds += time * 1000;
+                            } else if (unit === "M") {
+                                milliseconds += time * 60 * 1000;
+                            } else if (unit === "H") {
+                                milliseconds += time * 60 * 60 * 1000;
+                            } else if (unit === "D") {
+                                milliseconds += time * 24 * 60 * 60 * 1000;
+                            }
+                        }
+
+                        if (milliseconds > 0) {
+                            client.global.temp.huntbot.recalltime =
+                                milliseconds + 5000;
+                            isstartedhunting = true;
+                        } else {
+                            if (
+                                client.global.paused ||
+                                client.global.captchadetected
+                            ) {
+                                while (true) {
+                                    if (
+                                        !(
+                                            client.global.paused ||
+                                            client.global.captchadetected
+                                        )
+                                    )
+                                        break;
+                                    await client.delay(3000);
+                                }
+                            }
+                            client.logger.alert(
+                                "Farm",
+                                "HuntBot",
+                                "Couldn't find valid duration format! Retry after 61 seconds.",
+                            );
+                            setTimeout(async () => {
+                                await huntbotHandler(client, channel);
+                            }, 61000);
+                            return;
+                        }
+                    });
+
                 if (isstartedhunting) {
                     client.global.total.huntbot++;
                     client.broadcast({
