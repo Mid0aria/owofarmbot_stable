@@ -7,7 +7,6 @@ on:
 
 permissions:
     contents: write
-    workflows: write
 
 jobs:
     format:
@@ -34,3 +33,4 @@ jobs:
               with:
                   commit_message: "Apply formatting changes"
                   branch: ${{ github.head_ref }}
+                  file_pattern: ":!**/.github/workflows/**"
