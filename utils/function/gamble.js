@@ -160,6 +160,20 @@ async function coinflip(client, channel) {
         } catch (err) {
             client.logger.alert("Farm", "Coinflip", "Error while coinfliping: " + err);
         } finally {
+            client.broadcast({
+                action: "update",
+                type: "coinflip",
+                progress: client.global.gamble.coinflip,
+                global: client.global
+            });
+            setTimeout(() => {
+                client.broadcast({
+                    action: "update",
+                    type: "cowoncywon",
+                    progress: client.global.gamble.cowoncywon,
+                    global: client.global
+                });
+            }, 1600);
             setTimeout(() => {
                 smol();
             }, interval);
@@ -302,6 +316,20 @@ function slot(client, channel) {
         } catch (err) {
             client.logger.alert("Farm", "Slot", "Error while sloting: " + err);
         } finally {
+            client.broadcast({
+                action: "update",
+                type: "slot",
+                progress: client.global.gamble.slot,
+                global: client.global
+            });
+            setTimeout(() => {
+                client.broadcast({
+                    action: "update",
+                    type: "cowoncywon",
+                    progress: client.global.gamble.cowoncywon,
+                    global: client.global
+                });
+            }, 1600);
             setTimeout(() => {
                 smol();
             }, interval);

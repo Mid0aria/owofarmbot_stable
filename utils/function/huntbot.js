@@ -308,7 +308,9 @@ async function triggerHB(client, channel) {
             }
             
             let isstartedhunting = false;
+            client.logger.info("Farm", "Huntbot", "Solving captcha...");
             const solution = await require("../huntbot_captcha/huntbotcaptcha.js")(captchaImageURL);
+            client.logger.info("Farm", "Huntbot", "Captcha solve completed. Starting huntbot...");
             await client.delay(1600);
             await channel.send({
                 content: `${commandrandomizer([

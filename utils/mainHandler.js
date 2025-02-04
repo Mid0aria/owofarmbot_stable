@@ -138,6 +138,8 @@ module.exports = async (client, message) => {
         }
         require("./function/huntbot.js")(client);
     }
+
+    if (client.config.settings.safety.autopause) require("./function/safety.js")(client);
 };
 
 async function checklist(client, channel) {

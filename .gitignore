@@ -133,5 +133,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-#config
-config.json
+# config (don't need coz i can un-stage change for config.json and no token leak)
+# config.json

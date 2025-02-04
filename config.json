@@ -110,6 +110,12 @@
             "showlogbeforeexit": false
         },
 
+        "safety": {
+          "autopause": true,
+          "pauseafter": 30,
+          "pausefor": 5
+        },
+
         "captcha": {
             "autosolve": true,
             "autosolve_thread": 1,

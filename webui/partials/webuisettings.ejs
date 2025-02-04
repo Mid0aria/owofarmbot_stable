@@ -1,70 +1,117 @@
-<div class="popup" id="webui-settings-popup">
-    <div class="popup-header">WebUI Settings</div>
-    <div class="popup-body">
-        <div class="background-option">
-            <label>Background:</label>
-            <div class="background-list">
-                <img
-                    src="./assets/image/1.jpg"
-                    alt="Background 1"
-                    onclick="selectBackground(this, './assets/image/1.jpg')"
-                    class="background-item"
-                />
-                <img
-                    src="./assets/image/2.jpg"
-                    alt="Background 2"
-                    onclick="selectBackground(this, './assets/image/2.jpg')"
-                    class="background-item"
-                />
-                <video
-                    src="./assets/video/1.mp4"
-                    alt="Background 3"
-                    onclick="selectBackground(this, './assets/video/1.mp4')"
-                    loop
-                    muted
-                    autoplay
-                    class="background-item background-video"
-                ></video>
-                <video
-                    src="./assets/video/2.mp4"
-                    alt="Background 4"
-                    onclick="selectBackground(this, './assets/video/2.mp4')"
-                    loop
-                    muted
-                    autoplay
-                    class="background-item background-video"
-                ></video>
-                <video
-                    src="./assets/video/3.mp4"
-                    alt="Background 5"
-                    onclick="selectBackground(this, './assets/video/3.mp4')"
-                    loop
-                    muted
-                    autoplay
-                    class="background-item background-video"
-                ></video>
-                <video
-                    src="./assets/video/4.mp4"
-                    alt="Background 6"
-                    onclick="selectBackground(this, './assets/video/4.mp4')"
-                    loop
-                    muted
-                    autoplay
-                    class="background-item background-video"
-                ></video>
-                <video
-                    src="./assets/video/5.mp4"
-                    alt="Background 7"
-                    onclick="selectBackground(this, './assets/video/5.mp4')"
-                    loop
-                    muted
-                    autoplay
-                    class="background-item background-video"
-                ></video>
+<div class="webui-settings" id="webui-settings" style="display: none">
+    <!-- Main Content -->
+    <div class="settings-content">
+        <h2 class="text-container">WebUI Settings</h2>
+
+        <div class="settings-section" id="textbg">
+            <h3>Text Background Settings</h3>
+
+            <div>
+                <label class="form-check-label">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="text-background-toggle"
+                        onchange="toggleTextBackground()">
+                    Enable Text Background
+                </label>
+            </div>
+
+            <div>
+                <label>
+                    <input
+                        type="color"
+                        id="text-background-color"
+                        onchange="changeTextBackgroundColor(this.value)">
+                    Select Text Background Color
+                </label>
+            </div>
+
+            <div>
+                <label class="form-check-label">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="semi-trans-toggle"
+                        onchange="toggleSemiTransparent()">
+                    Semi-Transparent Mode
+                </label>
+            </div>
+
+            <div>
+                <label class="form-check-label">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="blur-bg-toggle"
+                        onchange="toggleBlurTextBackground()">
+                    Blur Text Background
+                </label>
+            </div>
+
+            <label>
+                Blur Intensity: <span id="blur-value">8px</span>
+                <input type="range" id="blur-intensity-slider" min="0" max="16" step="1" value="8"
+                    oninput="updateBlurIntensity(this.value)">
+            </label>
+        </div>
+
+        <div class="settings-section" id="misc">
+            <h3>Misc.</h3>
+
+            <div id="title-setting">
+                <h4>Page Title Settings</h4>
+                <div>
+                    <label class="form-check-label">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
+                            id="title-animation-toggle"
+                            onchange="toggleTitleAnimation()">
+                        Enable Title Animation
+                    </label>
+                </div>
+
+                <div>
+                    <label class="form-label">Custom page title</label>
+                    <input type="text" class="form-control" id="custom-title" value=""/>
+                    <div>
+                        <button id="save-title-btn" class="btn btn-primary">Save Custom Title</button>
+                        <button id="reset-title-btn" class="btn btn-danger">Reset Default Title</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="popup-footer">
-        <button class="btn btn-secondary" onclick="closePopup()">Close</button>
+
+        <div class="settings-section" id="background">
+            <h3>Background Selection</h3>
+            <div class="background-section">
+                <h4>Images (Put your image in ./webui/background/image)</h4>
+                <div class="background-list">
+                    <% if (images.length> 0) { %>
+                        <% images.forEach(image=> { %>
+                            <img src="<%= image %>" alt="Background" onclick="selectBackground(this, '<%= image %>')"
+                                class="background-item" />
+                            <% }) %>
+                                <% } else { %>
+                                    <p>No images available.</p>
+                                    <% } %>
+                </div>
+            </div>
+
+            <div class="background-section">
+                <h4>Videos (Put your video in ./webui/background/video - support .mp4)</h4>
+                <div class="background-list">
+                    <% if (videos.length> 0) { %>
+                        <% videos.forEach(video=> { %>
+                            <video src="<%= video %>" onclick="selectBackground(this, '<%= video %>')" loop muted
+                                autoplay class="background-item background-video"></video>
+                            <% }) %>
+                                <% } else { %>
+                                    <p>No videos available.</p>
+                                    <% } %>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

@@ -99,6 +99,8 @@ function showHome(menuType) {
             "none";
         document.getElementById("general-settings-content").style.display =
             "none";
+        document.getElementById("webui-settings").style.display = "none";
+        document.getElementById("log-section").style.display = "none";
     } else if (menuType === "extra") {
         document.getElementById("home-content-extra").style.display = "block";
         document.getElementById("settings-content-extra").style.display =
@@ -107,6 +109,8 @@ function showHome(menuType) {
         document.getElementById("settings-content").style.display = "none";
         document.getElementById("general-settings-content").style.display =
             "none";
+        document.getElementById("webui-settings").style.display = "none";
+        document.getElementById("log-section").style.display = "none";
     }
 }
 
@@ -128,6 +132,8 @@ async function showSettings(menuType) {
             "none";
         document.getElementById("general-settings-content").style.display =
             "none";
+        document.getElementById("webui-settings").style.display = "none";
+        document.getElementById("log-section").style.display = "none";
     } else if (menuType === "extra") {
         document.getElementById("settings-content-extra").style.display =
             "block";
@@ -136,6 +142,8 @@ async function showSettings(menuType) {
         document.getElementById("home-content").style.display = "none";
         document.getElementById("general-settings-content").style.display =
             "none";
+        document.getElementById("webui-settings").style.display = "none";
+        document.getElementById("log-section").style.display = "none";
     } else if (menuType === "general") {
         document.getElementById("general-settings-content").style.display =
             "block";
@@ -144,15 +152,22 @@ async function showSettings(menuType) {
         document.getElementById("home-content-extra").style.display = "none";
         document.getElementById("settings-content").style.display = "none";
         document.getElementById("home-content").style.display = "none";
+        document.getElementById("webui-settings").style.display = "none";
+        document.getElementById("log-section").style.display = "none";
     }
 }
 
-function showPopup() {
-    document.getElementById("webui-settings-popup").style.display = "block";
-}
-
-function closePopup() {
-    document.getElementById("webui-settings-popup").style.display = "none";
+function openWebUISettings() {
+    activateMenu("webui-settings-link");
+    document.getElementById("webui-settings").style.display = "block";
+    document.getElementById("home-content").style.display = "none";
+    document.getElementById("home-content-extra").style.display = "none";
+    document.getElementById("settings-content").style.display = "none";
+    document.getElementById("settings-content-extra").style.display =
+        "none";
+    document.getElementById("general-settings-content").style.display =
+        "none";
+    document.getElementById("log-section").style.display = "none";
 }
 
 function showrebootalertPopup() {
@@ -167,25 +182,33 @@ function animateTitle(text) {
     let textToAnimate = text;
     let currentPosition = 0;
     let directionForward = true;
-
     function updateTitle() {
-        if (currentPosition === textToAnimate.length) {
-            directionForward = false;
-        } else if (currentPosition === 0) {
-            directionForward = true;
+        try {
+            const enableAnimate = localStorage.getItem("titleAnimation") === "true";
+            if (!enableAnimate) {
+                document.title = text;
+                return;
+            }
+            if (currentPosition === textToAnimate.length) {
+                directionForward = false;
+            } else if (currentPosition === 0) {
+                directionForward = true;
+            }
+
+            let displayedText = directionForward
+                ? textToAnimate.slice(0, currentPosition + 1)
+                : textToAnimate.slice(0, currentPosition - 1);
+
+            document.title = displayedText;
+
+            currentPosition = directionForward
+                ? currentPosition + 1
+                : currentPosition - 1;
+
+            setTimeout(updateTitle, 380);
+        } catch (e) {
+            console.log(e);
         }
-
-        let displayedText = directionForward
-            ? textToAnimate.slice(0, currentPosition + 1)
-            : textToAnimate.slice(0, currentPosition - 1);
-
-        document.title = displayedText;
-
-        currentPosition = directionForward
-            ? currentPosition + 1
-            : currentPosition - 1;
-
-        setTimeout(updateTitle, 380);
     }
 
     updateTitle();
@@ -193,7 +216,7 @@ function animateTitle(text) {
 
 function activateMenu(linkId) {
     const menuLinks = document.querySelectorAll(
-        "#main-menu a, #extra-menu a, #general-menu a",
+        "#main-menu a, #extra-menu a, #general-menu a, #logging a",
     );
     menuLinks.forEach((item) => {
         item.classList.remove("active");
@@ -225,4 +248,17 @@ function closeNotification(notification) {
     setTimeout(() => {
         notification.remove();
     }, 500);
+}
+
+function showlog() {
+    activateMenu("logging-link");
+    document.getElementById("log-section").style.display = "block";
+    document.getElementById("webui-settings").style.display = "none";
+    document.getElementById("home-content").style.display = "none";
+    document.getElementById("home-content-extra").style.display = "none";
+    document.getElementById("settings-content").style.display = "none";
+    document.getElementById("settings-content-extra").style.display =
+        "none";
+    document.getElementById("general-settings-content").style.display =
+        "none";
 }

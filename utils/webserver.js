@@ -42,6 +42,13 @@ function startWebSocketServer(client, extraclient) {
                 }),
             );
         }
+        ws.send(
+            JSON.stringify({
+                action: "connectinfo",
+                type: "oldlog",
+                log: client.logger.getSimpleLog(),
+            }),
+        );
 
         websocketclientsarray.push(ws);
 

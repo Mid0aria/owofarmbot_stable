@@ -23,6 +23,7 @@ const fs = require("fs");
 
 let reallog = [],
     fulllog = [],
+    simplifylog = [],
     loggermaincl,
     loggerextrac;
 
@@ -84,6 +85,14 @@ module.exports = (client) => {
                 console.error("Error writing to log file", err);
             }
         });
+        simplifylog.push(localLogMessage);
+
+        if (process.send) {
+            process.send({
+                type: 'log',
+                message: localLogMessage
+            });
+        }
     }
 
     function showlog(reallog) {
@@ -203,9 +212,14 @@ module.exports = (client) => {
         }
     }
 
+    function getSimpleLog() {
+        return simplifylog;
+    }
+
     return {
         info,
         warn,
         alert,
+        getSimpleLog,
     };
 };
