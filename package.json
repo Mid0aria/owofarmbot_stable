@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.9",
-    "version_note": "Multiple changes to bot and WebUI",
+    "version": "0.0.9.1",
+    "version_note": "Multiple changes to bot and WebUI. Hotfix: node-notifier cause \"TypeError: handle.setSimultaneousAccepts is not a function\" error",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "main.js",
     "repository": {
