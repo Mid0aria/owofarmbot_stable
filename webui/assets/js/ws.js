@@ -200,14 +200,14 @@ function connectWebSocket() {
                 if (data.type == "slot") {
                     document.getElementById("slot-value").innerHTML =
                         `${data.progress}`;
+                    document.getElementById("cowoncywon-value").innerHTML =
+                        `${data.cow}`;
                 }
                 if (data.type == "coinflip") {
                     document.getElementById("coinflip-value").innerHTML =
                         `${data.progress}`;
-                }
-                if (data.type == "cowoncywon") {
                     document.getElementById("cowoncywon-value").innerHTML =
-                        `${data.progress}`;
+                        `${data.cow}`;
                 }
             }
         }
@@ -258,14 +258,14 @@ function connectWebSocket() {
                 if (data.type == "slot") {
                     document.getElementById("slot-value-extra").innerHTML =
                         `${data.progress}`;
+                    document.getElementById("cowoncywon-value-extra").innerHTML =
+                        `${data.cow}`;
                 }
                 if (data.type == "coinflip") {
                     document.getElementById("coinflip-value-extra").innerHTML =
                         `${data.progress}`;
-                }
-                if (data.type == "cowoncywon") {
                     document.getElementById("cowoncywon-value-extra").innerHTML =
-                        `${data.progress}`;
+                        `${data.cow}`;
                 }
             }
         }

@@ -164,16 +164,9 @@ async function coinflip(client, channel) {
                 action: "update",
                 type: "coinflip",
                 progress: client.global.gamble.coinflip,
+                cow: client.global.gamble.cowoncywon,
                 global: client.global
             });
-            setTimeout(() => {
-                client.broadcast({
-                    action: "update",
-                    type: "cowoncywon",
-                    progress: client.global.gamble.cowoncywon,
-                    global: client.global
-                });
-            }, 1600);
             setTimeout(() => {
                 smol();
             }, interval);
@@ -320,16 +313,9 @@ function slot(client, channel) {
                 action: "update",
                 type: "slot",
                 progress: client.global.gamble.slot,
+                cow: client.global.gamble.cowoncywon,
                 global: client.global
             });
-            setTimeout(() => {
-                client.broadcast({
-                    action: "update",
-                    type: "cowoncywon",
-                    progress: client.global.gamble.cowoncywon,
-                    global: client.global
-                });
-            }, 1600);
             setTimeout(() => {
                 smol();
             }, interval);
