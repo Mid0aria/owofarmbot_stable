@@ -30,7 +30,7 @@
         "start": "node main.js",
         "run": "node main.js",
         "setup": "npm i",
-        "format": "prettier -w ."
+        "format": "prettier --write ."
     },
     "dependencies": {
         "axios": "^1.7.9",
