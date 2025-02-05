@@ -34,7 +34,6 @@
     },
     "dependencies": {
         "axios": "^1.7.9",
-        "canvas": "^3.1.0",
         "chalk": "^4.1.2",
         "discord.js-selfbot-v13": "^3.5.1",
         "ejs": "^3.1.10",

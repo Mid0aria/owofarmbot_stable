@@ -403,18 +403,6 @@ body {
 }
 
 /* Text background */
-.text-background {
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 4px 8px;
-    border-radius: 4px;
-    display: inline-block;
-}
-
-.text-background.block {
-    display: block;
-    max-width: fit-content;
-}
-
 .toggle-container,
 .color-picker-container {
     margin: 10px 0;
@@ -431,10 +419,6 @@ body {
 #text-background-toggle,
 #text-background-color {
     cursor: pointer;
-}
-
-[data-no-textbg] {
-    background: none;
 }
 
 .text-container {
