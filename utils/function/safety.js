@@ -16,8 +16,10 @@ module.exports = async (client) => {
                 interval = null;
 
                 setTimeout(() => {
-                    client.global.paused = false;
-                    client.logger.warn("Bot", "Safety", "Resuming after a safety pause.");
+                    if (!client.global.captchadetected) {
+                        client.global.paused = false;
+                        client.logger.warn("Bot", "Safety", "Resuming after a safety pause.");
+                    }
                     startTime = Date.now();
                     startSafetyCheck();
                 }, pauseDuration);
