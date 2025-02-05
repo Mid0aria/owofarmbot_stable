@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.8(BETA) WEBUI WITH CAPTCHA SOLVER ✒️</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.9(BETA) WEBUI WITH CAPTCHA SOLVER ✒️</h1>
 <h2 align ="center">The best owo farm bot until i do better. coded with the great ideas and love of a Turkish engineer, mid0hub team and users.<br> 💖 Thank you to everyone who contributed 💖</h2>
 <p align="center">
 
@@ -252,8 +252,8 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
 
         "safety": {
             "autopause": false, / emable auto pause the bot after a while
-            "afterminute": 30, / how long the bot will run until getting paused (in minutes)
-            "forminute": 5 / how long the bot will pause (in minutes)
+            "pauseafter": 30, / how long the bot will run until getting paused (in minutes)
+            "pausefor": 5 / how long the bot will pause (in minutes)
         },
 
         "captcha": {
