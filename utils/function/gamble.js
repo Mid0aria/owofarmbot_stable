@@ -99,7 +99,10 @@ async function coinflip(client, channel) {
                         );
                         currentBet = isWin
                             ? defaultBet
-                            : Math.min(Math.round(currentBet * multiplier), maxBet);
+                            : Math.min(
+                                  Math.round(currentBet * multiplier),
+                                  maxBet,
+                              );
 
                         client.off("messageUpdate", updateCFListener);
                         clearTimeout(doublecheck);
@@ -132,9 +135,9 @@ async function coinflip(client, channel) {
                             currentBet = isWin
                                 ? defaultBet
                                 : Math.min(
-                                    Math.round(currentBet * multiplier),
-                                    maxBet,
-                                );
+                                      Math.round(currentBet * multiplier),
+                                      maxBet,
+                                  );
                         }
                     });
 
@@ -158,14 +161,18 @@ async function coinflip(client, channel) {
                 client.on("messageUpdate", updateCFListener);
             });
         } catch (err) {
-            client.logger.alert("Farm", "Coinflip", "Error while coinfliping: " + err);
+            client.logger.alert(
+                "Farm",
+                "Coinflip",
+                "Error while coinfliping: " + err,
+            );
         } finally {
             client.broadcast({
                 action: "update",
                 type: "coinflip",
                 progress: client.global.gamble.coinflip,
                 cow: client.global.gamble.cowoncywon,
-                global: client.global
+                global: client.global,
             });
             setTimeout(() => {
                 smol();
@@ -224,7 +231,8 @@ function slot(client, channel) {
                     const isWin =
                         newMsg.content.includes("and won") &&
                         !newMsg.content.includes("nothing...");
-                    const isLoss = newMsg.content.includes("and won nothing...");
+                    const isLoss =
+                        newMsg.content.includes("and won nothing...");
 
                     if (isWin || isLoss) {
                         if (isWin) {
@@ -294,7 +302,11 @@ function slot(client, channel) {
                     collector.on("end", (collected) => {
                         if (collected.size == 0) {
                             client.global.gamble.slot--;
-                            client.logger.info("Farm", "Slot", "Failed to gamble!");
+                            client.logger.info(
+                                "Farm",
+                                "Slot",
+                                "Failed to gamble!",
+                            );
                         }
                     });
                 };
@@ -314,7 +326,7 @@ function slot(client, channel) {
                 type: "slot",
                 progress: client.global.gamble.slot,
                 cow: client.global.gamble.cowoncywon,
-                global: client.global
+                global: client.global,
             });
             setTimeout(() => {
                 smol();

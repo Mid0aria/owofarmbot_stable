@@ -26,7 +26,11 @@
 module.exports = async (client) => {
     let channel;
     if (client.basic.huntbotchannelid.length <= 0) {
-        client.logger.alert("Bot", "Config", "Huntbot channelid is blank, using main channelid...");
+        client.logger.alert(
+            "Bot",
+            "Config",
+            "Huntbot channelid is blank, using main channelid...",
+        );
         channel = client.channels.cache.get(client.basic.commandschannelid);
     } else channel = client.channels.cache.get(client.basic.huntbotchannelid);
     if (client.config.settings.owoprefix.length <= 0) {
@@ -306,11 +310,18 @@ async function triggerHB(client, channel) {
                 }, 601000);
                 return;
             }
-            
+
             let isstartedhunting = false;
             client.logger.info("Farm", "Huntbot", "Solving captcha...");
-            const solution = await require("../huntbot_captcha/huntbotcaptcha.js")(captchaImageURL);
-            client.logger.info("Farm", "Huntbot", "Captcha solve completed. Starting huntbot...");
+            const solution =
+                await require("../huntbot_captcha/huntbotcaptcha.js")(
+                    captchaImageURL,
+                );
+            client.logger.info(
+                "Farm",
+                "Huntbot",
+                "Captcha solve completed. Starting huntbot...",
+            );
             await client.delay(1600);
             await channel
                 .send({
@@ -326,8 +337,7 @@ async function triggerHB(client, channel) {
                 })
                 .then(async (msg) => {
                     let id = msg.id;
-                    let huntbotsuccessmsg =
-                        await getHuntbotSuccessMessage();
+                    let huntbotsuccessmsg = await getHuntbotSuccessMessage();
                     async function getHuntbotSuccessMessage() {
                         return new Promise((resolve) => {
                             const filter = (msg) =>
@@ -362,8 +372,7 @@ async function triggerHB(client, channel) {
                     }
 
                     const regex = /(\d+)([SMHD])/g;
-                    const matches =
-                        huntbotsuccessmsg.content.matchAll(regex);
+                    const matches = huntbotsuccessmsg.content.matchAll(regex);
                     let milliseconds = 0;
                     for (const match of matches) {
                         const time = parseInt(match[1]);

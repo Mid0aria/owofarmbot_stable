@@ -47,22 +47,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-        const backgroundElements =
-            document.querySelectorAll(".background-item");
-        backgroundElements.forEach((element) => {
-            if (element.src === savedBackground) {
-                element.classList.add("selected");
-            } else {
-                element.classList.remove("selected");
-            }
-        });
+    const backgroundElements = document.querySelectorAll(".background-item");
+    backgroundElements.forEach((element) => {
+        if (element.src === savedBackground) {
+            element.classList.add("selected");
+        } else {
+            element.classList.remove("selected");
+        }
+    });
 
-    const textBackgroundEnabled = localStorage.getItem("textBackground") === "true";
-    const savedColor = localStorage.getItem("textBackgroundColor") || "rgba(0, 0, 0, 0.6)";
+    const textBackgroundEnabled =
+        localStorage.getItem("textBackground") === "true";
+    const savedColor =
+        localStorage.getItem("textBackgroundColor") || "rgba(0, 0, 0, 0.6)";
     const isSemiTrans = localStorage.getItem("semiTransparent") === "true";
     const isBlur = localStorage.getItem("blurTextBackground") === "true";
 
-    document.getElementById("text-background-toggle").checked = textBackgroundEnabled;
+    document.getElementById("text-background-toggle").checked =
+        textBackgroundEnabled;
     document.getElementById("semi-trans-toggle").checked = isSemiTrans;
     document.getElementById("blur-bg-toggle").checked = isBlur;
     document.getElementById("text-background-color").value = savedColor;
@@ -84,13 +86,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-document.getElementById('save-title-btn').addEventListener('click', () => {
+document.getElementById("save-title-btn").addEventListener("click", () => {
     let customTitle = document.getElementById("custom-title").value;
     if (customTitle != "") localStorage.setItem("customPageTitle", customTitle);
     changeTitle();
 });
 
-document.getElementById('reset-title-btn').addEventListener('click', () => {
+document.getElementById("reset-title-btn").addEventListener("click", () => {
     document.getElementById("custom-title").value = "❤️ OwO Farm Bot Stable ❤️";
     localStorage.setItem("customPageTitle", "❤️ OwO Farm Bot Stable ❤️");
     changeTitle();
@@ -143,7 +145,6 @@ function selectBackground(element, src) {
     localStorage.setItem("selectedBackground", src);
 }
 
-
 function toggleTextBackground() {
     const isChecked = document.getElementById("text-background-toggle").checked;
     localStorage.setItem("textBackground", isChecked ? "true" : "false");
@@ -182,15 +183,20 @@ function applyTextBackground() {
     const isSemiTrans = localStorage.getItem("semiTransparent") === "true";
     const blurIntensity = localStorage.getItem("blurIntensity") || "8px";
 
-    let color = localStorage.getItem("textBackgroundColor") || "rgba(0, 0, 0, 0.6)";
+    let color =
+        localStorage.getItem("textBackgroundColor") || "rgba(0, 0, 0, 0.6)";
     if (isSemiTrans) {
         color = convertToSemiTransparent(color);
     }
 
-    document.querySelectorAll(".text-container").forEach(container => {
+    document.querySelectorAll(".text-container").forEach((container) => {
         if (isChecked) {
-            container.style.backgroundColor = isBlur ? "rgba(0, 0, 0, 0.3)" : color;
-            container.style.backdropFilter = isBlur ? `blur(${blurIntensity})` : "none";
+            container.style.backgroundColor = isBlur
+                ? "rgba(0, 0, 0, 0.3)"
+                : color;
+            container.style.backdropFilter = isBlur
+                ? `blur(${blurIntensity})`
+                : "none";
             container.classList.toggle("blur", isBlur);
         } else {
             container.style.backgroundColor = "transparent";
@@ -199,13 +205,16 @@ function applyTextBackground() {
         }
     });
 
-    document.documentElement.style.setProperty("--blur-intensity", blurIntensity);
+    document.documentElement.style.setProperty(
+        "--blur-intensity",
+        blurIntensity,
+    );
     document.documentElement.style.setProperty("--text-bg-color", color);
 }
 
 function removeTextBackground() {
     const elements = document.querySelectorAll(".text-container");
-    elements.forEach(el => {
+    elements.forEach((el) => {
         el.style.backgroundColor = "transparent";
         el.style.backdropFilter = "none";
         el.classList.remove("blur");
@@ -249,7 +258,8 @@ function toggleTitleAnimation() {
 function changeTitle() {
     const customTitle = localStorage.getItem("customPageTitle");
     let title;
-    if (customTitle == "" || customTitle == null) title = "❤️ OwO Farm Bot Stable ❤️";
+    if (customTitle == "" || customTitle == null)
+        title = "❤️ OwO Farm Bot Stable ❤️";
     else title = customTitle;
 
     animateTitle(title);

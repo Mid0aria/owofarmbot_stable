@@ -53,7 +53,7 @@ async function hunt(client, channel) {
         client.config.interval.hunt.min,
         client.config.interval.hunt.max,
     );
-    
+
     try {
         channel.sendTyping();
         if (client.global.battle) await client.delay(1500);
@@ -101,10 +101,11 @@ async function hunt(client, channel) {
 
                             const timer = setTimeout(() => {
                                 client.off("messageCreate", listener);
-                                const collector = channel.createMessageCollector({
-                                    filter,
-                                    time: 6100,
-                                });
+                                const collector =
+                                    channel.createMessageCollector({
+                                        filter,
+                                        time: 6100,
+                                    });
                                 collector.on("collect", (msg) => {
                                     if (filter(msg)) {
                                         collector.stop();
@@ -206,7 +207,7 @@ async function battle(client, channel) {
         channel.sendTyping();
         if (client.global.hunt) await client.delay(1500);
         client.global.battle = true;
-        
+
         await channel
             .send({
                 content: `${commandrandomizer([

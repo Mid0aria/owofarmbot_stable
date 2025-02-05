@@ -91,14 +91,19 @@ if (cluster.isMaster) {
     app.set("views", path.join(__dirname, "webui"));
     app.use("/assets", express.static(path.join(__dirname, "webui", "assets")));
 
-    app.use("/background", express.static(path.join(__dirname, "webui", "background")));
+    app.use(
+        "/background",
+        express.static(path.join(__dirname, "webui", "background")),
+    );
 
     const getFiles = async (dir, extensions) => {
         try {
             const files = await fs.readdir(dir);
             return files
-                .filter(file => extensions.includes(path.extname(file).toLowerCase()))
-                .map(file => `/background/${path.basename(dir)}/${file}`); // Fix URL Path
+                .filter((file) =>
+                    extensions.includes(path.extname(file).toLowerCase()),
+                )
+                .map((file) => `/background/${path.basename(dir)}/${file}`); // Fix URL Path
         } catch (err) {
             console.error(`Error reading ${dir}:`, err);
             return [];
@@ -106,23 +111,29 @@ if (cluster.isMaster) {
     };
 
     app.get("/", async (req, res) => {
-        const images = await getFiles(path.join(__dirname, "webui", "background", "image"), [".jpg", ".png", ".jpeg", ".webp"]);
-        const videos = await getFiles(path.join(__dirname, "webui", "background", "video"), [".mp4"]);
+        const images = await getFiles(
+            path.join(__dirname, "webui", "background", "image"),
+            [".jpg", ".png", ".jpeg", ".webp"],
+        );
+        const videos = await getFiles(
+            path.join(__dirname, "webui", "background", "video"),
+            [".mp4"],
+        );
 
         res.render("index", { images, videos });
     });
 
-    app.get('/logs', (req, res) => {
-        res.setHeader('Content-Type', 'text/event-stream');
-        res.setHeader('Cache-Control', 'no-cache');
-        res.setHeader('Connection', 'keep-alive');
+    app.get("/logs", (req, res) => {
+        res.setHeader("Content-Type", "text/event-stream");
+        res.setHeader("Cache-Control", "no-cache");
+        res.setHeader("Connection", "keep-alive");
         res.flushHeaders();
-        
-        cluster.on('message', (worker, message) => {
-            if (message.type == 'log') {
+
+        cluster.on("message", (worker, message) => {
+            if (message.type == "log") {
                 res.write(`data: ${JSON.stringify(message.message)}\n\n`);
             }
-        })
+        });
     });
 
     app.get("/api/get-config", async (req, res) => {
@@ -231,9 +242,7 @@ if (cluster.isMaster) {
         }
     });
 
-    app.listen(config.socket.expressport, () => {
-
-    });
+    app.listen(config.socket.expressport, () => {});
 
     cluster.fork();
 

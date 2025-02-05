@@ -99,7 +99,8 @@ module.exports = async (client, message) => {
              * Desktop Notifications
              */
             if (
-                (!client.config.settings.captcha.autosolve || client.config.settings.captcha.alerttype.desktop.force) &&
+                (!client.config.settings.captcha.autosolve ||
+                    client.config.settings.captcha.alerttype.desktop.force) &&
                 !client.global.istermux &&
                 client.config.settings.captcha.alerttype.desktop.notification
             ) {
@@ -113,7 +114,8 @@ module.exports = async (client, message) => {
                 });
             }
             if (
-                (!client.config.settings.captcha.autosolve || client.config.settings.captcha.alerttype.desktop.force) &&
+                (!client.config.settings.captcha.autosolve ||
+                    client.config.settings.captcha.alerttype.desktop.force) &&
                 !client.global.istermux &&
                 client.config.settings.captcha.alerttype.desktop.prompt
             ) {

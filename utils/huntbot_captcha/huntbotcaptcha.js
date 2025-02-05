@@ -21,8 +21,13 @@ module.exports = async (captchaUrl) => {
     });
     const largeImage = sharp(data);
     const { width, height } = await largeImage.metadata();
-    
-    return matchLetters(await largeImage.raw().toBuffer(), width, height, checks);
+
+    return matchLetters(
+        await largeImage.raw().toBuffer(),
+        width,
+        height,
+        checks,
+    );
 };
 
 function getAllImagePaths(dir) {
@@ -48,8 +53,24 @@ async function matchLetters(largeData, largeW, largeH, checks) {
 
         for (let y = 0; y <= largeH - smallH; y++) {
             for (let x = 0; x <= largeW - smallW; x++) {
-                if (compareImages(largeData, largeW, smallData, smallW, smallH, x, y)) {
-                    if (!matches.some(m => Math.abs(m.x - x) < smallW && Math.abs(m.y - y) < smallH)) {
+                if (
+                    compareImages(
+                        largeData,
+                        largeW,
+                        smallData,
+                        smallW,
+                        smallH,
+                        x,
+                        y,
+                    )
+                ) {
+                    if (
+                        !matches.some(
+                            (m) =>
+                                Math.abs(m.x - x) < smallW &&
+                                Math.abs(m.y - y) < smallH,
+                        )
+                    ) {
                         matches.push({ x, y, letter });
                     }
                 }
@@ -58,20 +79,29 @@ async function matchLetters(largeData, largeW, largeH, checks) {
     }
 
     matches.sort((a, b) => a.x - b.x);
-    return matches.map(m => m.letter).join("");
+    return matches.map((m) => m.letter).join("");
 }
 
-function compareImages(largeData, largeW, smallData, smallW, smallH, startX, startY) {
+function compareImages(
+    largeData,
+    largeW,
+    smallData,
+    smallW,
+    smallH,
+    startX,
+    startY,
+) {
     for (let y = 0; y < smallH; y++) {
         for (let x = 0; x < smallW; x++) {
             const largeIdx = ((startY + y) * largeW + (startX + x)) * 4;
             const smallIdx = (y * smallW + x) * 4;
 
-            if (smallData[smallIdx + 3] > 0 && (
-                smallData[smallIdx] !== largeData[largeIdx] ||
-                smallData[smallIdx + 1] !== largeData[largeIdx + 1] ||
-                smallData[smallIdx + 2] !== largeData[largeIdx + 2]
-            )) {
+            if (
+                smallData[smallIdx + 3] > 0 &&
+                (smallData[smallIdx] !== largeData[largeIdx] ||
+                    smallData[smallIdx + 1] !== largeData[largeIdx + 1] ||
+                    smallData[smallIdx + 2] !== largeData[largeIdx + 2])
+            ) {
                 return false;
             }
         }

@@ -29,16 +29,16 @@ function connectWebSocket() {
 
         //this shii cannot work inside if (data.action == "connectinfo") {
         if (data.type == "oldlog") {
-                const t = data.log;
-                const logContainer = document.getElementById("logContainer");
-                for (const log of t) {
-                    const raw = JSON.stringify(log);
-                    const logMessage = JSON.parse(raw);
-                    const logEntry = document.createElement("div");
-                    logEntry.textContent = logMessage;
-                    logContainer.appendChild(logEntry);
-                };
+            const t = data.log;
+            const logContainer = document.getElementById("logContainer");
+            for (const log of t) {
+                const raw = JSON.stringify(log);
+                const logMessage = JSON.parse(raw);
+                const logEntry = document.createElement("div");
+                logEntry.textContent = logMessage;
+                logContainer.appendChild(logEntry);
             }
+        }
 
         if (data.action == "connectinfo") {
             if (data.type == "uptime") {
@@ -58,7 +58,7 @@ function connectWebSocket() {
                     const logEntry = document.createElement("div");
                     logEntry.textContent = logMessage;
                     logContainer.appendChild(logEntry);
-                };
+                }
             }
             if (data.global.type == "Main" && data.type == "alldata") {
                 document.getElementById("usernick").textContent =
@@ -96,13 +96,13 @@ function connectWebSocket() {
 
                 document.getElementById("solvedcaptcha-value").innerHTML =
                     `${data.global.total.solvedcaptcha}`;
-                
+
                 document.getElementById("slot-value").innerHTML =
                     `${data.global.gamble.slot}`;
-                
+
                 document.getElementById("coinflip-value").innerHTML =
                     `${data.global.gamble.coinflip}`;
-                
+
                 document.getElementById("cowoncywon-value").innerHTML =
                     `${data.global.gamble.cowoncywon}`;
             }
@@ -142,13 +142,13 @@ function connectWebSocket() {
 
                 document.getElementById("solvedcaptcha-value-extra").innerHTML =
                     `${data.global.total.solvedcaptcha}`;
-                
+
                 document.getElementById("slot-value-extra").innerHTML =
                     `${data.global.gamble.slot}`;
-                
+
                 document.getElementById("coinflip-value-extra").innerHTML =
                     `${data.global.gamble.coinflip}`;
-                
+
                 document.getElementById("cowoncywon-value-extra").innerHTML =
                     `${data.global.gamble.cowoncywon}`;
             }
@@ -258,18 +258,19 @@ function connectWebSocket() {
                 if (data.type == "slot") {
                     document.getElementById("slot-value-extra").innerHTML =
                         `${data.progress}`;
-                    document.getElementById("cowoncywon-value-extra").innerHTML =
-                        `${data.cow}`;
+                    document.getElementById(
+                        "cowoncywon-value-extra",
+                    ).innerHTML = `${data.cow}`;
                 }
                 if (data.type == "coinflip") {
                     document.getElementById("coinflip-value-extra").innerHTML =
                         `${data.progress}`;
-                    document.getElementById("cowoncywon-value-extra").innerHTML =
-                        `${data.cow}`;
+                    document.getElementById(
+                        "cowoncywon-value-extra",
+                    ).innerHTML = `${data.cow}`;
                 }
             }
         }
-        
     };
 
     socket.onerror = function (error) {

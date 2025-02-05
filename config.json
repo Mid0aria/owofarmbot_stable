@@ -111,9 +111,9 @@
         },
 
         "safety": {
-          "autopause": true,
-          "pauseafter": 30,
-          "pausefor": 5
+            "autopause": true,
+            "pauseafter": 30,
+            "pausefor": 5
         },
 
         "captcha": {

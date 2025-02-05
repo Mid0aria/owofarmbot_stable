@@ -78,8 +78,21 @@ module.exports = (client) => {
         showlog(reallog);
 
         const localLogMessage =
-            new Date().toLocaleTimeString() + " " + (color == client.chalk.green ? "[I]" : client.chalk.yellow ? "[W]" : "[E]") + " " +
-                type + " >> " + client.global.type + " > " + module + " > " + result;
+            new Date().toLocaleTimeString() +
+            " " +
+            (color == client.chalk.green
+                ? "[I]"
+                : client.chalk.yellow
+                  ? "[W]"
+                  : "[E]") +
+            " " +
+            type +
+            " >> " +
+            client.global.type +
+            " > " +
+            module +
+            " > " +
+            result;
         fs.appendFile(logFileName, localLogMessage + "\n", (err) => {
             if (err) {
                 console.error("Error writing to log file", err);
@@ -89,8 +102,8 @@ module.exports = (client) => {
 
         if (process.send) {
             process.send({
-                type: 'log',
-                message: localLogMessage
+                type: "log",
+                message: localLogMessage,
             });
         }
     }

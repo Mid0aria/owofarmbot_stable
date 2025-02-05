@@ -112,7 +112,9 @@ async function questHandler(client, channel, mainSender, extraSender) {
                             );
                             client.off("messageCreate", listener);
                             const result = (message) =>
-                                message.embeds[0].author.name.includes("Quest Log");
+                                message.embeds[0].author.name.includes(
+                                    "Quest Log",
+                                );
                             const collector = channel.createMessageCollector({
                                 result,
                                 time: 16000,
@@ -183,7 +185,10 @@ async function questHandler(client, channel, mainSender, extraSender) {
                         /Progress:\s*\[(\d+)\/(\d+)\]/,
                     );
                     const [progress1, progress2] = progressGroup
-                        ? [parseInt(progressGroup[1]), parseInt(progressGroup[2])]
+                        ? [
+                              parseInt(progressGroup[1]),
+                              parseInt(progressGroup[2]),
+                          ]
                         : [0, 0];
 
                     const isLocked = line.includes("🔒 Locked");
@@ -200,7 +205,11 @@ async function questHandler(client, channel, mainSender, extraSender) {
                 await client.delay(1600);
 
                 if (questcontent.includes("You finished all of your quests!")) {
-                    client.logger.info("Farm", "Quest", "All quests completed!");
+                    client.logger.info(
+                        "Farm",
+                        "Quest",
+                        "All quests completed!",
+                    );
                     client.global.quest.title = "All quests completed!";
                     client.global.quest.reward = "";
                     client.global.quest.progress = "";
@@ -215,7 +224,8 @@ async function questHandler(client, channel, mainSender, extraSender) {
                                     break;
                                 case quest.title.includes("Gamble"):
                                     if (
-                                        !client.basic.commands.gamble.coinflip &&
+                                        !client.basic.commands.gamble
+                                            .coinflip &&
                                         !client.basic.commands.gamble.slot
                                     ) {
                                         questGamble(client, channel, quest);
@@ -273,8 +283,9 @@ async function questHandler(client, channel, mainSender, extraSender) {
                                         "Receive a cookie from",
                                     ) &&
                                         mainclient.global.temp.usedcookie ==
-                                        false &&
-                                        extraclient.global.temp.usedcookie == false:
+                                            false &&
+                                        extraclient.global.temp.usedcookie ==
+                                            false:
                                         questCookie(
                                             client,
                                             channel,
@@ -340,7 +351,8 @@ async function questHandler(client, channel, mainSender, extraSender) {
 
                         client.global.quest.title = "No active quest found";
                         client.global.quest.reward = "";
-                        client.global.quest.progress = "Recheck after 61 seconds";
+                        client.global.quest.progress =
+                            "Recheck after 61 seconds";
                     }
                 }
             });
@@ -369,11 +381,16 @@ async function questOwO(client, channel, quest) {
                 })
                 .then(async () => {
                     quest.pro1++;
-                    client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
+                    client.global.quest.progress =
+                        quest.pro1 + " / " + quest.pro2;
                 });
             await client.delay(getrand(12000, 16000));
         } catch (err) {
-            client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+            client.logger.alert(
+                "Farm",
+                "Quest",
+                "Error while doing quest: " + err,
+            );
             quest.pro1--;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         }
@@ -406,11 +423,16 @@ async function questGamble(client, channel, quest) {
                 })
                 .then(async () => {
                     quest.pro1++;
-                    client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
+                    client.global.quest.progress =
+                        quest.pro1 + " / " + quest.pro2;
                 });
             await client.delay(getrand(12000, 16000));
         } catch (err) {
-            client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+            client.logger.alert(
+                "Farm",
+                "Quest",
+                "Error while doing quest: " + err,
+            );
             quest.pro1--;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         }
@@ -454,11 +476,16 @@ async function questActionOther(client, channel, quest) {
                 })
                 .then(async () => {
                     quest.pro1++;
-                    client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
+                    client.global.quest.progress =
+                        quest.pro1 + " / " + quest.pro2;
                 });
             await client.delay(getrand(12000, 16000));
         } catch (err) {
-            client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+            client.logger.alert(
+                "Farm",
+                "Quest",
+                "Error while doing quest: " + err,
+            );
             quest.pro1--;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         }
@@ -504,7 +531,11 @@ async function questCurse(client, channel, quest, mainSender, extraSender) {
                     });
                 await client.delay(321000);
             } catch (err) {
-                client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+                client.logger.alert(
+                    "Farm",
+                    "Quest",
+                    "Error while doing quest: " + err,
+                );
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -535,7 +566,11 @@ async function questCurse(client, channel, quest, mainSender, extraSender) {
                     });
                 await client.delay(321000);
             } catch (err) {
-                client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+                client.logger.alert(
+                    "Farm",
+                    "Quest",
+                    "Error while doing quest: " + err,
+                );
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -576,7 +611,11 @@ async function questPray(client, channel, quest, mainSender, extraSender) {
                     });
                 await client.delay(321000);
             } catch (err) {
-                client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+                client.logger.alert(
+                    "Farm",
+                    "Quest",
+                    "Error while doing quest: " + err,
+                );
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -607,7 +646,11 @@ async function questPray(client, channel, quest, mainSender, extraSender) {
                     });
                 await client.delay(321000);
             } catch (err) {
-                client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+                client.logger.alert(
+                    "Farm",
+                    "Quest",
+                    "Error while doing quest: " + err,
+                );
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -659,7 +702,11 @@ async function questBattle(client, channel, quest, mainSender, extraSender) {
                     });
                 await client.delay(16000);
             } catch (err) {
-                client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+                client.logger.alert(
+                    "Farm",
+                    "Quest",
+                    "Error while doing quest: " + err,
+                );
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -698,7 +745,11 @@ async function questBattle(client, channel, quest, mainSender, extraSender) {
                     });
                 await client.delay(16000);
             } catch (err) {
-                client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+                client.logger.alert(
+                    "Farm",
+                    "Quest",
+                    "Error while doing quest: " + err,
+                );
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -733,10 +784,15 @@ async function questCookie(client, channel, quest, mainSender, extraSender) {
                 .then(async () => {
                     extraclient.global.temp.usedcookie = true;
                     quest.pro1++;
-                    client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
+                    client.global.quest.progress =
+                        quest.pro1 + " / " + quest.pro2;
                 });
         } catch (err) {
-            client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+            client.logger.alert(
+                "Farm",
+                "Quest",
+                "Error while doing quest: " + err,
+            );
             quest.pro1--;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         }
@@ -760,10 +816,15 @@ async function questCookie(client, channel, quest, mainSender, extraSender) {
                 .then(async () => {
                     mainclient.global.temp.usedcookie = true;
                     quest.pro1++;
-                    client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
+                    client.global.quest.progress =
+                        quest.pro1 + " / " + quest.pro2;
                 });
         } catch (err) {
-            client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+            client.logger.alert(
+                "Farm",
+                "Quest",
+                "Error while doing quest: " + err,
+            );
             quest.pro1--;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         }
@@ -818,7 +879,11 @@ async function questActionMe(client, channel, quest, mainSender, extraSender) {
                     });
                 await client.delay(16000);
             } catch (err) {
-                client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+                client.logger.alert(
+                    "Farm",
+                    "Quest",
+                    "Error while doing quest: " + err,
+                );
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -865,7 +930,11 @@ async function questActionMe(client, channel, quest, mainSender, extraSender) {
                     });
                 await client.delay(16000);
             } catch (err) {
-                client.logger.alert("Farm", "Quest", "Error while doing quest: " + err);
+                client.logger.alert(
+                    "Farm",
+                    "Quest",
+                    "Error while doing quest: " + err,
+                );
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }

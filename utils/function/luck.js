@@ -46,7 +46,7 @@ async function pray(client, channel) {
     try {
         channel.sendTyping();
         let content;
-        
+
         if (client.basic.commands.tomain) {
             content =
                 commandrandomizer(["owo", client.config.settings.owoprefix]) +
@@ -95,7 +95,7 @@ async function curse(client, channel) {
     try {
         channel.sendTyping();
         let content;
-        
+
         if (client.basic.commands.tomain) {
             content =
                 commandrandomizer(["owo", client.config.settings.owoprefix]) +
@@ -119,7 +119,6 @@ async function curse(client, channel) {
                     `Total prayed time: ${client.global.total.curse}`,
                 );
             });
-
     } catch (err) {
         client.logger.alert("Farm", "Curse", "Error while cursing: " + err);
     } finally {

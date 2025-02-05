@@ -163,10 +163,8 @@ function openWebUISettings() {
     document.getElementById("home-content").style.display = "none";
     document.getElementById("home-content-extra").style.display = "none";
     document.getElementById("settings-content").style.display = "none";
-    document.getElementById("settings-content-extra").style.display =
-        "none";
-    document.getElementById("general-settings-content").style.display =
-        "none";
+    document.getElementById("settings-content-extra").style.display = "none";
+    document.getElementById("general-settings-content").style.display = "none";
     document.getElementById("log-section").style.display = "none";
 }
 
@@ -184,7 +182,8 @@ function animateTitle(text) {
     let directionForward = true;
     function updateTitle() {
         try {
-            const enableAnimate = localStorage.getItem("titleAnimation") === "true";
+            const enableAnimate =
+                localStorage.getItem("titleAnimation") === "true";
             if (!enableAnimate) {
                 document.title = text;
                 return;
@@ -257,8 +256,6 @@ function showlog() {
     document.getElementById("home-content").style.display = "none";
     document.getElementById("home-content-extra").style.display = "none";
     document.getElementById("settings-content").style.display = "none";
-    document.getElementById("settings-content-extra").style.display =
-        "none";
-    document.getElementById("general-settings-content").style.display =
-        "none";
+    document.getElementById("settings-content-extra").style.display = "none";
+    document.getElementById("general-settings-content").style.display = "none";
 }

@@ -13,14 +13,17 @@
 
 module.exports = (client) => {
     const logError = (type, err, origin = null) => {
-        const errMessage =
-            `--------------------------------------
+        const errMessage = `--------------------------------------
 Error: ${err?.message || err}
 Stack: ${err?.stack || "No stack trace available"}
 Origin: ${origin || "N/A"}
 --------------------------------------`;
 
-        client.logger.alert("Bot", "Anticrash", "An crash happened! " + type + "\n" + errMessage)
+        client.logger.alert(
+            "Bot",
+            "Anticrash",
+            "An crash happened! " + type + "\n" + errMessage,
+        );
     };
 
     process.on("unhandledRejection", (reason, p) => {
@@ -30,7 +33,7 @@ Origin: ${origin || "N/A"}
     process.on("uncaughtException", (err, origin) => {
         logError("Uncaught Exception", err, origin);
     });
-/* well this and above is the same idk why
+    /* well this and above is the same idk why
     process.on("uncaughtExceptionMonitor", (err, origin) => {
         logError("Uncaught Exception Monitor", err, origin);
     });

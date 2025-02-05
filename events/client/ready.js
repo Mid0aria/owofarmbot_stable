@@ -77,20 +77,31 @@ module.exports = async (client) => {
 };
 
 function setupSweeper(botClient) {
-    setInterval(() => {
-        botClient.channels.cache.forEach((channel) => {
-            if (channel.messages) {
-                const messagesArray = Array.from(channel.messages.cache.values());
-                messagesArray.sort((a, b) => a.createdTimestamp - b.createdTimestamp);
-                const messagesToDelete = Math.floor(messagesArray.length * 0.85);
-                for (let i = 0; i < messagesToDelete; i++) {
-                    channel.messages.cache.delete(messagesArray[i].id);
+    setInterval(
+        () => {
+            botClient.channels.cache.forEach((channel) => {
+                if (channel.messages) {
+                    const messagesArray = Array.from(
+                        channel.messages.cache.values(),
+                    );
+                    messagesArray.sort(
+                        (a, b) => a.createdTimestamp - b.createdTimestamp,
+                    );
+                    const messagesToDelete = Math.floor(
+                        messagesArray.length * 0.85,
+                    );
+                    for (let i = 0; i < messagesToDelete; i++) {
+                        channel.messages.cache.delete(messagesArray[i].id);
+                    }
                 }
-            }
-        });
+            });
 
-        botClient.logger.warn(
-            "Bot", "Cache", `Cleared oldest 85% of message cache for [${botClient.user.username}].`
-        );
-    }, 5 * 60 * 1000);
+            botClient.logger.warn(
+                "Bot",
+                "Cache",
+                `Cleared oldest 85% of message cache for [${botClient.user.username}].`,
+            );
+        },
+        5 * 60 * 1000,
+    );
 }

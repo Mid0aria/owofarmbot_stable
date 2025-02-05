@@ -127,7 +127,7 @@ module.exports = async (client, message) => {
         await client.delay(32000);
         require("./function/luck.js")(client, message);
     }
-    
+
     if (client.basic.commands.huntbot.enable) {
         if (client.global.paused || client.global.captchadetected) {
             while (true) {
@@ -139,7 +139,8 @@ module.exports = async (client, message) => {
         require("./function/huntbot.js")(client);
     }
 
-    if (client.config.settings.safety.autopause) require("./function/safety.js")(client);
+    if (client.config.settings.safety.autopause)
+        require("./function/safety.js")(client);
 };
 
 async function checklist(client, channel) {

@@ -10,7 +10,11 @@ module.exports = async (client) => {
             let now = Date.now();
             if (!client.global.paused && now - startTime >= safetyInterval) {
                 client.global.paused = true;
-                client.logger.warn("Bot", "Safety", "Safety paused to reduce bot rate.");
+                client.logger.warn(
+                    "Bot",
+                    "Safety",
+                    "Safety paused to reduce bot rate.",
+                );
 
                 clearInterval(interval);
                 interval = null;
@@ -18,7 +22,11 @@ module.exports = async (client) => {
                 setTimeout(() => {
                     if (!client.global.captchadetected) {
                         client.global.paused = false;
-                        client.logger.warn("Bot", "Safety", "Resuming after a safety pause.");
+                        client.logger.warn(
+                            "Bot",
+                            "Safety",
+                            "Resuming after a safety pause.",
+                        );
                     }
                     startTime = Date.now();
                     startSafetyCheck();
