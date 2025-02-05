@@ -123,6 +123,7 @@
                 "webhook": true,
                 "webhookurl": "xxx",
                 "desktop": {
+                    "force": true,
                     "notification": true,
                     "prompt": true
                 },

@@ -263,6 +263,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
                 "webhook": true, / true or false (boolean)
                 "webhookurl": "xxx"  / If you set webhook to true, enter your webhook url here
                 "desktop": {
+                    "force": true, / true or false (boolean). Force the bot to show alert when detect captcha
                     "notification": true, / true or false (boolean)
                     "prompt": true / true or false (boolean)
                 },
