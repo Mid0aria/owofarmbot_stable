@@ -142,10 +142,10 @@ module.exports = (client) => {
             temp = temp.trim();
 
             if (temp.length < 9) {
-                paddedText = temp.padEnd(8, " ");
+                paddedText = temp.padEnd(9, " ");
                 return paddedText;
             } else {
-                paddedText = temp.slice(0, 6).padEnd(7, " ") + "+";
+                paddedText = temp.slice(0, 7).padEnd(8, " ") + "+";
                 return paddedText;
             }
         }
@@ -157,9 +157,9 @@ module.exports = (client) => {
         ) {
             console.clear();
             console.log(
-                `╔══════════╦═══════════════════════╦════════════════════════════════════════════════
-║ Token    ║ Status                ║ Questing
-╠══════════╬═══════════════════════╬════════════════════════════════════════════════
+                `╔══════════╦════════════════════════╦════════════════════════════════════════════════
+║ Token    ║ Status                 ║ Questing
+╠══════════╬════════════════════════╬════════════════════════════════════════════════
 ║ Main     ║ Total hunt: ${padder(mainHunt, false)}  ║ ${
                     loggermaincl.global.quest.title
                 }
@@ -169,7 +169,7 @@ module.exports = (client) => {
 ║ ${mainPause} ║ Cowoncy won: ${padder(mainCow, false)} ║ ${
                     loggermaincl.global.quest.progress
                 }
-╠══════════╬═══════════════════════╬════════════════════════════════════════════════
+╠══════════╬════════════════════════╬════════════════════════════════════════════════
 ║ Extra    ║ Total hunt: ${padder(extraHunt, false)}  ║ ${
                     loggerextrac.global.quest.title
                 }
@@ -179,7 +179,7 @@ module.exports = (client) => {
 ║ ${extraPause} ║ Cowoncy won: ${padder(extraCow, false)} ║ ${
                     loggerextrac.global.quest.progress
                 }
-╚══════════╩═══════════════════════╩════════════════════════════════════════════════
+╚══════════╩════════════════════════╩════════════════════════════════════════════════
 >>> Log`,
             );
             for (const logs of reallog) {
@@ -188,9 +188,9 @@ module.exports = (client) => {
         } else if (client.config.settings.logging.newlog) {
             console.clear();
             console.log(
-                `╔══════════════════════╦══════════╦═══════════════════════════════════════════════
-║ Name                 ║ Status   ║ Questing
-╠══════════════════════╬══════════╬═══════════════════════════════════════════════
+                `╔═══════════════════════╦══════════╦═══════════════════════════════════════════════
+║ Name                 ║ Status    ║ Questing
+╠══════════════════════╬═══════════╬═══════════════════════════════════════════════
 ║ Total hunt           ║ ${padder(mainHunt, false)} ║ > Title
 ║ Total battle         ║ ${padder(mainBattle, false)} ║ ${
                     client.global.quest.title
@@ -201,7 +201,7 @@ module.exports = (client) => {
                 }
 ║ Safety level         ║ ${mainCaptcha} ║ > Progress
 ║ Running?             ║ ${mainPause} ║ ${client.global.quest.progress}
-╚══════════════════════╩══════════╩═══════════════════════════════════════════════
+╚══════════════════════╩═══════════╩═══════════════════════════════════════════════
 >>> Log`,
             );
             for (const logs of reallog) {
