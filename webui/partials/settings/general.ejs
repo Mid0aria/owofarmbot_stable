@@ -44,6 +44,11 @@
                 >Intervals</a
             >
         </li>
+        <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="tab" href="#general-safety"
+                >Safety</a
+            >
+        </li>
         <li class="nav-item ms-auto">
             <button id="general-saveBtn" class="btn btn-danger save-btn">
                 <i class="bi bi-floppy2-fill"></i> Save
@@ -523,6 +528,18 @@
                         <input
                             class="form-check-input"
                             type="checkbox"
+                            id="settings-captcha-alerttype-desktop-force"
+                        />
+                        <label
+                            class="form-check-label"
+                            for="settings-captcha-alerttype-desktop-force"
+                            >Force alert when detect captcha</label
+                        >
+                    </div>
+                    <div class="form-check mb-2">
+                        <input
+                            class="form-check-input"
+                            type="checkbox"
                             id="settings-captcha-alerttype-desktop-notification"
                         />
                         <label
@@ -643,7 +660,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-huntmininterval"
+                        id="interval-hunt-min"
                         value="16000"
                     />
                 </div>
@@ -652,7 +669,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-huntmaxinterval"
+                        id="interval-hunt-max"
                         value="32000"
                     />
                 </div>
@@ -664,7 +681,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-battlemininterval"
+                        id="interval-battle-min"
                         value="16000"
                     />
                 </div>
@@ -673,7 +690,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-battlemaxinterval"
+                        id="interval-battle-max"
                         value="32000"
                     />
                 </div>
@@ -685,7 +702,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-praymininterval"
+                        id="interval-pray-min"
                         value="316000"
                     />
                 </div>
@@ -694,7 +711,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-praymaxinterval"
+                        id="interval-pray-max"
                         value="332000"
                     />
                 </div>
@@ -706,7 +723,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-coinflipmininterval"
+                        id="interval-coinflip-min"
                         value="16000"
                     />
                 </div>
@@ -715,7 +732,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-coinflipmaxinterval"
+                        id="interval-coinflip-max"
                         value="32000"
                     />
                 </div>
@@ -727,7 +744,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-slotmininterval"
+                        id="interval-slot-min"
                         value="16000"
                     />
                 </div>
@@ -736,7 +753,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-slotmaxinterval"
+                        id="interval-slot-max"
                         value="32000"
                     />
                 </div>
@@ -748,7 +765,7 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-animalsmininterval"
+                        id="interval-animals-min"
                         value="610000"
                     />
                 </div>
@@ -757,8 +774,44 @@
                     <input
                         type="number"
                         class="form-control"
-                        id="intervals-animalsmaxinterval"
+                        id="interval-animals-max"
                         value="661000"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="general-safety">
+            <div class="settings-section">
+                <h4>Safety (Experiment, might not work)</h4>
+                <div class="form-check mb-2">
+                    <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="settings-safety-autopause"
+                    />
+                    <label
+                        class="form-check-label"
+                        for="settings-safety-autopause"
+                        >Enable safety pause</label
+                    >
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Pause after (minutes)</label>
+                    <input
+                        type="number"
+                        class="form-control",
+                        id="settings-safety-pauseafter"
+                        value="30"
+                    />
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Pause duration (minutes)</label>
+                    <input
+                        type="number"
+                        class="form-control",
+                        id="settings-safety-pausefor"
+                        value="5"
                     />
                 </div>
             </div>

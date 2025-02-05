@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.8.0.1",
-    "version_note": "Fixed a bug related to when to use the huntbot function again after huntbot has been started.",
+    "version": "0.0.9",
+    "version_note": "Multiple changes to bot and WebUI",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "main.js",
     "repository": {
@@ -40,6 +40,7 @@
         "express": "^4.21.2",
         "fs-extra": "^11.3.0",
         "node-notifier": "^10.0.1",
+        "sharp": "^0.33.5",
         "socket.io-client": "^4.8.1",
         "ws": "^8.18.0",
         "yargs": "^17.7.2"

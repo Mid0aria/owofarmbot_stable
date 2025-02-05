@@ -9,40 +9,30 @@
  * Sets up listeners to handle various types of process crashes and logs them using the client's chalk and logger utilities.
  *
  * @param {Object} client - The client object that contains the chalk and logger utilities.
- * @param {Object} client.chalk - The chalk utility for styling console output.
- * @param {Function} client.chalk.blue - Function to style text in blue.
- * @param {Function} client.chalk.bold - Function to style text in bold.
- * @param {Function} client.chalk.white - Function to style text in white.
- * @param {Function} client.chalk.magenta - Function to style text in magenta.
- * @param {Function} client.chalk.red - Function to style text in red.
- * @param {Object} client.logger - The logger utility for logging messages.
- * @param {Function} client.logger.info - Function to log informational messages.
  */
 
 module.exports = (client) => {
+    const logError = (type, err, origin = null) => {
+        const errMessage =
+            `--------------------------------------
+Error: ${err?.message || err}
+Stack: ${err?.stack || "No stack trace available"}
+Origin: ${origin || "N/A"}
+--------------------------------------`;
+
+        client.logger.alert("Bot", "Anticrash", "An crash happened! " + type + "\n" + errMessage)
+    };
+
     process.on("unhandledRejection", (reason, p) => {
-        console.log(
-            client.chalk.blue(client.chalk.bold(`[antiCrash]`)),
-            client.chalk.white(`>>`),
-            client.chalk.magenta(`Unhandled Rejection/Catch`),
-            client.chalk.red(reason, p),
-        );
+        logError("Unhandled Rejection", reason, p);
     });
+
     process.on("uncaughtException", (err, origin) => {
-        console.log(
-            client.chalk.blue(client.chalk.bold(`[antiCrash]`)),
-            client.chalk.white(`>>`),
-            client.chalk.magenta(`Unhandled Exception/Catch`),
-            client.chalk.red(err, origin),
-        );
+        logError("Uncaught Exception", err, origin);
     });
+/* well this and above is the same idk why
     process.on("uncaughtExceptionMonitor", (err, origin) => {
-        console.log(
-            client.chalk.blue(client.chalk.bold(`[antiCrash]`)),
-            client.chalk.white(`>>`),
-            client.chalk.magenta(`Uncaught Exception/Catch`),
-            client.chalk.red(err, origin),
-        );
+        logError("Uncaught Exception Monitor", err, origin);
     });
-    client.logger.info("Bot", "AntiCrash", "Ready");
+*/
 };

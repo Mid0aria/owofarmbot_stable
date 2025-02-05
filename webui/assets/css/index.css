@@ -125,6 +125,7 @@ body {
     margin-right: 6px;
     color: #4caf50;
 }
+
 .waiting-connection {
     color: rgb(238, 255, 0);
     font-size: 16px;
@@ -140,15 +141,18 @@ body {
 }
 
 @keyframes dotsAnimation {
-    0% {
+    25% {
         content: ".";
     }
-    33% {
+
+    50% {
         content: "..";
     }
-    66% {
+
+    75% {
         content: "...";
     }
+
     100% {
         content: "";
     }
@@ -173,6 +177,7 @@ body {
     transform: scale(1.2);
     color: #ffcc00;
 }
+
 /* Responsive tweaks */
 @media (max-width: 768px) {
     .sidebar {
@@ -233,6 +238,10 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.stat-box.override {
+    grid-column: span 2;
 }
 
 .stat-box .value {
@@ -325,9 +334,11 @@ body {
 .sidebar.closed a i {
     font-size: 1.5rem;
 }
+
 .btn-custom {
     margin: 10px;
 }
+
 /* Settings Styles */
 .settings-section {
     background-color: #1f1f1f;
@@ -351,6 +362,7 @@ body {
 }
 
 .nav-tabs .nav-link {
+    background-color: #67ca6bb2;
     color: #fff;
     border: none;
 }
@@ -360,6 +372,7 @@ body {
     color: white;
     border: none;
 }
+
 .save-btn {
     margin-left: 10px;
     padding: 8px 16px;
@@ -387,4 +400,75 @@ body {
     border-color: #4caf50;
     color: white;
     box-shadow: 0 0 0 0.25rem rgba(76, 175, 80, 0.25);
+}
+
+/* Text background */
+.toggle-container,
+.color-picker-container {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-container label,
+.color-picker-container label {
+    margin-right: 8px;
+    color: white;
+}
+
+#text-background-toggle,
+#text-background-color {
+    cursor: pointer;
+}
+
+.text-container {
+    display: inline-block;
+    position: relative;
+    padding: 4px;
+    border-radius: 6px;
+    background: var(--text-bg-color, rgba(0, 0, 0, 0));
+    backdrop-filter: none;
+}
+
+.text-container.blur {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(var(--blur-intensity, 8px));
+}
+
+/* Background item */
+.background-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.background-item {
+    width: 240px;
+    height: 160px;
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.background-item:hover {
+    transform: scale(1.1);
+}
+
+.background-video {
+    width: 240px;
+    height: 160px;
+    object-fit: cover;
+}
+
+.log-container {
+    font-family: Consolas, "Courier New", monospace;
+    width: 80vw;
+    height: 70vh;
+    border-radius: 16px;
+    background: rgb(0, 0, 0);
+    padding: 10px;
+    overflow-y: auto;
+    word-wrap: break-word;
+    white-space: pre-wrap;
 }

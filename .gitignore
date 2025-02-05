@@ -132,3 +132,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# config (don't need coz i can un-stage change for config.json and no token leak)
+# config.json

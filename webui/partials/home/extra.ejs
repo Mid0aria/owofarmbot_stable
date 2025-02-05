@@ -2,25 +2,32 @@
 <div id="home-content-extra" style="display: none">
     <!-- User Info Section -->
     <div class="userinfo-section" id="userinfo">
-        <h2>User Info</h2>
+        <h2 class="text-container">User Info</h2>
         <p>
-            Nickname:
-            <span id="usernick-extra">çıkaramadım abi kimsin sen</span>
-            username:
-            <span id="username-extra">çıkaramadım abi kimsin sen</span>
+            <div class="text-container">
+                Nickname:
+                <span id="usernick-extra">çıkaramadım abi kimsin sen</span>
+            </div>
+            <div class="text-container">
+                username:
+                <span id="username-extra">çıkaramadım abi kimsin sen</span>
+            </div>
         </p>
         <p>
-            Farm Bot Status:
-            <span id="bot-status-extra">Stopped</span>
+            <div class="text-container">
+                Farm Bot Status: <span id="bot-status-extra">Stopped</span>
+            </div>
         </p>
         <p>
-            WebSocket Status:
-            <span id="ws-status-extra">Disconnected</span>
+            <div class="text-container">
+                WebSocket Status:
+                <span id="ws-status-extra">Disconnected</span>
+            </div>
         </p>
     </div>
     <!-- Actions Section -->
     <div class="actions-section" id="actions">
-        <h2>Actions</h2>
+        <h2 class="text-container">Actions</h2>
         <div class="action-btns">
             <button
                 class="btn btn-success btn-custom"
@@ -47,7 +54,7 @@
         </div>
     </div>
     <!-- Stats Section -->
-    <h2>Extra Token Stats</h2>
+    <h2 class="text-container">Extra Token Stats</h2>
     <div class="stats-grid">
         <div class="stat-box">
             <span id="hunt-value-extra" class="value">0</span>
@@ -80,6 +87,18 @@
         <div class="stat-box">
             <span id="captcha-value-extra" class="value">0</span>
             <span class="label">Captcha</span>
+        </div>
+        <div class="stat-box">
+            <span id="slot-value-extra" class="value">0</span>
+            <span class="label">Slot</span>
+        </div>
+        <div class="stat-box">
+            <span id="coinflip-value-extra" class="value">0</span>
+            <span class="label">Coinflip</span>
+        </div>
+        <div class="stat-box override">
+            <span id="cowoncywon-value-extra" class="value">0</span>
+            <span class="label">Cowoncy won by gambling</span>
         </div>
         <div class="stat-box highlight">
             <span id="solvedcaptcha-value-extra" class="value">0</span>

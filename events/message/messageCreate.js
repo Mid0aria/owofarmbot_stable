@@ -65,6 +65,12 @@ module.exports = async (client, message) => {
                 progress: client.global.total.captcha,
                 global: client.global,
             });
+            client.broadcast({
+                action: "update",
+                type: "botstatus",
+                status: "Paused",
+                global: client.global,
+            });
             client.logger.alert("Bot", "Captcha", `Captcha Detected!`);
             client.logger.info(
                 "Bot",
@@ -93,7 +99,7 @@ module.exports = async (client, message) => {
              * Desktop Notifications
              */
             if (
-                !client.config.settings.captcha.autosolve &&
+                (!client.config.settings.captcha.autosolve || client.config.settings.captcha.alerttype.desktop.force) &&
                 !client.global.istermux &&
                 client.config.settings.captcha.alerttype.desktop.notification
             ) {
@@ -107,7 +113,7 @@ module.exports = async (client, message) => {
                 });
             }
             if (
-                !client.config.settings.captcha.autosolve &&
+                (!client.config.settings.captcha.autosolve || client.config.settings.captcha.alerttype.desktop.force) &&
                 !client.global.istermux &&
                 client.config.settings.captcha.alerttype.desktop.prompt
             ) {
@@ -241,6 +247,12 @@ module.exports = async (client, message) => {
                     "Captcha",
                     `Captcha solved. Resuming bot automatically...`,
                 );
+                client.broadcast({
+                    action: "update",
+                    type: "botstatus",
+                    status: "Running",
+                    global: client.global,
+                });
             } else {
                 client.logger.warn(
                     "Bot",

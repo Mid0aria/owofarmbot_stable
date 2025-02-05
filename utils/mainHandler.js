@@ -127,6 +127,7 @@ module.exports = async (client, message) => {
         await client.delay(32000);
         require("./function/luck.js")(client, message);
     }
+    
     if (client.basic.commands.huntbot.enable) {
         if (client.global.paused || client.global.captchadetected) {
             while (true) {
@@ -135,61 +136,10 @@ module.exports = async (client, message) => {
                 await client.delay(3000);
             }
         }
-        let huntbotcaptchaprocess = null;
-
-        await client.globalutil
-            .isPortInUse(client.config.socket.port, "localhost")
-            .then((inUse) => {
-                if (inUse) {
-                    client.logger.warn(
-                        "Bot",
-                        "Huntbot",
-                        "HuntBot captcha solver already started.",
-                    );
-                    require("./function/huntbot.js")(client);
-                    return 0;
-                } else {
-                    client.logger.warn(
-                        "Bot",
-                        "Huntbot",
-                        "HuntBot captcha solver starting...",
-                    );
-                    huntbotcaptchaprocess = client.childprocess.spawn(
-                        "python", //? linux does not accept "py" ahh goofy
-                        [
-                            path.join(
-                                __dirname,
-                                "./huntbot_captcha/huntbotcaptcha.py",
-                            ),
-                        ],
-                    );
-
-                    require("./function/huntbot.js")(client);
-                }
-            });
-
-        process.on("exit", () => {
-            if (huntbotcaptchaprocess) {
-                client.logger.warn(
-                    "Bot",
-                    "Huntbot",
-                    "Killing huntBot captcha solver...",
-                );
-                huntbotcaptchaprocess.kill("SIGINT");
-            }
-        });
-
-        process.on("SIGINT", () => {
-            if (huntbotcaptchaprocess) {
-                client.logger.warn(
-                    "Bot",
-                    "Huntbot",
-                    "Killing huntBot captcha solver...",
-                );
-                huntbotcaptchaprocess.kill("SIGINT");
-            }
-        });
+        require("./function/huntbot.js")(client);
     }
+
+    if (client.config.settings.safety.autopause) require("./function/safety.js")(client);
 };
 
 async function checklist(client, channel) {

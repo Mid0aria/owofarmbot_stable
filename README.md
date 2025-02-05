@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.7(BETA) WEBUI WITH CAPTCHA SOLVER ✒️</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.9(BETA) WEBUI WITH CAPTCHA SOLVER ✒️</h1>
 <h2 align ="center">The best owo farm bot until i do better. coded with the great ideas and love of a Turkish engineer, mid0hub team and users.<br> 💖 Thank you to everyone who contributed 💖</h2>
 <p align="center">
 
@@ -250,6 +250,12 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
             "showlogbeforeexit": false / show a full log when user click ctrl + c (only affect when newlog is true)
         },
 
+        "safety": {
+            "autopause": false, / emable auto pause the bot after a while
+            "pauseafter": 30, / how long the bot will run until getting paused (in minutes)
+            "pausefor": 5 / how long the bot will pause (in minutes)
+        },
+
         "captcha": {
             "autosolve": true, // (set to true if you want hcaptcha to solve) true or false (boolean)
             "autosolve_thread": 1, // you choose how many threads the hcaptcha solver will run with (higher threads = faster captcha solver, you may need a powerful cpu for higher threads) (integer)
@@ -257,6 +263,7 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
                 "webhook": true, / true or false (boolean)
                 "webhookurl": "xxx"  / If you set webhook to true, enter your webhook url here
                 "desktop": {
+                    "force": true, / true or false (boolean). Force the bot to show alert when detect captcha
                     "notification": true, / true or false (boolean)
                     "prompt": true / true or false (boolean)
                 },

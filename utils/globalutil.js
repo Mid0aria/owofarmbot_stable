@@ -65,8 +65,10 @@ exports.verifyconfig = async (client, extrac, config) => {
     ];
 
     for (let i = 0; i < vars.length; i++) {
+        let c = false;
         for (let j = i + 1; j < vars.length; j++) {
             if (vars[i] == vars[j] && vars[i].length > 0) {
+                c = true;
                 normal = false;
                 showerrcoziamlazy(`There are some duplicate channel id!`);
                 console.log(
@@ -78,6 +80,7 @@ exports.verifyconfig = async (client, extrac, config) => {
                 break;
             }
         }
+        if (c) break;
     }
 
     if (config.main.commands.pray && config.main.commands.curse) {

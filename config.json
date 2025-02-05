@@ -110,6 +110,12 @@
             "showlogbeforeexit": false
         },
 
+        "safety": {
+          "autopause": true,
+          "pauseafter": 30,
+          "pausefor": 5
+        },
+
         "captcha": {
             "autosolve": true,
             "autosolve_thread": 1,
@@ -117,6 +123,7 @@
                 "webhook": true,
                 "webhookurl": "xxx",
                 "desktop": {
+                    "force": true,
                     "notification": true,
                     "prompt": true
                 },
@@ -178,7 +185,6 @@
         }
     },
     "socket": {
-        "port": 65432,
         "expressport": 1243,
         "websocket": 31085
     }

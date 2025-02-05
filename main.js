@@ -91,8 +91,38 @@ if (cluster.isMaster) {
     app.set("views", path.join(__dirname, "webui"));
     app.use("/assets", express.static(path.join(__dirname, "webui", "assets")));
 
-    app.get("/", (req, res) => {
-        res.render("index");
+    app.use("/background", express.static(path.join(__dirname, "webui", "background")));
+
+    const getFiles = async (dir, extensions) => {
+        try {
+            const files = await fs.readdir(dir);
+            return files
+                .filter(file => extensions.includes(path.extname(file).toLowerCase()))
+                .map(file => `/background/${path.basename(dir)}/${file}`); // Fix URL Path
+        } catch (err) {
+            console.error(`Error reading ${dir}:`, err);
+            return [];
+        }
+    };
+
+    app.get("/", async (req, res) => {
+        const images = await getFiles(path.join(__dirname, "webui", "background", "image"), [".jpg", ".png", ".jpeg", ".webp"]);
+        const videos = await getFiles(path.join(__dirname, "webui", "background", "video"), [".mp4"]);
+
+        res.render("index", { images, videos });
+    });
+
+    app.get('/logs', (req, res) => {
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
+        res.flushHeaders();
+        
+        cluster.on('message', (worker, message) => {
+            if (message.type == 'log') {
+                res.write(`data: ${JSON.stringify(message.message)}\n\n`);
+            }
+        })
     });
 
     app.get("/api/get-config", async (req, res) => {
@@ -202,9 +232,7 @@ if (cluster.isMaster) {
     });
 
     app.listen(config.socket.expressport, () => {
-        console.log(
-            `WebUI started on http://localhost:${config.socket.expressport}`,
-        );
+
     });
 
     cluster.fork();
@@ -216,3 +244,41 @@ if (cluster.isMaster) {
 } else {
     require("./bot.js");
 }
+
+/*
+wow, this project come so big that i can't remember which is which
+so i add this file structure and (will) come with some information
+obiviously, fo debug
+.
+├───assets
+├───commands
+├───data
+├───events
+│   ├───client
+│   └───message
+├───handlers
+├───node_modules
+├───phrases
+├───tests
+├───utils
+│   ├───function
+│   ├───hcaptchasolver
+│   └───huntbot_captcha
+│       └───letters
+├───webui
+│   ├───assets
+│   │   ├───css
+│   │   └───js
+│   ├───background
+│   │   ├───image
+│   │   └───video
+│   └───partials
+│       ├───home
+│       ├───settings
+│       └───sidebar
+├───bot.js Setup and login, call ./handlers and ./utils/mainhandler.js
+├───main.js Fork itself, the sub call bot.js
+└───config.json
+
+I was lazy to finish
+*/
