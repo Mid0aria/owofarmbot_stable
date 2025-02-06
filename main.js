@@ -175,6 +175,15 @@ if (cluster.isMaster) {
         }
 
         const convertedSettings = {};
+        const excludeKeys = [
+            "token",
+            "userid",
+            "commandschannelid",
+            "huntbotchannelid",
+            "owodmchannelid",
+            "gamblechannelid",
+            "autoquestchannelid",
+        ];
 
         for (const [key, value] of Object.entries(settings)) {
             if (key === "settingtype") continue;
@@ -191,7 +200,25 @@ if (cluster.isMaster) {
 
             const lastKey = keys[keys.length - 1];
 
-            current[lastKey] = value;
+            if (
+                keys[0] === "animals" &&
+                keys[1] === "type" &&
+                typeof value === "string"
+            ) {
+                current["type"] = {
+                    sell: value === "sell",
+                    sacrifice: value === "sacrifice",
+                };
+            } else if (
+                !excludeKeys.includes(key) &&
+                !isNaN(value) &&
+                value !== true &&
+                value !== false
+            ) {
+                current[lastKey] = parseInt(value, 10);
+            } else {
+                current[lastKey] = value;
+            }
         }
 
         const updatedConfig = deepMerge(currentConfig, convertedSettings);
@@ -223,7 +250,7 @@ if (cluster.isMaster) {
     app.post("/save-settings", async (req, res) => {
         try {
             const settings = req.body;
-
+            console.log(settings);
             const updatedConfig = await updateConfig(settings);
 
             config = updatedConfig;
