@@ -210,7 +210,7 @@ if (cluster.isMaster) {
                     sacrifice: value === "sacrifice",
                 };
             } else if (
-                !excludeKeys.includes(key) &&
+                !excludeKeys.includes(lastKey) &&
                 !isNaN(value) &&
                 value !== true &&
                 value !== false
@@ -250,7 +250,7 @@ if (cluster.isMaster) {
     app.post("/save-settings", async (req, res) => {
         try {
             const settings = req.body;
-            console.log(settings);
+
             const updatedConfig = await updateConfig(settings);
 
             config = updatedConfig;

@@ -114,7 +114,6 @@ const mergeConfigs = async (client, configPath, backupPath) => {
         const oldConfig = await fse.readJson(backupPath);
         const newConfig = await fse.readJson(configPath);
 
-        // Derin birleştirme yaparak yeni özellikleri koruyoruz
         const mergedConfig = deepMerge(newConfig, oldConfig);
 
         await fse.writeJson(configPath, mergedConfig, { spaces: 2 });
@@ -156,6 +155,7 @@ const updateViaGit = async (client, cp) => {
         cp.execSync("git pull --force");
         cp.execSync("git reset --hard");
         client.logger.info("Updater", "Git", "Update successful");
+        process.exit(0);
     } catch (error) {
         throw new Error(`Git update failed: ${error.message}`);
     }
