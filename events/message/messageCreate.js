@@ -104,6 +104,14 @@ module.exports = async (client, message) => {
                 !client.global.istermux &&
                 client.config.settings.captcha.alerttype.desktop.notification
             ) {
+                client.notifier.notify({
+                    title: "Captcha Detected!",
+                    message: `Solve the captcha and type ${client.config.prefix}resume in farm channel`,
+                    icon: "./assets/captcha.png",
+                    sound: true,
+                    wait: true,
+                    appID: "OwO Farm Bot Stable",
+                });
             }
             if (
                 (!client.config.settings.captcha.autosolve ||
@@ -174,6 +182,7 @@ module.exports = async (client, message) => {
                     client.childprocess.exec(termuxtoastCommand);
                 }
             }
+
             if (
                 client.config.settings.captcha.autosolve &&
                 isWebCaptchaMessage(
