@@ -26,6 +26,7 @@
     ],
     "author": "Mid0aria",
     "license": "ISC",
+    "type": "commonjs",
     "scripts": {
         "start": "node main.js",
         "run": "node main.js",
@@ -49,9 +50,9 @@
     },
     "homepage": "https://github.com/Mid0aria/owofarmbot_stable#readme",
     "devDependencies": {
-        "@eslint/js": "^9.19.0",
-        "eslint": "^9.19.0",
+        "@eslint/js": "^9.20.0",
+        "eslint": "^9.20.0",
         "globals": "^15.14.0",
-        "prettier": "^3.4.2"
+        "prettier": "^3.5.0"
     }
 }

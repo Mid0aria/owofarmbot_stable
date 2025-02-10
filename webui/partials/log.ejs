@@ -7,7 +7,7 @@
 </div>
 
 <script>
-    const eventSource = new EventSource('/logs');
+    const eventSource = new EventSource("/logs");
 
     eventSource.onmessage = (event) => {
         const logMessage = JSON.parse(event.data);
@@ -17,11 +17,11 @@
         logEntry.textContent = logMessage;
         logContainer.appendChild(logEntry);
 
-        if (logContainer.children.length > 200) {
+        if (logContainer.children.length > 50) {
             logContainer.removeChild(logContainer.firstChild);
         }
 
-        logContainer.scrollTop = logContainer.scrollHeight
+        logContainer.scrollTop = logContainer.scrollHeight;
     };
 
     eventSource.onerror = (err) => {
