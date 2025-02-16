@@ -288,14 +288,36 @@ async function checklist(client, channel) {
                             break;
 
                         case line.startsWith("⬛ 🍪") &&
-                            client.config.settings.checklist.types.cookie:
+                            client.config.settings.checklist.types.cookie: {
                             await client.delay(3000);
+                            //aliciafae xd
+                            let members = channel.guild.members.cache
+                                .filter(
+                                    (member) =>
+                                        !member.user.bot &&
+                                        member.id !== "408785106942164992" &&
+                                        member.id !== client.user.id,
+                                )
+                                .map((member) => member.user);
+                            let selectedmemberid;
+
+                            if (members.length === 0) {
+                                selectedmemberid = "408785106942164992";
+                            } else {
+                                const randomMember =
+                                    members[
+                                        Math.floor(
+                                            Math.random() * members.length,
+                                        )
+                                    ];
+                                selectedmemberid = `${randomMember.id}`;
+                            }
                             await channel
                                 .send({
                                     content: `${commandrandomizer([
                                         "owo",
                                         client.config.settings.owoprefix,
-                                    ])} cookie <@408785106942164992>`,
+                                    ])} cookie <@${selectedmemberid}>`,
                                 })
                                 .then(() => {
                                     client.global.temp.usedcookie = true;
@@ -307,6 +329,7 @@ async function checklist(client, channel) {
                                 });
                             await client.delay(3000);
                             break;
+                        }
 
                         case line.startsWith("️☑️ 🍪"):
                             client.global.temp.usedcookie = true;
