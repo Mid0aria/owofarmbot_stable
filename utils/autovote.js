@@ -42,8 +42,7 @@ const argv = yargs.options({
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 (async () => {
-    const authUrl =
-        "https://discord.com/oauth2/authorize?scope=identify%20guilds%20email&redirect_uri=https%3A%2F%2Ftop.gg%2Flogin%2Fcallback&response_type=code&client_id=422087909634736160&state=Lw==";
+    const topcici = "https://top.gg";
     const { token, botid } = argv;
 
     const { browser, page } = await connect({
@@ -59,8 +58,12 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
         window.localStorage.setItem("token", `"${token}"`);
     }, token);
 
-    await page.goto(authUrl, { waitUntil: "load" });
+    await page.goto(topcici, { waitUntil: "load" });
+    await page.waitForSelector(".chakra-button.css-7rul47", { visible: true });
+    await page.locator(".chakra-button.css-7rul47").setTimeout(3000).click();
 
+    //discord auth
+    await page.waitForNavigation({ waitUntil: "load" });
     await page.waitForSelector("div.action__3d3b0 button", { visible: true });
     await page.locator("div.action__3d3b0 button").setTimeout(3000).click();
 
@@ -93,7 +96,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
         await page.evaluate(() => {
             const button = document.querySelector(
-                "div.css-1yn6pjb button.chakra-button.css-1xwhzbv",
+                "div.css-1yn6pjb button.chakra-button.css-7rul47",
             );
 
             if (!button || button.disabled) {
