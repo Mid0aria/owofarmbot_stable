@@ -62,6 +62,10 @@ module.exports = (client) => {
         logging("🔴", type, module, result, client.chalk.red);
     }
 
+    function debug(result = "") {
+        logging("⚪", "Bot", "Debug", result, client.chalk.white);
+    }
+
     function logging(emoji, type, module, result, color) {
         const logMessage =
             `${client.chalk.white(`[${new Date().toLocaleTimeString()}]`)} ` +
@@ -73,30 +77,50 @@ module.exports = (client) => {
             `${client.chalk.magenta(module)} > ` +
             `${color(result)}`;
 
-        reallog.push(logMessage);
-        if (exitlog) fulllog.push(logMessage);
-        if (reallog.length >= length) reallog.shift();
-        showlog(reallog);
-
         const localLogMessage = `[${new Date().toLocaleTimeString()}] ${
             color == client.chalk.green
-                ? "🟢"
-                : client.chalk.yellow
-                  ? "🟡"
-                  : "🔴"
-        } ${type} >> ${client.global.type} > ${module} > ${result}`;
+                ? "[I]"
+                : color == client.chalk.yellow
+                  ? "[W]"
+                  : color == client.chalk.white ? "[D]" : "[E]"
+            } ${type} >> ${client.global.type} > ${module} > ${result}`;
+        
         fs.appendFile(logFileName, localLogMessage + "\n", (err) => {
             if (err) {
                 console.error("Error writing to log file", err);
             }
         });
-        simplifylog.push(localLogMessage);
 
-        if (process.send) {
-            process.send({
-                type: "log",
-                message: localLogMessage,
-            });
+        fs.readdir("./data", (err, files) => {
+            if (err) return console.error("Error reading directory:", err);
+
+            const logFiles = files.filter(file => file.endsWith(".log"))
+                .map(file => ({ name: file, time: fs.statSync(path.join(logDir, file)).mtime.getTime() }))
+                .sort((a, b) => a.time - b.time);
+
+            logFiles.slice(0, logFiles.length - 10).forEach(file => 
+                fs.unlink(path.join(logDir, file.name), err => {
+                    if (!err) console.log("Deleted:", file.name);
+                })
+            );
+        });
+
+        if (color != client.chalk.white) {
+            reallog.push(logMessage);
+            if (exitlog) fulllog.push(logMessage);
+            if (reallog.length >= length) reallog.shift();
+            showlog(reallog);
+
+            const webLogMessage = `[${new Date().toLocaleTimeString()}] ${emoji} ${type} >> ${client.global.type} > ${module} > ${result}`;
+
+            simplifylog.push(webLogMessage);
+
+            if (process.send) {
+                process.send({
+                    type: "log",
+                    message: webLogMessage,
+                });
+            }
         }
     }
 
@@ -225,6 +249,7 @@ module.exports = (client) => {
         info,
         warn,
         alert,
+        debug,
         getSimpleLog,
     };
 };

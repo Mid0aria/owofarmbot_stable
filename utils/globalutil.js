@@ -463,3 +463,126 @@ exports.gatherUserDetails = async (config, tokentype, client) => {
         console.log("✅ Config updated successfully!");
     }
 };
+
+exports.getconfig = (config, client) => {
+    const packageJson = require("../package.json");
+
+    client.logger.debug(`OwO Farm Bot Stable - Debug log
+Basic information
+-------------------------
+Version: ${packageJson.version}
+Platform: ${process.platform} (using process.platform)
+-------------------------
+
+Config
+-------------------------
+Main commands:
+  Hunt: ${config.main.commands.hunt} - type: ${typeof config.main.commands.hunt}
+  Battle: ${config.main.commands.battle} - type: ${typeof config.main.commands.battle}
+  Pray: ${config.main.commands.pray} - type: ${typeof config.main.commands.pray}
+  Curse: ${config.main.commands.curse} - type: ${typeof config.main.commands.curse}
+  Huntbot: 
+    Enable: ${config.main.commands.huntbot.enable} - type: ${typeof config.main.commands.huntbot.enable}
+    Max Time: ${config.main.commands.huntbot.maxtime} - type: ${typeof config.main.commands.huntbot.maxtime}
+    Upgrade: ${config.main.commands.huntbot.upgrade} - type: ${typeof config.main.commands.huntbot.upgrade}
+    Upgrade Type: ${config.main.commands.huntbot.upgradetype} - type: ${typeof config.main.commands.huntbot.upgradetype}
+  Gamble: 
+    Coinflip: ${config.main.commands.gamble.coinflip} - type: ${typeof config.main.commands.gamble.coinflip}
+    Slot: ${config.main.commands.gamble.slot} - type: ${typeof config.main.commands.gamble.slot}
+  Animals: ${config.main.commands.animals} - type: ${typeof config.main.commands.animals}
+  Inventory: ${config.main.commands.inventory} - type: ${typeof config.main.commands.inventory}
+  Checklist: ${config.main.commands.checklist} - type: ${typeof config.main.commands.checklist}
+  Autoquest: ${config.main.commands.autoquest} - type: ${typeof config.main.commands.autoquest}
+  Gem rarity: ${config.main.maximum_gem_rarity} - type: ${typeof config.main.maximum_gem_rarity}
+
+Extra commands:
+  Hunt: ${config.extra.commands.hunt} - type: ${typeof config.extra.commands.hunt}
+  Battle: ${config.extra.commands.battle} - type: ${typeof config.extra.commands.battle}
+  Pray: ${config.extra.commands.pray} - type: ${typeof config.extra.commands.pray}
+  Curse: ${config.extra.commands.curse} - type: ${typeof config.extra.commands.curse}
+  Huntbot: 
+    Enable: ${config.extra.commands.huntbot.enable} - type: ${typeof config.extra.commands.huntbot.enable}
+    Max Time: ${config.extra.commands.huntbot.maxtime} - type: ${typeof config.extra.commands.huntbot.maxtime}
+    Upgrade: ${config.extra.commands.huntbot.upgrade} - type: ${typeof config.extra.commands.huntbot.upgrade}
+    Upgrade Type: ${config.extra.commands.huntbot.upgradetype} - type: ${typeof config.extra.commands.huntbot.upgradetype}
+  Gamble: 
+    Coinflip: ${config.extra.commands.gamble.coinflip} - type: ${typeof config.extra.commands.gamble.coinflip}
+    Slot: ${config.extra.commands.gamble.slot} - type: ${typeof config.extra.commands.gamble.slot}
+  Animals: ${config.extra.commands.animals} - type: ${typeof config.extra.commands.animals}
+  Inventory: ${config.extra.commands.inventory} - type: ${typeof config.extra.commands.inventory}
+  Checklist: ${config.extra.commands.checklist} - type: ${typeof config.extra.commands.checklist}
+  Autoquest: ${config.extra.commands.autoquest} - type: ${typeof config.extra.commands.autoquest}
+  To Main: ${config.extra.commands.tomain} - type: ${typeof config.extra.commands.tomain}
+  Gem rarity: ${config.extra.maximum_gem_rarity} - type: ${typeof config.extra.maximum_gem_rarity}
+
+Elaina: ${config.settings.autophrases} - type: ${typeof config.settings.autophrases}
+Join giveaways: ${config.settings.autojoingiveaways} - type: ${typeof config.settings.autojoingiveaways}
+
+Checklist:
+  Daily: ${config.settings.checklist.types.daily} - type: ${typeof config.settings.checklist.types.daily}
+  Cookie: ${config.settings.checklist.types.cookie} - type: ${typeof config.settings.checklist.types.cookie}
+  Vote: ${config.settings.checklist.types.vote} - type: ${typeof config.settings.checklist.types.vote}
+
+Inventory:
+  Use:
+    Lootbox: ${config.settings.inventory.use.lootbox} - type: ${typeof config.settings.inventory.use.lootbox}
+    Fabled Lootbox: ${config.settings.inventory.use.fabledlootbox} - type: ${typeof config.settings.inventory.use.fabledlootbox}
+    Crate: ${config.settings.inventory.use.crate} - type: ${typeof config.settings.inventory.use.crate}
+    Gems: ${config.settings.inventory.use.gems} - type: ${typeof config.settings.inventory.use.gems}
+
+Gamble:
+  Coinflip:
+    Default Amount: ${config.settings.gamble.coinflip.default_amount} - type: ${typeof config.settings.gamble.coinflip.default_amount}
+    Max Amount: ${config.settings.gamble.coinflip.max_amount} - type: ${typeof config.settings.gamble.coinflip.max_amount}
+    Multiplier: ${config.settings.gamble.coinflip.multiplier} - type: ${typeof config.settings.gamble.coinflip.multiplier}
+  Slot:
+    Default Amount: ${config.settings.gamble.slot.default_amount} - type: ${typeof config.settings.gamble.slot.default_amount}
+    Max Amount: ${config.settings.gamble.slot.max_amount} - type: ${typeof config.settings.gamble.slot.max_amount}
+    Multiplier: ${config.settings.gamble.slot.multiplier} - type: ${typeof config.settings.gamble.slot.multiplier}
+
+Safety:
+  Auto Pause: ${config.settings.safety.autopause} - type: ${typeof config.settings.safety.autopause}
+  Pause After: ${config.settings.safety.pauseafter} - type: ${typeof config.settings.safety.pauseafter}
+  Pause For: ${config.settings.safety.pausefor} - type: ${typeof config.settings.safety.pausefor}
+
+Captcha:
+  Auto Solve: ${config.settings.captcha.autosolve} - type: ${typeof config.settings.captcha.autosolve}
+  Alert Type:
+    Webhook: ${config.settings.captcha.alerttype.webhook} - type: ${typeof config.settings.captcha.alerttype.webhook}
+    Desktop:
+      Force: ${config.settings.captcha.alerttype.desktop.force} - type: ${typeof config.settings.captcha.alerttype.desktop.force}
+      Notification: ${config.settings.captcha.alerttype.desktop.notification} - type: ${typeof config.settings.captcha.alerttype.desktop.notification}
+      Prompt: ${config.settings.captcha.alerttype.desktop.prompt} - type: ${typeof config.settings.captcha.alerttype.desktop.prompt}
+    Termux:
+      Notification: ${config.settings.captcha.alerttype.termux.notification} - type: ${typeof config.settings.captcha.alerttype.termux.notification}
+      Vibration: ${config.settings.captcha.alerttype.termux.vibration} - type: ${typeof config.settings.captcha.alerttype.termux.vibration}
+      Vibration Time: ${config.settings.captcha.alerttype.termux.vibration_time} - type: ${typeof config.settings.captcha.alerttype.termux.vibration_time}
+      Toast: ${config.settings.captcha.alerttype.termux.toast} - type: ${typeof config.settings.captcha.alerttype.termux.toast}
+
+Animals:
+  Sell: ${config.animals.type.sell} - type: ${typeof config.animals.type.sell}
+  Sacrifice: ${config.animals.type.sacrifice} - type: ${typeof config.animals.type.sacrifice}
+
+Interval:
+  Hunt: ${config.interval.hunt.min} - ${config.interval.hunt.max}
+  Type: ${typeof config.interval.hunt.min} - ${typeof config.interval.hunt.max}
+
+  Battle: ${config.interval.battle.min} - ${config.interval.battle.max}
+  Type: ${typeof config.interval.battle.min} - ${typeof config.interval.battle.max}
+
+  Pray: ${config.interval.pray.min} - ${config.interval.pray.max}
+  Type: ${typeof config.interval.pray.min} - ${typeof config.interval.pray.max}
+
+  Coinflip: ${config.interval.coinflip.min} - ${config.interval.coinflip.max}
+  Type: ${typeof config.interval.coinflip.min} - ${typeof config.interval.coinflip.max}
+
+  Slot: ${config.interval.slot.min} - ${config.interval.slot.max}
+  Type: ${typeof config.interval.slot.min} - ${typeof config.interval.slot.max}
+
+  Animals: ${config.interval.animals.min} - ${config.interval.animals.max}
+  Type: ${typeof config.interval.animals.min} - ${typeof config.interval.animals.max}
+
+  Checklist: ${config.interval.checklist} - type: ${typeof config.interval.checklist}
+-------------------------
+`)
+}

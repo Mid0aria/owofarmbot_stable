@@ -1,7 +1,9 @@
-<div class="sidebar" id="sidebar">
-    <h3><i class="bi bi-menu-button-wide"></i> OwO Farm Bot Stable</h3>
+<div class="sidebar" id="thesidebar">
+    <div class="sidebar-top" onclick="toggleMenu()">
+        <h3><i class="bi bi-menu-button-wide"></i> OwO Farm Bot Stable</h3>
+    </div>
 
-    <div id="sidebar-general-section">
+    <div id="sidebar-general-section" style="padding-top: 100px;">
         <h2>General</h2>
         <div id="general-menu">
             <a id="general-settings-link" onclick="showSettings('general')">
@@ -42,23 +44,31 @@
         </div>
     </div>
 
-    <div style="position: absolute; bottom: 100px; left: 20px; color: #b0bec5">
-        <i class="bi bi-clock"></i>
-        Uptime: <span id="uptime">0d 0h 0m 0s</span>
+    <div style="position: absolute; margin-top: 860px" id="love">
+        hidden love
     </div>
 
-    <div style="
-            position: absolute;
-            bottom: 0px;
-            left: 20px;
-            display: flex;
-            gap: 10px;
-        ">
-        <a href="https://github.com/mid0aria/owofarmbot_stable" target="_blank">
-            <i class="bi bi-github"></i>
-        </a>
-        <a href="https://github.com/sponsors/Mid0aria" target="_blank">
-            <i class="bi bi-cash-coin"></i>
-        </a>
+    <div class="sidebar-end" id="sidebar-end">
+        <div style="position: absolute; bottom: 110px; left: 20px; color: #b0bec5">
+            <i class="bi bi-clock"></i>
+            Uptime: <span id="uptime">0d 0h 0m 0s</span>
+        </div>
+
+        <div style="
+                position: absolute;
+                bottom: 0px;
+                left: 10px;
+                display: flex;
+                gap: 20px;
+            ">
+            <a href="https://github.com/mid0aria/owofarmbot_stable" target="_blank">
+                <i class="bi bi-github" style="margin-left: 20px;"></i>
+                <i>Github</i>
+            </a>
+            <a href="https://github.com/sponsors/Mid0aria" target="_blank">
+                <i class="bi bi-cash-coin" style="margin-left: 25px;"></i>
+                <i>Support</i>
+            </a>
+        </div>
     </div>
 </div>

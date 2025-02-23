@@ -31,6 +31,8 @@ body {
         background-color 0.3s ease;
     z-index: 5;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .sidebar.closed {
@@ -38,7 +40,7 @@ body {
     background-color: #333;
 }
 
-.sidebar h3 {
+.sidebar-top h3 {
     color: #00c853;
     font-size: 1.6rem;
     margin-bottom: 20px;
@@ -178,17 +180,6 @@ body {
     color: #ffcc00;
 }
 
-/* Responsive tweaks */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
-
-    .sidebar.closed {
-        width: 60px;
-    }
-}
-
 .content {
     display: flex;
     flex-direction: column;
@@ -218,18 +209,20 @@ body {
     color: #f44336 !important;
 }
 
+/* Add the var here to let it customizable but i was lazy */
+
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
-    background-color: #121212;
+    background-color: var(--stat-grid-color, #121212);
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
 .stat-box {
-    background-color: #1f1f1f;
+    background-color: var(--stat-box-color, #1f1f1f);
     text-align: center;
     padding: 20px;
     border-radius: 10px;
@@ -297,30 +290,6 @@ body {
 
 .action-btns button:hover {
     transform: scale(1.05);
-}
-
-.menu-toggle {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    background-color: #1f1f1f;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    z-index: 10;
-}
-
-.menu-toggle:focus {
-    outline: none;
-}
-
-.menu-toggle i {
-    color: #4caf50;
-}
-
-.menu-toggle.open i {
-    color: #ff9800;
 }
 
 .sidebar.closed {
@@ -471,4 +440,166 @@ body {
     overflow-y: auto;
     word-wrap: break-word;
     white-space: pre-wrap;
+}
+
+.info-card {
+    width: 25vw;
+    padding: 16px;
+    gap: 8px;
+    background-color: var(--info-out-color, #121212);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: left;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    min-height: 100%;
+}
+
+.info-card.blur {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(var(--info-blur, 4px));
+}
+
+.info-card-data {
+    height: 20%;
+    display: inline-block;
+    position: relative;
+    padding: 4px;
+    border-radius: 6px;
+    background: var(--info-in-color, #1f1f1f);
+    backdrop-filter: none;
+}
+
+.info-card-data.blur {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(var(--info-data-blur, 8px));
+}
+
+.quest-card {
+    width: 25vw;
+    padding: 24px;
+    gap: 20px;
+    background-color: var(--quest-out-color, #121212);
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: left;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    min-height: 100%;
+}
+
+.quest-card.blur {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(var(--quest-blur, 4px));
+}
+
+.quest-card-data {
+    height: 30%;
+    display: inline-block;
+    position: relative;
+    padding: 4px;
+    border-radius: 6px;
+    background: var(--quest-in-color, #1f1f1f);
+    backdrop-filter: none;
+}
+
+.quest-card-data.blur {
+    background: rgba(0, 0, 0, 0);
+    backdrop-filter: blur(var(--quest-data-blur, 8px));
+}
+
+.sidebar-top {
+    margin-top: -20px;
+    margin-left: -25px;
+    padding-top: 20px;
+    padding-left: 25px;
+    padding-bottom: 15px;
+    height: 100px;
+    width: 270px;
+    background-color: #1c1e24;
+    cursor: pointer;
+    position: absolute;
+    flex-shrink: 0;
+    z-index: 6;
+}
+
+.sidebar-end {
+    background-color: #1c1e24;
+    height: 160px;
+    width: 250px;
+    position: sticky;
+    position: inherit;
+    bottom: 0;
+    left: 0;
+    flex-shrink: 0;
+}
+
+.big-box {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+    padding-bottom: 70px;
+}
+
+.small-box {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.another-big-box {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    align-items: start;
+}
+
+.another-small-box {
+    display: flex;
+    align-items: center;
+}
+
+/* Maybe it not too nessesary */
+
+@media (max-width: 900px) {
+    .big-box {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .info-card {
+        width: 90vw;
+    }
+
+    .quest-card {
+        width: 90vw;
+    }
+
+    .sidebar {
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .content {
+        margin-top: 100px;
+    }
+
+    .sidebar-top {
+        height: 90px;
+        width: 100%;
+        position: fixed;
+        left: 0;
+        margin-left: 0px;
+        padding-top: 30px;
+    }
+
+    .stats-grid {
+        padding: 10px;
+    }
+
+    .stat-box {
+        padding: 10px;
+    }
 }

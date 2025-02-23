@@ -1,58 +1,69 @@
 <!-- Main Home Content -->
 <div id="home-content">
-    <!-- User Info Section -->
-    <div class="userinfo-section" id="userinfo">
-        <h2 class="text-container">User Info</h2>
-        <p>
-            <div class="text-container">
-                Nickname:
-                <span id="usernick">çıkaramadım abi kimsin sen</span>
+    <!-- User Info and Quest Section -->
+    <div class="big-box">
+        <div class="small-box">
+            <h2 class="text-container">User Info</h2>
+            <div class="info-card" id="userinfo">
+                <div class="info-card-data">
+                    username:
+                    <span id="username">çıkaramadım abi kimsin sen</span>
+                </div>
+
+                <div class="info-card-data">
+                    Nickname:
+                    <span id="usernick">çıkaramadım abi kimsin sen</span>
+                </div>
+
+                <div class="info-card-data">
+                    Farm Bot Status: <span id="bot-status">Stopped</span>
+                </div>
+
+                <div class="info-card-data">
+                    WebSocket Status:
+                    <span id="ws-status">Disconnected</span>
+                </div>
             </div>
-            <div class="text-container">
-                username:
-                <span id="username">çıkaramadım abi kimsin sen</span>
+        </div>
+
+        <div class="small-box">
+            <h2 class="text-container">Quest</h2>
+            <div class="quest-card" id="quest">
+                <div class="quest-card-data">
+                    <span id="quest-title">Waiting...</span>
+                </div>
+
+                <div class="quest-card-data">
+                    <span id="quest-reward">Waiting...</span>
+                </div>
+
+                <div class="quest-card-data">
+                    <span id="quest-progress">Waiting...</span>
+                </div>
             </div>
-        </p>
-        <p>
-            <div class="text-container">
-                Farm Bot Status: <span id="bot-status">Stopped</span>
+        </div>
+
+        <div class="small-box">
+            <div class="actions-section" id="actions">
+                <h2 class="text-container">Actions</h2>
+                <div class="action-btns">
+                    <button class="btn btn-success btn-custom" onclick="sendAction('start')">
+                        Start
+                    </button>
+                    <button class="btn btn-info btn-custom" onclick="sendAction('pause')">
+                        Pause
+                    </button>
+                    <button class="btn btn-warning btn-custom" onclick="sendAction('resume')">
+                        Resume
+                    </button>
+                    <button class="btn btn-danger btn-custom" onclick="showrebootalertPopup()">
+                        Reboot
+                    </button>
+                </div>
             </div>
-        </p>
-        <p>
-            <div class="text-container">
-                WebSocket Status:
-                <span id="ws-status">Disconnected</span>
-            </div>
-        </p>
-    </div>
-    <!-- Actions Section -->
-    <div class="actions-section" id="actions">
-        <h2 class="text-container">Actions</h2>
-        <div class="action-btns">
-            <button
-                class="btn btn-success btn-custom"
-                onclick="sendAction('start')"
-            >
-                Start
-            </button>
-            <button
-                class="btn btn-info btn-custom"
-                onclick="sendAction('pause')"
-            >
-                Pause</button
-            ><button
-                class="btn btn-warning btn-custom"
-                onclick="sendAction('resume')"
-            >
-                Resume</button
-            ><button
-                class="btn btn-danger btn-custom"
-                onclick="showrebootalertPopup()"
-            >
-                Reboot
-            </button>
         </div>
     </div>
+
     <!-- Stats Section -->
     <h2 class="text-container">Stats</h2>
     <div class="stats-grid">

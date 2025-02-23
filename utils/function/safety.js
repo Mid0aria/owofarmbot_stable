@@ -15,6 +15,11 @@ module.exports = async (client) => {
                     "Safety",
                     "Safety paused to reduce bot rate.",
                 );
+                client.broadcast({
+                    action: "update",
+                    type: "botstatus",
+                    status: "Safety paused",
+                });
 
                 clearInterval(interval);
                 interval = null;

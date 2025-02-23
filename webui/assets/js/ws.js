@@ -12,7 +12,7 @@ let socket;
 let startTime = null;
 
 function connectWebSocket() {
-    socket = new WebSocket(`ws://${window.location.hostname}:31085`); //! buna configden nasıl port vereyim AMK
+    socket = new WebSocket(`ws://${window.location.host}/ws`); //! buna configden nasıl port vereyim AMK
 
     socket.onopen = function () {
         document.getElementById("ws-status").textContent = "Connected";
@@ -161,54 +161,51 @@ function connectWebSocket() {
                         `${data.status}`;
                 }
 
-                if (data.type == "hunt") {
-                    document.getElementById("hunt-value").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "battle") {
-                    document.getElementById("battle-value").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "pray") {
-                    document.getElementById("pray-value").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "curse") {
-                    document.getElementById("curse-value").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "huntbot") {
-                    document.getElementById("huntbot-value").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "vote") {
-                    document.getElementById("vote-value").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "giveaway") {
-                    document.getElementById("giveaway-value").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "captcha") {
-                    document.getElementById("captcha-value").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "solvedcaptcha") {
-                    document.getElementById("solvedcaptcha-value").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "slot") {
-                    document.getElementById("slot-value").innerHTML =
-                        `${data.progress}`;
-                    document.getElementById("cowoncywon-value").innerHTML =
-                        `${data.cow}`;
-                }
-                if (data.type == "coinflip") {
-                    document.getElementById("coinflip-value").innerHTML =
-                        `${data.progress}`;
-                    document.getElementById("cowoncywon-value").innerHTML =
-                        `${data.cow}`;
-                }
+                document.getElementById("hunt-value").innerHTML =
+                    `${data.global.total.hunt}`;
+
+                document.getElementById("battle-value").innerHTML =
+                    `${data.global.total.battle}`;
+
+                document.getElementById("pray-value").innerHTML =
+                    `${data.global.total.pray}`;
+
+                document.getElementById("curse-value").innerHTML =
+                    `${data.global.total.curse}`;
+
+                document.getElementById("huntbot-value").innerHTML =
+                    `${data.global.total.huntbot}`;
+
+                document.getElementById("vote-value").innerHTML =
+                    `${data.global.total.vote}`;
+
+                document.getElementById("giveaway-value").innerHTML =
+                    `${data.global.total.giveaway}`;
+
+                document.getElementById("captcha-value").innerHTML =
+                    `${data.global.total.captcha}`;
+
+                document.getElementById("solvedcaptcha-value").innerHTML =
+                    `${data.global.total.solvedcaptcha}`;
+
+                document.getElementById("slot-value").innerHTML =
+                    `${data.global.gamble.slot}`;
+
+                document.getElementById("coinflip-value").innerHTML =
+                    `${data.global.gamble.coinflip}`;
+
+                document.getElementById("cowoncywon-value").innerHTML =
+                    `${data.global.gamble.cowoncywon}`;
+                
+                const hasQuest = data.global.quest.title != "All quests completed!" || data.global.quest.title != "No active quest found";
+                document.getElementById("quest-title").textContent = (hasQuest ? "Title: " : "") +
+                    `${data.global.quest.title}`;
+                
+                document.getElementById("quest-reward").textContent = (hasQuest ? "Reward: " : "") +
+                    `${data.global.quest.reward}`;
+                
+                document.getElementById("quest-progress").textContent = (hasQuest ? "Progress: " : "") +
+                    `${data.global.quest.progress}`;
             }
         }
         if (data.global.type == "Extra") {
@@ -218,57 +215,51 @@ function connectWebSocket() {
                         `${data.status}`;
                 }
 
-                if (data.type == "hunt") {
-                    document.getElementById("hunt-value-extra").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "battle") {
-                    document.getElementById("battle-value-extra").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "pray") {
-                    document.getElementById("pray-value-extra").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "curse") {
-                    document.getElementById("curse-value-extra").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "huntbot") {
-                    document.getElementById("huntbot-value-extra").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "vote") {
-                    document.getElementById("vote-value-extra").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "giveaway") {
-                    document.getElementById("giveaway-value-extra").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "captcha") {
-                    document.getElementById("captcha-value-extra").innerHTML =
-                        `${data.progress}`;
-                }
-                if (data.type == "solvedcaptcha") {
-                    document.getElementById(
-                        "solvedcaptcha-value-extra",
-                    ).innerHTML = `${data.progress}`;
-                }
-                if (data.type == "slot") {
-                    document.getElementById("slot-value-extra").innerHTML =
-                        `${data.progress}`;
-                    document.getElementById(
-                        "cowoncywon-value-extra",
-                    ).innerHTML = `${data.cow}`;
-                }
-                if (data.type == "coinflip") {
-                    document.getElementById("coinflip-value-extra").innerHTML =
-                        `${data.progress}`;
-                    document.getElementById(
-                        "cowoncywon-value-extra",
-                    ).innerHTML = `${data.cow}`;
-                }
+                document.getElementById("hunt-value-extra").innerHTML =
+                    `${data.global.total.hunt}`;
+
+                document.getElementById("battle-value-extra").innerHTML =
+                    `${data.global.total.battle}`;
+
+                document.getElementById("pray-value-extra").innerHTML =
+                    `${data.global.total.pray}`;
+
+                document.getElementById("curse-value-extra").innerHTML =
+                    `${data.global.total.curse}`;
+
+                document.getElementById("huntbot-value-extra").innerHTML =
+                    `${data.global.total.huntbot}`;
+
+                document.getElementById("vote-value-extra").innerHTML =
+                    `${data.global.total.vote}`;
+
+                document.getElementById("giveaway-value-extra").innerHTML =
+                    `${data.global.total.giveaway}`;
+
+                document.getElementById("captcha-value-extra").innerHTML =
+                    `${data.global.total.captcha}`;
+
+                document.getElementById("solvedcaptcha-value-extra").innerHTML =
+                    `${data.global.total.solvedcaptcha}`;
+
+                document.getElementById("slot-value-extra").innerHTML =
+                    `${data.global.gamble.slot}`;
+
+                document.getElementById("coinflip-value-extra").innerHTML =
+                    `${data.global.gamble.coinflip}`;
+
+                document.getElementById("cowoncywon-value-extra").innerHTML =
+                    `${data.global.gamble.cowoncywon}`;
+                
+                const hasQuest = data.global.quest.title != "All quests completed!" || data.global.quest.title != "No active quest found";
+                document.getElementById("quest-title-extra").textContent = (hasQuest ? "Title: " : "") +
+                    `${data.global.quest.title}`;
+                
+                document.getElementById("quest-reward-extra").textContent = (hasQuest ? "Reward: " : "") +
+                    `${data.global.quest.reward}`;
+                
+                document.getElementById("quest-progress-extra").textContent = (hasQuest ? "Progress: " : "") +
+                    `${data.global.quest.progress}`;
             }
         }
     };

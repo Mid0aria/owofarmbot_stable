@@ -259,3 +259,38 @@ function showlog() {
     document.getElementById("settings-content-extra").style.display = "none";
     document.getElementById("general-settings-content").style.display = "none";
 }
+
+function toggleMenu() {
+    console.log("ced");
+    let hasExtra = false;
+    if (document.getElementById("usernick-extra").textContent != "çıkaramadım abi kimsin sen")
+        hasExtra = true;
+
+    if (window.innerWidth <= 900) {
+        if (document.getElementById("sidebar-general-section").style.display == "block") {
+            document.getElementById("sidebar-general-section").style.display = "none";
+            document.getElementById("sidebar-main-section").style.display = "none";
+            document.getElementById("sidebar-extra-section").style.display = "none";
+            document.getElementById("sidebar-end").style.display = "none";
+            document.getElementById("love").style.display = "none";
+            document.getElementById("thesidebar").style.height = "auto";
+            document.getElementById("connected").style.marginLeft = "0px";
+        } else {
+            document.getElementById("sidebar-general-section").style.display = "block";
+            document.getElementById("sidebar-main-section").style.display = "block";
+            if (hasExtra) document.getElementById("sidebar-extra-section").style.display = "block";
+            document.getElementById("sidebar-end").style.display = "block";
+            document.getElementById("love").style.display = "block";
+            document.getElementById("thesidebar").style.height = "100vh";
+            document.getElementById("connected").style.marginLeft = "270px";
+        }
+    } else if (document.getElementById("sidebar-general-section").style.display != "block") {
+        document.getElementById("sidebar-general-section").style.display = "block";
+        document.getElementById("sidebar-main-section").style.display = "block";
+        if (hasExtra) document.getElementById("sidebar-extra-section").style.display = "block";
+        document.getElementById("sidebar-end").style.display = "block";
+        document.getElementById("love").style.display = "block";
+        document.getElementById("thesidebar").style.height = "100vh";
+        document.getElementById("connected").style.marginLeft = "270px";
+    }
+}
