@@ -384,7 +384,7 @@ async function checklist(client, channel) {
     }
 
     smol(client, channel);
-    require("./function/farm.js");
+    require("./function/farm.js")(client);
 }
 
 async function sell(client, channel, choose, types) {
