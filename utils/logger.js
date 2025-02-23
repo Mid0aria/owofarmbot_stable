@@ -97,8 +97,8 @@ module.exports = (client) => {
                 .map(file => ({ name: file, time: fs.statSync(path.join("./data", file)).mtime.getTime() }))
                 .sort((a, b) => a.time - b.time);
 
-            logFiles.slice(0, logFiles.length - 10).forEach(file =>
-                fs.unlink(path.join("./data", file.name))
+            logFiles.slice(0, logFiles.length - 5).forEach(file => 
+                fs.unlink(path.join("./data", file.name), err => {})
             );
         });
 
