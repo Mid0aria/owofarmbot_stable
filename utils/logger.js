@@ -21,6 +21,7 @@
  * - Otherwise, it logs the last message in the reallog array.
  */
 const fs = require("fs");
+const path = require("path");
 
 let reallog = [],
     fulllog = [],
@@ -92,16 +93,12 @@ module.exports = (client) => {
         });
 
         fs.readdir("./data", (err, files) => {
-            if (err) return console.error("Error reading directory:", err);
-
             const logFiles = files.filter(file => file.endsWith(".log"))
-                .map(file => ({ name: file, time: fs.statSync(path.join(logDir, file)).mtime.getTime() }))
+                .map(file => ({ name: file, time: fs.statSync(path.join("./data", file)).mtime.getTime() }))
                 .sort((a, b) => a.time - b.time);
 
-            logFiles.slice(0, logFiles.length - 10).forEach(file => 
-                fs.unlink(path.join(logDir, file.name), err => {
-                    if (!err) console.log("Deleted:", file.name);
-                })
+            logFiles.slice(0, logFiles.length - 10).forEach(file =>
+                fs.unlink(path.join("./data", file.name))
             );
         });
 
