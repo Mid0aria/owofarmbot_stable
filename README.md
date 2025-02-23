@@ -396,8 +396,7 @@ Promt mode:
 
 ## 🔗・Required Links
 
-[NodeJS](https://nodejs.org/en/)<br>
-[Python(version ≥ 3.10)](https://www.python.org/downloads/)<br>
+[NodeJS (version 22.12.0)](https://nodejs.org/dist/v22.12.0/node-v22.12.0-x64.msi)<br>
 [Terminal](https://apps.microsoft.com/detail/9n0dx20hk701)<br>
 [Farm Bot ZIP File](https://github.com/Mid0aria/owofarmbot_stable/archive/refs/heads/main.zip)
 
@@ -418,9 +417,6 @@ irm "https://raw.githubusercontent.com/mid0aria/owofarmbot_stable/main/windows-s
 ```bash
 # Check Node.js version:
 node -v
-
-# Check Python version:
-py --version
 
 # Clone the files with git:
 git clone https://github.com/Mid0aria/owofarmbot_stable

@@ -1,31 +1,34 @@
 <div class="log-section" id="log-section" style="display: none">
     <div>
         <h1 class="text-container">Logs</h1>
-
         <div id="logContainer" class="log-container"></div>
     </div>
 </div>
 
 <script>
     const eventSource = new EventSource("/logs");
+    const logContainer = document.getElementById("logContainer");
+    const maxLogEntries = 200;
 
     eventSource.onmessage = (event) => {
         const logMessage = JSON.parse(event.data);
-        //console.log("Received log:", logMessage);
-        const logContainer = document.getElementById("logContainer");
         const logEntry = document.createElement("div");
         logEntry.textContent = logMessage;
-        logContainer.appendChild(logEntry);
 
-        if (logContainer.children.length > 50) {
+        const fragment = document.createDocumentFragment();
+        fragment.appendChild(logEntry);
+
+        while (logContainer.children.length >= maxLogEntries) {
             logContainer.removeChild(logContainer.firstChild);
         }
 
+        logContainer.appendChild(fragment);
         logContainer.scrollTop = logContainer.scrollHeight;
     };
 
     eventSource.onerror = (err) => {
         console.error("SSE Error:", err);
-        eventSource.close();
+
+        // eventSource.close();
     };
 </script>

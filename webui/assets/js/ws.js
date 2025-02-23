@@ -27,25 +27,12 @@ function connectWebSocket() {
         const data = JSON.parse(event.data);
         console.log(data);
 
-        //this shii cannot work inside if (data.action == "connectinfo") {
-        if (data.type == "oldlog") {
-            const t = data.log;
-            const logContainer = document.getElementById("logContainer");
-            for (const log of t) {
-                const raw = JSON.stringify(log);
-                const logMessage = JSON.parse(raw);
-                const logEntry = document.createElement("div");
-                logEntry.textContent = logMessage;
-                logContainer.appendChild(logEntry);
-            }
-        }
-
         if (data.action == "connectinfo") {
             if (data.type == "uptime") {
                 startTime = new Date() - data.uptime * 1000;
                 setInterval(updateUptime, 1000);
             }
-            if (data.global.type == "Extra") {
+            if (data.global?.type == "Extra") {
                 document.getElementById("sidebar-extra-section").style.display =
                     "block";
             }
@@ -60,7 +47,7 @@ function connectWebSocket() {
                     logContainer.appendChild(logEntry);
                 }
             }
-            if (data.global.type == "Main" && data.type == "alldata") {
+            if (data.global?.type == "Main" && data.type == "alldata") {
                 document.getElementById("usernick").textContent =
                     `${data.client.globalName}`;
 
@@ -106,7 +93,7 @@ function connectWebSocket() {
                 document.getElementById("cowoncywon-value").innerHTML =
                     `${data.global.gamble.cowoncywon}`;
             }
-            if (data.global.type == "Extra" && data.type == "alldata") {
+            if (data.global?.type == "Extra" && data.type == "alldata") {
                 document.getElementById("usernick-extra").textContent =
                     `${data.client.globalName}`;
 
@@ -154,7 +141,7 @@ function connectWebSocket() {
             }
         }
 
-        if (data.global.type == "Main") {
+        if (data.global?.type == "Main") {
             if (data.action == "update") {
                 if (data.type == "botstatus") {
                     document.getElementById("bot-status").textContent =
@@ -208,7 +195,7 @@ function connectWebSocket() {
                     `${data.global.quest.progress}`;
             }
         }
-        if (data.global.type == "Extra") {
+        if (data.global?.type == "Extra") {
             if (data.action == "update") {
                 if (data.type == "botstatus") {
                     document.getElementById("bot-status-extra").textContent =
