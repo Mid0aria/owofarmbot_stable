@@ -130,8 +130,6 @@ if (cluster.isMaster) {
         res.setHeader("Cache-Control", "no-cache");
         res.setHeader("Connection", "keep-alive");
         res.flushHeaders();
-        cluster.removeListener("message"); //remove any old listener (maybe)
-
         cluster.on("message", (worker, message) => {
             if (message.type == "log") {
                 res.write(`data: ${JSON.stringify(message.message)}\n\n`);
