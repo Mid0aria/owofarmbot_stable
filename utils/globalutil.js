@@ -584,5 +584,5 @@ Interval:
 
   Checklist: ${config.interval.checklist} - type: ${typeof config.interval.checklist}
 -------------------------
-`)
-}
+`);
+};

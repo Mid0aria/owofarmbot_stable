@@ -171,7 +171,9 @@ async function checklist(client, channel) {
                             const filter = (msg) =>
                                 msg.embeds[0] &&
                                 msg.embeds[0].author &&
-                                msg.embeds[0].author.name.includes("Checklist") &&
+                                msg.embeds[0].author.name.includes(
+                                    "Checklist",
+                                ) &&
                                 msg.author.id === "408785106942164992" &&
                                 msg.channel.id === channel.id &&
                                 msg.id.localeCompare(id) > 0;
@@ -191,10 +193,11 @@ async function checklist(client, channel) {
                                     "Rechecking checklist...",
                                 );
                                 client.off("messageCreate", listener);
-                                const collector = channel.createMessageCollector({
-                                    filter,
-                                    time: 11600,
-                                });
+                                const collector =
+                                    channel.createMessageCollector({
+                                        filter,
+                                        time: 11600,
+                                    });
                                 collector.on("collect", (msg) => {
                                     if (filter(msg)) {
                                         collector.stop();
@@ -219,22 +222,30 @@ async function checklist(client, channel) {
                     }
 
                     await client.delay(3000);
-                    if (client.global.captchadetected || client.global.paused) return;
-                    let checklistmsg = message.embeds[0].description.toLowerCase();
+                    if (client.global.captchadetected || client.global.paused)
+                        return;
+                    let checklistmsg =
+                        message.embeds[0].description.toLowerCase();
                     if (checklistmsg.includes("☑️ 🎉")) {
-                        client.logger.info("Farm", "Checklist", "Checklist completed.");
+                        client.logger.info(
+                            "Farm",
+                            "Checklist",
+                            "Checklist completed.",
+                        );
                     } else {
                         const checklistlines = checklistmsg.trim().split("\n");
                         checklistlines.forEach(async (line) => {
                             switch (true) {
                                 case line.startsWith("⬛ 🎁") &&
-                                    client.config.settings.checklist.types.daily:
+                                    client.config.settings.checklist.types
+                                        .daily:
                                     await client.delay(3000);
                                     await channel
                                         .send({
                                             content: `${commandrandomizer([
                                                 "owo",
-                                                client.config.settings.owoprefix,
+                                                client.config.settings
+                                                    .owoprefix,
                                             ])} daily`,
                                         })
                                         .then(() => {
@@ -255,8 +266,8 @@ async function checklist(client, channel) {
                                         `Platform: ${process.platform}`,
                                     );
                                     switch (
-                                    process.platform ||
-                                    client.global.istermux
+                                        process.platform ||
+                                        client.global.istermux
                                     ) {
                                         case "android":
                                             client.logger.warn(
@@ -273,7 +284,10 @@ async function checklist(client, channel) {
                                             );
 
                                             client.childprocess.spawn("node", [
-                                                path.join(__dirname, "./autovote.js"),
+                                                path.join(
+                                                    __dirname,
+                                                    "./autovote.js",
+                                                ),
                                                 `--token=${client.basic.token}`,
                                                 `--bid=408785106942164992`,
                                             ]);
@@ -281,56 +295,61 @@ async function checklist(client, channel) {
                                             client.broadcast({
                                                 action: "update",
                                                 type: "vote",
-                                                progress: client.global.total.vote,
+                                                progress:
+                                                    client.global.total.vote,
                                                 global: client.global,
                                             });
                                             break;
                                     }
                                     break;
 
-                        case line.startsWith("⬛ 🍪") &&
-                            client.config.settings.checklist.types.cookie: {
-                            await client.delay(3000);
-                            //aliciafae xd
-                            let members = channel.guild.members.cache
-                                .filter(
-                                    (member) =>
-                                        !member.user.bot &&
-                                        member.id !== "408785106942164992" &&
-                                        member.id !== client.user.id,
-                                )
-                                .map((member) => member.user);
-                            let selectedmemberid;
-
-                            if (members.length === 0) {
-                                selectedmemberid = "408785106942164992";
-                            } else {
-                                const randomMember =
-                                    members[
-                                        Math.floor(
-                                            Math.random() * members.length,
+                                case line.startsWith("⬛ 🍪") &&
+                                    client.config.settings.checklist.types
+                                        .cookie: {
+                                    await client.delay(3000);
+                                    //aliciafae xd
+                                    let members = channel.guild.members.cache
+                                        .filter(
+                                            (member) =>
+                                                !member.user.bot &&
+                                                member.id !==
+                                                    "408785106942164992" &&
+                                                member.id !== client.user.id,
                                         )
-                                    ];
-                                selectedmemberid = `${randomMember.id}`;
-                            }
-                            await channel
-                                .send({
-                                    content: `${commandrandomizer([
-                                        "owo",
-                                        client.config.settings.owoprefix,
-                                    ])} cookie <@${selectedmemberid}>`,
-                                })
-                                .then(() => {
-                                    client.global.temp.usedcookie = true;
-                                    client.logger.info(
-                                        "Farm",
-                                        "Checklist - Cookie",
-                                        `Cookie sent`,
-                                    );
-                                });
-                            await client.delay(3000);
-                            break;
-                        }
+                                        .map((member) => member.user);
+                                    let selectedmemberid;
+
+                                    if (members.length === 0) {
+                                        selectedmemberid = "408785106942164992";
+                                    } else {
+                                        const randomMember =
+                                            members[
+                                                Math.floor(
+                                                    Math.random() *
+                                                        members.length,
+                                                )
+                                            ];
+                                        selectedmemberid = `${randomMember.id}`;
+                                    }
+                                    await channel
+                                        .send({
+                                            content: `${commandrandomizer([
+                                                "owo",
+                                                client.config.settings
+                                                    .owoprefix,
+                                            ])} cookie <@${selectedmemberid}>`,
+                                        })
+                                        .then(() => {
+                                            client.global.temp.usedcookie = true;
+                                            client.logger.info(
+                                                "Farm",
+                                                "Checklist - Cookie",
+                                                `Cookie sent`,
+                                            );
+                                        });
+                                    await client.delay(3000);
+                                    break;
+                                }
 
                                 case line.startsWith("️☑️ 🍪"):
                                     client.global.temp.usedcookie = true;
@@ -375,8 +394,17 @@ async function checklist(client, channel) {
                     }, client.config.interval.checklist);
                 });
         } catch (e) {
-            client.logger.alert("Farm", "Checklist", "Error while checking checklist: ", e);
-            client.logger.warn("Farm", "Checklist", "Recheck checklist after 10 minutes");
+            client.logger.alert(
+                "Farm",
+                "Checklist",
+                "Error while checking checklist: ",
+                e,
+            );
+            client.logger.warn(
+                "Farm",
+                "Checklist",
+                "Recheck checklist after 10 minutes",
+            );
             setTimeout(() => {
                 smol(client, channel);
             }, 610000);

@@ -83,9 +83,11 @@ module.exports = (client) => {
                 ? "[I]"
                 : color == client.chalk.yellow
                   ? "[W]"
-                  : color == client.chalk.white ? "[D]" : "[E]"
-            } ${type} >> ${client.global.type} > ${module} > ${result}`;
-        
+                  : color == client.chalk.white
+                    ? "[D]"
+                    : "[E]"
+        } ${type} >> ${client.global.type} > ${module} > ${result}`;
+
         fs.appendFile(logFileName, localLogMessage + "\n", (err) => {
             if (err) {
                 console.error("Error writing to log file", err);
@@ -93,13 +95,21 @@ module.exports = (client) => {
         });
 
         fs.readdir("./data", (err, files) => {
-            const logFiles = files.filter(file => file.endsWith(".log"))
-                .map(file => ({ name: file, time: fs.statSync(path.join("./data", file)).mtime.getTime() }))
+            const logFiles = files
+                .filter((file) => file.endsWith(".log"))
+                .map((file) => ({
+                    name: file,
+                    time: fs
+                        .statSync(path.join("./data", file))
+                        .mtime.getTime(),
+                }))
                 .sort((a, b) => a.time - b.time);
 
-            logFiles.slice(0, logFiles.length - 5).forEach(file => 
-                fs.unlink(path.join("./data", file.name), err => {})
-            );
+            logFiles
+                .slice(0, logFiles.length - 5)
+                .forEach((file) =>
+                    fs.unlink(path.join("./data", file.name), (err) => {}),
+                );
         });
 
         if (color != client.chalk.white) {

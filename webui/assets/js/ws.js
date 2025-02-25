@@ -183,15 +183,19 @@ function connectWebSocket() {
 
                 document.getElementById("cowoncywon-value").innerHTML =
                     `${data.global.gamble.cowoncywon}`;
-                
-                const hasQuest = data.global.quest.title != "All quests completed!" || data.global.quest.title != "No active quest found";
-                document.getElementById("quest-title").textContent = (hasQuest ? "Title: " : "") +
-                    `${data.global.quest.title}`;
-                
-                document.getElementById("quest-reward").textContent = (hasQuest ? "Reward: " : "") +
+
+                const hasQuest =
+                    data.global.quest.title != "All quests completed!" ||
+                    data.global.quest.title != "No active quest found";
+                document.getElementById("quest-title").textContent =
+                    (hasQuest ? "Title: " : "") + `${data.global.quest.title}`;
+
+                document.getElementById("quest-reward").textContent =
+                    (hasQuest ? "Reward: " : "") +
                     `${data.global.quest.reward}`;
-                
-                document.getElementById("quest-progress").textContent = (hasQuest ? "Progress: " : "") +
+
+                document.getElementById("quest-progress").textContent =
+                    (hasQuest ? "Progress: " : "") +
                     `${data.global.quest.progress}`;
             }
         }
@@ -237,15 +241,19 @@ function connectWebSocket() {
 
                 document.getElementById("cowoncywon-value-extra").innerHTML =
                     `${data.global.gamble.cowoncywon}`;
-                
-                const hasQuest = data.global.quest.title != "All quests completed!" || data.global.quest.title != "No active quest found";
-                document.getElementById("quest-title-extra").textContent = (hasQuest ? "Title: " : "") +
-                    `${data.global.quest.title}`;
-                
-                document.getElementById("quest-reward-extra").textContent = (hasQuest ? "Reward: " : "") +
+
+                const hasQuest =
+                    data.global.quest.title != "All quests completed!" ||
+                    data.global.quest.title != "No active quest found";
+                document.getElementById("quest-title-extra").textContent =
+                    (hasQuest ? "Title: " : "") + `${data.global.quest.title}`;
+
+                document.getElementById("quest-reward-extra").textContent =
+                    (hasQuest ? "Reward: " : "") +
                     `${data.global.quest.reward}`;
-                
-                document.getElementById("quest-progress-extra").textContent = (hasQuest ? "Progress: " : "") +
+
+                document.getElementById("quest-progress-extra").textContent =
+                    (hasQuest ? "Progress: " : "") +
                     `${data.global.quest.progress}`;
             }
         }

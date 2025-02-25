@@ -8,4 +8,4 @@ notifier.notify({
     sound: true,
     wait: true,
     appID: "OwO Farm Bot Stable",
-})
+});
