@@ -69,6 +69,13 @@ async function pray(client, channel) {
                     "Pray",
                     `Total prayed time: ${client.global.total.pray}`,
                 );
+
+                client.broadcast({
+                    action: "update",
+                    type: "pray",
+                    progress: client.global.total.pray,
+                    global: client.global,
+                });
             });
     } catch (err) {
         client.logger.alert("Farm", "Pray", "Error while praying: " + err);
@@ -118,6 +125,13 @@ async function curse(client, channel) {
                     "Curse",
                     `Total prayed time: ${client.global.total.curse}`,
                 );
+
+                client.broadcast({
+                    action: "update",
+                    type: "curse",
+                    progress: client.global.total.curse,
+                    global: client.global,
+                });
             });
     } catch (err) {
         client.logger.alert("Farm", "Curse", "Error while cursing: " + err);

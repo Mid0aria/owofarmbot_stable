@@ -306,6 +306,7 @@ if (
         console.log(getRandomBanner());
         await updater.checkUpdate(client, cp, packageJson);
         await globalutil.verifyconfig(client, extrac, config);
+        await globalutil.getconfig(config, client);
 
         await initializeBot();
 

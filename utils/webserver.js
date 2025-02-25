@@ -12,7 +12,21 @@ let websocketclientsarray = [];
 
 function startWebSocketServer(client, extraclient) {
     const wss = new WebSocket.Server({
-        port: config.socket.websocket,
+        noServer: true,
+    });
+
+    process.on("message", (data, socket) => {
+        if (data.type == "upgrade") {
+            const request = {
+                url: data.requestData.url,
+                headers: data.requestData.headers,
+                method: data.requestData.method,
+            };
+
+            wss.handleUpgrade(request, socket, data.head, (ws) => {
+                wss.emit("connection", ws, request);
+            });
+        }
     });
 
     wss.on("connection", (ws) => {

@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.9(BETA) WEBUI WITH CAPTCHA SOLVER ✒️</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.9.3(BETA) WEBUI WITH CAPTCHA SOLVER ✒️</h1>
 <h2 align ="center">The best owo farm bot until i do better. coded with the great ideas and love of a Turkish engineer, mid0hub team and users.<br> 💖 Thank you to everyone who contributed 💖</h2>
 <p align="center">
 
@@ -322,12 +322,11 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
         "animals": {
             "max": 661000,
             "min": 610000
-        }
+        },
+        "checklist": 3610000
     }
     "socket": {
-        "port": 65432,/ If another program is using port 65432 on your computer (I think it shouldn't be), you can avoid the conflict by changing the port here.
-        "expressport": 1243,/ If another program is using port 1243 on your computer (I think it shouldn't be), you can avoid the conflict by changing the port here.
-        "websocket": 31085        / If another program on your computer is using port 31085 (I don't think it should), you can avoid conflicts by changing the port here. you also need to find the websocket link in index.js in the webui/assets/js folder and enter the same port
+        "expressport": 1243/ If another program is using port 1243 on your computer (I think it shouldn't be), you can avoid the conflict by changing the port here.
     }
 }
 

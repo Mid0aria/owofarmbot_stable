@@ -26,14 +26,13 @@ module.exports = async (client) => {
 
     if (client.basic.commands.hunt) {
         await hunt(client, channel);
-    }
-    if (client.basic.commands.battle) {
-        if (client.basic.commands.hunt) {
-            await client.delay(2000);
-            await battle(client, channel);
-        } else {
-            await battle(client, channel);
-        }
+        await client.delay(2000);
+        if (client.basic.commands.battle) await battle(client, channel);
+    } else if (client.basic.commands.battle) await battle(client, channel);
+    else if (client.config.settings.autophrases) {
+        setInterval(() => {
+            elaina2(client, channel);
+        }, 16000);
     }
 };
 
@@ -229,6 +228,9 @@ async function battle(client, channel) {
                     `Total Battle: ${client.global.total.battle}`,
                 );
             });
+        if (client.config.settings.autophrases && !client.basic.commands.hunt) {
+            await elaina2(client, channel);
+        }
     } catch (err) {
         client.logger.alert("Farm", "Battle", "Error while battling: " + err);
     } finally {
@@ -260,54 +262,3 @@ async function elaina2(client, channel) {
         client.logger.info("Farm", "Phrases", "Successfuly sent.");
     });
 }
-
-/*
-async function elaina2(client, channel) {
-    if (client.global.captchadetected || client.global.paused) return;
-
-    client.fs.readFile("./phrases/phrases.json", "utf8", async (err, data) => {
-        if (err) {
-            client.logger.error(
-                "Farm",
-                "Phrases",
-                "Error reading phrases file."
-            );
-            return;
-        }
-
-        const phrasesObject = JSON.parse(data);
-        const phrases = phrasesObject.phrases;
-
-        if (!phrases || !phrases.length) {
-            return client.logger.alert(
-                "Farm",
-                "Phrases",
-                "Phrases array is undefined or empty."
-            );
-        }
-
-        let randomCount = Math.floor(Math.random() * 5) + 1;
-
-        for (let i = 0; i < randomCount; i++) {
-            let result = Math.floor(Math.random() * phrases.length);
-            let ilu = phrases[result];
-            channel.sendTyping();
-            await channel.send({ content: ilu });
-            client.logger.info(
-                "Farm",
-                "Phrases",
-                `Gönderilen Phrases: (${i + 1} / ${randomCount})`
-            );
-            let randomDelayTime = Math.floor(Math.random() * 4000) + 1000;
-
-            await client.delay(randomDelayTime);
-        }
-
-        client.logger.info(
-            "Farm",
-            "Phrases",
-            "Successfully sent phrases with random delays."
-        );
-    });
-}
-*/

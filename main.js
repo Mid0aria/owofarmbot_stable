@@ -62,6 +62,7 @@ const cluster = require("cluster");
 const path = require("path");
 const fs = require("fs").promises;
 const express = require("express");
+const http = require("http");
 const bodyParser = require("body-parser");
 let config,
     DEVELOPER_MODE = false;
@@ -86,6 +87,7 @@ try {
 
 if (cluster.isMaster) {
     const app = express();
+    const server = http.createServer(app);
     app.set("view engine", "ejs");
     app.use(bodyParser.json());
     app.set("views", path.join(__dirname, "webui"));
@@ -128,7 +130,6 @@ if (cluster.isMaster) {
         res.setHeader("Cache-Control", "no-cache");
         res.setHeader("Connection", "keep-alive");
         res.flushHeaders();
-
         cluster.on("message", (worker, message) => {
             if (message.type == "log") {
                 res.write(`data: ${JSON.stringify(message.message)}\n\n`);
@@ -269,9 +270,20 @@ if (cluster.isMaster) {
         }
     });
 
-    app.listen(config.socket.expressport, () => {});
+    server.listen(config.socket.expressport, () => {});
 
-    cluster.fork();
+    const chill = cluster.fork();
+
+    server.on("upgrade", (request, socket, head) => {
+        if (request.headers["upgrade"] == "websocket") {
+            const requestData = {
+                url: request.url,
+                headers: request.headers,
+                method: request.method,
+            };
+            chill.send({ type: "upgrade", requestData, head }, socket);
+        }
+    });
 
     cluster.on("exit", () => {
         console.log("The bot is down, restarting...");
@@ -299,12 +311,14 @@ obiviously, fo debug
 ├───utils
 │   ├───function
 │   ├───hcaptchasolver
-│   └───huntbot_captcha
-│       └───letters
+│   ├───huntbot_captcha
+│   │   └───letters
+│   └───webserver.js
 ├───webui
 │   ├───assets
 │   │   ├───css
 │   │   └───js
+│   │       └───ws.js
 │   ├───background
 │   │   ├───image
 │   │   └───video

@@ -338,6 +338,12 @@ async function questHandler(client, channel, mainSender, extraSender) {
                             client.global.quest.reward = quest.reward + rwKind;
                             client.global.quest.progress =
                                 quest.pro1 + " / " + quest.pro2;
+                            
+                            client.broadcast({
+                                action: "update",
+                                type: "quest",
+                                global: client.global,
+                            });
                             break;
                         }
                     }
