@@ -43,7 +43,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
     let socketcaptchastatus = false;
     let socket;
     function connectWebSocket() {
-        socket = new WebSocket(`ws://localhost:${config.socket.websocket}`);
+        socket = new WebSocket(`ws://localhost:${config.socket.expressport}`);
 
         socket.onopen = function () {
             console.log("WebSocket bağlantısı başarılı.");
