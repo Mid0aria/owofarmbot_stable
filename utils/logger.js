@@ -94,23 +94,33 @@ module.exports = (client) => {
             }
         });
 
-        fs.readdir("./data", (err, files) => {
-            const logFiles = files
-                .filter((file) => file.endsWith(".log"))
-                .map((file) => ({
-                    name: file,
-                    time: fs
-                        .statSync(path.join("./data", file))
-                        .mtime.getTime(),
-                }))
-                .sort((a, b) => a.time - b.time);
+        try {
+            fs.readdir("./data", (err, files) => {
+                const logFiles = files
+                    .filter((file) => file.endsWith(".log"))
+                    .map((file) => ({
+                        name: file,
+                        time: fs
+                            .statSync(path.join("./data", file))
+                            .mtime.getTime(),
+                    }))
+                    .sort((a, b) => a.time - b.time);
 
-            logFiles
-                .slice(0, logFiles.length - 5)
-                .forEach((file) =>
-                    fs.unlink(path.join("./data", file.name), (err) => {}),
-                );
-        });
+                logFiles
+                    .slice(0, logFiles.length - 5)
+                    .forEach((file) =>
+                        fs.unlink(path.join("./data", file.name), (err) => {}),
+                    );
+            });
+        } catch (e) {
+            client.logger.alert(
+                "Bot",
+                "Logger",
+                "Failed to delete old log file: ",
+                e,
+            );
+            client.logger.debug(e);
+        }
 
         if (color != client.chalk.white) {
             reallog.push(logMessage);

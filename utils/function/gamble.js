@@ -144,10 +144,10 @@ async function coinflip(client, channel) {
                     collector.on("end", (collected) => {
                         if (collected.size == 0) {
                             client.global.gamble.coinflip--;
-                            client.logger.info(
+                            client.logger.warn(
                                 "Farm",
                                 "Coinflip",
-                                "Failed to gamble!",
+                                "Failed to coinflip!",
                             );
                         }
                     });
@@ -166,6 +166,7 @@ async function coinflip(client, channel) {
                 "Coinflip",
                 "Error while coinfliping: " + err,
             );
+            client.logger.debug(err);
         } finally {
             client.broadcast({
                 action: "update",
@@ -302,10 +303,10 @@ function slot(client, channel) {
                     collector.on("end", (collected) => {
                         if (collected.size == 0) {
                             client.global.gamble.slot--;
-                            client.logger.info(
+                            client.logger.warn(
                                 "Farm",
                                 "Slot",
-                                "Failed to gamble!",
+                                "Failed to slot!",
                             );
                         }
                     });
@@ -320,6 +321,7 @@ function slot(client, channel) {
             });
         } catch (err) {
             client.logger.alert("Farm", "Slot", "Error while sloting: " + err);
+            client.logger.debug(err);
         } finally {
             client.broadcast({
                 action: "update",

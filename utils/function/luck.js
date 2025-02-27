@@ -79,6 +79,7 @@ async function pray(client, channel) {
             });
     } catch (err) {
         client.logger.alert("Farm", "Pray", "Error while praying: " + err);
+        client.logger.debug(err);
     } finally {
         setTimeout(() => {
             pray(client, channel);
@@ -123,7 +124,7 @@ async function curse(client, channel) {
                 client.logger.info(
                     "Farm",
                     "Curse",
-                    `Total prayed time: ${client.global.total.curse}`,
+                    `Total cursed time: ${client.global.total.curse}`,
                 );
 
                 client.broadcast({
@@ -135,6 +136,7 @@ async function curse(client, channel) {
             });
     } catch (err) {
         client.logger.alert("Farm", "Curse", "Error while cursing: " + err);
+        client.logger.debug(err);
     } finally {
         setTimeout(() => {
             curse(client, channel);

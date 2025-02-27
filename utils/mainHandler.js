@@ -388,11 +388,15 @@ async function checklist(client, channel) {
                         "Checklist",
                         `Paused: ${client.global.checklist}`,
                     );
-
-                    setTimeout(() => {
-                        smol(client, channel);
-                    }, client.config.interval.checklist);
                 });
+            setTimeout(() => {
+                smol(client, channel);
+                client.logger.warn(
+                    "Farm",
+                    "Checklist",
+                    "Recheck checklist after interval",
+                );
+            }, client.config.interval.checklist);
         } catch (e) {
             client.logger.alert(
                 "Farm",
@@ -405,6 +409,7 @@ async function checklist(client, channel) {
                 "Checklist",
                 "Recheck checklist after 10 minutes",
             );
+            client.logger.debug(e);
             setTimeout(() => {
                 smol(client, channel);
             }, 610000);
@@ -422,20 +427,26 @@ async function sell(client, channel, choose, types) {
         }, 16000);
         return;
     }
-    channel.sendTyping();
-    await channel.send({
-        content: `${commandrandomizer([
-            "owo",
-            client.config.settings.owoprefix,
-        ])} ${choose} ${types}`,
-    });
-    setTimeout(
-        () => {
-            sell(client, channel, choose, types);
-        },
-        getrand(
-            client.config.interval.animals.min,
-            client.config.interval.animals.max,
-        ),
-    );
+    try {
+        channel.sendTyping();
+        await channel.send({
+            content: `${commandrandomizer([
+                "owo",
+                client.config.settings.owoprefix,
+            ])} ${choose} ${types}`,
+        });
+    } catch (err) {
+        client.logger.alert("Farm", "Sell", "Failed to sell: " + err);
+        client.logger.debug(err);
+    } finally {
+        setTimeout(
+            () => {
+                sell(client, channel, choose, types);
+            },
+            getrand(
+                client.config.interval.animals.min,
+                client.config.interval.animals.max,
+            ),
+        );
+    }
 }
