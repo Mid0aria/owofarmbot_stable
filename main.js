@@ -289,7 +289,10 @@ if (cluster.isMaster) {
 
             chill.once("message", (msg) => {
                 if (msg === "ready-for-upgrade") {
-                    chill.send({ type: "upgrade-socket", requestData, head }, socket);
+                    chill.send(
+                        { type: "upgrade-socket", requestData, head },
+                        socket,
+                    );
                 } else {
                     socket.destroy();
                 }

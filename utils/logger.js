@@ -109,11 +109,16 @@ module.exports = (client) => {
                 logFiles
                     .slice(0, logFiles.length - 5)
                     .forEach((file) =>
-                        fs.unlink(path.join("./data", file.name), (err) => { }),
+                        fs.unlink(path.join("./data", file.name), (err) => {}),
                     );
             });
         } catch (e) {
-            client.logger.alert("Bot", "Logger", "Failed to delete old log file: ", e);
+            client.logger.alert(
+                "Bot",
+                "Logger",
+                "Failed to delete old log file: ",
+                e,
+            );
             client.logger.debug(e);
         }
 

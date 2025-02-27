@@ -391,7 +391,11 @@ async function checklist(client, channel) {
                 });
             setTimeout(() => {
                 smol(client, channel);
-                client.logger.warn("Farm", "Checklist", "Recheck checklist after interval");
+                client.logger.warn(
+                    "Farm",
+                    "Checklist",
+                    "Recheck checklist after interval",
+                );
             }, client.config.interval.checklist);
         } catch (e) {
             client.logger.alert(
