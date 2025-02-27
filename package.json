@@ -34,15 +34,15 @@
         "format": "prettier --write ."
     },
     "dependencies": {
-        "axios": "^1.7.9",
+        "axios": "^1.8.1",
         "chalk": "^4.1.2",
-        "discord.js-selfbot-v13": "^3.5.1",
+        "discord.js-selfbot-v13": "^3.6.0",
         "ejs": "^3.1.10",
         "express": "^4.21.2",
         "fs-extra": "^11.3.0",
         "node-notifier": "^10.0.1",
         "sharp": "^0.33.5",
-        "ws": "^8.18.0",
+        "ws": "^8.18.1",
         "yargs": "^17.7.2"
     },
     "bugs": {
@@ -50,9 +50,9 @@
     },
     "homepage": "https://github.com/Mid0aria/owofarmbot_stable#readme",
     "devDependencies": {
-        "@eslint/js": "^9.20.0",
-        "eslint": "^9.20.0",
-        "globals": "^15.14.0",
-        "prettier": "^3.5.0"
+        "@eslint/js": "^9.21.0",
+        "eslint": "^9.21.0",
+        "globals": "^16.0.0",
+        "prettier": "^3.5.2"
     }
 }
