@@ -16,7 +16,11 @@ function startWebSocketServer(client, extraclient) {
     });
 
     process.on("message", (data, socket) => {
-        if (data.type == "upgrade") {
+        if (data.type === "upgrade") {
+            process.send("ready-for-upgrade");
+        } else if (data.type === "upgrade-socket") {
+            if (!wss) return socket.destroy();
+
             const request = {
                 url: data.requestData.url,
                 headers: data.requestData.headers,
