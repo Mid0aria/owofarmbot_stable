@@ -2,7 +2,7 @@
 
 dWdnY2Y6Ly9iY3JhLmZjYmd2c2wucGJ6L2dlbnB4LzVwc2tIZ1B4Y3hQVkVlWGxxVVhGb1kgcm90MTM= </br>
 
-<h1 align="center">OwO Farm Bot Stable V0.0.9.3.1(BETA) WEBUI WITH CAPTCHA SOLVER ✒️</h1>
+<h1 align="center">OwO Farm Bot Stable V0.0.9.3.2(BETA) WEBUI WITH CAPTCHA SOLVER ✒️</h1>
 <h2 align ="center">The best owo farm bot until i do better. coded with the great ideas and love of a Turkish engineer, mid0hub team and users.<br> 💖 Thank you to everyone who contributed 💖</h2>
 <p align="center">
 
@@ -323,7 +323,6 @@ If you need the help, join the Discord server [here](https://discord.gg/WzYXVbXt
             "max": 661000,
             "min": 610000
         },
-        "checklist": 3610000
     }
     "socket": {
         "expressport": 1243/ If another program is using port 1243 on your computer (I think it shouldn't be), you can avoid the conflict by changing the port here.

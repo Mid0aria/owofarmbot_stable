@@ -222,8 +222,30 @@ async function checklist(client, channel) {
                     }
 
                     await client.delay(3000);
-                    if (client.global.captchadetected || client.global.paused)
+                    if (client.global.captchadetected || client.global.paused) {
                         return;
+                    }
+
+                    const regex = /(\d+)\s*H|\s*(\d+)\s*M|\s*(\d+)\s*S/;
+                    const matches = message.embeds[0].footer.text.match(regex);
+
+                    if (matches) {
+                        const hours = matches[1] ? parseInt(matches[1], 10) : 0;
+                        const minutes = matches[2]
+                            ? parseInt(matches[2], 10)
+                            : 0;
+                        const seconds = matches[3]
+                            ? parseInt(matches[3], 10)
+                            : 0;
+
+                        client.global.temp.intervals.checklist +=
+                            hours * 60 * 60 * 1000; // Saat
+                        client.global.temp.intervals.checklist +=
+                            minutes * 60 * 1000; // Dakika
+                        client.global.temp.intervals.checklist +=
+                            seconds * 1000; // Saniye
+                    }
+
                     let checklistmsg =
                         message.embeds[0].description.toLowerCase();
                     if (checklistmsg.includes("☑️ 🎉")) {
@@ -394,9 +416,9 @@ async function checklist(client, channel) {
                 client.logger.warn(
                     "Farm",
                     "Checklist",
-                    "Recheck checklist after interval",
+                    "Rechecking checklist after interval",
                 );
-            }, client.config.interval.checklist);
+            }, client.global.temp.intervals.checklist);
         } catch (e) {
             client.logger.alert(
                 "Farm",

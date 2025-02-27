@@ -182,8 +182,7 @@
         "animals": {
             "max": 661000,
             "min": 610000
-        },
-        "checklist": 3610000
+        }
     },
     "socket": {
         "expressport": 1243

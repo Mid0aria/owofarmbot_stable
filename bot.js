@@ -150,6 +150,9 @@ let owofarmbot_stable = {
             recalltime: 0,
             essence: false,
         },
+        intervals: {
+            checklist: 0,
+        },
 
         isready: false,
         started: false,
