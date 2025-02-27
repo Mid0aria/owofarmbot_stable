@@ -368,6 +368,7 @@ async function questHandler(client, channel, mainSender, extraSender) {
             "Quest",
             "Error while getting quest: " + err + "\nRecheck after 61 seconds.",
         );
+        client.logger.debug(err);
         setTimeout(() => {
             questHandler(client, channel);
         }, 61000);
@@ -397,6 +398,7 @@ async function questOwO(client, channel, quest) {
                 "Quest",
                 "Error while doing quest: " + err,
             );
+            client.logger.debug(err);
             quest.pro1--;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         }
@@ -439,6 +441,7 @@ async function questGamble(client, channel, quest) {
                 "Quest",
                 "Error while doing quest: " + err,
             );
+            client.logger.debug(err);
             quest.pro1--;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         }
@@ -492,6 +495,7 @@ async function questActionOther(client, channel, quest) {
                 "Quest",
                 "Error while doing quest: " + err,
             );
+            client.logger.debug(err);
             quest.pro1--;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         }
@@ -542,6 +546,7 @@ async function questCurse(client, channel, quest, mainSender, extraSender) {
                     "Quest",
                     "Error while doing quest: " + err,
                 );
+                client.logger.debug(err);
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -577,6 +582,7 @@ async function questCurse(client, channel, quest, mainSender, extraSender) {
                     "Quest",
                     "Error while doing quest: " + err,
                 );
+                client.logger.debug(err);
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -622,6 +628,7 @@ async function questPray(client, channel, quest, mainSender, extraSender) {
                     "Quest",
                     "Error while doing quest: " + err,
                 );
+                client.logger.debug(err);
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -657,6 +664,7 @@ async function questPray(client, channel, quest, mainSender, extraSender) {
                     "Quest",
                     "Error while doing quest: " + err,
                 );
+                client.logger.debug(err);
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -713,6 +721,7 @@ async function questBattle(client, channel, quest, mainSender, extraSender) {
                     "Quest",
                     "Error while doing quest: " + err,
                 );
+                client.logger.debug(err);
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -756,6 +765,7 @@ async function questBattle(client, channel, quest, mainSender, extraSender) {
                     "Quest",
                     "Error while doing quest: " + err,
                 );
+                client.logger.debug(err);
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -799,6 +809,7 @@ async function questCookie(client, channel, quest, mainSender, extraSender) {
                 "Quest",
                 "Error while doing quest: " + err,
             );
+            client.logger.debug(err);
             quest.pro1--;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         }
@@ -831,6 +842,7 @@ async function questCookie(client, channel, quest, mainSender, extraSender) {
                 "Quest",
                 "Error while doing quest: " + err,
             );
+            client.logger.debug(err);
             quest.pro1--;
             client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
         }
@@ -890,6 +902,7 @@ async function questActionMe(client, channel, quest, mainSender, extraSender) {
                     "Quest",
                     "Error while doing quest: " + err,
                 );
+                client.logger.debug(err);
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }
@@ -941,6 +954,7 @@ async function questActionMe(client, channel, quest, mainSender, extraSender) {
                     "Quest",
                     "Error while doing quest: " + err,
                 );
+                client.logger.debug(err);
                 quest.pro1--;
                 client.global.quest.progress = quest.pro1 + " / " + quest.pro2;
             }

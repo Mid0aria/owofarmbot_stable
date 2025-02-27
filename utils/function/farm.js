@@ -176,6 +176,7 @@ async function hunt(client, channel) {
         }
     } catch (err) {
         client.logger.alert("Farm", "Hunt", "Error while hunting: " + err);
+        client.logger.debug(err);
     } finally {
         client.global.hunt = false;
         setTimeout(() => {
@@ -233,6 +234,7 @@ async function battle(client, channel) {
         }
     } catch (err) {
         client.logger.alert("Farm", "Battle", "Error while battling: " + err);
+        client.logger.debug(err);
     } finally {
         client.global.battle = false;
         setTimeout(() => {

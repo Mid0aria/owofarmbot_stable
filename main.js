@@ -272,22 +272,34 @@ if (cluster.isMaster) {
 
     server.listen(config.socket.expressport, () => {});
 
-    const chill = cluster.fork();
+    let chill = cluster.fork();
 
     server.on("upgrade", (request, socket, head) => {
-        if (request.headers["upgrade"] == "websocket") {
+        if (request.headers["upgrade"] === "websocket") {
+            if (!chill || chill.killed) {
+                socket.destroy();
+                return;
+            }
             const requestData = {
                 url: request.url,
                 headers: request.headers,
                 method: request.method,
             };
-            chill.send({ type: "upgrade", requestData, head }, socket);
+            chill.send({ type: "upgrade" });
+
+            chill.once("message", (msg) => {
+                if (msg === "ready-for-upgrade") {
+                    chill.send({ type: "upgrade-socket", requestData, head }, socket);
+                } else {
+                    socket.destroy();
+                }
+            });
         }
     });
 
     cluster.on("exit", () => {
         console.log("The bot is down, restarting...");
-        cluster.fork();
+        chill = cluster.fork();
     });
 } else {
     require("./bot.js");
