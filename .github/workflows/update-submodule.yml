@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 name: Update Submodule
 
 on:
@@ -27,28 +26,3 @@ jobs:
                   git add .
                   git commit -m "Auto-update all submodules" || echo "No changes to commit"
                   git push
-=======
-name: Update Submodule
-
-on:
-    push:
-        branches:
-            - main
-
-jobs:
-    update-submodule:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Copy Code
-              uses: actions/checkout@v3
-              with:
-                  submodules: true
-                  fetch-depth: 0
-
-            - name: Update Submodule
-              run: |
-                  git submodule update --init --recursive --remote
-                  git add utils/autovote
-                  git commit -m "Auto-update submodule"
-                  git push
->>>>>>> ff5598713a02ea60b9f11c548576c6b1c80e08e7
