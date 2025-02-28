@@ -1,0 +1,3 @@
+[submodule "utils/autovote"]
+	path = utils/autovote
+	url = https://github.com/Mid0aria/top.gg-automatic-voter

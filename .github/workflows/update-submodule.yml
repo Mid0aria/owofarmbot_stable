@@ -1,0 +1,23 @@
+name: Update Submodule
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    update-submodule:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Copy Code
+              uses: actions/checkout@v3
+              with:
+                  submodules: true
+                  fetch-depth: 0
+
+            - name: Update Submodule
+              run: |
+                  git submodule update --init --recursive --remote
+                  git add utils/autovote
+                  git commit -m "Auto-update submodule"
+                  git push

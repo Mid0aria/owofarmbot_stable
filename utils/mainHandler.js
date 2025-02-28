@@ -308,7 +308,7 @@ async function checklist(client, channel) {
                                             client.childprocess.spawn("node", [
                                                 path.join(
                                                     __dirname,
-                                                    "./autovote.js",
+                                                    "./autovote/index.js",
                                                 ),
                                                 `--token=${client.basic.token}`,
                                                 `--bid=408785106942164992`,
