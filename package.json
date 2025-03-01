@@ -1,7 +1,7 @@
 {
     "name": "owofarmbot_stable",
-    "version": "0.0.9.3.2",
-    "version_note": "added dynamic interval for checklist",
+    "version": "0.0.9.3.3",
+    "version_note": "Fixed dynamic checklist interval",
     "description": "Discord OwO farm bot stable with CAPTCHA(BAN) protection",
     "main": "main.js",
     "repository": {

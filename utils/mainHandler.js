@@ -226,25 +226,25 @@ async function checklist(client, channel) {
                         return;
                     }
 
-                    const regex = /(\d+)\s*H|\s*(\d+)\s*M|\s*(\d+)\s*S/;
-                    const matches = message.embeds[0].footer.text.match(regex);
+                    const regex = /(\d+)\s*H|(\d+)\s*M|(\d+)\s*S/g;
+                    const matches = [
+                        ...message.embeds[0].footer.text.matchAll(regex),
+                    ];
 
-                    if (matches) {
-                        const hours = matches[1] ? parseInt(matches[1], 10) : 0;
-                        const minutes = matches[2]
-                            ? parseInt(matches[2], 10)
-                            : 0;
-                        const seconds = matches[3]
-                            ? parseInt(matches[3], 10)
-                            : 0;
+                    let checklisthours = 0,
+                        checklistminutes = 0,
+                        checklistseconds = 0;
 
-                        client.global.temp.intervals.checklist +=
-                            hours * 60 * 60 * 1000; // Saat
-                        client.global.temp.intervals.checklist +=
-                            minutes * 60 * 1000; // Dakika
-                        client.global.temp.intervals.checklist +=
-                            seconds * 1000; // Saniye
-                    }
+                    matches.forEach((match) => {
+                        if (match[1]) checklisthours = parseInt(match[1], 10);
+                        if (match[2]) checklistminutes = parseInt(match[2], 10);
+                        if (match[3]) checklistseconds = parseInt(match[3], 10);
+                    });
+
+                    client.global.temp.intervals.checklist +=
+                        checklisthours * 60 * 60 * 1000 +
+                        checklistminutes * 60 * 1000 +
+                        checklistseconds * 1000;
 
                     let checklistmsg =
                         message.embeds[0].description.toLowerCase();
