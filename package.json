@@ -34,7 +34,7 @@
         "format": "prettier --write ."
     },
     "dependencies": {
-        "axios": "^1.8.1",
+        "axios": "^1.8.2",
         "chalk": "^4.1.2",
         "discord.js-selfbot-v13": "^3.6.0",
         "ejs": "^3.1.10",
