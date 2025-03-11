@@ -47,7 +47,7 @@ function Clone-Project {
         Write-Host "The project is already cloned at $repoPath." -ForegroundColor Green
     } else {
         Write-Host "Cloning the repository..." -ForegroundColor Yellow
-        git clone https://github.com/Mid0aria/owofarmbot_stable $repoPath
+        git clone --recurse-submodules https://github.com/mid0aria/owofarmbot_stable $repoPath
         Write-Host "Repository cloned successfully." -ForegroundColor Green
     }
 
