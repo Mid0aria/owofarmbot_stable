@@ -63,6 +63,22 @@ process.emitWarning = (warning, type) => {
 };
 
 const cp = require("child_process");
+const fs = require("fs");
+const path = require("path");
+// check config
+const configPath = path.join(__dirname, "config.json");
+const exampleConfigPath = path.join(__dirname, "config.example.json");
+
+if (!fs.existsSync(configPath)) {
+    if (fs.existsSync(exampleConfigPath)) {
+        fs.copyFileSync(exampleConfigPath, configPath);
+        console.log("config.json created from config.example.json");
+    } else {
+        console.log("Error: config.example.json does not exist.");
+    }
+} else {
+    console.log("config.json already exists.");
+}
 
 let config,
     DEVELOPER_MODE = false;
@@ -89,7 +105,6 @@ const isTermux =
     process.env.PREFIX && process.env.PREFIX.includes("com.termux");
 const packageJson = require("./package.json");
 
-const fs = require("fs");
 const chalk = require("chalk");
 
 const { initializeWebSocket, broadcast } = require("./utils/webserver.js");

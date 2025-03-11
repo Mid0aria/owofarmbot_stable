@@ -417,7 +417,7 @@ irm "https://raw.githubusercontent.com/mid0aria/owofarmbot_stable/main/windows-s
 node -v
 
 # Clone the files with git:
-git clone https://github.com/Mid0aria/owofarmbot_stable
+git clone --recurse-submodules https://github.com/mid0aria/owofarmbot_stable
 # Optionally you can also download from github at https://github.com/Mid0aria/owofarmbot_stable/archive/refs/heads/main.zip
 
 # Enter into the cloned directory:
