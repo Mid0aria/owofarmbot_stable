@@ -90,6 +90,13 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                 `--disable-extensions-except=${extensionPath}`,
                 `--load-extension=${extensionPath}`,
             ],
+            plugins: [
+                require("puppeteer-extra-plugin-adblocker")({
+                    blockTrackers: true,
+                    useCache: true,
+                    cacheDir: path.resolve(__dirname, "./adblockcache"),
+                }),
+            ],
         });
 
         await page.setViewport({
