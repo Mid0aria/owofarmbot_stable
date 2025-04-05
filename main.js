@@ -21,7 +21,12 @@ const packageJson = require("./package.json");
 
 // auto install dependencies
 for (let dep of Object.keys(packageJson.dependencies)) {
-    if (isTermux && (dep === "puppeteer" || dep === "puppeteer-real-browser")) {
+    if (
+        isTermux &&
+        (dep === "puppeteer" ||
+            dep === "puppeteer-real-browser" ||
+            dep === "puppeteer-extra-plugin-adblocker")
+    ) {
         console.log("Skipping Puppeteer in Termux environment");
         continue;
     }
@@ -38,7 +43,11 @@ for (let dep of Object.keys(packageJson.dependencies)) {
     }
 }
 
-const additionalDeps = ["puppeteer", "puppeteer-real-browser"];
+const additionalDeps = [
+    "puppeteer",
+    "puppeteer-real-browser",
+    "puppeteer-extra-plugin-adblocker",
+];
 
 for (let dep of additionalDeps) {
     if (isTermux) {

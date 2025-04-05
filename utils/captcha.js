@@ -21,6 +21,7 @@ const { connect } = require("puppeteer-real-browser");
 const yargs = require("yargs");
 const path = require("path");
 const config = require("../config.json");
+const fse = require("fs-extra");
 const argv = yargs.options({
     token: {
         alias: "t",
@@ -37,6 +38,12 @@ const argv = yargs.options({
 }).argv;
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+const adblockcachedir = path.resolve(__dirname, "./adblockcache");
+
+if (!fse.existsSync(adblockcachedir)) {
+    fse.mkdirSync(adblockcachedir, { recursive: true });
+}
 
 (async () => {
     let captchasolved = false;
@@ -94,7 +101,7 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
                 require("puppeteer-extra-plugin-adblocker")({
                     blockTrackers: true,
                     useCache: true,
-                    cacheDir: path.resolve(__dirname, "./adblockcache"),
+                    cacheDir: adblockcachedir,
                 }),
             ],
         });
